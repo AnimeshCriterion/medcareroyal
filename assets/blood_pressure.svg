@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="302.5" height="302" viewBox="0 0 302.5 302">
+  <defs>
+    <filter id="Ellipse_119">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.671" result="color"/>
+      <feComposite operator="out" in="SourceGraphic" in2="blur"/>
+      <feComposite operator="in" in="color"/>
+      <feComposite operator="in" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_1154" data-name="Group 1154" transform="translate(-37 -139)">
+    <circle id="Ellipse_117" data-name="Ellipse 117" cx="150" cy="150" r="150" transform="translate(38.5 140)" fill="none" stroke="#0f88fc" stroke-linecap="round" stroke-width="2" stroke-dasharray="4" opacity="0.56"/>
+    <circle id="Ellipse_118" data-name="Ellipse 118" cx="128.5" cy="128.5" r="128.5" transform="translate(59.5 162)" fill="none" stroke="#0f88fc" stroke-linecap="round" stroke-width="2" stroke-dasharray="4" opacity="0.87"/>
+    <g data-type="innerShadowGroup">
+      <ellipse id="Ellipse_119-2" data-name="Ellipse 119" cx="107" cy="106.5" rx="107" ry="106.5" transform="translate(81 184)" fill="#0f88fc" opacity="0.05"/>
+      <g transform="matrix(1, 0, 0, 1, 37, 139)" filter="url(#Ellipse_119)">
+        <ellipse id="Ellipse_119-3" data-name="Ellipse 119" cx="107" cy="106.5" rx="107" ry="106.5" transform="translate(44 45)" fill="#fff" opacity="0.05"/>
+      </g>
+    </g>
+    <circle id="Ellipse_120" data-name="Ellipse 120" cx="83" cy="83" r="83" transform="translate(105 207)" fill="#fff"/>
+    <circle id="Ellipse_122" data-name="Ellipse 122" cx="8" cy="8" r="8" transform="translate(37 240)" fill="#0f88fc"/>
+    <circle id="Ellipse_123" data-name="Ellipse 123" cx="8" cy="8" r="8" transform="translate(113 389)" fill="#0f88fc"/>
+    <circle id="Ellipse_124" data-name="Ellipse 124" cx="8" cy="8" r="8" transform="translate(261 180)" fill="#0f88fc"/>
+    <circle id="Ellipse_125" data-name="Ellipse 125" cx="8" cy="8" r="8" transform="translate(301 373)" fill="#0f88fc"/>
+    <g id="blood-pressure-_4_" transform="translate(148.765 762.641)">
+      <path id="Path_1647" data-name="Path 1647" d="M25.483-510.357C12.833-496.1,3.95-480.841,1.176-468.595a37.547,37.547,0,0,0-.977,11.7,26.847,26.847,0,0,0,15.223,21.61,26.783,26.783,0,0,0,22.524.31c2.356-1.023,2.31-.806.574-2.589a25.459,25.459,0,0,1-6.681-12.355,25.6,25.6,0,0,1,5.813-22.276,26.424,26.424,0,0,1,10.03-6.945l1.333-.512-.682-1.488c-4.062-8.759-11.161-19.269-19.176-28.431C27.994-510.9,27-512,26.986-512,26.955-512,26.273-511.256,25.483-510.357ZM4.911-460.828c.6.279.76.744.884,2.558a21.3,21.3,0,0,0,8.65,15.843,21.984,21.984,0,0,0,11.347,4.062c1.194,0,1.783.124,2.155.481a1.4,1.4,0,0,1-.341,2.263c-.419.217-.729.217-2.4.062a22.684,22.684,0,0,1-5.906-1.209,24.2,24.2,0,0,1-15.89-17.889,18.061,18.061,0,0,1-.4-5.41A1.4,1.4,0,0,1,4.911-460.828Z" transform="translate(0 0)" fill="#c6d8fb" stroke="#609fff" stroke-width="2"/>
+      <path id="Path_1648" data-name="Path 1648" d="M240.554-292.289a22.978,22.978,0,0,0-11.161,4.031A28.442,28.442,0,0,0,224-282.911a24.034,24.034,0,0,0-3.906,9.441,29.21,29.21,0,0,0-.093,6.976,24.4,24.4,0,0,0,4.263,10.309,23.227,23.227,0,0,0,14.122,8.774,29.2,29.2,0,0,0,8.139.015,22.758,22.758,0,0,0,17.9-16.835A22.768,22.768,0,0,0,261-282.725a29.087,29.087,0,0,0-5.72-5.658A22.625,22.625,0,0,0,240.554-292.289Zm5.209,3.023A19.846,19.846,0,0,1,262.2-271.439c.2,2.031.078,2.558-.651,2.93a1.153,1.153,0,0,1-1.271.062c-.589-.263-.76-.729-.9-2.527A16.97,16.97,0,0,0,234.6-284.787a17.075,17.075,0,0,0-8.309,9.8,19.04,19.04,0,0,0-.853,4.883c0,1.085-.4,1.643-1.271,1.783-.5.078-.636.016-1.07-.4l-.5-.5.093-1.814a19.8,19.8,0,0,1,13.13-17.362,23.56,23.56,0,0,1,4.108-1.008A28.249,28.249,0,0,1,245.763-289.267Zm-2.728,5.519c.791.357.853.713.853,4.806v3.767l.76.279a5.582,5.582,0,0,1,2.837,2.713,4.128,4.128,0,0,1,.512,2.511,4.029,4.029,0,0,1-.434,2.356,6.046,6.046,0,0,1-2.713,2.713,4.2,4.2,0,0,1-2.434.434,3.865,3.865,0,0,1-2.372-.434,5.576,5.576,0,0,1-2.666-7.518,5.564,5.564,0,0,1,2.728-2.7l.992-.465v-3.907c0-3.86,0-3.922.357-4.232A1.235,1.235,0,0,1,243.035-283.748Z" transform="translate(-185.695 -185.591)" fill="#e8edfc" stroke="#609fff" stroke-width="2"/>
+      <path id="Path_1649" data-name="Path 1649" d="M349.6-164.344a3.091,3.091,0,0,0-1.922,2,2.783,2.783,0,0,0,1.147,3.038,2.026,2.026,0,0,0,1.535.434,2.584,2.584,0,0,0,2.558-1.55A2.831,2.831,0,0,0,349.6-164.344Z" transform="translate(-293.642 -293.678)" fill="#c6d8fb"/>
+    </g>
+  </g>
+</svg>

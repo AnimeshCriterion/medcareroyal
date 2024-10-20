@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medvantage_patient/Modal/investigation_model.dart';
 import 'package:medvantage_patient/View/Pages/activities_chronicle_view.dart';
 import 'package:medvantage_patient/View/Pages/edit_profile_view.dart';
 import 'package:medvantage_patient/View/Pages/exercise_tracking_view.dart';
@@ -27,6 +28,7 @@ import '../View/Pages/dashboard_view.dart';
 import '../View/Pages/feedback_view.dart';
 import '../View/Pages/fq_view.dart';
 import '../View/Pages/home_care_training_view.dart';
+import '../View/Pages/investigation_page.dart';
 import '../View/Pages/nnn.dart';
 import '../View/Pages/pills_remind_intake_analytics.dart';
 import '../View/Pages/pills_reminder_scheduled_prescription.dart';
@@ -186,7 +188,10 @@ class MasterDashboardViewModal extends ChangeNotifier{
       case 'Edit Profile':
         Get.to(()=>EditProfile());
         // return  EditProfile();
-
+      case 'Prescribed Investigation':
+        Get.to(()=>InvestigationPage());
+        // return  EditProfile();
+break;
     case 'Vital Management' :
       Get.to(()=>const AddVitalView());
       // return AddVitalView();

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,6 @@ class EcgController extends GetxController {
 
   TextEditingController notesController = TextEditingController();
 
-  Rx<FlutterBlue> flutterBlue = FlutterBlue.instance.obs;
 
   ScanResult? devicesData;
   set updateDevicesData(ScanResult val) {
@@ -97,16 +96,16 @@ class EcgController extends GetxController {
     updateIsDeviceScanning=true;
 
     // Start scanning
-    flutterBlue.value.startScan(timeout: const Duration(hours: 1));
+    FlutterBluePlus.startScan(timeout: const Duration(hours: 1));
     updateIsDeviceScanning=false;
 
 // Listen to scan results
-    subscription = flutterBlue.value.scanResults.listen((results) {
+    subscription = FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
 
       for (ScanResult r in results) {
         if (r.device.name.toString() == 'CT_ECG') {
-          flutterBlue.value.stopScan();
+          FlutterBluePlus.stopScan();
           updateIsDeviceFound=true;
           updateDevicesData = r;
           Future.delayed(Duration(seconds: 3)).then((value) async {
@@ -118,12 +117,12 @@ class EcgController extends GetxController {
         print('Device Name : ${r.device.name.toString()}');
       }
     });
-    flutterBlue.value.stopScan();
+    FlutterBluePlus.stopScan();
   }
 
   getData() async {
     checkDeviceConnection();
-    flutterBlue.value.state.listen((event) {
+    FlutterBluePlus.state.listen((event) {
       print('nnnnnnnnnn' + event.toString());
     });
 

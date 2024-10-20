@@ -1,11 +1,12 @@
 import 'dart:math';
 
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:medvantage_patient/LiveVital/live_vital_controller.dart';
 import 'package:medvantage_patient/LiveVital/thermometer/thermometer_vm.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../app_manager/app_color.dart';
@@ -116,11 +117,11 @@ get();
                   //   ),
                   // ),
 
-                  StreamBuilder<BluetoothDeviceState>(
+                  StreamBuilder<BluetoothConnectionState>(
                     stream: widget.device.state,
-                    initialData: BluetoothDeviceState.connecting,
+                    initialData: BluetoothConnectionState.connecting,
                     builder: (c, snapshot) => ListTile(
-                      leading: (snapshot.data == BluetoothDeviceState.connected)
+                      leading: (snapshot.data == BluetoothConnectionState.connected)
                           ? const Icon(Icons.bluetooth_connected)
                           : const Icon(Icons.bluetooth_disabled),
                       title: Text(

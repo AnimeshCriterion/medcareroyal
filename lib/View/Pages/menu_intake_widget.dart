@@ -1016,7 +1016,7 @@ class _IntakeMenusWidgetState extends State<IntakeMenusWidget> {
                     Expanded(
                       child: PrimaryButton(
                         onPressed: () {
-
+                          Get.back();
                         },
                         title:  localization.getLocaleData.cancel.toString(),
                         color: AppColor.grey,

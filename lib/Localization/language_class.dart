@@ -449,7 +449,10 @@ class Lang {
   String? vitalManagement;
   String? activitiesChronicle;
   String? fluidManagement;
+  String? presribedMedicine;
   String? medcareRoyalTraining;
+  String ? Noinvestigationsfound;
+  String ? PrescribedOn;
   String? faq;
   String? bedCareConnect;
   String? setting;
@@ -583,7 +586,8 @@ class Lang {
         this.filter,
         this.videoCalling,
         this.copyright,
-
+this.Noinvestigationsfound,
+        this.PrescribedOn,
 
 
         this.highlightSymptoms,
@@ -1229,6 +1233,7 @@ class Lang {
     vitalManagement= json['vitalManagement'];
     activitiesChronicle= json['activitiesChronicle'];
     fluidManagement= json['fluidManagement'];
+    presribedMedicine= json['presribedMedicine'];
     medcareRoyalTraining= json['medcareRoyalTraining'];
     faq= json['faq'];
     bedCareConnect= json['bedCareConnect'];
@@ -1256,6 +1261,8 @@ class Lang {
     json['onlineDoctorConsulWithQualifiedDoctor'];
     enterMobileNo = json['enterMobileNo'];
     verify = json['verify'];
+    PrescribedOn = json['PrescribedOn'];
+    Noinvestigationsfound = json['Noinvestigationsfound'];
     confirmationForYourIdentity = json['confirmationForYourIdentity'];
     notificationMessage = json['notificationMessage'];
     confirmMobileNo = json['confirmMobileNo'];
@@ -1786,6 +1793,8 @@ class Lang {
     data['loginWithMobile'] = loginWithMobile;
     data['enterValidContact'] = enterValidContact;
     data['or'] = or;
+    data['PrescribedOn'] = PrescribedOn;
+    data['Noinvestigationsfound'] = Noinvestigationsfound;
     data['loginOtp'] = loginOtp;
     data['verifyMobileNo'] = verifyMobileNo;
     data['didnotGetCode'] = didnotGetCode;
@@ -1816,6 +1825,7 @@ class Lang {
     data['vitalManagement'] = vitalManagement;
     data['activitiesChronicle'] = activitiesChronicle;
     data['fluidManagement'] = fluidManagement;
+    data['presribedMedicine'] = presribedMedicine;
     data['medcareRoyalTraining'] = medcareRoyalTraining;
     data['faq'] = faq;
     data['bedCareConnect'] = bedCareConnect;

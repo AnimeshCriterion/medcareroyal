@@ -1,4 +1,5 @@
 
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:medvantage_patient/LiveVital/CTBP/scan_cr_bp_machine_modal.dart';
 import 'package:medvantage_patient/LiveVital/CTBP/scan_ct_bp_machine_controller.dart';
 import 'package:medvantage_patient/LiveVital/CTBP/scan_result_tile.dart';
@@ -6,7 +7,6 @@ import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -41,7 +41,7 @@ class _ScanCTBpMachineState extends State<ScanCTBpMachine> {
 
   get() async {
 
-    FlutterBlue.instance
+    FlutterBluePlus
         .startScan(timeout: const Duration(seconds: 4));
   }
 
@@ -64,9 +64,9 @@ class _ScanCTBpMachineState extends State<ScanCTBpMachine> {
           appBar: CustomAppBar(title: 'Search Device',color:  themeChange.darkTheme
               ? AppColor.darkshadowColor1
               : AppColor.lightshadowColor1,),
-          body: StreamBuilder<BluetoothState>(
-              stream: FlutterBlue.instance.state,
-              initialData: BluetoothState.unknown,
+          body: StreamBuilder<BluetoothAdapterState>(
+              stream: FlutterBluePlus.state,
+              initialData: BluetoothAdapterState.unknown,
               builder: (c, snapshot) {
 
                 return const FindDevicesScreen();
@@ -107,7 +107,7 @@ class _ScanCTBpMachineState extends State<ScanCTBpMachine> {
             color: AppColor.orange,
             title: 'search Again',
             onPressed: () {
-              FlutterBlue.instance.startScan();
+              FlutterBluePlus.startScan();
             },
           ),
         ],
@@ -183,13 +183,13 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
           ),
         ),
           child: RefreshIndicator(
-            onRefresh: () => FlutterBlue.instance
+            onRefresh: () => FlutterBluePlus
                 .startScan(timeout: const Duration(seconds: 4)),
             child: GetBuilder(
                 init: ScanCtBpMachineController(),
                 builder: (_) {
                   return StreamBuilder<bool>(
-                    stream: FlutterBlue.instance.isScanning,
+                    stream: FlutterBluePlus.isScanning,
                     initialData: false,
                     builder: (c, deviceSnapshot) {
                       modal.controller.isDeviceFound.value = false;
@@ -203,7 +203,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                         child: modal.controller.isScanning.value
                             ? Lottie.asset('assets/scanning.json')
                             : StreamBuilder<List<ScanResult>>(
-                                stream: FlutterBlue.instance.scanResults,
+                                stream: FlutterBluePlus.scanResults,
                                 initialData: const [],
                                 builder: (c, snapshot) {
                                   for (int i = 0;
@@ -241,12 +241,12 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
           ),
         ),
         floatingActionButton: StreamBuilder<bool>(
-          stream: FlutterBlue.instance.isScanning,
+          stream: FlutterBluePlus.isScanning,
           initialData: false,
           builder: (c, snapshot) {
             if (snapshot.data!) {
               return FloatingActionButton(
-                onPressed: () => FlutterBlue.instance.stopScan(),
+                onPressed: () => FlutterBluePlus.stopScan(),
                 backgroundColor: Colors.red,
                 child: const Icon(Icons.stop),
               );
@@ -254,7 +254,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
               return FloatingActionButton(
                   backgroundColor: AppColor.orange,
                   child: const Icon(Icons.search),
-                  onPressed: () => FlutterBlue.instance
+                  onPressed: () => FlutterBluePlus
                       .startScan(timeout: const Duration(seconds: 4)));
             }
           },
@@ -293,7 +293,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
           color: AppColor.orange,
           title: 'Search Again',
           onPressed: () {
-            FlutterBlue.instance
+            FlutterBluePlus
                 .startScan(timeout: const Duration(seconds: 4));
           },
         ),

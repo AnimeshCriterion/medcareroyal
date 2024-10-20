@@ -1,6 +1,7 @@
 import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import '../../app_manager/alert_toast.dart';
 import 'ecg_controller.dart';
@@ -20,7 +21,7 @@ class _ECGViewState extends State<ECGView> {
   EcgController ecgController = Get.put(EcgController());
 
   get() async {
-    await ecgController.flutterBlue.value.stopScan();
+    await FlutterBluePlus.stopScan();
 
     if (ecgController.devicesData != null) {
       await ecgController.devicesData!.device.disconnect();

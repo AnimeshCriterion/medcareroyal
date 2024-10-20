@@ -2,7 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
@@ -16,7 +16,6 @@ alertToast(context,message){
 
 class CareTakerController extends GetxController {
 
-  FlutterBlue flutterBluePlus =  FlutterBlue.instance;
 
   StreamSubscription? scanSubscription;
   StreamSubscription? subscription1;
@@ -74,13 +73,13 @@ class CareTakerController extends GetxController {
     print('3DeviceScanning'+getIsDeviceScanning.toString());
 
     // Start scanning
-    flutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
+    FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
 
       updateIsDeviceScanning=false;
     });
 
     // Listen to scan results
-    scanSubscription = flutterBluePlus.scanResults.listen((results) {
+    scanSubscription = FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
         print(r.device.name.toString());

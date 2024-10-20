@@ -98,7 +98,7 @@ class LiveVitalModal{
       //   apiCallType: ApiCallType.post(body: request),
       // );
 print('nnnnnnvnnnnvnnn '+data.toString());
-      if (data['responseCode'] == 0) {
+      if (data['status'] == 0) {
         Alert.show(data["message"]);
       } else {
         Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: "Vital added successfully!".toString()));

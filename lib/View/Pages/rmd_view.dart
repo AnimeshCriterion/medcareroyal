@@ -155,7 +155,7 @@ class _RMDViewState extends State<RMDView> {
       {'title': localization.getLocaleData.VitalManagement, 'img': 'vitals.svg', 'navigation': 'Vital Management'},
       {'title': localization.getLocaleData.FluidManagement, 'img': 'fluidmanagement.svg', 'navigation': 'Fluid Management'},
       {'title': localization.getLocaleData.PrescriptionChecklist, 'img': 'pills.svg', 'navigation': 'Prescription Checklist'},
-      // {'title': localization.getLocaleData.dietChecklist, 'img': 'dietchecklist.svg', 'navigation': 'Diet Checklist'},
+       {'title': localization.getLocaleData.presribedMedicine, 'img': 'dietchecklist.svg', 'navigation': 'Prescribed Investigation'},
       {'title': localization.getLocaleData.SupplementChecklist, 'img': 'suppliment.svg', 'navigation': 'Supplement Checklist'},
     ];
     List other = [

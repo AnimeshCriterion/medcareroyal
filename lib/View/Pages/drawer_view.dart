@@ -83,7 +83,7 @@ class _MyDrawerState extends State<MyDrawer> {
         'navigation':'Fluid Management'
       },
       // {
-      //   'title':'Urine Output',
+      //   'title':localization.getLocaleData.presribedMedicine,
       //   'light_img':ImagePaths.fluidLight.toString(),
       //   'dark_img':  ImagePaths.fluidDark.toString(),
       // },

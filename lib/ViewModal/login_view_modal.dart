@@ -303,11 +303,15 @@ class LoginViewModal extends ChangeNotifier {
 
       generateOTPForPatient(context);
       print("Aniemsh${userRepository.getUser.mobileNo}");
-      var value=(data['responseValue'][0]['isActive'].toString());
-      print(value+ ' ertyuio');
-      final box = GetStorage();
-      box.write('isActive', value);
-      print(box.read('isActive').toString()+'asdfghjkrtyuiofghj');
+
+      await prefs.setString('isActive', (data['responseValue'][0]['isActive']??'0').toString());
+      // var value=(data['responseValue'][0]['isActive'].toString());
+      // print(value+ ' ertyuio');
+      // final box = GetStorage();
+      // box.write('isActive', value);
+      // print(box.read('isActive').toString()+'asdfghjkrtyuiofghj');
+
+
     } else {
       Alert.show("Please enter valid UHID");
     }

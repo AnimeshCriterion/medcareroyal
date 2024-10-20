@@ -4,7 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +16,6 @@ import '../devices_api.dart';
 
 class YonkerOximeterController extends GetxController{
 
-  FlutterBlue flutterBlue=FlutterBlue.instance ;
 
 
   BluetoothDevice? devicesData;
@@ -43,7 +42,7 @@ class YonkerOximeterController extends GetxController{
   getDevices(context) async {
     // Start scanning
     bool isAlreadyConnected=false;
-     List<BluetoothDevice> data=await flutterBlue.connectedDevices;
+     List<BluetoothDevice> data=await FlutterBluePlus.connectedDevices;
     print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
      if(data.isNotEmpty){
 
@@ -69,11 +68,11 @@ class YonkerOximeterController extends GetxController{
     if(!isAlreadyConnected){
       updateIsDeviceFound = false;
       updateIsScanning = true;
-      flutterBlue.startScan(timeout: const Duration(seconds: 4)).then((value) {
+      FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
         updateIsScanning = false;
       });
 // Listen to scan results
-      flutterBlue.scanResults.listen((results) {
+      FlutterBluePlus.scanResults.listen((results) {
         // do something with scan results
 
         for (ScanResult r in results) {
@@ -82,7 +81,7 @@ class YonkerOximeterController extends GetxController{
             updateDevicesData = r.device;
             updateIsDeviceFound = true;
             Future.delayed(Duration(seconds: 3)).then((value) async {
-              flutterBlue.stopScan();
+              FlutterBluePlus.stopScan();
               await getData(context);
             });
           }
@@ -91,7 +90,7 @@ class YonkerOximeterController extends GetxController{
         }
       });
     }
-    flutterBlue.stopScan();
+    FlutterBluePlus.stopScan();
   }
 
   bool isConnected=false;

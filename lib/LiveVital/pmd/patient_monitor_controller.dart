@@ -2,7 +2,8 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/services.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:intl/intl.dart';
@@ -16,7 +17,6 @@ import '../live_vital_controller.dart';
 class MyPatientMonitorController extends GetxController{
 
 
-  FlutterBlue flutterBluePlus =  FlutterBlue.instance;
 
   StreamSubscription? scanSubscription;
   StreamSubscription? subscription1;
@@ -76,13 +76,13 @@ class MyPatientMonitorController extends GetxController{
     print('3DeviceScanning'+getIsDeviceScanning.toString());
 
     // Start scanning
-    flutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
+    FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
 
       updateIsDeviceScanning=false;
     });
 
     // Listen to scan results
-    scanSubscription = flutterBluePlus.scanResults.listen((results) {
+    scanSubscription = FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
         print(r.device.name.toString());

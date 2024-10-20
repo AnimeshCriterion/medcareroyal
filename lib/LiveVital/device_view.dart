@@ -359,99 +359,99 @@ class _DeviceViewState extends State<DeviceView> {
                         ),
                       ),
 
-                      Visibility(
-                          visible: widget.isViaOximeter,
-                          child: Column(
-                            children: [
-                              InkWell(
-                                onTap: () async {
-                                  _enableBluetooth(context,
-                                      route: const Oximeter());
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      40, 8, 40, 8),
-                                  child: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    color: Colors.blue.shade50,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text('Via Oximeter',
-                                            style: MyTextTheme.mediumBCB
-                                                .copyWith(
-                                                    color: AppColor
-                                                        .primaryColorLight)),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Visibility(
-                                visible: widget.isWellue,
-                                child: InkWell(
-                                  onTap: () {
-                                    _enableBluetooth(context,
-                                        route: WellueView());
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        40, 0, 40, 8),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.blue.shade50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text('Wellue Oximeter',
-                                              style: MyTextTheme.mediumBCB
-                                                  .copyWith(
-                                                      color: AppColor
-                                                          .primaryColorLight)),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 10,
-                              ),
-                              Visibility(
-                                visible: widget.isYonkerOximeter,
-                                child: InkWell(
-                                  onTap: () {
-                                    _enableBluetooth(context,
-                                        route: const YonkerOximeterView());
-                                  },
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        40, 0, 40, 8),
-                                    child: Container(
-                                      padding: const EdgeInsets.all(8),
-                                      color: Colors.blue.shade50,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text('Yonker Oximeter',
-                                              style: MyTextTheme.mediumBCB
-                                                  .copyWith(
-                                                      color: AppColor
-                                                          .primaryColorLight)),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          )),
+                      // Visibility(
+                      //     visible: widget.isViaOximeter,
+                      //     child: Column(
+                      //       children: [
+                      //         InkWell(
+                      //           onTap: () async {
+                      //             _enableBluetooth(context,
+                      //                 route: const Oximeter());
+                      //           },
+                      //           child: Padding(
+                      //             padding: const EdgeInsets.fromLTRB(
+                      //                 40, 8, 40, 8),
+                      //             child: Container(
+                      //               padding: const EdgeInsets.all(8.0),
+                      //               color: Colors.blue.shade50,
+                      //               child: Row(
+                      //                 mainAxisAlignment:
+                      //                     MainAxisAlignment.center,
+                      //                 children: [
+                      //                   Text('Via Oximeter',
+                      //                       style: MyTextTheme.mediumBCB
+                      //                           .copyWith(
+                      //                               color: AppColor
+                      //                                   .primaryColorLight)),
+                      //                 ],
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         const SizedBox(
+                      //           height: 10,
+                      //         ),
+                      //         Visibility(
+                      //           visible: widget.isWellue,
+                      //           child: InkWell(
+                      //             onTap: () {
+                      //               _enableBluetooth(context,
+                      //                   route: WellueView());
+                      //             },
+                      //             child: Padding(
+                      //               padding: const EdgeInsets.fromLTRB(
+                      //                   40, 0, 40, 8),
+                      //               child: Container(
+                      //                 padding: const EdgeInsets.all(8),
+                      //                 color: Colors.blue.shade50,
+                      //                 child: Row(
+                      //                   mainAxisAlignment:
+                      //                       MainAxisAlignment.center,
+                      //                   children: [
+                      //                     Text('Wellue Oximeter',
+                      //                         style: MyTextTheme.mediumBCB
+                      //                             .copyWith(
+                      //                                 color: AppColor
+                      //                                     .primaryColorLight)),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         const SizedBox(
+                      //           height: 10,
+                      //         ),
+                      //         Visibility(
+                      //           visible: widget.isYonkerOximeter,
+                      //           child: InkWell(
+                      //             onTap: () {
+                      //               _enableBluetooth(context,
+                      //                   route: const YonkerOximeterView());
+                      //             },
+                      //             child: Padding(
+                      //               padding: const EdgeInsets.fromLTRB(
+                      //                   40, 0, 40, 8),
+                      //               child: Container(
+                      //                 padding: const EdgeInsets.all(8),
+                      //                 color: Colors.blue.shade50,
+                      //                 child: Row(
+                      //                   mainAxisAlignment:
+                      //                       MainAxisAlignment.center,
+                      //                   children: [
+                      //                     Text('Yonker Oximeter',
+                      //                         style: MyTextTheme.mediumBCB
+                      //                             .copyWith(
+                      //                                 color: AppColor
+                      //                                     .primaryColorLight)),
+                      //                   ],
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     )),
 
 
                       Visibility(

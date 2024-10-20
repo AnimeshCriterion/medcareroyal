@@ -3,7 +3,8 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
+
 import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -25,6 +26,7 @@ import '../LiveVital/low_ecg/devices_view.dart';
 import '../LiveVital/ptt/ptt_view.dart';
 import '../LiveVital/stetho_bluetooth/pid_page_for_stetho.dart';
 import '../Localization/app_localization.dart';
+import '../authenticaton/user_repository.dart';
 import 'bp_data_view.dart';
 
 class AddDeviceConnectView extends StatefulWidget {
@@ -124,13 +126,13 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
         controller.subscription1!.cancel();
 
       controller.updateSelectedDevice = Map<String, dynamic>.from({});
-      FlutterBlue.instance.stopScan();
+      FlutterBluePlus.stopScan();
       await controller.devicesData!.disconnect();
 
       controller.update();
     }catch(e){
 
-      FlutterBlue.instance.stopScan();
+      FlutterBluePlus.stopScan();
 
       if(controller.timer!=null){
         controller.timer!.cancel();
@@ -142,10 +144,12 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
   Widget build(BuildContext context) {
     ApplicationLocalizations localization =
     Provider.of<ApplicationLocalizations>(context, listen: true);
+    UserRepository  userRepository = Provider.of<UserRepository>(context, listen: false);
 
     final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
     // AddDeviceViewModal addDevicevm =
     // Provider.of<AddDeviceViewModal>(context, listen: true);
+
     return Container(
       color: AppColor.white,
       child: SafeArea(
@@ -179,6 +183,7 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                 //   ),
                 //   Text("Add Device",style: MyTextTheme().largeBCB,)
                 // ],),
+                userRepository.currentUser!.uhID.toString().toLowerCase()=="uhid01169"?Center(child: Text("Coming Soon")):
                 Expanded(
                   child: Container(
                       decoration: BoxDecoration(
@@ -390,16 +395,16 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                             controller.updateSelectedDeviceIndex=index.toString();
                         controller.updateSelectedDevice = Map.from(data);
                         try {
-                          FlutterBlue.instance.stopScan();
-                          controller.oxi.disConnect(
-                              macAddress:
-                              controller.macAddress.toString());
+                          FlutterBluePlus.stopScan();
+                          // controller.oxi.disConnect(
+                          //     macAddress:
+                          //     controller.macAddress.toString());
                         } catch (e) {}
                         if (  data['name'].toString() != 'BPW1 Watch' && data['name'].toString() !='Apple'&& data['name'].toString() !='ECG'&& data['name'].toString() !='StethoScope'&& data['name'].toString() !='PTT') {
 
 
                               if (data['device'].toString() == 'CTP005') {
-                                controller.Ctoximeter(context);
+                                // controller.Ctoximeter(context);
 
                               } else {
 
@@ -522,9 +527,9 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                                       : AppColor.greyDark,
                                   fontWeight: FontWeight.w600),
                             ),
-                            modal==''? SizedBox(): Text( '('+ modal+')',
+                            modal==' '? SizedBox(): Text('model:  '+ modal+' ',
                               style: MyTextTheme().mediumGCN.copyWith(
-                                  fontSize: 11,
+                                  fontSize: 8,
                                   color: themeChange.darkTheme
                                       ? AppColor.grey.withOpacity(.9)
                                       : AppColor.greyDark,

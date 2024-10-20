@@ -4,9 +4,10 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:medvantage_patient/LiveVital/Wellue/wellue_modal.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+
 import 'package:intl/intl.dart';
 
 import '../../View/widget/common_method/show_progress_dialog.dart';
@@ -23,9 +24,6 @@ class WellueViewModal extends ChangeNotifier {
 
 
 
-
-
-  FlutterBlue flutterBlue = FlutterBlue.instance;
 
 
   BluetoothDevice? deviceData;
@@ -67,10 +65,10 @@ class WellueViewModal extends ChangeNotifier {
     updateIsDeviceFound=false;
 
     // Start scanning
-    flutterBlue.startScan(timeout: const Duration(seconds: 4));
+    FlutterBluePlus.startScan(timeout: const Duration(seconds: 4));
 
 // Listen to scan results
-      flutterBlue.scanResults.listen((results) {
+    FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
 
 
@@ -91,7 +89,7 @@ Timer(const Duration(seconds: 4), () {
   updateIsScanning=false;
       });
 // Stop scanning
-    flutterBlue.stopScan();
+    FlutterBluePlus.stopScan();
 
   }
 

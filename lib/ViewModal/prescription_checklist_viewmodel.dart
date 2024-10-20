@@ -217,6 +217,8 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
     }
   }
 
+
+
   bool checkDurationType(String duration){
     print("Animes$duration");
    return durationType.map((e) =>
@@ -263,7 +265,6 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
             int data=        datee.difference( DateFormat('HH:mm').parse(DateFormat('HH:mm').format(DateTime.now() )) ).inHours;
 
            if(data<=1) {
-
              await CustomBottomSheet.open(context,
                  child: Container( decoration: BoxDecoration(
                    borderRadius: BorderRadius.circular(15),
@@ -340,14 +341,16 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
                      ),
                    ),
                  ));
-
-
             }
            else{
 
-             Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: "Before time you can't take medicine.".toString()));
+             Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: "Medicine cannot be updated for previous days or before the prescribed time.".toString()));
              // Alert.show("Before time you can't take medicine.");
            }
+          }else{
+            showMedicineTimePopup(context,medicationNameAndDate.drugName.toString(),timeString.toString());
+
+
           }
         },
         child: Container(
@@ -428,4 +431,63 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
     );
   }
 
+  void showMedicineTimePopup(BuildContext context, String medicineName, String medicineTime) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return MedicineTimePopup(
+          medicineName: medicineName,
+          medicineTime: medicineTime,
+        );
+      },
+    );
+  }
+
+}
+
+
+class MedicineTimePopup extends StatelessWidget {
+  final String medicineName;
+  final String medicineTime;
+
+  MedicineTimePopup({required this.medicineName, required this.medicineTime});
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      contentPadding: EdgeInsets.all(16),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Medicine Details',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(
+                  Icons.cancel,
+                  color: Colors.red,
+                  size: 24,
+                ),
+              ),
+            ],
+          ),
+          SizedBox(height: 16),
+          Text(
+            'Medicine: $medicineName',
+            style: TextStyle(fontSize: 16),
+          ),
+          SizedBox(height: 8),
+          Text(
+            'Time: $medicineTime',
+            style: TextStyle(fontSize: 16),
+          ),
+        ],
+      ),
+    );
+  }
 }

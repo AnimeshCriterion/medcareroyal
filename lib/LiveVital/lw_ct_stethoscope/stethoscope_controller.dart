@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:medvantage_patient/LiveVital/devices_api.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -115,7 +115,6 @@ class StethoscopeController extends GetxController {
     Get.back();
   }
 
-  Rx<FlutterBlue> flutterBlue = FlutterBlue.instance.obs;
 
   Rx<bool> isDeviceConnected = false.obs;
 
@@ -181,13 +180,13 @@ class StethoscopeController extends GetxController {
     deviceList = [];
     updateIsDeviceScanning = true;
     // Start scanning
-    flutterBlue.value
+    FlutterBluePlus
         .startScan(timeout: const Duration(seconds: 4))
         .then((value) {
       updateIsDeviceScanning = false;
     });
 // Listen to scan results
-    subscription = flutterBlue.value.scanResults.listen((results) {
+    subscription =FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
       print('nnnnnvvv' + results.length.toString());
       updateDeviceList = results;
@@ -201,7 +200,7 @@ class StethoscopeController extends GetxController {
       }
     });
     // Stop Scanning
-    flutterBlue.value.stopScan();
+    FlutterBluePlus.stopScan();
   }
 
   bool isHeartMode = false;

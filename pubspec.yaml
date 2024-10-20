@@ -139,7 +139,7 @@ dependencies:
   flutter_share: ^2.0.0
   uni_links:
   liquid_progress_indicator_v2:
-  flutter_blue:
+#  flutter_blue:
   signalr_netcore:
   flick_video_player:
   flutter_dynamic_icon:

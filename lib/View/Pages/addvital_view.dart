@@ -10,6 +10,7 @@ import 'package:medvantage_patient/LiveVital/device_view.dart';
 import 'package:medvantage_patient/View/Pages/drawer_view.dart';
 import 'package:medvantage_patient/View/Pages/vital_history_page.dart';
 import 'package:medvantage_patient/ViewModal/addvital_view_modal.dart';
+import 'package:medvantage_patient/app_manager/alert_dialogue.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
@@ -313,21 +314,36 @@ class _AddVitalViewState extends State<AddVitalView> {
                                   Expanded(
                                     child: InkWell(
                                       onTap: () async{
-                                        final box = GetStorage();
-                                          await box.read('isActive');
-                                        var value= await box.read('isActive');
-                                        print('asdfghjkrtyuiofghj'+value.toString());
-                                        setState(() {
+
+                                        final prefs = await SharedPreferences.getInstance();
+                                        // final box = GetStorage();
+                                        //   await box.read('isActive');
+                                        // var value= await box.read('isActive');
+                                        // print('asdfghjkrtyuiofghj'+value.toString());
+
+                                        var value= await prefs.getString('isActive');
+
                                           if(value.toString()=='1'){
-                                            addvitalVM.subscriptionIndex = 1;
-                                            addvitalVM.isIntake = false;
+                                            setState(() {
+
+                                              addvitalVM.subscriptionIndex = 1;
+                                              addvitalVM.isIntake = false;
+
+                                            });
                                           }else{
-                                            Get.showSnackbar(MySnackbar.SuccessSnackBar(message: 'Coming Soon!'));
+                                           // Get.showSnackbar(MySnackbar.SuccessSnackBar(message: 'Coming Soon!'));
+                                            alertToast(context, 'Coming Soon!');
                                           }
+
+                                        // setState(() {
+                                        //
+                                        //   addvitalVM.subscriptionIndex = 1;
+                                        //   addvitalVM.isIntake = false;
+                                        // });
 
                                           // MyNavigator.push(context, const VitalHistoryPage());
                                           //  MyNavigator.navigateTransparent(context, const HistoryPage());
-                                        });
+
                                       },
                                       child: Container(
                                         decoration: BoxDecoration(

@@ -1,13 +1,10 @@
 import 'dart:async';
 
 
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:medvantage_patient/LiveVital/CTBP/scan_cr_bp_machine_modal.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
@@ -35,7 +32,7 @@ class CTBpScreenView extends StatefulWidget {
 class _CTBpScreenViewState extends State<CTBpScreenView> {
 
     late ScanResult device;
-  FlutterBlue flutterBlue = FlutterBlue.instance;
+  FlutterBluePlus flutterBlue = FlutterBluePlus();
 
 
 
@@ -95,18 +92,18 @@ class _CTBpScreenViewState extends State<CTBpScreenView> {
         // title: Text(device.name),
         title: Text(localization.getLocaleData.bloodPressure.toString()),
         actions: <Widget>[
-          StreamBuilder<BluetoothDeviceState>(
+          StreamBuilder<BluetoothConnectionState>(
             stream: device.device.state,
-            initialData: BluetoothDeviceState.connecting,
+            initialData: BluetoothConnectionState.connecting,
             builder: (c, snapshot) {
               VoidCallback? onPressed;
               String text;
               switch (snapshot.data) {
-                case BluetoothDeviceState.connected:
+                case BluetoothConnectionState.connected:
                   onPressed = () => device.device.disconnect();
                   text = 'Disconnect';
                   break;
-                case BluetoothDeviceState.disconnected:
+                case BluetoothConnectionState.disconnected:
                   onPressed = () => device.device.connect();
                   text = 'Connect';
                   break;
@@ -143,12 +140,12 @@ class _CTBpScreenViewState extends State<CTBpScreenView> {
       ),
         child: Column(
           children: <Widget>[
-            StreamBuilder<BluetoothDeviceState>(
+            StreamBuilder<BluetoothConnectionState>(
               stream: device.device.state,
-              initialData: BluetoothDeviceState.connecting,
+              initialData: BluetoothConnectionState.connecting,
               builder: (c, snapshot) =>
                   ListTile(
-                    leading: (snapshot.data == BluetoothDeviceState.connected)
+                    leading: (snapshot.data == BluetoothConnectionState.connected)
                         ? const Icon(Icons.bluetooth_connected)
                         : const Icon(Icons.bluetooth_disabled),
                     title: Text('Device Connected' +

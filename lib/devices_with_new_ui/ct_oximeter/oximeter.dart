@@ -4,7 +4,7 @@ import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_oximeter/flutter_oximeter.dart';
+// import 'package:flutter_oximeter/flutter_oximeter.dart';
 import 'package:get/get.dart';
 import 'dart:async';
 import 'package:lottie/lottie.dart';
@@ -39,8 +39,8 @@ class _OximetersState extends State<Oximeters> {
 
   StreamSubscription? subscriptionss;
 
-
-  FlutterOximeter oxi=FlutterOximeter();
+  //
+  // FlutterOximeter oxi=FlutterOximeter();
   StreamSubscription? subscription;
 
 
@@ -57,7 +57,7 @@ class _OximetersState extends State<Oximeters> {
 
     super.dispose();
     subscription!.cancel();
-    oxi.disConnect(macAddress: macAddress);
+    // oxi.disConnect(macAddress: macAddress);
   }
 
   // Platform messages are asynchronous, so we initialize in an async method.
@@ -70,16 +70,16 @@ class _OximetersState extends State<Oximeters> {
       controller.updateSpo2='00';
     });
 
-    subscriptionss=  oxi.detectedDataStream.listen((event) {
-      controller.updateSpo2=event.spo2.toString();
-      controller.updatePr=event.heartRate.toString();
-    });
+    // subscriptionss=  oxi.detectedDataStream.listen((event) {
+    //   controller.updateSpo2=event.spo2.toString();
+    //   controller.updatePr=event.heartRate.toString();
+    // });
   }
 
   onPressBack() async {
     try{
       controller.updateSelectedDeviceIndex = '';
-      oxi.disConnect(macAddress: controller.macAddress.toString());
+      // oxi.disConnect(macAddress: controller.macAddress.toString());
       controller.selectedDevice =
           DeviceListDataModal.fromJson(Map<String, dynamic>.from({}));
 

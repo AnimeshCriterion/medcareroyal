@@ -5,8 +5,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:medvantage_patient/LiveVital/devices_api.dart';
-import 'package:flutter_blue/flutter_blue.dart';
+
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,6 @@ class YonkerBpMachineController extends GetxController{
 
 
 
-  FlutterBlue flutterBlue=FlutterBlue.instance ;
 
 
   ScanResult? devicesData;
@@ -52,12 +52,12 @@ class YonkerBpMachineController extends GetxController{
 
     updateIsDeviceFound=false;
     updateIsScanning=true;
-    flutterBlue.startScan(timeout: const Duration(seconds: 4)).then((value) {
+    FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
 
       updateIsScanning=false;
     });
 // Listen to scan results
-    flutterBlue.scanResults.listen((results) {
+    FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
 
       for (ScanResult r in results) {
@@ -71,7 +71,7 @@ class YonkerBpMachineController extends GetxController{
       }
     });
 
-    flutterBlue.stopScan();
+    FlutterBluePlus.stopScan();
   }
 
   bool isConnected=false;

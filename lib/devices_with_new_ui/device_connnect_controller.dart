@@ -1,15 +1,10 @@
 
 
 import 'dart:async';
-import 'dart:convert';
-import 'package:flutter/material.dart';
-import 'package:flutter_blue/flutter_blue.dart';
-import 'package:flutter_oximeter/flutter_oximeter.dart';
+// import 'package:flutter_oximeter/flutter_oximeter.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../../assets.dart';
 import '../../devices_with_new_ui/bp_data_view.dart';
-import '../../devices_with_new_ui/ct_oximeter/oximeter.dart';
 import '../../devices_with_new_ui/device_list_data_data_modal.dart';
 
 class DeviceConnectController extends GetxController{
@@ -25,10 +20,11 @@ class DeviceConnectController extends GetxController{
     {
       "id":1,
       "name":"yonker",
-      "modal":"",
+      "modal":"YK-81C",
       "deviceType":"Oximeter",
       "image":'assets/yonker_oxi.png',
-      'device':'BleModuleA',
+      'device':'YK-81C',
+      // 'device':'BleModuleA',
       'suuid':'cdeacd80-5235-4c07-8846-93a37ee6b86d',
       'cuuid':'cdeacd81-5235-4c07-8846-93a37ee6b86d'
 
@@ -36,7 +32,7 @@ class DeviceConnectController extends GetxController{
     {
       "id":1,
       "name":"Wellue",
-      "modal":"",
+      "modal":" ",
       "deviceType":"Oximeter",
       "image":'assets/wellue_oxi.png',
       'device':'OxySmart',
@@ -48,7 +44,7 @@ class DeviceConnectController extends GetxController{
     // '28:FF:B2:F9:B4:14',
       "id":2,
       "name":"Omron",
-      "modal":"",
+      "modal":" ",
       "deviceType":"BP Machine",
       "image":'assets/omron_bp.png',
       'device':'BLESmart_00000' ,
@@ -58,7 +54,7 @@ class DeviceConnectController extends GetxController{
     {
       "id":3,
       "name":"CT BP",
-      "modal":"",
+      "modal":" ",
       "deviceType":"BP Machine",
       "image":'assets/ct_bp.png',
       'device':'CT033',
@@ -68,27 +64,28 @@ class DeviceConnectController extends GetxController{
     {
       "id":4,
       "name":"yonker",
-      "modal":"",
+      "modal":"YK-BPA1",
       "deviceType":"BP Machine",
       "image":'assets/yonker_bp.png',
-      'device':'BleModuleB',
+      'device':'YK-BPA1',
+      // 'device':'BleModuleB',
       'suuid':'cdeacd80-5235-4c07-8846-93a37ee6b86d',
       'cuuid':'cdeacd81-5235-4c07-8846-93a37ee6b86d'
     },
-    {
-      "id":4,
-      "name":"CT Oximeter",
-      "modal":"",
-      "deviceType":"Oximeter",
-      "image":'assets/ct_oxi.png',
-      'device':'CTP005',
-      'suuid':'cdeacd80-5235-4c07-8846-93a37ee6b86d',
-      'cuuid':'cdeacd81-5235-4c07-8846-93a37ee6b86d'
-    },
+    // {
+    //   "id":4,
+    //   "name":"CT Oximeter",
+    //   "modal":" ",
+    //   "deviceType":"Oximeter",
+    //   "image":'assets/ct_oxi.png',
+    //   'device':'CTP005',
+    //   'suuid':'cdeacd80-5235-4c07-8846-93a37ee6b86d',
+    //   'cuuid':'cdeacd81-5235-4c07-8846-93a37ee6b86d'
+    // },
     {
       "id":4,
       "name":"BPW1 Watch",
-      "modal":"",
+      "modal":" ",
       "deviceType":"Watch",
       "image":'assets/bpw_watch.png',
       'device':'BleMod',
@@ -98,7 +95,7 @@ class DeviceConnectController extends GetxController{
     {
       "id":4,
       "name":"Apple",
-      "modal":"",
+      "modal":" ",
       "deviceType":"Watch",
       "image":'assets/apple_watch.png',
       'device':'BLEsmart_',
@@ -108,7 +105,7 @@ class DeviceConnectController extends GetxController{
     {
       "id":4,
       "name":"ECG",
-      "modal":"",
+      "modal":" ",
       "deviceType":"Pocket ECG",
       "image":'assets/pocket_ecg.png',
       'device':' ',
@@ -118,7 +115,7 @@ class DeviceConnectController extends GetxController{
     {
       "id":4,
       "name":"StethoScope",
-      "modal":"",
+      "modal":" ",
       "deviceType":"CT Stethoscope",
       "image":'assets/ct_stetho.png',
       'device':' ',
@@ -128,7 +125,7 @@ class DeviceConnectController extends GetxController{
     {
       "id":4,
       "name":"PTT",
-      "modal":"",
+      "modal":" ",
       "deviceType":"PTT",
       "image":'assets/ct_ptt.png',
       'device':'BLESmart_00000458005FBFD0DFA8',
@@ -243,14 +240,17 @@ class DeviceConnectController extends GetxController{
     int tempint=0;
     bool isAlreadyConnected=false;
 
-    List<BluetoothDevice> data= await FlutterBlue.instance.connectedDevices;
+    List<BluetoothDevice> data= await FlutterBluePlus.connectedDevices;
+
+    print('nnvnnvnvnvnnnnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.length.toString());
+
     print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + getSelectedDevice.device.toString());
   if(data.isNotEmpty){
 
     print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
       // String tempName='';
       for(int i=0;i<data.length;i++){
-        if(data[i].name.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())){
+        if(data[i].name.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())  ){
           // tempName=data[i].name.toString();
           print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
 
@@ -279,12 +279,12 @@ class DeviceConnectController extends GetxController{
 
     }
   if(isAlreadyConnected){
-    FlutterBlue.instance.stopScan();
+    FlutterBluePlus.stopScan();
 
     }
     else {
       print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvn : ' + data.toString());
-      FlutterBlue.instance
+      FlutterBluePlus
           .startScan(timeout: const Duration(minutes: 15),  )
           .then((value) {
         // updateIsDeviceScanning=false;
@@ -295,7 +295,7 @@ class DeviceConnectController extends GetxController{
           .then((value) => updateIsScanning = false);
 
       // Listen to scan results
-      FlutterBlue.instance.scanResults.listen((List<ScanResult> results) async {
+      FlutterBluePlus.scanResults.listen((List<ScanResult> results) async {
         // do something with scan results
         for (ScanResult r in results) {   print('nnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.name.toString());
           if (r.device.name.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())) {
@@ -304,7 +304,7 @@ class DeviceConnectController extends GetxController{
             updateDevicesData = r.device;
             await   connectionState();
             Future.delayed(Duration(seconds: 1)).then((value) async {
-              FlutterBlue.instance.stopScan();
+              FlutterBluePlus.stopScan();
               try{
                 await r.device.connect();
               }catch(e){
@@ -380,7 +380,12 @@ class DeviceConnectController extends GetxController{
 
           print('Characteristics UUID : ' + c.uuid.toString());
           if (c.uuid.toString().toUpperCase() == getSelectedDevice.cuuid.toString().toUpperCase()) {
-             await   c.setNotifyValue(true );
+            try{
+              await c.setNotifyValue(true);
+            }
+            catch(e){
+              c.setNotifyValue(true);
+            }
 
             subscription=   c.value.listen((value) async {
               try{
@@ -453,10 +458,14 @@ class DeviceConnectController extends GetxController{
     switch (val){
         case 'CT033':
           await ctBp(value);
-        case 'BleModuleB':
+        case 'YK-BPA1YK-BPA1':
           await yonkerBpMachine(value);
-        case 'BleModuleA':
-          await yonkerOximeterData(value);
+      // case 'YK-BPA1':
+      //   await yonkerBpMachine(value);
+      // case 'YK-81C':
+      //     await yonkerOximeterData(value);
+    case 'YK-81CYK-81C':
+        await yonkerOximeterData(value);
       case 'OxySmart':
         await oximeterValue(value);
       case 'BLESmart':
@@ -505,11 +514,15 @@ class DeviceConnectController extends GetxController{
   yonkerOximeterData( List value){
     if(value.isNotEmpty){
       if (value[0] == 129) {
-        updateSpo2 = value[1].toString();
-        updatePr = value[2].toString();
+        if (value[1].toString() != '0') {
+          updateSpo2 = value[1].toString();
+        }
+        if (value[2].toString() != '0') {
+          updatePr = value[2].toString();
+        }
         updateIsMeasring=false;
       }else{
-        updateIsMeasring=true;
+        updateIsMeasring=false;
       }
     }else{
       updateIsMeasring=false;
@@ -551,8 +564,16 @@ yonkerBpMachine(value){
         if(hexData[2].toString().toUpperCase()=='F'){
           if(hexData[3].toString()=='8'){
             print('nnnnnn'+hexData.toString());
-            updatePr=oxiList[6].toString();
-            updateSpo2=oxiList[5].toString();
+
+            if (oxiList[6].toString() != '0') {
+
+              updatePr=oxiList[6].toString();
+            }
+
+            if (oxiList[5].toString() != '0') {
+              updateSpo2=oxiList[5].toString();
+
+            }
             updateIsMeasring=false;
           }
         }
@@ -585,7 +606,7 @@ yonkerBpMachine(value){
   }
 
 
-  FlutterOximeter oxi=FlutterOximeter();
+  // FlutterOximeter oxi=FlutterOximeter();
   Timer? timer;
 
   String macAddress = '';
@@ -595,46 +616,46 @@ yonkerBpMachine(value){
   }
   StreamSubscription? subscriptions;
   StreamSubscription? subscriptionss;
-  Ctoximeter(context){
-
-    timer=Timer.periodic(Duration(seconds: 5), (timer) {
-      print('nnnnnnvnnnnnnnnnvnnvnvnnnn ' );
-       oxi.startScanDevice();
-    });
-
-    subscriptions=oxi.getScanningStateStream.listen((event) {
-
-      isScanning=event;
-
-    });
-
-
-
-
-
-int i=0;
-    subscriptionss=  oxi.deviecFoundStream.listen((event) {
-
-
-      Future.delayed(Duration(seconds: 1)).then((value) {
-        i=i+1;
-        oxi.connect(macAddress: event!.macAddress??'', deviceName: event!.deviceName??'');
-        updateIsConnected=true;
-        updateMacAddress=event.macAddress.toString();
-        print('nnnnnnvnnnnnnnnnvnnvnvnnnn '+event.macAddress.toString().toString());
-        if( isConnected){
-          if(i==1){
-            Get.to(() => Oximeters());
-          }
-        }
+  // Ctoximeter(context){
+  //
+  //   timer=Timer.periodic(Duration(seconds: 5), (timer) {
+  //     print('nnnnnnvnnnnnnnnnvnnvnvnnnn ' );
+  //      oxi.startScanDevice();
+  //   });
+  //
+  //   subscriptions=oxi.getScanningStateStream.listen((event) {
+  //
+  //     isScanning=event;
+  //
+  //   });
 
 
 
 
-      });
+//
+// int i=0;
+//     subscriptionss=  oxi.deviecFoundStream.listen((event) {
 
-
-    });
+    //
+    //   Future.delayed(Duration(seconds: 1)).then((value) {
+    //     i=i+1;
+    //    // oxi.connect(macAddress: event!.macAddress??'', deviceName: event!.deviceName??'');
+    //     updateIsConnected=true;
+    //     updateMacAddress=event.macAddress.toString();
+    //     print('nnnnnnvnnnnnnnnnvnnvnvnnnn '+event.macAddress.toString().toString());
+    //     if( isConnected){
+    //       if(i==1){
+    //         Get.to(() => Oximeters());
+    //       }
+    //     }
+    //
+    //
+    //
+    //
+    //   });
+    //
+    //
+    // });
 
     // oxi.getConnectionStateStream.listen((event) {
     //   isConnected=event;
@@ -645,7 +666,7 @@ int i=0;
     //     });
     //   }
     // });
-  }
+  // }
 
   //   _scanState(List<int> value) {
   //   int val =value.length==1? value[0]:value[2];

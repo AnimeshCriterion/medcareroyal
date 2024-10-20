@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:medvantage_patient/View/widget/common_method/show_progress_dialog.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/devices_with_new_ui/device_connnect_controller.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
@@ -10,6 +11,7 @@ import '../../app_manager/neomorphic/neomorphic.dart';
 import '../../common_libs.dart';
 import '../../theme/theme.dart';
 import '../LiveVital/live_vital_controller.dart';
+import '../main.dart';
 import 'add_device_connect.dart';
 import 'device_list_data_data_modal.dart';
 
@@ -32,7 +34,6 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
   onPressBack() async {
     try{
 
-      await controller.subscription1!.cancel();
       controller.updateSelectedDeviceIndex = '';
       await controller.devicesData!.disconnect();
 
@@ -45,6 +46,13 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
       if(controller.subscription!=null){
         await  controller.subscription!.cancel();
       }
+
+    }
+
+    try {
+      await controller.subscription1!.cancel();
+    }
+    catch(e){
 
     }
     Get.back();
@@ -297,12 +305,18 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
 
                   func: () async {
                     // await controller.deviceData();
-                    await  LiveVitalModal(). addVitals(context,
-                        BPSys: controller.getBpSys.toString(),
-                        BPDias:controller.getBpDia.toString(),
-                        pr: controller.getPr.toString(),
-                      spo2: controller.getSpo2.toString()
-                    );
+                    final BuildContext? _context=NavigationService.navigatorKey.currentContext;
+                    try{
+                        await LiveVitalModal().addVitals(_context,
+                            BPSys: controller.getBpSys.toString(),
+                            BPDias: controller.getBpDia.toString(),
+                            pr: controller.getPr.toString(),
+                            spo2: controller.getSpo2.toString());
+                      }
+                      catch(e){
+
+                        Get.back();
+                      }
                   }),
             ),
 

@@ -22,6 +22,11 @@
 	<string>$(MARKETING_VERSION)</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>NSAppTransportSecurity</key>
+    <dict>
+      <key>NSAllowsArbitraryLoads</key>
+      <true/>
+    </dict>
 	<key>CFBundleVersion</key>
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
@@ -50,19 +55,19 @@
 	<string>Shrc companion app location is required for finding nearest hospital</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Shrc companion app  required access for video and audio call</string>
+	<key>NSMotionUsageDescription</key>
+	<string>We need access to motion data to track your physical activity for a better user experience.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Shrc companion app requires access to the photo to upload document and profile image</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>it is used to recognise symptoms by speech in Shrc companion app </string>
-	<key>NSMotionUsageDescription</key>
-    <string>We need access to motion data to track your physical activity for a better user experience.</string>
-
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>remote-notification</string>
+		<string>external-accessory</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

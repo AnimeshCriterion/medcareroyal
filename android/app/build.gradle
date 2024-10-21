@@ -29,11 +29,12 @@ apply plugin: 'com.google.gms.google-services'
 android {
     namespace "com.critetiontech.medvantage_patient"
     compileSdkVersion 34
-    ndkVersion flutter.ndkVersion
+    ndkVersion "27.0.12077973"
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
         coreLibraryDesugaringEnabled true
     }
 
@@ -75,7 +76,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.window:window:1.0.0'
     implementation 'androidx.window:window-java:1.0.0'
-    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
@@ -83,4 +83,6 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.android.support:multidex:2.0.1'
     implementation "androidx.activity:activity:1.6.0-alpha05"
+
+    coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.2.2'
 }

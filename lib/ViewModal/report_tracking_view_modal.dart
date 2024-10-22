@@ -62,7 +62,9 @@ class ReportTrackingViewModal extends ChangeNotifier{
     print('nnvnnvnvnvnnnvnnnnnn '+data.toString());
     var url=jsonDecode(data)['responseValue'].isEmpty? '':jsonDecode(data)['responseValue'][0]['url'].toString();
       if (response.statusCode == 200) {
-        await labReportExtraction(context,'https://apimedcareroyal.medvantage.tech:7082/Upload/Image/'+url.toString());
+
+        await  getPatientMediaData(context);
+        // await labReportExtraction(context,'https://apimedcareroyal.medvantage.tech:7082/Upload/Image/'+url.toString());
         alertToast(context, 'Report uploaded successfully');
 
 

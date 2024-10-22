@@ -2,33 +2,23 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:medvantage_patient/LiveVital/pmd/my_text_theme.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
-import 'package:medvantage_patient/View/Pages/add_lab_results_view.dart';
-import 'package:medvantage_patient/View/Pages/dose.dart';
 import 'package:medvantage_patient/View/Pages/drawer_view.dart';
-import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
-import 'package:medvantage_patient/app_manager/imageViewer/ImageView.dart';
-import 'package:medvantage_patient/app_manager/navigator.dart';
-import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:medvantage_patient/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 import '../../ViewModal/report_tracking_view_modal.dart';
-import '../../app_manager/alert_toast.dart';
 import '../../app_manager/bottomSheet/bottom_sheet.dart';
-import '../../app_manager/bottomSheet/functional_sheet.dart';
 import '../../app_manager/camera_and images/image_picker.dart';
 import '../../app_manager/widgets/buttons/custom_ink_well.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
-import '../../assets.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
 
 import 'package:get/get.dart';
 
-import '../../devices_with_new_ui/add_device_connect.dart';
 class ReportTrackingView extends StatefulWidget {
   const ReportTrackingView({super.key});
 
@@ -260,10 +250,10 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Expanded(
-                          child: Text( 'Results',
-                        style:themeChange.darkTheme? MyTextTheme().mediumWCB:MyTextTheme().largeBCB,
-                      )),
+                      // Expanded(
+                      //     child: Text( 'Results',
+                      //   style:themeChange.darkTheme? MyTextTheme().mediumWCB:MyTextTheme().largeBCB,
+                      // )),
                       // PrimaryButton(
                       //   color: AppColor.neoGreen,
                       //     borderColor: Colors.transparent,
@@ -311,7 +301,7 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                                           child: Column(crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(data['category']
-                                                    .toString(),
+                                                    .toString().toUpperCase(),
                                                 style:themeChange.darkTheme?  MyTextTheme().largeWCB: MyTextTheme().largeBCB,
                                               ),
                                               Text(

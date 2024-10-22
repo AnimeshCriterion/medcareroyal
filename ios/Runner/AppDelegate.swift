@@ -1,5 +1,6 @@
 import UIKit
 import Flutter
+import Firebase
 
 
 @main
@@ -8,6 +9,8 @@ import Flutter
     _ application: UIApplication,
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
+      FirebaseApp.configure()
+      UNUserNotificationCenter.current().delegate=self
     GeneratedPluginRegistrant.register(with: self)
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }

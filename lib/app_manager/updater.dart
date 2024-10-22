@@ -8,8 +8,8 @@ import 'package:get/get.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-
-import 'package:new_version/new_version.dart';
+//
+// import 'package:new_version/new_version.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 import 'package:in_app_update/in_app_update.dart';
@@ -50,47 +50,47 @@ class Updater{
   }
 
 
-  checkVersion(context) async{
-
-
-    if(Platform.isAndroid){
-      checkForUpdate(context);
-    }
-    else{
-
-      final newVersion = NewVersion();
-
-      VersionStatus? status = await newVersion.getVersionStatus();
-      if(status!=null){
-        try {
-
-          currentVersion = Version.parse(status.localVersion.toString());
-          // Version currentVersion = Version.parse('1.0.2');
-          latestVersion = Version.parse(status.storeVersion.toString());
-
-          //
-          // print(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
-          //
-          // print(currentVersion.toString()+'\n'+latestVersion.toString());
-          if(latestVersion > currentVersion){
-            showUpdateDialogue(latestVersion, context,
-                showCancelButton: true);
-          }
-
-        }
-        catch (e){
-          print(e);
-          var retry=await apiDialogue(context,'Alert', 'Internet connection issue, try to reconnect.',
-              showCanCelButton: true
-          );
-          if(retry){
-            var data= await  checkVersion(context);
-            return data;
-          }
-
-        }
-      }
-    }
+  // checkVersion(context) async{
+  //
+  //
+  //   if(Platform.isAndroid){
+  //     checkForUpdate(context);
+  //   }
+  //   else{
+  //
+  //    // final newVersion = NewVersion();
+  //
+  //     //VersionStatus? status = await newVersion.getVersionStatus();
+  //     // if(status!=null){
+  //     //   try {
+  //     //
+  //     //     currentVersion = Version.parse(status.localVersion.toString());
+  //     //     // Version currentVersion = Version.parse('1.0.2');
+  //     //     latestVersion = Version.parse(status.storeVersion.toString());
+  //
+  //         //
+  //         // print(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+  //         //
+  //         // print(currentVersion.toString()+'\n'+latestVersion.toString());
+  //         if(latestVersion > currentVersion){
+  //           showUpdateDialogue(latestVersion, context,
+  //               showCancelButton: true);
+  //         }
+  //
+  //       }
+  //       catch (e){
+  //         print(e);
+  //         var retry=await apiDialogue(context,'Alert', 'Internet connection issue, try to reconnect.',
+  //             showCanCelButton: true
+  //         );
+  //         if(retry){
+  //           var data= await  checkVersion(context);
+  //           return data;
+  //         }
+  //
+  //       }
+  //     }
+  //   }
 
 
 
@@ -154,15 +154,15 @@ class Updater{
                                 },),
                               ),
                             ):Container(),
-                            Expanded(
-                              child: MyButton(title: 'Update', onPress: () {
-                                if (Platform.isAndroid) {
-                                  _launchURL(PLAY_STORE_URL);
-                                } else if (Platform.isIOS) {
-                                  _launchURL(APP_STORE_URL);
-                                }
-                              },),
-                            ),
+                            // Expanded(
+                            //   child: MyButton(title: 'Update', onPress: () {
+                            //     if (Platform.isAndroid) {
+                            //       _launchURL(PLAY_STORE_URL);
+                            //     } else if (Platform.isIOS) {
+                            //       _launchURL(APP_STORE_URL);
+                            //     }
+                            //   },),
+                            // ),
                           ],
                         ),
                       ],
@@ -203,17 +203,17 @@ class Updater{
                         style: MyTextTheme.mediumBCN,),
                     ),
                     const SizedBox(width: 15,),
-                    MyButton(
-                      width: 120,
-                      title: 'Update',
-                      onPress: (){
-                        if (Platform.isAndroid) {
-                          _launchURL(PLAY_STORE_URL);
-                        } else if (Platform.isIOS) {
-                          _launchURL(APP_STORE_URL);
-                        }
-                      },
-                    ),
+                    // MyButton(
+                    //   width: 120,
+                    //   title: 'Update',
+                    //   onPress: (){
+                    //     if (Platform.isAndroid) {
+                    //       _launchURL(PLAY_STORE_URL);
+                    //     } else if (Platform.isIOS) {
+                    //       _launchURL(APP_STORE_URL);
+                    //     }
+                    //   },
+                    // ),
                   ],
                 )
               ],
@@ -224,7 +224,7 @@ class Updater{
     );
   }
 
-}
+// }
 
 
 _launchURL(String url) async {

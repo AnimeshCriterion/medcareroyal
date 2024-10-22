@@ -13,8 +13,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:in_app_update/in_app_update.dart';
 
 import 'package:lottie/lottie.dart';
-
-import 'package:new_version/new_version.dart';
+//
+// import 'package:new_version/new_version.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
@@ -60,64 +60,64 @@ class Updater{
     );
   }
 
-  checkVersion(context) async{
-
-
-
-    if(Platform.isAndroid){
-      print('nnnnnvnnnvnn');
-
-     await checkForUpdate();
-
-      print('nnnnnvnnnvnn3');
-    }
-    else{
-
-      print('nnnnnvnnnvnn1');
-      final newVersion = NewVersion();
-
-      VersionStatus? status = await newVersion.getVersionStatus();
-
-
-
-      if(status!=null){
-        try {
-
-          currentVersion = Version.parse(status.localVersion.toString());
-          // Version currentVersion = Version.parse('1.0.2');
-          latestVersion = Version.parse(status.storeVersion.toString());
-
-          //
-          // print(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
-          //
-          // print(currentVersion.toString()+'\n'+latestVersion.toString());
-          if(latestVersion > currentVersion){
-            showUpdateDialogue(latestVersion, context,
-                showCancelButton: true);
-          }
-
-        }
-        catch (e){
-          print('nnnnvnnnvvnn '+e.toString());
-          var retry=await apiDialogue(context,'Alert', 'Internet connection issue, try to reconnect.',
-              showCanCelButton: true
-          );
-          if(retry){
-            var data= await  checkVersion(context);
-            return data;
-          }
-          else{
-            return cancelResponse;
-          }
-        }
-      }
-    }
-
-
-
-
-
-  }
+  // checkVersion(context) async{
+  //
+  //
+  //
+  //   if(Platform.isAndroid){
+  //     print('nnnnnvnnnvnn');
+  //
+  //    await checkForUpdate();
+  //
+  //     print('nnnnnvnnnvnn3');
+  //   }
+  //   else{
+  //
+  //     // print('nnnnnvnnnvnn1');
+  //     // final newVersion = NewVersion();
+  //     //
+  //     // VersionStatus? status = await newVersion.getVersionStatus();
+  //     //
+  //
+  //
+  //     if(status!=null){
+  //       try {
+  //
+  //         currentVersion = Version.parse(status.localVersion.toString());
+  //         // Version currentVersion = Version.parse('1.0.2');
+  //         latestVersion = Version.parse(status.storeVersion.toString());
+  //
+  //         //
+  //         // print(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+  //         //
+  //         // print(currentVersion.toString()+'\n'+latestVersion.toString());
+  //         if(latestVersion > currentVersion){
+  //           showUpdateDialogue(latestVersion, context,
+  //               showCancelButton: true);
+  //         }
+  //
+  //       }
+  //       catch (e){
+  //         print('nnnnvnnnvvnn '+e.toString());
+  //         var retry=await apiDialogue(context,'Alert', 'Internet connection issue, try to reconnect.',
+  //             showCanCelButton: true
+  //         );
+  //         if(retry){
+  //           var data= await  checkVersion(context);
+  //           return data;
+  //         }
+  //         else{
+  //           return cancelResponse;
+  //         }
+  //       }
+  //     }
+  //   }
+  //
+  //
+  //
+  //
+  //
+  // }
 
 
   showUpdateDialogue(lat,context,{

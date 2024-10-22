@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
@@ -84,21 +83,21 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
 
       // bool locationEnable = await LocationService().enableGPS();
 
-      await FlutterBluetoothSerial.instance.requestEnable();
-      bool bluetoothEnable =
-          (await FlutterBluetoothSerial.instance.isEnabled) ?? false;
+      // await FlutterBluetoothSerial.instance.requestEnable();
+      // bool bluetoothEnable =
+      //     (await FlutterBluetoothSerial.instance.isEnabled) ?? false;
 
       if (permissionGiven) {
         // if (locationEnable) {
-        if (bluetoothEnable) {
+        // if (bluetoothEnable) {
           if (permissionGiven) {
 
           } else {
             Alert.show('some Permissions Are Not Granted');
           }
-        } else {
-          Alert.show('Please Enable Bluetooth Use This Feature');
-        }
+        // } else {
+        //   Alert.show('Please Enable Bluetooth Use This Feature');
+        // }
         // } else {
         //   Alert.show('Please Enable Location Use This Feature');
         // }

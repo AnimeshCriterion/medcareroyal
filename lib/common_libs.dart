@@ -29,7 +29,6 @@ export 'package:hexcolor/hexcolor.dart';
 export 'package:in_app_update/in_app_update.dart';
 export 'package:image_cropper/image_cropper.dart';
 export 'package:date_time_picker/date_time_picker.dart';
-export 'package:introduction_screen/introduction_screen.dart';
 export 'package:intl_phone_field/intl_phone_field.dart';
 export 'package:pin_code_fields/pin_code_fields.dart';
 export 'package:dots_indicator/dots_indicator.dart';

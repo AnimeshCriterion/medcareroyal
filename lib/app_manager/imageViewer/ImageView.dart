@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';

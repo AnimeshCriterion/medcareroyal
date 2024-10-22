@@ -1,5 +1,4 @@
 
-import 'package:bluetooth_state/bluetooth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -58,7 +57,7 @@ class _bpscreenState extends State<bpscreen> {
           onWillPop: ( ){
             try{
               Get.back();
-              BluetoothState().requestDisableBluetooth();
+              // BluetoothState().requestDisableBluetooth();
               controller.subscription!.cancel();
               controller.subscription1!.cancel();
               controller.devicesData!.disconnect();

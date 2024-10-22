@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
@@ -56,22 +55,22 @@ class _AddDeviceViewState extends State<AddDeviceView> {
       permissionGiven = permissionBluScan.isGranted;
 
       // bool locationEnable = await LocationService().enableGPS();
-
-      await FlutterBluetoothSerial.instance.requestEnable();
-      bool bluetoothEnable =
-          (await FlutterBluetoothSerial.instance.isEnabled) ?? false;
+      //
+      // await FlutterBluetoothSerial.instance.requestEnable();
+      // bool bluetoothEnable =
+      //     (await FlutterBluetoothSerial.instance.isEnabled) ?? false;
 
       if (permissionGiven) {
         // if (locationEnable) {
-        if (bluetoothEnable) {
+        // if (bluetoothEnable) {
           if (permissionGiven) {
             MyNavigator.push(context, route);
           } else {
             Alert.show('some Permissions Are Not Granted');
           }
-        } else {
-          Alert.show('Please Enable Bluetooth Use This Feature');
-        }
+        // } else {
+        //   Alert.show('Please Enable Bluetooth Use This Feature');
+        // }
         // } else {
         //   Alert.show('Please Enable Location Use This Feature');
         // }

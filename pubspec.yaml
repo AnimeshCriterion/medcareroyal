@@ -29,10 +29,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  lottie: ^3.0.0
+  lottie:
   shared_preferences:
   chewie: ^1.3.4
-  webview_flutter: ^4.10.0
+  webview_flutter:
   alert_dialog: ^1.0.1
   get_storage: ^2.0.3
   dio: ^5.0.0
@@ -87,7 +87,7 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   share_plus:
   speech_to_text:
-  blur: ^3.1.0
+#  blur: ^3.1.0
   text_to_speech: ^0.2.3
   loading_animation_widget: ^1.2.0+4
   flutter_tts: ^4.0.2
@@ -96,9 +96,9 @@ dependencies:
   timezone: ^0.9.1
   #  rxdart: ^0.27.7
   #  android_alarm_manager_plus: ^3.0.3
-  firebase_core: ^3.4.0
-  firebase_messaging: ^15.1.3
-  firebase_core_platform_interface: ^5.3.0
+  firebase_core:
+  firebase_messaging:
+  firebase_core_platform_interface:
   geocoding: ^3.0.0
   flutter_html:
   scrollable_positioned_list: ^0.3.5
@@ -106,7 +106,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^21.1.41
   flutter_staggered_animations: ^1.1.1
   flutter_file_downloader: ^2.0.0
-  file_picker: ^5.2.6
+#  file_picker: ^5.2.6
   flutter_pdfview: ^1.2.2
   path_provider: ^2.0.10
   http: ^0.13.5
@@ -115,15 +115,15 @@ dependencies:
   flutter_slidable: ^3.0.0
   syncfusion_flutter_charts: ^21.1.41
 #  flutter_blue_plus: ^1.4.0
-  flutter_bluetooth_serial: ^0.4.0
+#  flutter_bluetooth_serial: ^0.4.0
   flutter_sound: ^9.2.13
   rounded_loading_button: ^2.1.0
   step_progress_indicator: ^1.0.2
   clay_containers: ^0.3.4
   floating_action_bubble: ^1.1.4
   chart_sparkline: ^1.0.13
-  audioplayers: ^6.1.0
-  flutter_oximeter: ^0.0.5
+  audioplayers:
+#  flutter_oximeter: ^0.0.5
   helix_timex: ^0.0.5
   health:
   percent_indicator: ^4.2.3
@@ -131,8 +131,8 @@ dependencies:
   video_player: ^2.8.4
   #  app_settings: ^5.1.1
   #  just_audio: ^0.9.35
-  location: ^6.0.2
-  flutter_native_timezone: ^2.0.0
+  location:
+#  flutter_native_timezone: ^2.0.0
   flutter_screenutil: ^5.5.3+2
   flutter_downloader:
   #  awesome_notifications:
@@ -142,7 +142,7 @@ dependencies:
 #  flutter_blue:
   signalr_netcore:
   flick_video_player:
-  flutter_dynamic_icon:
+#  flutter_dynamic_icon:
   pdf:
   printing:
   rebirth:
@@ -151,7 +151,7 @@ dependencies:
   record:
   audio_session:
   app_settings:
-  bluetooth_state:
+#  bluetooth_state:
   workmanager:
   flutter_blue_plus:
   flutter_colorpicker:
@@ -162,8 +162,7 @@ dependencies:
   audio_input_type_plugin: ^0.0.2
   just_audio:
   in_app_purchase:
-  package_info_plus:
-#    path: audio_input_type_plugin
+  #    path: audio_input_type_plugin
 
   #  share_plus: ^7.0.2
 
@@ -183,7 +182,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_launcher_icons: ^0.14.1
+#  flutter_launcher_icons: ^0.14.1
 
 flutter_launcher_icons:
 #  android: "launcher_icon"

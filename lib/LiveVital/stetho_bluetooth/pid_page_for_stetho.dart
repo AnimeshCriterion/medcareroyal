@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:app_settings/app_settings.dart';
 import 'package:audio_input_type_plugin/audio_input_type_plugin.dart';
 import 'package:audio_session/audio_session.dart';
-import 'package:bluetooth_state/bluetooth_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
+import 'package:medvantage_patient/LiveVital/stetho_bluetooth/stetho_bluetooth_controller.dart';
 import 'package:medvantage_patient/LiveVital/stetho_bluetooth/stetho_bluetooth_view.dart';
 import 'package:medvantage_patient/app_manager/alert_dialogue.dart';
 import 'package:medvantage_patient/app_manager/alert_toast.dart';
@@ -26,8 +26,6 @@ import '../../app_manager/widgets/text_field/my_text_field_2.dart';
 import '../../app_manager/widgets/text_field/primary_text_field.dart';
 import '../../common_libs.dart';
 import '../../theme/theme.dart';
-import '../lw_ct_stethoscope/listen/ios_voice.dart';
-import '../lw_ct_stethoscope/stethoscope_controller.dart';
 import 'app_api.dart';
 import 'listen_stetho_stream/listen_stetho_stream_view.dart';
 
@@ -87,7 +85,7 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
       color: AppColor.white,
       child: SafeArea(
         child: GetBuilder(
-            init: StethoscopeController(),
+            init: StethoBluetoothController(),
             builder: (_) {
               return DefaultTabController(
                 length: 2,
@@ -512,7 +510,7 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
                 ),
                 TextButton(
                   onPressed: () async {
-                    BluetoothState().requestDisableBluetooth();
+                    // BluetoothState().requestDisableBluetooth();
                     if (listenC.text.toString() != '') {
                       Get.back();
                       Get.to(ListenStethoStreamView(

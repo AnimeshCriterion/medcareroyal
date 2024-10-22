@@ -10,7 +10,6 @@ import 'package:pdf/widgets.dart' as pw;
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
-import 'package:syncfusion_flutter_pdf/pdf.dart';
 import '../../../app_manager/theme/text_theme.dart';
 import '../../../authenticaton/user_repository.dart';
 import '../devices_view.dart';

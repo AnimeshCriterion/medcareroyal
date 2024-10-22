@@ -4,7 +4,6 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_bluetooth_serial/flutter_bluetooth_serial.dart';
 import 'package:location/location.dart';
 import 'package:medvantage_patient/LiveVital/device_view.dart';
 import 'package:medvantage_patient/View/Pages/drawer_view.dart';
@@ -1901,13 +1900,13 @@ class _AddVitalViewState extends State<AddVitalView> {
 
       // bool locationEnable = await LocationService().enableGPS();
 
-      await FlutterBluetoothSerial.instance.requestEnable();
-      bool bluetoothEnable =
-          (await FlutterBluetoothSerial.instance.isEnabled) ?? false;
+      // await FlutterBluetoothSerial.instance.requestEnable();
+      // bool bluetoothEnable =
+      //     (await FlutterBluetoothSerial.instance.isEnabled) ?? false;
 
       if (permissionGiven) {
         // if (locationEnable) {
-        if (bluetoothEnable) {
+        // if (bluetoothEnable) {
           if (permissionGiven) {
             Get.to(AddDeviceConnectView(
             ));
@@ -1916,10 +1915,10 @@ class _AddVitalViewState extends State<AddVitalView> {
             Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: 'some Permissions Are Not Granted'));
             // Alert.show('some Permissions Are Not Granted');
           }
-        } else {
-          Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: 'Please Enable Bluetooth Use This Feature'));
-          // Alert.show('Please Enable Bluetooth Use This Feature');
-        }
+        // } else {
+        //   Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: 'Please Enable Bluetooth Use This Feature'));
+        //   // Alert.show('Please Enable Bluetooth Use This Feature');
+        // }
         // } else {
         //   Alert.show('Please Enable Location Use This Feature');
         // }

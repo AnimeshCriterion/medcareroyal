@@ -13,7 +13,6 @@ import 'package:medvantage_patient/assets.dart';
 import 'package:medvantage_patient/authenticaton/user_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';

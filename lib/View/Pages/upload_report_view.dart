@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/widgets.dart';
 import 'package:medvantage_patient/LiveVital/pmd/my_text_theme.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../ViewModal/report_tracking_view_modal.dart';
 import '../../app_manager/bottomSheet/bottom_sheet.dart';
 import '../../app_manager/camera_and images/image_picker.dart';
+import '../../app_manager/imageViewer/ImageView.dart';
 import '../../app_manager/widgets/buttons/custom_ink_well.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../authenticaton/user_repository.dart';
@@ -285,9 +286,10 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                               ),
                               child: InkWell(
                                 onTap: () async {
+
+                                  // Get.to(()=>MyImageView(url: data['url'].toString()) );
                                  await reportTrackingVM.labReportExtraction(context, data['url'].toString());
-                                  // MyNavigator.push(context,
-                                  //     MyImageView(url: data['url'].toString()));
+
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

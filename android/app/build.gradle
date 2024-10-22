@@ -28,19 +28,24 @@ apply plugin: 'com.google.gms.google-services'
 
 android {
     namespace "com.critetiontech.medvantage_patient"
-    compileSdkVersion 34
-    ndkVersion "27.0.12077973"
-    buildToolsVersion "23.0.1"
+    compileSdk 34
+    ndkVersion flutter.ndkVersion
+
+//    compileOptions {
+//        sourceCompatibility JavaVersion.VERSION_21
+//        targetCompatibility JavaVersion.VERSION_21
+//        coreLibraryDesugaringEnabled true
+//    }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_21
-        targetCompatibility JavaVersion.VERSION_21
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
         coreLibraryDesugaringEnabled true
     }
 
-//    kotlinOptions {
-//        jvmTarget = '21'
-//    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'

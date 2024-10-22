@@ -34,6 +34,7 @@ dependencies:
   chewie: ^1.5.0
   webview_flutter:
   alert_dialog: ^1.0.1
+
   get_storage: ^2.0.3
   dio: ^5.0.0
   google_fonts: ^4.0.3
@@ -223,6 +224,7 @@ flutter:
     - assets/water_intake2/
     - assets/water_intake_light/
     - assets/drawer/
+    - assets/raw/
     - assets/lightm_patient/
     - assets/darkm_patient/
     - assets/symptoms_tracker/

@@ -27,12 +27,19 @@ class NotificationService {
     var initializationSettingsIOS = DarwinInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
+        defaultPresentSound: true,
+        defaultPresentAlert: true,
+        defaultPresentBadge: true,
+        defaultPresentBanner: true,
+        defaultPresentList: true,
         requestSoundPermission: true,
         requestCriticalPermission: true,
         onDidReceiveLocalNotification:
             (int id, String? title, String? body, String? payload) async {});
     var initializationSettings = InitializationSettings(
         android: initializationSettingsAndroid, iOS: initializationSettingsIOS);
+
+
 
     await notificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse:
@@ -43,7 +50,10 @@ class NotificationService {
   }
 
   final DarwinNotificationDetails _iOSPlatformChannelSpecifics =
-      const DarwinNotificationDetails(presentAlert: true, presentSound: true);
+      const DarwinNotificationDetails(presentAlert: true, presentSound: true
+      ,presentBadge: true,presentBanner: true,presentList: true,
+        sound:"bellicon.wav"
+      );
 
   final AndroidNotificationDetails androidNotificationDetails =
       const AndroidNotificationDetails(

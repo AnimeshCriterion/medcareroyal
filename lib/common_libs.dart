@@ -34,7 +34,7 @@ export 'package:pin_code_fields/pin_code_fields.dart';
 export 'package:dots_indicator/dots_indicator.dart';
 export 'package:flutter_rating_bar/flutter_rating_bar.dart';
 export 'package:share_plus/share_plus.dart';
-export 'package:new_version/new_version.dart';
+// export 'package:new_version/new_version.dart';
 export 'package:version/version.dart';
 export 'package:photo_view/photo_view.dart';
 export 'package:provider/provider.dart';

@@ -1,6 +1,7 @@
 
 
 
+import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:medvantage_patient/Localization/language_class.dart';
 import 'package:medvantage_patient/ViewModal/addvital_view_modal.dart';
@@ -8,7 +9,6 @@ import 'package:medvantage_patient/ViewModal/addvital_view_modal.dart';
 
 import 'package:medvantage_patient/ViewModal/consultdoctor_view_modal.dart';
 import 'package:medvantage_patient/ViewModal/dashboard_view_modal.dart';
-import 'package:medvantage_patient/ViewModal/drawer_view_modal.dart';
 import 'package:medvantage_patient/ViewModal/editprofile_view_modal.dart';
 import 'package:medvantage_patient/ViewModal/login_view_modal.dart';
 import 'package:medvantage_patient/ViewModal/medicine_reminder_view_moda.dart';
@@ -21,7 +21,6 @@ import 'package:medvantage_patient/common_libs.dart';
 import 'package:medvantage_patient/services/firebase_service/fireBaseService.dart';
 import 'package:medvantage_patient/services/local_notification_services.dart';
 import 'package:medvantage_patient/splash_screen.dart';
-import 'package:medvantage_patient/theme/style.dart';
 import 'package:medvantage_patient/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -31,11 +30,8 @@ import 'package:provider/provider.dart';
 
 
 import 'LiveVital/Wellue/wellue_view_modal.dart';
-import 'Modal/app_details_data_modal.dart';
-import 'View/Pages/dashboard_view.dart';
 import 'ViewModal/MasterDashoboardViewModal.dart';
 import 'ViewModal/activities_chronicle_view_modal.dart';
-import 'ViewModal/add_device_view_modal.dart';
 import 'ViewModal/bed_care_view_modal.dart';
 import 'ViewModal/chat_view_modal.dart';
 import 'ViewModal/exercise_view_model.dart';
@@ -51,20 +47,17 @@ import 'ViewModal/report_tracking_view_modal.dart';
 import 'ViewModal/rmd_view_modal.dart';
 import 'ViewModal/symptoms_tracker_view_modal.dart';
 import 'ViewModal/vitals_trend_view_modal.dart';
-import 'app_manager/app_color.dart';
-import 'app_manager/neomorphic/theme_provider.dart';
-import 'app_manager/theme/theme_provider.dart';
-import 'app_manager/theme/theme_provider.dart';
 import 'authenticaton/user_repository.dart';
-import 'package:timezone/data/latest.dart'as tz;
 
 
 
 void main() async {
 
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp(options: FirebaseOptions(apiKey: "AIzaSyBFZMASaP9K4HV-8vpb2jrEoY4v43OKDow", appId: "874216638219", messagingSenderId: "874216638219", projectId: "smartheartfailureclini"));
+  await Firebase.initializeApp(
 
+  );
 
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 

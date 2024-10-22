@@ -72,7 +72,7 @@ class _RMDViewState extends State<RMDView> {
     rmdViewModal. updateCurrentIndex=0;
 
     try{
-      Updater().checkVersion(context);
+      //Updater().checkVersion(context);
     }
   catch(e){
 

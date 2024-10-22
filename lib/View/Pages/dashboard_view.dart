@@ -93,7 +93,7 @@ class _DashboardViewState extends State<DashboardView> {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       get(context);
 
-      Updater().checkVersion(context);
+     // Updater().checkVersion(context);
     });
 
     print('nnnnnnnnnnnnvnnnv');

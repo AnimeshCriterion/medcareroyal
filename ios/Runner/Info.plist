@@ -32,6 +32,11 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 	<key>NSBluetoothAlwaysUsageDescription</key>
 	<string>Need BLE permission to connect a bluetooth stethoscope machine to listen to the heart beats of patient</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
@@ -50,19 +55,20 @@
 	<string>Shrc companion app location is required for finding nearest hospital</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Shrc companion app  required access for video and audio call</string>
+	<key>NSMotionUsageDescription</key>
+	<string>We need access to motion data to track your physical activity for a better user experience.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Shrc companion app requires access to the photo to upload document and profile image</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>it is used to recognise symptoms by speech in Shrc companion app </string>
-	<key>NSMotionUsageDescription</key>
-    <string>We need access to motion data to track your physical activity for a better user experience.</string>
-
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
 		<string>remote-notification</string>
+		<string>external-accessory</string>
+		<string>processing</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>

@@ -48,6 +48,7 @@ class User {
   String? alternateMobileNo;
   String? alternateCountryCode;
   String? addressLine2;
+  String? token;
 
   User(
       {this.pmid,
@@ -98,7 +99,10 @@ class User {
         this.isNotificationRequired,
         this.alternateMobileNo,
         this.alternateCountryCode,
-        this.addressLine2});
+        this.addressLine2,
+        this.token,
+
+      });
 
   User.fromJson(Map<String, dynamic> json) {
     pmid = json['pmid'];
@@ -149,6 +153,7 @@ class User {
     clientId = json['clientId'];
     alternateMobileNo = json['alternateMobileNo'];
     alternateCountryCode = json['alternateCountryCode'];
+    token = json['token'];
     addressLine2 = json['addressLine2'];
   }
 
@@ -202,6 +207,7 @@ class User {
     data['alternateMobileNo'] = alternateMobileNo;
     data['alternateCountryCode'] = alternateCountryCode;
     data['addressLine2'] = addressLine2;
+    data['token'] = token;
     return data;
   }
 }

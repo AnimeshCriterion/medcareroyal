@@ -85,7 +85,7 @@ class LoginViewModal extends ChangeNotifier {
 
       if (data['status'] == 1) {
 
-
+        logindetail[0].addAll({'token':token});
         // Alert.show("Otp Verified");
 
         await userRepository

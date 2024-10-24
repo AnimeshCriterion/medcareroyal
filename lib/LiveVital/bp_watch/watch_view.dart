@@ -2,15 +2,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:medvantage_patient/LiveVital/bp_watch/watch_controller.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import '../../app_manager/app_color.dart';
 import '../../app_manager/theme/text_theme.dart';
 import '../../common_libs.dart';
 import '../../theme/theme.dart';
-import '../live_vital_controller.dart';
 
 class Watch extends StatefulWidget {
   const Watch({super.key});

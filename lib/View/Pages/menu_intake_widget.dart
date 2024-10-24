@@ -1,12 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:medvantage_patient/app_manager/navigator.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:liquid_progress_indicator_v2/liquid_progress_indicator.dart';
-import 'package:medvantage_patient/app_manager/theme/theme_provider.dart';
-import 'package:medvantage_patient/app_manager/widgets/text_field/my_text_field_2.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../Localization/app_localization.dart';
@@ -20,10 +17,8 @@ import '../../app_manager/neomorphic/neomorphic.dart';
 import '../../app_manager/widgets/buttons/primary_button.dart';
 import '../../app_manager/widgets/tab_responsive.dart';
 import '../../app_manager/widgets/text_field/primary_text_field.dart';
-import '../../app_manager/widgets/text_field/secondary_text_field.dart';
 import '../../common_libs.dart';
 import '../../theme/theme.dart';
-import 'add_new_drink.dart';
 import '../../theme/style.dart';
 
 class IntakeMenusWidget extends StatefulWidget {

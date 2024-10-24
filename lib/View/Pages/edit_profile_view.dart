@@ -1,26 +1,17 @@
-import 'dart:io';
 
-import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:medvantage_patient/ViewModal/editprofile_view_modal.dart';
-import 'package:medvantage_patient/app_manager/alert_toast.dart';
-import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
-import 'package:medvantage_patient/app_manager/navigator.dart';
 import 'package:medvantage_patient/app_manager/neomorphic/neomorphic.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
-import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:medvantage_patient/app_manager/widgets/coloured_safe_area.dart';
 import 'package:medvantage_patient/app_manager/widgets/text_field/custom_sd.dart';
-import 'package:medvantage_patient/app_manager/widgets/text_field/my_text_field_2.dart';
-import 'package:medvantage_patient/app_manager/widgets/text_field/primary_date_time_field.dart';
 import 'package:medvantage_patient/app_manager/widgets/text_field/primary_text_field.dart';
 import 'package:medvantage_patient/authenticaton/user_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_place/google_place.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 

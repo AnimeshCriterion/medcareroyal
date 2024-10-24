@@ -2,7 +2,6 @@
 
 import 'package:get/get.dart';
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';

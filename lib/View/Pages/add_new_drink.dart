@@ -1,14 +1,12 @@
 import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:medvantage_patient/Modal/ManualFoodAssignDataModal.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
-import 'package:medvantage_patient/app_manager/neomorphic/theme_provider.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../ViewModal/addvital_view_modal.dart';
 import '../../app_manager/comman_widget.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
-import '../../assets.dart';
 import '../../common_libs.dart';
 import '../../theme/theme.dart';
 import 'drawer_view.dart';

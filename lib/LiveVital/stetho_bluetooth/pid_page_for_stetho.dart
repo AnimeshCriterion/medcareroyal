@@ -1,20 +1,13 @@
-import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
 import 'package:audio_input_type_plugin/audio_input_type_plugin.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:lottie/lottie.dart';
 import 'package:medvantage_patient/LiveVital/stetho_bluetooth/stetho_bluetooth_controller.dart';
 import 'package:medvantage_patient/LiveVital/stetho_bluetooth/stetho_bluetooth_view.dart';
-import 'package:medvantage_patient/app_manager/alert_dialogue.dart';
 import 'package:medvantage_patient/app_manager/alert_toast.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:record/record.dart';
 
 import '../../Localization/app_localization.dart';
 import '../../View/widget/common_method/show_progress_dialog.dart';
@@ -22,7 +15,6 @@ import '../../app_manager/app_color.dart';
 import '../../app_manager/my_button.dart';
 import '../../app_manager/theme/text_theme.dart';
 import '../../app_manager/widgets/tab_responsive.dart';
-import '../../app_manager/widgets/text_field/my_text_field_2.dart';
 import '../../app_manager/widgets/text_field/primary_text_field.dart';
 import '../../common_libs.dart';
 import '../../theme/theme.dart';

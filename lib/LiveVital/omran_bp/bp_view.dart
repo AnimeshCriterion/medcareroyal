@@ -7,7 +7,6 @@ import '../../View/widget/common_method/show_progress_dialog.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/theme/text_theme.dart';
 import '../../common_libs.dart';
-import '../live_vital_controller.dart';
 import 'bp_controller.dart';
 
 class bpscreen extends StatefulWidget {

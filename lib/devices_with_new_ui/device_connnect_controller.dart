@@ -23,8 +23,8 @@ class DeviceConnectController extends GetxController{
       "modal":"YK-81C",
       "deviceType":"Oximeter",
       "image":'assets/yonker_oxi.png',
-      // 'device':'YK-81C',
-      'device':'BleModuleA',
+      'device':'YK-81C',
+      // 'device':'BleModuleA',
       // 'suuid':'cd80',
       // 'cuuid':'cd81'
   'suuid':'cdeacd80-5235-4c07-8846-93a37ee6b86d',

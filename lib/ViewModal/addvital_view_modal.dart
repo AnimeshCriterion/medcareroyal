@@ -351,17 +351,20 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
     UserRepository userRepository =
         Provider.of<UserRepository>(context, listen: false);
     ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString());
-    var body={
-      "vmValueUrineOutput": urineC.value.text.toString(),
-      "uhid": userRepository.getUser.uhID.toString(),
-
-      "userId": userRepository.getUser.userId.toString(),
-      "currentDate": DateTime.now().toString(),
-      "clientId": userRepository.getUser.clientId.toString(),
-      "isFromPatient": true,
+    var body = {
+      'clientId': userRepository.getUser.clientId.toString(),
+      'id': userRepository.getUser.userId.toString(),
+      'uhid': userRepository.getUser.uhID.toString(),
+      'outputDate': DateFormat('yyyy-MM-dd hh:mm').format(DateTime.now()),
+      'outputTypeID': 51,
+      'pmID': 0,
+      'quantity': urineC.value.text.toString(),
+      'unitID': 1,
+      'userID': userRepository.getUser.userId.toString()
     };
+    print("Request"+body.toString());
     var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.currentContext!,
-        url:'api/PatientVital/InsertPatientVital',
+        url:'api/output/SavePatientOutput',
         localStorage: true,
         apiCallType: ApiCallType.rawPost(body: body),
         isSavedApi: true);
@@ -833,7 +836,7 @@ ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading
         'outputDate': DateFormat('yyyy-MM-dd hh:mm').format(DateTime.now()),
         'outputTypeID': 51,
         'pmID': getSelectedPmID.toString(),
-        'quantity': urineC.text.toString(),
+        'quantity': urineC.value.text.toString(),
         'unitID': 1,
         'userID': userRepository.getUser.userId.toString()
       };

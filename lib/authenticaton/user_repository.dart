@@ -56,6 +56,9 @@ class UserRepository  extends ChangeNotifier {
     print('nnnnnnnvnnn '+User.fromJson(jsonDecode(prefs.getString(Constant.userStore)??"{}")).patientName.toString());
     notifyListeners();
     return User.fromJson(jsonDecode(prefs.getString(Constant.userStore)??"{}"));
+
+
+
   }
 
   Future updateGoneThrowFP(bool val) async{

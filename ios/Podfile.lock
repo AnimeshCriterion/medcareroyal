@@ -7,43 +7,7 @@ PODS:
     - Flutter
   - audioplayers_darwin (0.0.1):
     - Flutter
-  - bluetooth_state (0.0.1):
-    - Flutter
   - device_info_plus (0.0.1):
-    - Flutter
-  - DKImagePickerController/Core (4.3.9):
-    - DKImagePickerController/ImageDataManager
-    - DKImagePickerController/Resource
-  - DKImagePickerController/ImageDataManager (4.3.9)
-  - DKImagePickerController/PhotoGallery (4.3.9):
-    - DKImagePickerController/Core
-    - DKPhotoGallery
-  - DKImagePickerController/Resource (4.3.9)
-  - DKPhotoGallery (0.0.19):
-    - DKPhotoGallery/Core (= 0.0.19)
-    - DKPhotoGallery/Model (= 0.0.19)
-    - DKPhotoGallery/Preview (= 0.0.19)
-    - DKPhotoGallery/Resource (= 0.0.19)
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Core (0.0.19):
-    - DKPhotoGallery/Model
-    - DKPhotoGallery/Preview
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Model (0.0.19):
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Preview (0.0.19):
-    - DKPhotoGallery/Model
-    - DKPhotoGallery/Resource
-    - SDWebImage
-    - SwiftyGif
-  - DKPhotoGallery/Resource (0.0.19):
-    - SDWebImage
-    - SwiftyGif
-  - file_picker (0.0.1):
-    - DKImagePickerController/PhotoGallery
     - Flutter
   - Firebase/CoreOnly (11.2.0):
     - FirebaseCore (= 11.2.0)
@@ -82,15 +46,9 @@ PODS:
     - Flutter
   - flutter_downloader (0.0.1):
     - Flutter
-  - flutter_dynamic_icon (0.0.1):
-    - Flutter
   - flutter_keyboard_visibility (0.0.1):
     - Flutter
   - flutter_local_notifications (0.0.1):
-    - Flutter
-  - flutter_native_timezone (0.0.1):
-    - Flutter
-  - flutter_oximeter (0.0.1):
     - Flutter
   - flutter_pdfview (1.0.2):
     - Flutter
@@ -185,9 +143,6 @@ PODS:
   - record_darwin (1.0.0):
     - Flutter
     - FlutterMacOS
-  - SDWebImage (5.19.7):
-    - SDWebImage/Core (= 5.19.7)
-  - SDWebImage/Core (5.19.7)
   - share_plus (0.0.1):
     - Flutter
   - shared_preferences_foundation (0.0.1):
@@ -195,11 +150,11 @@ PODS:
     - FlutterMacOS
   - speech_to_text (0.0.1):
     - Flutter
+    - FlutterMacOS
     - Try
-  - sqflite (0.0.3):
+  - sqflite_darwin (0.0.4):
     - Flutter
     - FlutterMacOS
-  - SwiftyGif (5.4.5)
   - syncfusion_flutter_pdfviewer (0.0.1):
     - Flutter
   - text_to_speech (0.0.1):
@@ -218,6 +173,7 @@ PODS:
     - Flutter
   - webview_flutter_wkwebview (0.0.1):
     - Flutter
+    - FlutterMacOS
   - workmanager (0.0.1):
     - Flutter
 
@@ -226,19 +182,14 @@ DEPENDENCIES:
   - audio_input_type_plugin (from `.symlinks/plugins/audio_input_type_plugin/ios`)
   - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
-  - bluetooth_state (from `.symlinks/plugins/bluetooth_state/ios`)
   - device_info_plus (from `.symlinks/plugins/device_info_plus/ios`)
-  - file_picker (from `.symlinks/plugins/file_picker/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_messaging (from `.symlinks/plugins/firebase_messaging/ios`)
   - Flutter (from `Flutter`)
   - flutter_blue_plus (from `.symlinks/plugins/flutter_blue_plus/ios`)
   - flutter_downloader (from `.symlinks/plugins/flutter_downloader/ios`)
-  - flutter_dynamic_icon (from `.symlinks/plugins/flutter_dynamic_icon/ios`)
   - flutter_keyboard_visibility (from `.symlinks/plugins/flutter_keyboard_visibility/ios`)
   - flutter_local_notifications (from `.symlinks/plugins/flutter_local_notifications/ios`)
-  - flutter_native_timezone (from `.symlinks/plugins/flutter_native_timezone/ios`)
-  - flutter_oximeter (from `.symlinks/plugins/flutter_oximeter/ios`)
   - flutter_pdfview (from `.symlinks/plugins/flutter_pdfview/ios`)
   - flutter_share (from `.symlinks/plugins/flutter_share/ios`)
   - flutter_sound (from `.symlinks/plugins/flutter_sound/ios`)
@@ -263,21 +214,19 @@ DEPENDENCIES:
   - record_darwin (from `.symlinks/plugins/record_darwin/ios`)
   - share_plus (from `.symlinks/plugins/share_plus/ios`)
   - shared_preferences_foundation (from `.symlinks/plugins/shared_preferences_foundation/darwin`)
-  - speech_to_text (from `.symlinks/plugins/speech_to_text/ios`)
-  - sqflite (from `.symlinks/plugins/sqflite/darwin`)
+  - speech_to_text (from `.symlinks/plugins/speech_to_text/darwin`)
+  - sqflite_darwin (from `.symlinks/plugins/sqflite_darwin/darwin`)
   - syncfusion_flutter_pdfviewer (from `.symlinks/plugins/syncfusion_flutter_pdfviewer/ios`)
   - text_to_speech (from `.symlinks/plugins/text_to_speech/ios`)
   - uni_links (from `.symlinks/plugins/uni_links/ios`)
   - url_launcher_ios (from `.symlinks/plugins/url_launcher_ios/ios`)
   - video_player_avfoundation (from `.symlinks/plugins/video_player_avfoundation/darwin`)
   - wakelock (from `.symlinks/plugins/wakelock/ios`)
-  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/ios`)
+  - webview_flutter_wkwebview (from `.symlinks/plugins/webview_flutter_wkwebview/darwin`)
   - workmanager (from `.symlinks/plugins/workmanager/ios`)
 
 SPEC REPOS:
   trunk:
-    - DKImagePickerController
-    - DKPhotoGallery
     - Firebase
     - FirebaseCore
     - FirebaseCoreInternal
@@ -290,8 +239,6 @@ SPEC REPOS:
     - GoogleUtilities
     - nanopb
     - PromisesObjC
-    - SDWebImage
-    - SwiftyGif
     - Toast
     - TOCropViewController
     - Try
@@ -305,12 +252,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/audio_session/ios"
   audioplayers_darwin:
     :path: ".symlinks/plugins/audioplayers_darwin/ios"
-  bluetooth_state:
-    :path: ".symlinks/plugins/bluetooth_state/ios"
   device_info_plus:
     :path: ".symlinks/plugins/device_info_plus/ios"
-  file_picker:
-    :path: ".symlinks/plugins/file_picker/ios"
   firebase_core:
     :path: ".symlinks/plugins/firebase_core/ios"
   firebase_messaging:
@@ -321,16 +264,10 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_blue_plus/ios"
   flutter_downloader:
     :path: ".symlinks/plugins/flutter_downloader/ios"
-  flutter_dynamic_icon:
-    :path: ".symlinks/plugins/flutter_dynamic_icon/ios"
   flutter_keyboard_visibility:
     :path: ".symlinks/plugins/flutter_keyboard_visibility/ios"
   flutter_local_notifications:
     :path: ".symlinks/plugins/flutter_local_notifications/ios"
-  flutter_native_timezone:
-    :path: ".symlinks/plugins/flutter_native_timezone/ios"
-  flutter_oximeter:
-    :path: ".symlinks/plugins/flutter_oximeter/ios"
   flutter_pdfview:
     :path: ".symlinks/plugins/flutter_pdfview/ios"
   flutter_share:
@@ -380,9 +317,9 @@ EXTERNAL SOURCES:
   shared_preferences_foundation:
     :path: ".symlinks/plugins/shared_preferences_foundation/darwin"
   speech_to_text:
-    :path: ".symlinks/plugins/speech_to_text/ios"
-  sqflite:
-    :path: ".symlinks/plugins/sqflite/darwin"
+    :path: ".symlinks/plugins/speech_to_text/darwin"
+  sqflite_darwin:
+    :path: ".symlinks/plugins/sqflite_darwin/darwin"
   syncfusion_flutter_pdfviewer:
     :path: ".symlinks/plugins/syncfusion_flutter_pdfviewer/ios"
   text_to_speech:
@@ -396,7 +333,7 @@ EXTERNAL SOURCES:
   wakelock:
     :path: ".symlinks/plugins/wakelock/ios"
   webview_flutter_wkwebview:
-    :path: ".symlinks/plugins/webview_flutter_wkwebview/ios"
+    :path: ".symlinks/plugins/webview_flutter_wkwebview/darwin"
   workmanager:
     :path: ".symlinks/plugins/workmanager/ios"
 
@@ -405,11 +342,7 @@ SPEC CHECKSUMS:
   audio_input_type_plugin: d5eb88c70707854c50155029aa1a83e894691705
   audio_session: 088d2483ebd1dc43f51d253d4a1c517d9a2e7207
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
-  bluetooth_state: bcb756468051530ea63a47ec996e0b5d802b0f0c
   device_info_plus: e5c5da33f982a436e103237c0c85f9031142abed
-  DKImagePickerController: 946cec48c7873164274ecc4624d19e3da4c1ef3c
-  DKPhotoGallery: b3834fecb755ee09a593d7c9e389d8b5d6deed60
-  file_picker: ce3938a0df3cc1ef404671531facef740d03f920
   Firebase: 98e6bf5278170668a7983e12971a66b2cd57fc8c
   firebase_core: 2bedc3136ec7c7b8561c6123ed0239387b53f2af
   firebase_messaging: 15d114e1a41fc31e4fbabcd48d765a19eec94a38
@@ -420,11 +353,8 @@ SPEC CHECKSUMS:
   Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
   flutter_blue_plus: 4837da7d00cf5d441fdd6635b3a57f936778ea96
   flutter_downloader: b7301ae057deadd4b1650dc7c05375f10ff12c39
-  flutter_dynamic_icon: fb0cd2f84c817c1a0ddbbc383fbebec3cd5e88d8
   flutter_keyboard_visibility: 0339d06371254c3eb25eeb90ba8d17dca8f9c069
   flutter_local_notifications: 4cde75091f6327eb8517fa068a0a5950212d2086
-  flutter_native_timezone: 5f05b2de06c9776b4cc70e1839f03de178394d22
-  flutter_oximeter: 8cd4a59c739dd0becd21bb86954af619a939c1f3
   flutter_pdfview: 25f53dd6097661e6395b17de506e6060585946bd
   flutter_share: 4be0208963c60b537e6255ed2ce1faae61cd9ac2
   flutter_sound: c60effa2a350fb977885f0db2fbc4c1ad5160900
@@ -454,12 +384,10 @@ SPEC CHECKSUMS:
   printing: 233e1b73bd1f4a05615548e9b5a324c98588640b
   PromisesObjC: f5707f49cb48b9636751c5b2e7d227e43fba9f47
   record_darwin: df0a677188e5fed18472550298e675f19ddaffbe
-  SDWebImage: 8a6b7b160b4d710e2a22b6900e25301075c34cb3
   share_plus: 056a1e8ac890df3e33cb503afffaf1e9b4fbae68
   shared_preferences_foundation: fcdcbc04712aee1108ac7fda236f363274528f78
-  speech_to_text: b43a7d99aef037bd758ed8e45d79bbac035d2dfe
-  sqflite: 673a0e54cc04b7d6dba8d24fb8095b31c3a99eec
-  SwiftyGif: 706c60cf65fa2bc5ee0313beece843c8eb8194d4
+  speech_to_text: 627d3fd2194770b51abb324ba45c2d39398f24a8
+  sqflite_darwin: a553b1fd6fe66f53bbb0fe5b4f5bab93f08d7a13
   syncfusion_flutter_pdfviewer: bb9998884b864cfedf72628df3503bdf57e397c0
   text_to_speech: 8669facdbd5b72d2939b810493defd991634f6f9
   Toast: 1f5ea13423a1e6674c4abdac5be53587ae481c4e
@@ -469,7 +397,7 @@ SPEC CHECKSUMS:
   url_launcher_ios: 5334b05cef931de560670eeae103fd3e431ac3fe
   video_player_avfoundation: 7c6c11d8470e1675df7397027218274b6d2360b3
   wakelock: d0fc7c864128eac40eba1617cb5264d9c940b46f
-  webview_flutter_wkwebview: 2a23822e9039b7b1bc52e5add778e5d89ad488d1
+  webview_flutter_wkwebview: 0982481e3d9c78fd5c6f62a002fcd24fc791f1e4
   workmanager: 0afdcf5628bbde6924c21af7836fed07b42e30e6
 
 PODFILE CHECKSUM: 3765b805c03121794c6d132546df9366f592bc4d

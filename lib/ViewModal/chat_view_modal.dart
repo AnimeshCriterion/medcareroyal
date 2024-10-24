@@ -5,7 +5,9 @@ import 'package:medvantage_patient/app_manager/api/api_call.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
+import 'package:signalr_netcore/http_connection_options.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
+import 'package:signalr_netcore/itransport.dart';
 import '../Modal/ChatDataModal.dart';
 import '../View/widget/common_method/show_progress_dialog.dart';
 import '../app_manager/api/api_util.dart';
@@ -122,9 +124,6 @@ class ChatViewModal extends ChangeNotifier {
     updateIsOnline=false;
     UserRepository userRepository =
         Provider.of<UserRepository>(context, listen: false);
-
-    print("Animehs${userRepository.getUser.toJson()}");
-
     try {
       var data = await _api.callMedvanatagePatient7100(context,
           url:
@@ -212,6 +211,52 @@ class ChatViewModal extends ChangeNotifier {
     catch(e){
       print('nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn $e nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn');
     }
+    // print('nnnnnnnnnnn'+data.toString());
+  }
+
+
+  connectServerNotification(context)async{
+    UserRepository userRepository =
+    Provider.of<UserRepository>(context, listen: false);
+
+      final hubConnection =await HubConnectionBuilder()
+          .withUrl(
+          'https://apimedcareroyal.medvantage.tech:7101/Notification',options: HttpConnectionOptions(
+        transport: HttpTransportType.LongPolling, // Enable Long Polling
+      ),).withAutomaticReconnect()
+          .build();
+
+      hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
+      hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
+      print('Notification1 ${userRepository.getUser.clientId!.toString()}');
+      print('Notification1 ${hubConnection.state.toString()}');
+      await hubConnection.start();
+
+      dynamic data = await hubConnection.invoke("AddUser", args: <Object>[
+        int.parse(userRepository.getUser.clientId!.toString()), int.parse(userRepository.getUser.userId!.toString())
+      ]);
+      print('Notification1 $data');
+
+      // hubConnection.on("ReceiveMessage", (arguments) {
+      //   print('nnnnnnvvnv$arguments');
+      //   updateChat = (arguments ?? []).toList();
+      //   print('nnnnnnvvnv$arguments');
+      //   scrollToBottom();
+      // });
+      //
+      // hubConnection.on("OnlineUser", (arguments) {
+      //
+      //   updateIsOnline = (arguments ?? []).toList().isNotEmpty;
+      //   print('nnnnnnnnnnn OnlineUser $arguments');
+      // });
+      // hubConnection.onclose(({Exception? error}) async {
+      //   print('Connection closed: ${error?.toString() ?? 'Unknown error'}');
+      //   hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
+      //   hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
+      //   await hubConnection.start();
+      // });
+
+
     // print('nnnnnnnnnnn'+data.toString());
   }
 

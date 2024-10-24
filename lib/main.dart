@@ -25,10 +25,7 @@ import 'package:medvantage_patient/theme/theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:provider/provider.dart';
-
-
 import 'LiveVital/Wellue/wellue_view_modal.dart';
 import 'ViewModal/MasterDashoboardViewModal.dart';
 import 'ViewModal/activities_chronicle_view_modal.dart';
@@ -59,6 +56,9 @@ void main() async {
 
   );
 
+
+
+
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
   await FireBaseService().connect();
@@ -69,6 +69,13 @@ void main() async {
   print('Firebase Token: $token');  /// temp
 
   User user=await UserRepository().fetchUserData();
+
+
+
+
+
+  // Invoke AddUser with ClientId and UserId
+
 
   print('nnnnnnnvnnnnnvnvnvnn '+user.patientName.toString());
   // AppDetailsDataModal appData=await UserRepository.fetchAppData();

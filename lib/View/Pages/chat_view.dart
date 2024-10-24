@@ -55,7 +55,8 @@ class _ChatViewState extends State<ChatView> {
   get() async {
 
     ChatViewModal chatVM = Provider.of<ChatViewModal>(context, listen: false);
-    await chatVM.connectServer(context);
+    // await chatVM.connectServer(context);
+    await chatVM.connectServerNotification(context);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       WidgetsFlutterBinding.ensureInitialized();
 

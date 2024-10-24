@@ -348,7 +348,8 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
              // Alert.show("Before time you can't take medicine.");
            }
           }else{
-            showMedicineTimePopup(context,medicationNameAndDate.drugName.toString(),timeString.toString());
+            showMedicineTimePopup(context,medicationNameAndDate.drugName.toString(),
+                timeString.toString());
 
 
           }

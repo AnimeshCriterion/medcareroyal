@@ -86,7 +86,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
           localStorage: true,
           apiCallType: ApiCallType.rawPost(body: {
             "problemName": '',
-          "languageId": await prefs.getString("lang").toString()
+              "languageId": await prefs.getString("lang").toString()
           }));
       updateShowNoData=true;
       if (data["responseCode"] == 1) {

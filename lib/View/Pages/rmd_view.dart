@@ -35,6 +35,7 @@ import '../../common_libs.dart';
 import '../../main.dart';
 import '../../theme/theme.dart';
 import '../../voice_assistant.dart';
+import '../request_Calback_View.dart';
 import 'addvital_view.dart';
 import 'drawer_view.dart';
 import '../../theme/style.dart';
@@ -1388,64 +1389,79 @@ class _RMDViewState extends State<RMDView> {
                 height: 2,
               ),
 
-              // InkWell(
-              //   onTap: () {
-              //     Get.back();
-              //     ambulanceBottomSheet(context);
-              //     Future.delayed(Duration(seconds: 3)).then((value) =>
-              //         MyNavigator.pushReplacement(
-              //             context, CallForAmbulanceView()));
-              //   },
-              //   child: Container(
-              //     height: 50,
-              //     decoration: BoxDecoration(
-              //         border: Border.all(
-              //           color: themeChange.darkTheme == true
-              //               ? Colors.grey.shade800
-              //               : Colors.grey.shade400,
-              //         ),
-              //         borderRadius: BorderRadius.circular(10),
-              //         gradient: LinearGradient(
-              //           colors: [
-              //             themeChange.darkTheme
-              //                 ? AppColor.neoBGGrey1
-              //                 : Colors.white,
-              //             themeChange.darkTheme
-              //                 ? AppColor.neoBGGrey1
-              //                 : Colors.white,
-              //             themeChange.darkTheme
-              //                 ? AppColor.neoBGGrey2
-              //                 : Colors.grey.shade300,
-              //             // themeChange.darkTheme? AppColor.neoBGGrey2:Colors.white,
-              //             // style.themeData(value.darkTheme, context).focusColor,
-              //           ],
-              //           begin: Alignment.topCenter,
-              //           end: Alignment.bottomCenter,
-              //         ),
-              //         boxShadow: [
-              //           BoxShadow(
-              //               color: themeChange.darkTheme == true
-              //                   ? Colors.transparent
-              //                   : Colors.grey.shade300,
-              //               blurRadius: 5,
-              //               offset: const Offset(0, 5),
-              //               spreadRadius: 2),
-              //         ]),
-              //     child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: [
-              //           Text(
-              //             "Call For Ambulance",
-              //             style: MyTextTheme.largeGCB.copyWith(
-              //                 color: themeChange.darkTheme
-              //                     ? Colors.grey.shade400
-              //                     : AppColor.greyDark,
-              //                 fontSize: 16),
-              //           ),
-              //           // Text(userRepository.getAppDetails.eraEmergencyContactNumber.toString())
-              //         ]),
-              //   ),
-              // )
+              InkWell(
+                onTap: () {
+                  Get.back();
+                  // ambulanceBottomSheet(context);
+                  // Future.delayed(Duration(seconds: 3)).then((value) =>
+                  //     MyNavigator.pushReplacement(
+                  //         context, CallForAmbulanceView()));
+
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return Dialog(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: RequestCallbackFormStyled(),
+                        ),
+                      );
+                    },
+                  );
+                },
+                child: Container(
+                  height: 50,
+                  decoration: BoxDecoration(
+                      border: Border.all(
+                        color: themeChange.darkTheme == true
+                            ? Colors.grey.shade800
+                            : Colors.grey.shade400,
+                      ),
+                      borderRadius: BorderRadius.circular(10),
+                      gradient: LinearGradient(
+                        colors: [
+                          themeChange.darkTheme
+                              ? AppColor.neoBGGrey1
+                              : Colors.white,
+                          themeChange.darkTheme
+                              ? AppColor.neoBGGrey1
+                              : Colors.white,
+                          themeChange.darkTheme
+                              ? AppColor.neoBGGrey2
+                              : Colors.grey.shade300,
+                          // themeChange.darkTheme? AppColor.neoBGGrey2:Colors.white,
+                          // style.themeData(value.darkTheme, context).focusColor,
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                            color: themeChange.darkTheme == true
+                                ? Colors.transparent
+                                : Colors.grey.shade300,
+                            blurRadius: 5,
+                            offset: const Offset(0, 5),
+                            spreadRadius: 2),
+                      ]),
+                  child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          "Request Callback",
+                          style: MyTextTheme.largeGCB.copyWith(
+                              color: themeChange.darkTheme
+                                  ? Colors.grey.shade400
+                                  : AppColor.greyDark,
+                              fontSize: 16),
+                        ),
+                        // Text(userRepository.getAppDetails.eraEmergencyContactNumber.toString())
+                      ]),
+                ),
+              )
             ]),
           ),
         ));

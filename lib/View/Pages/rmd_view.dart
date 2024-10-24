@@ -58,6 +58,7 @@ class _RMDViewState extends State<RMDView> {
   void initState() {
     // TODO: implement initState
     super.initState();
+
     get();
 
   }
@@ -107,6 +108,9 @@ class _RMDViewState extends State<RMDView> {
     catch(e){
 
     }
+
+
+
   }
 
   List temp=[
@@ -139,6 +143,34 @@ class _RMDViewState extends State<RMDView> {
 
     return data;
   }
+
+   showHealthKitInfoDialog(BuildContext context) async {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        // Automatically dismiss the dialog after 3 seconds
+        Future.delayed(Duration(seconds: 3), () {
+          if (Navigator.of(context).canPop()) {
+            Navigator.of(context).pop();  // Dismiss the dialog
+          }
+        });
+
+        return AlertDialog(
+          title: Text('HealthKit Integration'),
+          content: Text('This feature uses Apple Health (HealthKit) to track your health data like steps and heart rate. Your data stays private and secure.'),
+          actions: [
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();  // Manually dismiss the dialog
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 
   @override
   Widget build(BuildContext context) {

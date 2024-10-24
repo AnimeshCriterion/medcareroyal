@@ -139,6 +139,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    showHealthKitInfoDialog(context);
     get();
   }
 
@@ -175,6 +176,44 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
+
+
+Future<void> showHealthKitInfoDialog(BuildContext context) async {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      // Automatically dismiss the dialog after 3 seconds
+      Future.delayed(Duration(seconds: 3), () {
+        if (Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();  // Dismiss the dialog
+        }
+      });
+
+      return AlertDialog(
+        title: Text('HealthKit Integration'),
+        content: Text('This feature uses Apple Health (HealthKit) to track your health data like steps and heart rate. Your data stays private and secure.'),
+        actions: [
+          TextButton(
+            child: Text('Learn More'),
+            onPressed: () {
+              // Navigate to a help or info page
+              if (Navigator.of(context).canPop()) {
+                Navigator.of(context).pop();  // Close the dialog before navigating
+              }
+            },
+          ),
+          TextButton(
+            child: Text('OK'),
+            onPressed: () {
+              Navigator.of(context).pop();  // Manually dismiss the dialog
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
 class NavigationService{
   static GlobalKey<NavigatorState>navigatorKey = GlobalKey<NavigatorState>();
 }

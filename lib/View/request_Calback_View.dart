@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';  // For jsonEncode
 import 'package:http/http.dart' as http;
 import 'package:medvantage_patient/app_manager/app_color.dart';
+import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 
 import '../authenticaton/user_repository.dart';
 import '../common_libs.dart';
@@ -16,10 +17,7 @@ class _RequestCallbackFormStyledState extends State<RequestCallbackFormStyled> {
   final _formKey = GlobalKey<FormState>();
   final String apiUrl = "https://apimedcareroyal.medvantage.tech:7082/api/LogInForSHFCApp/EmergencyAlertAPI";
 TextEditingController remarkC=TextEditingController();
-  String? _selectedDoctor;
-  String? _callbackTime;
-  String _name = '';
-  String _phoneNumber = '';
+
   String _reason = '';
 
 
@@ -30,17 +28,16 @@ TextEditingController remarkC=TextEditingController();
     Provider.of<UserRepository>(context, listen: false);
     // Set up query parameters
     String uhid = userRepository.getUser.uhID.toString();
-    String deviceToken =userRepository.currentUser';
+    String deviceToken =userRepository.getUser.token.toString();
     String clientId =userRepository.getUser.clientId.toString();
-    String remark = 'Test';
     String emergencyNumber = '0';
 
     // Construct the full URL with parameters
-    Uri url = Uri.parse('$apiUrl?Uhid=$uhid&deviceToken=$deviceToken&clientId=$clientId&remark=$remark&emergencyNumber=$emergencyNumber');
-
+    Uri url = Uri.parse('$apiUrl?Uhid=$uhid&deviceToken=$deviceToken&clientId=$clientId&remark=${remarkC.value.text.toString()}&emergencyNumber=$emergencyNumber');
+print("CheckUrl"+url.toString());
     try {
       // Make the GET request
-      final response = await http.get(url);
+      final response = await http.post(url);
 
       // Check for a successful response
       if (response.statusCode == 200) {
@@ -120,22 +117,16 @@ TextEditingController remarkC=TextEditingController();
                     textStyle: TextStyle(fontSize: 16),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () async {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                     await callEmergencyAlertAPI();
-
-                    }
-                  },
-                  child: Text('Request Callback'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColor.primaryColorDark,
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    textStyle: TextStyle(fontSize: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                Expanded(
+                  child: PrimaryButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                       await callEmergencyAlertAPI();
+                  
+                      }
+                    },
+                                 title: 'Request Callback',
                   ),
                 ),
               ],

@@ -58,7 +58,7 @@
 	<key>NSMotionUsageDescription</key>
 	<string>We need access to motion data to track your physical activity for a better user experience.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Shrc companion app requires access to the photo to upload document and profile image</string>
+	<string>Shfc companion app requires access to the photo to upload document and profile image</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
 	<string>it is used to recognise symptoms by speech in Shrc companion app </string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>

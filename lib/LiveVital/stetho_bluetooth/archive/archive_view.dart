@@ -4,8 +4,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:audio_input_type_plugin/audio_input_type_plugin.dart';
-import 'package:audio_session/audio_session.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,13 +12,10 @@ import 'package:share_plus/share_plus.dart';
 
 import '../../../app_manager/app_color.dart';
 import '../../../app_manager/theme/text_theme.dart';
-import '../../../app_manager/widgets/text_field/my_text_field_2.dart';
-import '../../../app_manager/widgets/text_field/primary_text_field.dart';
 import '../../../common_libs.dart';
 import '../../../theme/theme.dart';
 import '../audio_player_stetho.dart';
 import '../stetho_bluetooth_controller.dart';
-import 'archive_audio_player.dart';
 import 'archive_controller.dart';
 
 class ArchiveView extends StatefulWidget {

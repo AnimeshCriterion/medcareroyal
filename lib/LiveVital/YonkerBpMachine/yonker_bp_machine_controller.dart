@@ -2,21 +2,13 @@
 
 
 import 'dart:async';
-import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
-import 'package:medvantage_patient/LiveVital/devices_api.dart';
 
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 import '../../View/widget/common_method/show_progress_dialog.dart';
-import '../../all_api.dart';
-import '../../app_manager/alert_toast.dart';
-import '../../app_manager/api/api_call.dart';
-import '../../authenticaton/user_repository.dart';
 
 
 class YonkerBpMachineController extends GetxController{

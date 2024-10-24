@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import '../../Localization/app_localization.dart';
 import '../../Modal/food_intake_data_moel.dart';
 import '../../Modal/supplement_intake_modal.dart';
-import '../../app_manager/appBar/custom_app_bar.dart';
 import '../../app_manager/comman_widget.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../app_manager/widgets/text_field/primary_date_time_field.dart';

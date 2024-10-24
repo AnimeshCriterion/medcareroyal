@@ -1,13 +1,10 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:medvantage_patient/Modal/excercise_tracking_data_modal.dart';
 import 'package:medvantage_patient/View/Pages/drawer_view.dart';
-import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
-import 'package:medvantage_patient/app_manager/my_button.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';

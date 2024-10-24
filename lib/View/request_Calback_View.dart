@@ -1,43 +1,11 @@
 import 'package:flutter/material.dart';
+import 'dart:convert';  // For jsonEncode
+import 'package:http/http.dart' as http;
+import 'package:medvantage_patient/app_manager/app_color.dart';
+import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 
-class RequestCallbackPopupStyled extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Patient App'),
-      ),
-      body: Center(
-        child: ElevatedButton(
-          onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return Dialog(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: RequestCallbackFormStyled(),
-                  ),
-                );
-              },
-            );
-          },
-          child: Text('Request Callback'),
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-            textStyle: TextStyle(fontSize: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
-}
+import '../authenticaton/user_repository.dart';
+import '../common_libs.dart';
 
 class RequestCallbackFormStyled extends StatefulWidget {
   @override
@@ -47,14 +15,57 @@ class RequestCallbackFormStyled extends StatefulWidget {
 
 class _RequestCallbackFormStyledState extends State<RequestCallbackFormStyled> {
   final _formKey = GlobalKey<FormState>();
-  String? _selectedDoctor;
-  String? _callbackTime;
-  String _name = '';
-  String _phoneNumber = '';
+  final String apiUrl = "https://apimedcareroyal.medvantage.tech:7082/api/LogInForSHFCApp/EmergencyAlertAPI";
+TextEditingController remarkC=TextEditingController();
+
   String _reason = '';
 
-  List<String> doctors = ['Dr. Smith', 'Dr. Brown', 'Dr. Lee'];
-  List<String> timeSlots = ['Morning', 'Afternoon', 'Evening'];
+
+  // This function will be used to make the API call
+  Future<void> callEmergencyAlertAPI() async {
+
+    UserRepository userRepository =
+    Provider.of<UserRepository>(context, listen: false);
+    // Set up query parameters
+    String uhid = userRepository.getUser.uhID.toString();
+    String deviceToken =userRepository.getUser.token.toString();
+    String clientId =userRepository.getUser.clientId.toString();
+    String emergencyNumber = '0';
+
+    // Construct the full URL with parameters
+    Uri url = Uri.parse('$apiUrl?Uhid=$uhid&deviceToken=$deviceToken&clientId=$clientId&remark=${remarkC.value.text.toString()}&emergencyNumber=$emergencyNumber');
+print("CheckUrl"+url.toString());
+    try {
+      // Make the GET request
+      final response = await http.post(url);
+
+      // Check for a successful response
+      if (response.statusCode == 200) {
+        // Parse the JSON response
+        var responseData = json.decode(response.body);
+        print('Response data: $responseData');
+
+        // Handle response data, e.g., show success message or process the data
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Callback requested!')),
+        );
+        Navigator.of(context).pop(
+        );
+      } else {
+        print('Failed to call API. Status code: ${response.statusCode}');
+        ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Something went wrong please try again .'))
+        );
+      }
+    } catch (error) {
+      // Handle any exceptions
+      print('Error calling API: $error');
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error in Communication with Server .'))
+      );
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -74,43 +85,7 @@ class _RequestCallbackFormStyledState extends State<RequestCallbackFormStyled> {
             ),
             SizedBox(height: 20),
             TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Name',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              onSaved: (value) {
-                _name = value!;
-              },
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Please enter your name';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 10),
-            TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Phone Number',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              keyboardType: TextInputType.phone,
-              onSaved: (value) {
-                _phoneNumber = value!;
-              },
-              validator: (value) {
-                if (value!.isEmpty || value.length != 10) {
-                  return 'Please enter a valid phone number';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 10),
-            TextFormField(
+              controller:remarkC ,
               decoration: InputDecoration(
                 labelText: 'Reason for Callback',
                 border: OutlineInputBorder(
@@ -129,58 +104,6 @@ class _RequestCallbackFormStyledState extends State<RequestCallbackFormStyled> {
               },
             ),
             SizedBox(height: 10),
-            DropdownButtonFormField(
-              decoration: InputDecoration(
-                labelText: 'Select Doctor',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              items: doctors.map((doctor) {
-                return DropdownMenuItem(
-                  value: doctor,
-                  child: Text(doctor),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _selectedDoctor = value as String?;
-                });
-              },
-              validator: (value) {
-                if (value == null) {
-                  return 'Please select a doctor';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 10),
-            DropdownButtonFormField(
-              decoration: InputDecoration(
-                labelText: 'Preferred Callback Time',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                ),
-              ),
-              items: timeSlots.map((time) {
-                return DropdownMenuItem(
-                  value: time,
-                  child: Text(time),
-                );
-              }).toList(),
-              onChanged: (value) {
-                setState(() {
-                  _callbackTime = value as String?;
-                });
-              },
-              validator: (value) {
-                if (value == null) {
-                  return 'Please select a preferred callback time';
-                }
-                return null;
-              },
-            ),
-            SizedBox(height: 20),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -194,24 +117,16 @@ class _RequestCallbackFormStyledState extends State<RequestCallbackFormStyled> {
                     textStyle: TextStyle(fontSize: 16),
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      _formKey.currentState!.save();
-                      // Logic to send callback request
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text('Callback requested!')),
-                      );
-                      Navigator.of(context).pop(); // Close the dialog
-                    }
-                  },
-                  child: Text('Submit'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-                    textStyle: TextStyle(fontSize: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
+                Expanded(
+                  child: PrimaryButton(
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                       await callEmergencyAlertAPI();
+                  
+                      }
+                    },
+                                 title: 'Request Callback',
                   ),
                 ),
               ],

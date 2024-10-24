@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:medvantage_patient/View/Pages/drawer_view.dart';
 import 'package:medvantage_patient/View/Pages/pills_reminder_view.dart';
 import 'package:medvantage_patient/View/Pages/urin_output.dart';
-import 'package:medvantage_patient/View/Pages/water_intake_view.dart';
 import 'package:medvantage_patient/app_manager/bottomSheet/bottom_sheet.dart';
 import 'package:medvantage_patient/app_manager/my_button.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
@@ -15,12 +13,10 @@ import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.da
 import 'package:medvantage_patient/app_manager/widgets/text_field/my_text_field_2.dart';
 import 'package:medvantage_patient/assets.dart';
 
-import '../../LiveVital/pmd/app_color.dart';
 import '../../Localization/app_localization.dart';
 import '../../ViewModal/activities_chronicle_view_modal.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
-import '../../app_manager/widgets/tab_responsive.dart';
 import '../../common_libs.dart';
 import '../../theme/style.dart';
 import '../../theme/theme.dart';

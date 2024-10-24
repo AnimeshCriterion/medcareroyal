@@ -5,7 +5,6 @@ import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:medvantage_patient/app_manager/bottomSheet/functional_sheet.dart';
 import 'package:intl/intl.dart';
 
-import '../all_api.dart';
 import '../app_manager/alert_toast.dart';
 import '../app_manager/api/api_call.dart';
 import '../app_manager/bottomSheet/bottom_sheet.dart';

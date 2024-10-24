@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-import 'package:medvantage_patient/app_manager/theme/theme_provider.dart';
 
 import '../../LiveVital/pmd/my_text_theme.dart';
 import '../../Localization/app_localization.dart';

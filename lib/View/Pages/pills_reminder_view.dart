@@ -1,19 +1,11 @@
-import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/response/response.dart';
-import 'package:http/http.dart';
-import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:medvantage_patient/LiveVital/pmd/app_color.dart';
-import 'package:medvantage_patient/LiveVital/stetho_bluetooth/pid_page_for_stetho.dart';
 import 'package:medvantage_patient/View/Pages/prescription_checklist.dart';
-import 'package:medvantage_patient/View/Pages/storage_data.dart';
 import 'package:medvantage_patient/ViewModal/MasterDashoboardViewModal.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
-import 'package:medvantage_patient/app_manager/navigator.dart';
 
 import '../../LiveVital/pmd/my_text_theme.dart';
 import '../../Localization/app_localization.dart';

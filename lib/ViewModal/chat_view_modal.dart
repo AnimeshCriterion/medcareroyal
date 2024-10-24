@@ -215,6 +215,13 @@ class ChatViewModal extends ChangeNotifier {
   }
 
 
+  List notificationList=[];
+  List get getNotificationList=>notificationList;
+  set updateNotificationList(List val){
+    notificationList=val;
+    notifyListeners();
+  }
+
   connectServerNotification(context)async{
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
@@ -226,17 +233,17 @@ class ChatViewModal extends ChangeNotifier {
       ),).withAutomaticReconnect()
           .build();
 
+    await hubConnection.start();
       hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
       hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
       print('Notification1 ${userRepository.getUser.clientId!.toString()}');
       print('Notification1 ${hubConnection.state.toString()}');
-      await hubConnection.start();
 
       dynamic data = await hubConnection.invoke("AddUser", args: <Object>[
         int.parse(userRepository.getUser.clientId!.toString()), int.parse(userRepository.getUser.userId!.toString())
       ]);
       print('Notification1 $data');
-
+    updateNotificationList=data['notificationResponse'];
       // hubConnection.on("ReceiveMessage", (arguments) {
       //   print('nnnnnnvvnv$arguments');
       //   updateChat = (arguments ?? []).toList();

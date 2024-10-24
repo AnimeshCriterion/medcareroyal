@@ -5,6 +5,8 @@ import 'package:get/get.dart';
 import '../../app_manager/alert_dialogue.dart';
 import '../../app_manager/alert_toast.dart';
 import '../../app_manager/theme/text_theme.dart';
+import '../../authenticaton/user_repository.dart';
+import '../../common_libs.dart';
 import 'history_controller.dart';
 import 'history_report.dart';
 
@@ -49,6 +51,9 @@ class _ReportHistoryState extends State<ReportHistory> {
   }
   @override
   Widget build(BuildContext context) {
+
+    UserRepository userRepository =
+    Provider.of<UserRepository>(context, listen: false);
     return SafeArea(
       child: GetBuilder(
           init: HistoryController(),
@@ -110,15 +115,10 @@ class _ReportHistoryState extends State<ReportHistory> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text("Patient ID : ",
+                                      Text("Patient UHID : ",
                                         style:  MyTextTheme.mediumWCB,
                                       ),
-                                      Text(
-                                        controller.getPreviousDataList.isNotEmpty
-                                            ? controller.getPreviousDataList[0]
-                                        ['PID']
-                                            .toString()
-                                            : '',
+                                      Text(userRepository.getUser.uhID.toString(),
                                         style: MyTextTheme.mediumWCB,
                                       ),
                                     ],
@@ -295,7 +295,7 @@ class _ReportHistoryState extends State<ReportHistory> {
                                                                 index1: index,
                                                                 index2:index2,
                                                                 leadIntervel:
-                                                                'pp_interval',
+                                                                'pp_Interval',
                                                                 leadValue:
                                                                 'V')
                                                                 .toString())),),
@@ -526,7 +526,7 @@ class _ReportHistoryState extends State<ReportHistory> {
                               style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
-                                color: Colors.white,
+                                color: Colors.black,
                               ),
                               ),
                             ),

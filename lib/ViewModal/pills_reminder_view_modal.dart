@@ -93,11 +93,12 @@ class PillsReminderViewModal extends ChangeNotifier{
   insertMedicine(context , {required int pmID, required int prescriptionID, required String time}) async {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
-    print(time); String formattedDate = DateFormat('yyyy-MM-dd  ').format(DateTime.now());
+    print(time); String formattedDate = DateFormat('yyyy-MM-dd HH:mm ').format(DateTime.now());
     try{
       var body={
         "pmID": pmID,
-        "intakeDateAndTime": formattedDate +time.toString(),
+        // "intakeDateAndTime": formattedDate +time.toString(),
+        "intakeDateAndTime": formattedDate.toString(),
         "prescriptionID": prescriptionID,
         "userID": userRepository.getUser.userId.toString()
       };

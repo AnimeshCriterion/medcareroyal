@@ -246,7 +246,7 @@ class _HistoryReportState extends State<HistoryReport> {
                                                     padding:
                                                     EdgeInsets.all(4.0),
                                                     child: Text(
-                                                      "First Name : ",
+                                                      "Patient Name : ",
                                                       style: TextStyle(
                                                           fontWeight:
                                                           FontWeight
@@ -256,12 +256,12 @@ class _HistoryReportState extends State<HistoryReport> {
                                                   Text(
                                                     userRepository.getUser.patientName
                                                         .toString()
-                                                        .contains(' ')
-                                                        ? userRepository.getUser.patientName
-                                                        .toString()
-                                                        .split(' ')[0]
-                                                        : userRepository.getUser.patientName
-                                                        .toString(),
+                                                        // .contains(' ')
+                                                        // ? userRepository.getUser.patientName
+                                                        // .toString()
+                                                        // .split(' ')[0]
+                                                        // : userRepository.getUser.patientName
+                                                        // .toString(),
                                                   ),
                                                 ],
                                               ),
@@ -271,7 +271,7 @@ class _HistoryReportState extends State<HistoryReport> {
                                                     padding:
                                                     EdgeInsets.all(4.0),
                                                     child: Text(
-                                                      "Last Name : ",
+                                                      "UHID : ",
                                                       style: TextStyle(
                                                           fontWeight:
                                                           FontWeight
@@ -279,18 +279,18 @@ class _HistoryReportState extends State<HistoryReport> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    userRepository.getUser.patientName
+                                                    userRepository.getUser.uhID
                                                         .toString()
-                                                        .contains(' ')
-                                                        ? userRepository.getUser.patientName
-                                                        .toString()
-                                                        .split(' ')[1]
-                                                        : '',
+                                                        // .contains(' ')
+                                                        // ? userRepository.getUser.patientName
+                                                        // .toString()
+                                                        // .split(' ')[1]
+                                                        // : '',
                                                   ),
                                                 ],
                                               ),
                                               Row(
-                                                children: [
+                                                children: [ 
                                                   Padding(
                                                     padding:
                                                     EdgeInsets.all(4.0),
@@ -303,11 +303,8 @@ class _HistoryReportState extends State<HistoryReport> {
                                                     ),
                                                   ),
                                                   Text(
-                                                    userRepository.getUser.gender
-                                                        .toString() ==
-                                                        '1'
-                                                        ? 'Male'
-                                                        : 'Female',
+                                                    userRepository.getUser.gender.toString()
+                                                        
                                                   ),
                                                 ],
                                               ),
@@ -2299,298 +2296,392 @@ class _HistoryReportState extends State<HistoryReport> {
                             ),
 
                             // Compare ECG Graph 0 and 1
+                            // Padding(
+                            //   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            //   child: Stack(
+                            //     children: [
+                            //
+                            //       // Compare ECG Graph 0 Fix
+                            //       // Padding(
+                            //       //   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            //       //   child: Container(
+                            //       //     decoration: BoxDecoration(
+                            //       //       borderRadius: BorderRadius.circular(
+                            //       //           1.0),
+                            //       //     ),
+                            //       //     child: SizedBox(
+                            //       //       width: MediaQuery
+                            //       //           .of(context)
+                            //       //           .size
+                            //       //           .width > 600 ? MediaQuery
+                            //       //           .of(context)
+                            //       //           .size
+                            //       //           .width : MediaQuery
+                            //       //           .of(context)
+                            //       //           .size
+                            //       //           .width / 0.8,
+                            //       //       height: 250,
+                            //       //       child: SfCartesianChart(
+                            //       //         plotAreaBorderWidth: 1.0,
+                            //       //         plotAreaBorderColor: Colors.red
+                            //       //             .shade900,
+                            //       //
+                            //       //         primaryXAxis: CategoryAxis(
+                            //       //           desiredIntervals: 36,
+                            //       //           axisLine: AxisLine(
+                            //       //               color: Colors.red.shade900),
+                            //       //           labelStyle: TextStyle(fontSize: 0),
+                            //       //           tickPosition: TickPosition.inside,
+                            //       //           interval: 20,
+                            //       //           // Interval * MajorGridLines = ECG Data (20*36=720)
+                            //       //           minorTicksPerInterval: 4,
+                            //       //           majorGridLines: MajorGridLines(
+                            //       //               width: 1,
+                            //       //               color: Colors.red.shade900),
+                            //       //           minorGridLines: MinorGridLines(
+                            //       //               width: 1,
+                            //       //               color: Colors.red.shade100),
+                            //       //         ),
+                            //       //
+                            //       //         primaryYAxis: NumericAxis(
+                            //       //           desiredIntervals: 8,
+                            //       //           axisLine: AxisLine(
+                            //       //               color: Colors.red.shade900),
+                            //       //           minimum: -2,
+                            //       //           maximum: 2,
+                            //       //           labelStyle: TextStyle(fontSize: 0),
+                            //       //           tickPosition: TickPosition.inside,
+                            //       //           minorTicksPerInterval: 4,
+                            //       //           majorGridLines: MajorGridLines(
+                            //       //               width: 1,
+                            //       //               color: Colors.red.shade900),
+                            //       //           minorGridLines: MinorGridLines(
+                            //       //               width: 1,
+                            //       //               color: Colors.red.shade100),
+                            //       //         ),
+                            //       //
+                            //       //         // zoomPanBehavior: ZoomPanBehavior(
+                            //       //         //   enablePinching: true,
+                            //       //         //   enablePanning: true,
+                            //       //         //   zoomMode: ZoomMode.x,
+                            //       //         //   enableDoubleTapZooming: true,
+                            //       //         // ),
+                            //       //
+                            //       //         series: [
+                            //       //
+                            //       //           LineSeries<VitalsData, int>(
+                            //       //             dataSource: List.generate(
+                            //       //                 (controller.getFileDataList
+                            //       //                     .isEmpty ? [] : controller
+                            //       //                     .graphList(0)
+                            //       //                     .length < 720 ? controller
+                            //       //                     .graphList(0) : controller
+                            //       //                     .graphList(0)
+                            //       //                     .getRange((controller
+                            //       //                     .graphList(0)
+                            //       //                     .length - 720),
+                            //       //                     controller
+                            //       //                         .graphList(0)
+                            //       //                         .length).toList())
+                            //       //                     .length, (index) {
+                            //       //               var vital = (controller
+                            //       //                   .graphList(0)
+                            //       //                   .length < 720 ? controller
+                            //       //                   .graphList(0) : controller
+                            //       //                   .graphList(0)
+                            //       //                   .getRange((controller
+                            //       //                   .graphList(0)
+                            //       //                   .length - 720),
+                            //       //                   controller
+                            //       //                       .graphList(0)
+                            //       //                       .length)
+                            //       //                   .toList())[index];
+                            //       //
+                            //       //               return VitalsData(
+                            //       //                   index,
+                            //       //                   double.parse(
+                            //       //                       vital.toString()));
+                            //       //             }),
+                            //       //             width: 1.0,
+                            //       //             color: Colors.black,
+                            //       //             xValueMapper: (VitalsData sales,
+                            //       //                 _) => sales.date,
+                            //       //             yValueMapper: (VitalsData sales,
+                            //       //                 _) => sales.value,
+                            //       //           ),
+                            //       //
+                            //       //           // LineSeries<VitalsData, int>(
+                            //       //           //   dataSource: List.generate(
+                            //       //           //       (controller.getFileDataList.isEmpty ? [] : controller.graphList(1).length < 720 ? controller.graphList(1) : controller.graphList(1)
+                            //       //           //           .getRange((controller.graphList(1).length - 720),
+                            //       //           //           controller.graphList(1).length).toList()).length, (index) {
+                            //       //           //     var vital = (controller.graphList(1).length < 720 ? controller.graphList(1) : controller.graphList(1)
+                            //       //           //         .getRange((controller.graphList(1).length - 720),
+                            //       //           //         controller.graphList(1).length).toList())[index];
+                            //       //           //
+                            //       //           //     return VitalsData(
+                            //       //           //         index,
+                            //       //           //         double.parse(vital.toString()));
+                            //       //           //   }),
+                            //       //           //   width: 1.0,
+                            //       //           //   color: Colors.blue,
+                            //       //           //   xValueMapper: (VitalsData sales, _) => sales.date,
+                            //       //           //   yValueMapper: (VitalsData sales, _) => sales.value,
+                            //       //           // ),
+                            //       //
+                            //       //         ],
+                            //       //
+                            //       //       ),
+                            //       //     ),
+                            //       //   ),
+                            //       // ),
+                            //
+                            //       // Compare ECG Graph 1 Not Fix
+                            //       // Padding(
+                            //       //   padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
+                            //       //   child: Container(
+                            //       //     decoration: BoxDecoration(
+                            //       //       borderRadius: BorderRadius.circular(
+                            //       //           1.0),
+                            //       //     ),
+                            //       //     child: SizedBox(
+                            //       //       width: MediaQuery
+                            //       //           .of(context)
+                            //       //           .size
+                            //       //           .width > 600 ? MediaQuery
+                            //       //           .of(context)
+                            //       //           .size
+                            //       //           .width : MediaQuery
+                            //       //           .of(context)
+                            //       //           .size
+                            //       //           .width / 0.8,
+                            //       //       height: 250,
+                            //       //       child: InteractiveViewer(
+                            //       //         boundaryMargin: EdgeInsets.zero,
+                            //       //         transformationController: zoomTransformationController,
+                            //       //         maxScale: 3.0,
+                            //       //         minScale: 1,
+                            //       //         child: SfCartesianChart(
+                            //       //           plotAreaBorderWidth: 1.0,
+                            //       //           plotAreaBorderColor: Colors
+                            //       //               .transparent,
+                            //       //
+                            //       //           primaryXAxis: CategoryAxis(
+                            //       //             autoScrollingMode: AutoScrollingMode
+                            //       //                 .end,
+                            //       //             visibleMinimum: 720,
+                            //       //             desiredIntervals: 36,
+                            //       //             axisLine: AxisLine(
+                            //       //                 color: Colors.transparent),
+                            //       //             labelStyle: TextStyle(
+                            //       //                 fontSize: 0),
+                            //       //             tickPosition: TickPosition.inside,
+                            //       //             interval: 20,
+                            //       //             // Interval * MajorGridLines = ECG Data (20*36=720)
+                            //       //             minorTicksPerInterval: 4,
+                            //       //             majorGridLines: MajorGridLines(
+                            //       //                 width: 1,
+                            //       //                 color: Colors.transparent),
+                            //       //             minorGridLines: MinorGridLines(
+                            //       //                 width: 1,
+                            //       //                 color: Colors.transparent),
+                            //       //           ),
+                            //       //
+                            //       //           primaryYAxis: NumericAxis(
+                            //       //             desiredIntervals: 8,
+                            //       //             axisLine: AxisLine(
+                            //       //                 color: Colors.transparent),
+                            //       //             minimum: -2,
+                            //       //             maximum: 2,
+                            //       //             labelStyle: TextStyle(
+                            //       //                 fontSize: 0),
+                            //       //             tickPosition: TickPosition.inside,
+                            //       //             minorTicksPerInterval: 4,
+                            //       //             majorGridLines: MajorGridLines(
+                            //       //                 width: 1,
+                            //       //                 color: Colors.transparent),
+                            //       //             minorGridLines: MinorGridLines(
+                            //       //                 width: 1,
+                            //       //                 color: Colors.transparent),
+                            //       //           ),
+                            //       //
+                            //       //           zoomPanBehavior: ZoomPanBehavior(
+                            //       //             // enablePinching: true,
+                            //       //             enablePanning: true,
+                            //       //             // zoomMode: ZoomMode.xy,
+                            //       //             // enableDoubleTapZooming: true,
+                            //       //             // maximumZoomLevel: 0.5,
+                            //       //           ),
+                            //       //
+                            //       //           series: [
+                            //       //
+                            //       //             // LineSeries<VitalsData, int>(
+                            //       //             //   dataSource: List.generate(
+                            //       //             //       (controller.getFileDataList.isEmpty ? [] : controller.graphList(0).length < 720 ? controller.graphList(0) : controller.graphList(0)
+                            //       //             //           .getRange((controller.graphList(0).length - 720),
+                            //       //             //           controller.graphList(0).length).toList()).length, (index) {
+                            //       //             //     var vital = (controller.graphList(0).length < 720 ? controller.graphList(0) : controller.graphList(0)
+                            //       //             //         .getRange((controller.graphList(0).length - 720),
+                            //       //             //         controller.graphList(0).length).toList())[index];
+                            //       //             //
+                            //       //             //     return VitalsData(
+                            //       //             //         index,
+                            //       //             //         double.parse(vital.toString()));
+                            //       //             //   }),
+                            //       //             //   width: 1.0,
+                            //       //             //   color: Colors.black,
+                            //       //             //   xValueMapper: (VitalsData sales, _) => sales.date,
+                            //       //             //   yValueMapper: (VitalsData sales, _) => sales.value,
+                            //       //             // ),
+                            //       //
+                            //       //             LineSeries<VitalsData, int>(
+                            //       //               dataSource: List.generate(
+                            //       //                   (controller.getFileDataList
+                            //       //                       .isEmpty
+                            //       //                       ? []
+                            //       //                       : controller
+                            //       //                       .graphList(1)
+                            //       //                       .length < 1440
+                            //       //                       ? controller.graphList(
+                            //       //                       1)
+                            //       //                       : controller.graphList(
+                            //       //                       1)
+                            //       //                       .getRange((controller
+                            //       //                       .graphList(1)
+                            //       //                       .length - 1440),
+                            //       //                       controller
+                            //       //                           .graphList(1)
+                            //       //                           .length).toList())
+                            //       //                       .length, (index) {
+                            //       //                 var vital = (controller
+                            //       //                     .graphList(1)
+                            //       //                     .length < 1440
+                            //       //                     ? controller.graphList(1)
+                            //       //                     : controller.graphList(1)
+                            //       //                     .getRange((controller
+                            //       //                     .graphList(1)
+                            //       //                     .length - 1440),
+                            //       //                     controller
+                            //       //                         .graphList(1)
+                            //       //                         .length)
+                            //       //                     .toList())[index];
+                            //       //
+                            //       //                 return VitalsData(
+                            //       //                     index,
+                            //       //                     double.parse(
+                            //       //                         vital.toString()));
+                            //       //               }),
+                            //       //               width: 1.0,
+                            //       //               color: Colors.blue,
+                            //       //               xValueMapper: (VitalsData sales,
+                            //       //                   _) => sales.date,
+                            //       //               yValueMapper: (VitalsData sales,
+                            //       //                   _) => sales.value,
+                            //       //             ),
+                            //       //
+                            //       //           ],
+                            //       //
+                            //       //         ),
+                            //       //       ),
+                            //       //     ),
+                            //       //   ),
+                            //       // ),
+                            //
+                            //     ],
+                            //   ),
+                            // ),
                             Padding(
-                              padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                              child: Stack(
-                                children: [
-
-                                  // Compare ECG Graph 0 Fix
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            1.0),
-                                      ),
-                                      child: SizedBox(
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width > 600 ? MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width : MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width / 0.8,
-                                        height: 250,
-                                        child: SfCartesianChart(
-                                          plotAreaBorderWidth: 1.0,
-                                          plotAreaBorderColor: Colors.red
-                                              .shade900,
-
-                                          primaryXAxis: CategoryAxis(
-                                            desiredIntervals: 36,
-                                            axisLine: AxisLine(
-                                                color: Colors.red.shade900),
-                                            labelStyle: TextStyle(fontSize: 0),
-                                            tickPosition: TickPosition.inside,
-                                            interval: 20,
-                                            // Interval * MajorGridLines = ECG Data (20*36=720)
-                                            minorTicksPerInterval: 4,
-                                            majorGridLines: MajorGridLines(
-                                                width: 1,
-                                                color: Colors.red.shade900),
-                                            minorGridLines: MinorGridLines(
-                                                width: 1,
-                                                color: Colors.red.shade100),
-                                          ),
-
-                                          primaryYAxis: NumericAxis(
-                                            desiredIntervals: 8,
-                                            axisLine: AxisLine(
-                                                color: Colors.red.shade900),
-                                            minimum: -2,
-                                            maximum: 2,
-                                            labelStyle: TextStyle(fontSize: 0),
-                                            tickPosition: TickPosition.inside,
-                                            minorTicksPerInterval: 4,
-                                            majorGridLines: MajorGridLines(
-                                                width: 1,
-                                                color: Colors.red.shade900),
-                                            minorGridLines: MinorGridLines(
-                                                width: 1,
-                                                color: Colors.red.shade100),
-                                          ),
-
-                                          // zoomPanBehavior: ZoomPanBehavior(
-                                          //   enablePinching: true,
-                                          //   enablePanning: true,
-                                          //   zoomMode: ZoomMode.x,
-                                          //   enableDoubleTapZooming: true,
-                                          // ),
-
-                                          series: [
-
-                                            LineSeries<VitalsData, int>(
-                                              dataSource: List.generate(
-                                                  (controller.getFileDataList
-                                                      .isEmpty ? [] : controller
-                                                      .graphList(0)
-                                                      .length < 720 ? controller
-                                                      .graphList(0) : controller
-                                                      .graphList(0)
-                                                      .getRange((controller
-                                                      .graphList(0)
-                                                      .length - 720),
-                                                      controller
-                                                          .graphList(0)
-                                                          .length).toList())
-                                                      .length, (index) {
-                                                var vital = (controller
-                                                    .graphList(0)
-                                                    .length < 720 ? controller
-                                                    .graphList(0) : controller
-                                                    .graphList(0)
-                                                    .getRange((controller
-                                                    .graphList(0)
-                                                    .length - 720),
-                                                    controller
-                                                        .graphList(0)
-                                                        .length)
-                                                    .toList())[index];
-
-                                                return VitalsData(
-                                                    index,
-                                                    double.parse(
-                                                        vital.toString()));
-                                              }),
-                                              width: 1.0,
-                                              color: Colors.black,
-                                              xValueMapper: (VitalsData sales,
-                                                  _) => sales.date,
-                                              yValueMapper: (VitalsData sales,
-                                                  _) => sales.value,
-                                            ),
-
-                                            // LineSeries<VitalsData, int>(
-                                            //   dataSource: List.generate(
-                                            //       (controller.getFileDataList.isEmpty ? [] : controller.graphList(1).length < 720 ? controller.graphList(1) : controller.graphList(1)
-                                            //           .getRange((controller.graphList(1).length - 720),
-                                            //           controller.graphList(1).length).toList()).length, (index) {
-                                            //     var vital = (controller.graphList(1).length < 720 ? controller.graphList(1) : controller.graphList(1)
-                                            //         .getRange((controller.graphList(1).length - 720),
-                                            //         controller.graphList(1).length).toList())[index];
-                                            //
-                                            //     return VitalsData(
-                                            //         index,
-                                            //         double.parse(vital.toString()));
-                                            //   }),
-                                            //   width: 1.0,
-                                            //   color: Colors.blue,
-                                            //   xValueMapper: (VitalsData sales, _) => sales.date,
-                                            //   yValueMapper: (VitalsData sales, _) => sales.value,
-                                            // ),
-
-                                          ],
-
-                                        ),
-                                      ),
-                                    ),
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                width: MediaQuery.of(context).size.width * 1,
+                                height:
+                                MediaQuery.of(context).size.shortestSide >
+                                    600
+                                    ? MediaQuery.of(context).size.height *
+                                    0.37
+                                    : MediaQuery.of(context).size.height *
+                                    0.45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(1.0),
+                                ),
+                                child: SfCartesianChart(
+                                  plotAreaBorderWidth: 1.0,
+                                  plotAreaBorderColor: Colors.red.shade900,
+                                  primaryXAxis: CategoryAxis(
+                                    desiredIntervals: 36,
+                                    axisLine:
+                                    AxisLine(color: Colors.red.shade900),
+                                    labelStyle: TextStyle(fontSize: 0),
+                                    tickPosition: TickPosition.inside,
+                                    interval: 20,
+                                    // Interval * MajorGridLines = ECG Data (20*36=720)
+                                    minorTicksPerInterval: 4,
+                                    majorGridLines: MajorGridLines(
+                                        width: 1, color: Colors.red.shade900),
+                                    minorGridLines: MinorGridLines(
+                                        width: 1, color: Colors.red.shade100),
                                   ),
-
-                                  // Compare ECG Graph 1 Not Fix
-                                  Padding(
-                                    padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(
-                                            1.0),
-                                      ),
-                                      child: SizedBox(
-                                        width: MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width > 600 ? MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width : MediaQuery
-                                            .of(context)
-                                            .size
-                                            .width / 0.8,
-                                        height: 250,
-                                        child: InteractiveViewer(
-                                          boundaryMargin: EdgeInsets.zero,
-                                          transformationController: zoomTransformationController,
-                                          maxScale: 3.0,
-                                          minScale: 1,
-                                          child: SfCartesianChart(
-                                            plotAreaBorderWidth: 1.0,
-                                            plotAreaBorderColor: Colors
-                                                .transparent,
-
-                                            primaryXAxis: CategoryAxis(
-                                              autoScrollingMode: AutoScrollingMode
-                                                  .end,
-                                              visibleMinimum: 720,
-                                              desiredIntervals: 36,
-                                              axisLine: AxisLine(
-                                                  color: Colors.transparent),
-                                              labelStyle: TextStyle(
-                                                  fontSize: 0),
-                                              tickPosition: TickPosition.inside,
-                                              interval: 20,
-                                              // Interval * MajorGridLines = ECG Data (20*36=720)
-                                              minorTicksPerInterval: 4,
-                                              majorGridLines: MajorGridLines(
-                                                  width: 1,
-                                                  color: Colors.transparent),
-                                              minorGridLines: MinorGridLines(
-                                                  width: 1,
-                                                  color: Colors.transparent),
-                                            ),
-
-                                            primaryYAxis: NumericAxis(
-                                              desiredIntervals: 8,
-                                              axisLine: AxisLine(
-                                                  color: Colors.transparent),
-                                              minimum: -2,
-                                              maximum: 2,
-                                              labelStyle: TextStyle(
-                                                  fontSize: 0),
-                                              tickPosition: TickPosition.inside,
-                                              minorTicksPerInterval: 4,
-                                              majorGridLines: MajorGridLines(
-                                                  width: 1,
-                                                  color: Colors.transparent),
-                                              minorGridLines: MinorGridLines(
-                                                  width: 1,
-                                                  color: Colors.transparent),
-                                            ),
-
-                                            zoomPanBehavior: ZoomPanBehavior(
-                                              // enablePinching: true,
-                                              enablePanning: true,
-                                              // zoomMode: ZoomMode.xy,
-                                              // enableDoubleTapZooming: true,
-                                              // maximumZoomLevel: 0.5,
-                                            ),
-
-                                            series: [
-
-                                              // LineSeries<VitalsData, int>(
-                                              //   dataSource: List.generate(
-                                              //       (controller.getFileDataList.isEmpty ? [] : controller.graphList(0).length < 720 ? controller.graphList(0) : controller.graphList(0)
-                                              //           .getRange((controller.graphList(0).length - 720),
-                                              //           controller.graphList(0).length).toList()).length, (index) {
-                                              //     var vital = (controller.graphList(0).length < 720 ? controller.graphList(0) : controller.graphList(0)
-                                              //         .getRange((controller.graphList(0).length - 720),
-                                              //         controller.graphList(0).length).toList())[index];
-                                              //
-                                              //     return VitalsData(
-                                              //         index,
-                                              //         double.parse(vital.toString()));
-                                              //   }),
-                                              //   width: 1.0,
-                                              //   color: Colors.black,
-                                              //   xValueMapper: (VitalsData sales, _) => sales.date,
-                                              //   yValueMapper: (VitalsData sales, _) => sales.value,
-                                              // ),
-
-                                              LineSeries<VitalsData, int>(
-                                                dataSource: List.generate(
-                                                    (controller.getFileDataList
-                                                        .isEmpty
-                                                        ? []
-                                                        : controller
-                                                        .graphList(1)
-                                                        .length < 1440
-                                                        ? controller.graphList(
-                                                        1)
-                                                        : controller.graphList(
-                                                        1)
-                                                        .getRange((controller
-                                                        .graphList(1)
-                                                        .length - 1440),
-                                                        controller
-                                                            .graphList(1)
-                                                            .length).toList())
-                                                        .length, (index) {
-                                                  var vital = (controller
-                                                      .graphList(1)
-                                                      .length < 1440
-                                                      ? controller.graphList(1)
-                                                      : controller.graphList(1)
-                                                      .getRange((controller
-                                                      .graphList(1)
-                                                      .length - 1440),
-                                                      controller
-                                                          .graphList(1)
-                                                          .length)
-                                                      .toList())[index];
-
-                                                  return VitalsData(
-                                                      index,
-                                                      double.parse(
-                                                          vital.toString()));
-                                                }),
-                                                width: 1.0,
-                                                color: Colors.blue,
-                                                xValueMapper: (VitalsData sales,
-                                                    _) => sales.date,
-                                                yValueMapper: (VitalsData sales,
-                                                    _) => sales.value,
-                                              ),
-
-                                            ],
-
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                  primaryYAxis: NumericAxis(
+                                    desiredIntervals: 8,
+                                    axisLine:
+                                    AxisLine(color: Colors.red.shade900),
+                                    minimum: -2,
+                                    maximum: 2,
+                                    labelStyle: TextStyle(fontSize: 0),
+                                    tickPosition: TickPosition.inside,
+                                    minorTicksPerInterval: 4,
+                                    majorGridLines: MajorGridLines(
+                                        width: 1, color: Colors.red.shade900),
+                                    minorGridLines: MinorGridLines(
+                                        width: 1, color: Colors.red.shade100),
                                   ),
+                                  zoomPanBehavior: ZoomPanBehavior(
+                                    enablePinching: true,
+                                    enablePanning: true,
+                                    zoomMode: ZoomMode.x,
+                                    enableDoubleTapZooming: true,
+                                  ),
+                                  series: [
+                                    LineSeries<VitalsData, int>(
+                                      dataSource: List.generate(
+                                          (controller.getFileDataList
+                                              .isEmpty ? [] : controller
+                                              .graphList(0)
+                                              .length < 720 ? controller
+                                              .graphList(0) : controller
+                                              .graphList(0)
+                                              .getRange((controller
+                                              .graphList(0)
+                                              .length - 720),
+                                              controller
+                                                  .graphList(0)
+                                                  .length).toList())
+                                              .length, (index) {
+                                        var vital = (controller
+                                            .graphList(0)
+                                            .length < 720 ? controller
+                                            .graphList(0) : controller
+                                            .graphList(0)
+                                            .getRange((controller
+                                            .graphList(0)
+                                            .length - 720),
+                                            controller
+                                                .graphList(0)
+                                                .length)
+                                            .toList())[index];
 
-                                ],
+                                        return VitalsData(index,
+                                            double.parse(vital.toString()));
+                                      }),
+                                      width: 1.5,
+                                      color: Colors.blue.shade700,
+                                      xValueMapper: (VitalsData sales, _) =>
+                                      sales.date,
+                                      yValueMapper: (VitalsData sales, _) =>
+                                      sales.value,
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
 

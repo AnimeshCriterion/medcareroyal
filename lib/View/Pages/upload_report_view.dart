@@ -287,8 +287,8 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                               child: InkWell(
                                 onTap: () async {
 
-                                  Get.to(()=>MyImageView(url: data['url'].toString()) );
-                                 // await reportTrackingVM.labReportExtraction(context, data['url'].toString());
+                                  // Get.to(()=>MyImageView(url: data['url'].toString()) );
+                                 await reportTrackingVM.labReportExtraction(context, data['url'].toString());
 
                                 },
                                 child: Padding(

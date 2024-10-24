@@ -23,10 +23,12 @@ class DeviceConnectController extends GetxController{
       "modal":"YK-81C",
       "deviceType":"Oximeter",
       "image":'assets/yonker_oxi.png',
-      'device':'YK-81C',
-      // 'device':'BleModuleA',
-      'suuid':'cdeacd80-5235-4c07-8846-93a37ee6b86d',
-      'cuuid':'cdeacd81-5235-4c07-8846-93a37ee6b86d'
+      // 'device':'YK-81C',
+      'device':'BleModuleA',
+      // 'suuid':'cd80',
+      // 'cuuid':'cd81'
+  'suuid':'cdeacd80-5235-4c07-8846-93a37ee6b86d',
+  'cuuid':'cdeacd81-5235-4c07-8846-93a37ee6b86d'
 
     },
     {
@@ -172,6 +174,17 @@ class DeviceConnectController extends GetxController{
       'suuid':'00001810-0000-1000-8000-00805f9b34fb',
       'cuuid':'00002a35-0000-1000-8000-00805f9b34fb'
     },
+
+    {
+      'id':13,
+      "name":"Omron",
+      "modal":"HBF-222T",
+      "deviceType":"BP Machine",
+      "image":'assets/omron_bp.png',
+      'device':'BLESmart',
+      'suuid':'1801',
+      'cuuid':'2a05'
+    },
     // {
     //   "id":4,
     //   "name":"Omran-736",
@@ -250,7 +263,7 @@ class DeviceConnectController extends GetxController{
     print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
       // String tempName='';
       for(int i=0;i<data.length;i++){
-        if(data[i].name.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())  ){
+        if(data[i].platformName.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())  ){
           // tempName=data[i].name.toString();
           print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
 
@@ -297,8 +310,8 @@ class DeviceConnectController extends GetxController{
       // Listen to scan results
       FlutterBluePlus.scanResults.listen((List<ScanResult> results) async {
         // do something with scan results
-        for (ScanResult r in results) {   print('nnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.name.toString());
-          if (r.device.name.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())) {
+        for (ScanResult r in results) {   print('nnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.platformName.toString());
+          if (r.device.platformName.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())) {
 
             print('nnvnnvnvnvnnnvnnvnnnnnnn nnvnnvnvnvnnnvnnvnnnnnnnnnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.name.toString().toString());
             updateDevicesData = r.device;
@@ -336,10 +349,10 @@ class DeviceConnectController extends GetxController{
   }
 
   connectionState(){
-    subscription1=devicesData!.state.listen((event) async {
+    subscription1=devicesData!.connectionState.listen((event) async {
       print('nnvnnvnvnvnnnvnnv nnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + event.toString());
 
-    if(BluetoothDeviceState.disconnected==event){
+    if(BluetoothConnectionState.disconnected==event){
         try{
           updateIsMeasring=false;
 
@@ -352,7 +365,7 @@ class DeviceConnectController extends GetxController{
         catch(e){
 
         }
-      } else if(BluetoothDeviceState.connected==event){
+      } else if(BluetoothConnectionState.connected==event){
 
 
         updateIsConnected=true;
@@ -387,7 +400,7 @@ class DeviceConnectController extends GetxController{
               c.setNotifyValue(true);
             }
 
-            subscription=   c.value.listen((value) async {
+            subscription=   c.lastValueStream.listen((value) async {
               try{
                 print("nnnnnnnnnnnnnnnnnnnnnnnnvnnvnnn : " + value.toString());
                 if(value.toList().isNotEmpty){
@@ -462,8 +475,8 @@ class DeviceConnectController extends GetxController{
           await yonkerBpMachine(value);
       // case 'YK-BPA1':
       //   await yonkerBpMachine(value);
-      // case 'YK-81C':
-      //     await yonkerOximeterData(value);
+      case 'BleModuleAYK-81C':
+          await yonkerOximeterData(value);
     case 'YK-81CYK-81C':
         await yonkerOximeterData(value);
       case 'OxySmart':

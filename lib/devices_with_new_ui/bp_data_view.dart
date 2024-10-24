@@ -43,9 +43,7 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
     }
     catch(e){
 
-      if(controller.subscription!=null){
-        await  controller.subscription!.cancel();
-      }
+
 
     }
 

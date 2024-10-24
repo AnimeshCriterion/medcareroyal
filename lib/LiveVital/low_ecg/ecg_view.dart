@@ -102,6 +102,29 @@ class _ECGViewState extends State<ECGView> {
                   //     ),
                   //   ),
                   // ),
+                  // Container(
+                  //   child: Row(
+                  //     children: [
+                  //       Padding(
+                  //         padding: EdgeInsets.only(right: 5),
+                  //         child: ElevatedButton(
+                  //           onPressed: () async {
+                  //             print(ecgController.devicesData!.device.name);
+                  //             await ecgController.devicesData!.device.connect(autoConnect: true);
+                  //             ecgController.getData();
+                  //           },
+                  //           child: Text(ecgController.getIsDeviceConnected? 'Connected':'Connect',
+                  //             style: TextStyle(
+                  //               fontSize: 20,
+                  //               color: Colors.blue,
+                  //             ),
+                  //           ),
+                  //           style: ElevatedButton.styleFrom(backgroundColor: Colors.white, fixedSize: Size(150, 45)),
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               ),
               body: WillPopScope(

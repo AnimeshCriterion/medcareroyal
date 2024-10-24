@@ -64,11 +64,11 @@ class EcgController extends GetxController {
   }
 
   checkDeviceConnection() {
-    devicesData!.device.state.listen((event) {
+    devicesData!.device.connectionState.listen((event) {
       print(event);
-      if (event == BluetoothDeviceState.connected) {
+      if (event == BluetoothConnectionState.connected) {
         updateIsDeviceConnected = true;
-      } else if (event == BluetoothDeviceState.disconnected) {
+      } else if (event == BluetoothConnectionState.disconnected) {
         updateIsDeviceConnected = false;
       }
     });
@@ -90,41 +90,52 @@ class EcgController extends GetxController {
     update();
   }
 
-  getDevices() {
+  getDevices() async {
 
     updateIsDeviceFound=false;
     updateIsDeviceScanning=true;
 
+
+    List<BluetoothDevice> data= await FlutterBluePlus.connectedDevices;
+
+      // String tempName='';
+      for(int i=0;i<data.length;i++){
+        try{
+        await data[i].disconnect();
+        }
+        catch(e){
+
+        }
+    }
     // Start scanning
-    FlutterBluePlus.startScan(timeout: const Duration(hours: 1));
+    FlutterBluePlus.startScan(timeout: const Duration(minutes: 5));
     updateIsDeviceScanning=false;
 
 // Listen to scan results
     subscription = FlutterBluePlus.scanResults.listen((results) {
-      // do something with scan results
-
+      // do something with scan
+      print('Device Name :  '+results.length.toString());
       for (ScanResult r in results) {
+        print('Device Name : ${r.device.name.toString()}');
         if (r.device.name.toString() == 'CT_ECG') {
+        //
+        // if (r.device.name.toString().contains('BLEsmart')) {
           FlutterBluePlus.stopScan();
           updateIsDeviceFound=true;
           updateDevicesData = r;
           Future.delayed(Duration(seconds: 3)).then((value) async {
-            await  devicesData!.device.connect(autoConnect: true);
+            await  devicesData!.device.connect( );
             await  getData();
           });
         }
 
-        print('Device Name : ${r.device.name.toString()}');
       }
+      // FlutterBluePlus.stopScan();
     });
-    FlutterBluePlus.stopScan();
   }
 
   getData() async {
     checkDeviceConnection();
-    FlutterBluePlus.state.listen((event) {
-      print('nnnnnnnnnn' + event.toString());
-    });
 
     List<BluetoothService> services =
         await devicesData!.device.discoverServices();

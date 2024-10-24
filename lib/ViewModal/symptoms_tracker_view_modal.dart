@@ -877,6 +877,16 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         });
       }
     }
+
+    if(dtDataTable.isEmpty){
+      dtDataTable.add({
+        'detailID': '',
+        'detailsDate': DateTime.now().toString(),
+        'details':'',
+        "isFromPatient":""
+      });
+    }
+
     try {
       var data = await _api.callMedvanatagePatient7082(context,
           url:

@@ -179,7 +179,9 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
     ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
+    print(  intakeTimeC.text.toString(),);
     String formattedDate = DateFormat('yyyy-MM-dd ').format(DateFormat('dd MMM yyyy').parse(dateShowController.value.text));
+    // String time = DateFormat('HH:mm').format(DateFormat('yyyy-MM-ddHH:mm').parse(intakeTimeC.text));
     ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString()
 
 
@@ -190,7 +192,8 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
       var body = {
         // "uhID":userRepository.getUser.uhID.toString(),
         "pmID": pmID,
-        "intakeDateAndTime":formattedDate.toString()+time.toString(),
+        // "intakeDateAndTime":formattedDate.toString()+time.toString(),
+        "intakeDateAndTime":formattedDate.toString()+intakeTimeC.text.toString(),
         "prescriptionID": prescriptionID,
         "userID": userRepository.getUser.userId.toString()
       };

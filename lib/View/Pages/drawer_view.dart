@@ -85,12 +85,12 @@ class _MyDrawerState extends State<MyDrawer> {
       //   'light_img':ImagePaths.dietChecklistLight.toString(),
       //   'dark_img':  ImagePaths.dietChecklistDark.toString(),
       // },
-      {
-        'title':localization.getLocaleData.supplementChecklist,
-        'light_img':'assets/colorful2/supplimentchecklist.svg',
-        'dark_img':  ImagePaths.supplementDark.toString(),
-        'navigation':'Supplement Checklist'
-      },
+      // {
+      //   'title':localization.getLocaleData.supplementChecklist,
+      //   'light_img':'assets/colorful2/supplimentchecklist.svg',
+      //   'dark_img':  ImagePaths.supplementDark.toString(),
+      //   'navigation':'Supplement Checklist'
+      // },
       // {
       //   'title':localization.getLocaleData.medcareRoyalTraining,
       //   'light_img':'assets/colorful2/homecaretraining.svg',

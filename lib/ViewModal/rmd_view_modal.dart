@@ -209,7 +209,7 @@ class RMDViewModal extends ChangeNotifier{
       var data = await _api.callMedvanatagePatient7082(context,
           url: 'api/PatientVital/GetPatientLastVital?uhID=${userRepository.getUser.uhID.toString()}',
           // url: 'HomeCareService/GetPatientLastVital?uhID=${userRepository.getUser.uhID.toString()}',
-          localStorage: true,
+          localStorage: false,
           apiCallType: ApiCallType.get());
 
       print("nnnnnnnnnnnnnn${jsonEncode(data)}");

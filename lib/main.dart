@@ -54,8 +54,8 @@ void main() async {
 
   /// temp
   FirebaseMessaging messaging = FirebaseMessaging.instance;
-  String? token = await messaging.getToken();
-  print('Firebase Token: $token');
+  // String? token = await messaging.getToken();
+  // print('Firebase Token: $token');
 
   /// temp
 

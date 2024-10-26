@@ -732,10 +732,9 @@ updateShowNoData=false;
       print("nnnnnnnnnnnnnn${jsonEncode(data)}");
       if (data["status"] == 1) {
         updateManualFoodList=data['responseValue'];
-        print('printing list ${data['responseValue']}');
       } else {
 
-        Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
+        //Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
         // Alert.show(data['responseValue'].toString());
       }
     }
@@ -763,13 +762,12 @@ updateShowNoData=false;
           url: "api/output/GetPatientOutputList?UHID=${userRepository.getUser.uhID.toString()}",
           localStorage: true,
           apiCallType: ApiCallType.get(),token: false);
-      print("vvvvvvvvvvvv${jsonEncode(data)}");
       updateShowNoData=true;
       if (data["status"] == 1) {
         updateUrinOutputList=data['responseValue'];
       } else {
 
-        Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
+       // Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
         // Alert.show(data['responseValue'].toString());
       }
 

@@ -57,7 +57,7 @@ class FireBaseService{
 
 
     FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-      print('Initial Message'+message!.data.toString());
+      //print('Initial Message'+message!.data.toString());
 
       if(message!=null){
         if(message.notification!=null){

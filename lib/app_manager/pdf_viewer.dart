@@ -2,15 +2,11 @@
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/custom_ink_well.dart';
 import 'package:medvantage_patient/app_manager/widgets/coloured_safe_area.dart';
-import 'package:medvantage_patient/common_libs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:flutter_file_downloader/flutter_file_downloader.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 
-import 'app_color.dart';
 import 'package:get/get.dart';
 
 
@@ -26,7 +22,6 @@ class PdfViewer extends StatefulWidget {
 
 class _PdfViewerState extends State<PdfViewer> {
   //get comparision => null;
-  double?_progress;
 
   getPermission()async{
 

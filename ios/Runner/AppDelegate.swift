@@ -1,6 +1,7 @@
 import UIKit
 import Flutter
 import Firebase
+import FirebaseMessaging
 
 
 @main
@@ -24,3 +25,4 @@ import Firebase
       }
 
 }
+

@@ -9,7 +9,7 @@ buildscript {
     }
 
     dependencies {
-//        classpath 'com.android.tools.build:gradle:8.1.4' // Use a compatible version
+   //classpath 'com.android.tools.build:gradle:8.1.4' // Use a compatible version
 
         classpath 'com.android.tools.build:gradle:7.4.1'
         classpath 'com.google.gms:google-services:4.3.15'

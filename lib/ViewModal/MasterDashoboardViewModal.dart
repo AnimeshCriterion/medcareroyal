@@ -32,6 +32,7 @@ import '../View/Pages/investigation_page.dart';
 import '../View/Pages/nnn.dart';
 import '../View/Pages/pills_remind_intake_analytics.dart';
 import '../View/Pages/pills_reminder_scheduled_prescription.dart';
+import '../View/Pages/plan_of_care_view.dart';
 import '../View/Pages/setting.dart';
 import '../View/Pages/sysmptoms_tracker_view.dart';
 import '../remote_dashboard/remote_dashboard_view.dart';
@@ -244,6 +245,9 @@ break;
       Get.to(()=>const ReportTrackingView());
       // return ReportTrackingView();
     break;
+      case 'Plan of care':
+        Get.to(()=>const PlanOfCareView());
+    // return
     case 'SmartHeart Failure Revival Training':
       Get.to(()=>const HomeCareTrainingView());
       // return HomeCareTrainingView();

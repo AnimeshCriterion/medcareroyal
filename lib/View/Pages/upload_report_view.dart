@@ -288,7 +288,7 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                                 onTap: () async {
 
                                   // Get.to(()=>MyImageView(url: data['url'].toString()) );
-                                 await reportTrackingVM.labReportExtraction(context, data['url'].toString());
+                                 await reportTrackingVM.labReportExtraction(context, 'https://cdn.flabs.in/webassets/33806e7015fbfcaff211.png'.toString());
 
                                 },
                                 child: Padding(

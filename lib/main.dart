@@ -35,6 +35,7 @@ import 'ViewModal/fullbody_checkup_viewmodal.dart';
 import 'ViewModal/home_isolation_request_view_modal.dart';
 import 'ViewModal/homeisolation_view_modal.dart';
 import 'ViewModal/pills_reminder_view_modal.dart';
+import 'ViewModal/plan_of_care_view_modal.dart';
 import 'ViewModal/prescription_checklist_viewmodel.dart';
 import 'ViewModal/report_tracking_view_modal.dart';
 import 'ViewModal/rmd_view_modal.dart';
@@ -168,6 +169,11 @@ void main() async {
       create: (_) => BedCareConnectViewModal(),
     ),
 
+
+            ChangeNotifierProvider<RMDViewModal>(create: (_)=>RMDViewModal(),),
+            ChangeNotifierProvider<PlanOfCareViewModal>(create: (_)=>PlanOfCareViewModal(),),
+            // ChangeNotifierProvider<AddDeviceViewModal>(create: (_)=>AddDeviceViewModal(),),
+          ],child: const MyApp()));
     ChangeNotifierProvider<RMDViewModal>(
       create: (_) => RMDViewModal(),
     ),

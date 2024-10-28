@@ -15,6 +15,7 @@ import '../../app_manager/camera_and images/image_picker.dart';
 import '../../app_manager/imageViewer/ImageView.dart';
 import '../../app_manager/widgets/buttons/custom_ink_well.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
+import '../../assets.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
 
@@ -133,21 +134,51 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
               //     ),
               //   ),
 
+              Row(crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  // InkWell(
+                  //   onTap: (){
+                  //      Get.back();
+                  //   },
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.all(8.0),
+                  //     child: Icon(Icons.arrow_back_ios,color: themeChange.darkTheme? Colors.white:Colors.grey,),
+                  //   ),
+                  // ),
+                  InkWell(
+                      onTap: () {
+                        scaffoldKey.currentState!.openDrawer();
+                      },
+                      child: Image.asset(
+                          themeChange.darkTheme == true
+                              ? ImagePaths.menuDark
+                              : ImagePaths.menulight,
+                          height: 40)),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Upload Report',
+                          style: MyTextTheme().largeBCB.copyWith(
+                              fontSize: 21,
+                              height: 0,
+                              color: themeChange.darkTheme == true
+                                  ? Colors.white70
+                                  : null),
+                        ),
 
+                      ],
+                    ),
+                  ),
+
+
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.all(10),
                 child: Row(crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
 
-                    InkWell(
-                      onTap: (){
-                        Get.back();
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Icon(Icons.arrow_back_ios,size: 21,color: themeChange.darkTheme? Colors.white:Colors.black,),
-                      ),
-                    ),
 
                     Expanded(
                       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,8 +186,8 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                           Row(
                             children: [
                               Expanded(
-                                child: Text( 'Lab Reports',
-                                  style: MyTextTheme().largeBCB.copyWith( height: 0,color: themeChange.darkTheme==true?Colors.white70:Colors.black),),
+                                child: Text( 'History',
+                                  style: MyTextTheme().mediumBCB.copyWith( height: 0,color: themeChange.darkTheme==true?Colors.white70:Colors.black),),
                               ),
 
                               InkWell(

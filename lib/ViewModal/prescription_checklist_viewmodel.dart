@@ -175,7 +175,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
   }
   TextEditingController intakeTimeC=TextEditingController();
 
-  insertMedication(context,int pmID,int prescriptionID, String time)async{
+  insertMedication(context,int pmID,int prescriptionID, String time,{duration,})async{
     ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
@@ -195,7 +195,9 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
         // "intakeDateAndTime":formattedDate.toString()+time.toString(),
         "intakeDateAndTime":formattedDate.toString()+intakeTimeC.text.toString(),
         "prescriptionID": prescriptionID,
-        "userID": userRepository.getUser.userId.toString()
+        "userID": userRepository.getUser.userId.toString(),
+        "duration": duration.toString(),
+        "compareTime": time.toString()
       };
       print("BODY $body");
 
@@ -327,7 +329,8 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
                                                         DateFormat('hh:mm a')
                                                             .parse(timeString
                                                                 .toString()))
-                                                    .toString());
+                                                    .toString(),
+                                            duration: duration.toString());
 
                                         },
                                    ));

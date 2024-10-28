@@ -111,6 +111,12 @@ class _MyDrawerState extends State<MyDrawer> {
         'dark_img':  ImagePaths.uploadReportDark.toString(),
         'navigation':'Upload Report'
       },
+      {
+        'title': 'Plan of care',
+        'light_img':'assets/colorful2/uploadreport.svg',
+        'dark_img':  ImagePaths.uploadReportDark.toString(),
+        'navigation':'Plan of care',
+      },
       // {
       //   'title': localization.getLocaleData.patientDashboard.toString(),
       //   'light_img':'assets/colorful2/feedback.svg',

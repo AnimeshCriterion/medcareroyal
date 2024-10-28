@@ -182,8 +182,8 @@ class DeviceConnectController extends GetxController{
       "deviceType":"BP Machine",
       "image":'assets/omron_bp.png',
       'device':'BLESmart',
-      'suuid':'1801',
-      'cuuid':'2a05'
+      'suuid':'0000181d-0000-1000-8000-00805f9b34fb',
+      'cuuid':'00002a9d-0000-1000-8000-00805f9b34fb'
     },
     // {
     //   "id":4,

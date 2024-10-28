@@ -173,10 +173,8 @@ void main() async {
             ChangeNotifierProvider<RMDViewModal>(create: (_)=>RMDViewModal(),),
             ChangeNotifierProvider<PlanOfCareViewModal>(create: (_)=>PlanOfCareViewModal(),),
             // ChangeNotifierProvider<AddDeviceViewModal>(create: (_)=>AddDeviceViewModal(),),
-          ],child: const MyApp()));
-    ChangeNotifierProvider<RMDViewModal>(
-      create: (_) => RMDViewModal(),
-    ),
+
+
     // ChangeNotifierProvider<AddDeviceViewModal>(create: (_)=>AddDeviceViewModal(),),
   ], child: const MyApp()));
 }

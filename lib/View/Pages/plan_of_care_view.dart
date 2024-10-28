@@ -38,12 +38,14 @@ class _PlanOfCareViewState extends State<PlanOfCareView> {
     get();
   }
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
-    PlanOfCareViewModal  planOfCareViewModal = Provider.of<PlanOfCareViewModal>(context, listen: false);
+    PlanOfCareViewModal  planOfCareViewModal = Provider.of<PlanOfCareViewModal>(context, listen: true);
     return SafeArea(child:
     Scaffold(
+      key: scaffoldKey,
       drawer: const MyDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -106,7 +108,7 @@ class _PlanOfCareViewState extends State<PlanOfCareView> {
                       color: Colors.white,
                         width: 1,
                     ),
-                
+
                     Expanded(flex: 4,child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text('Time',style: MyTextTheme().mediumWCB,),

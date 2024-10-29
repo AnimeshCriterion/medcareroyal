@@ -107,12 +107,12 @@ class _MyDrawerState extends State<MyDrawer> {
 
       {
         'title':localization.getLocaleData.uploadReport,
-        'light_img':'assets/colorful2/uploadreport.svg',
-        'dark_img':  ImagePaths.uploadReportDark.toString(),
+        'light_img':'assets/A Vitalio/uploadReport.svg',
+        'dark_img':  'assets/A Vitalio/uploadReport.svg',
         'navigation':'Upload Report'
       },
       {
-        'title': 'Plan of care',
+        'title': 'Plan of Care',
         'light_img':'assets/colorful2/uploadreport.svg',
         'dark_img':  ImagePaths.uploadReportDark.toString(),
         'navigation':'Plan of care',

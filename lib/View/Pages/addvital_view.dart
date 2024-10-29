@@ -1237,7 +1237,7 @@ class _AddVitalViewState extends State<AddVitalView> {
                                                     validator: (val){
                                                       if(val!.isNotEmpty)  {
                                                         if (double.parse(val.toString()) >
-                                                            30) {
+                                                            41) {
                                                           return localization.getLocaleData.pleaseEnterValidValue.toString();
                                                         }
                                                       }

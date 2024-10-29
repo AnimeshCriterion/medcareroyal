@@ -881,7 +881,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
     if(dtDataTable.isEmpty){
       dtDataTable.add({
         'detailID': '',
-        'detailsDate': DateTime.now().toString(),
+        'detailsDate':'',
         'details':'',
         "isFromPatient":""
       });

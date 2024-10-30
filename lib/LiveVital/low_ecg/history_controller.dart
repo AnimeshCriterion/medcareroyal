@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
-import '../../app_manager/alert_dialogue.dart';
 import '../../app_manager/alert_toast.dart';
 import '../../authenticaton/user_repository.dart';
 
@@ -24,7 +23,6 @@ class HistoryController extends GetxController{
         selectedData.add({"jsonFile":jsonFile, "ColumnData":val, "Date":date,});
         }
         else{
-
           Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: 'Only two column can be selected'));
           // alertToast(context, 'Only two column can be selected');
         }

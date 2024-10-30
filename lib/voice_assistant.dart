@@ -944,7 +944,8 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
 
       // String url = 'http://182.156.200.178:8007/api/echo/';  /// OLD
 
-      String url = 'http://182.156.200.178:8005/api/echo/';   /// Live
+      //String url = 'http://182.156.200.178:8005/api/echo/';   /// Live
+      String url = 'http://food.shopright.ai:3478/api/echo/';   /// Live Cloud Url
       // String url = 'http://172.16.20.234:5003/api/echo/';  /// LOCAL
 
       var requestBody = {

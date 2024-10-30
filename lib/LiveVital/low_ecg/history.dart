@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import '../../app_manager/alert_dialogue.dart';
 import '../../app_manager/alert_toast.dart';
 import '../../app_manager/theme/text_theme.dart';
 import '../../authenticaton/user_repository.dart';

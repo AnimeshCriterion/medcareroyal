@@ -9,7 +9,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
-import '../../View/widget/common_method/show_progress_dialog.dart';
 import '../../authenticaton/user_repository.dart';
 import '../devices_api.dart';
 

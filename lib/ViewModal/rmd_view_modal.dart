@@ -244,7 +244,8 @@ class RMDViewModal extends ChangeNotifier{
         "pmID": pmID,
         "intakeDateAndTime":formattedDate.toString()+time.toString(),
         "prescriptionID": prescriptionID,
-        "userID": userRepository.getUser.userId.toString()
+        "userID": userRepository.getUser.userId.toString(),
+
       };
       print("BODY $body");
 

@@ -72,7 +72,7 @@ class PulseTransitTimeController extends GetxController {
     List<BluetoothDevice> data= await FlutterBluePlus.connectedDevices;
     print('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnn  : ${data}');
     for(int i=0;i<data.length;i++){
-      if(data[i].name.toString().contains('CT_PTT_Device')) {
+      if(data[i].platformName.toString().contains('CT_PTT_Device')) {
         isAlreadyConnected=true;
         updateIsDeviceFound=true;
         updateIsDeviceScanning=false;
@@ -245,7 +245,7 @@ class PulseTransitTimeController extends GetxController {
         for (BluetoothCharacteristic c in characteristics) {
           if (c.uuid.toString()=='0040') {
             await c.setNotifyValue(true);
-            liveSubscription=c.value.listen((value2) async {
+            liveSubscription=c.lastValueStream.listen((value2) async {
               try{
                 var data = ascii.decode(value2);
                 print('ECG and SpO2 received from device : $data');
@@ -362,7 +362,7 @@ class PulseTransitTimeController extends GetxController {
         for (BluetoothCharacteristic c in characteristics) {
           if(c.uuid.toString()=='2a37'){
             await c.setNotifyValue(true);
-            hrSubscription=c.value.listen((value2) async {
+            hrSubscription=c.lastValueStream.listen((value2) async {
               var data=ascii.decode(value2);
               print('Heart rate received from device : $data');
 
@@ -537,7 +537,7 @@ class PulseTransitTimeController extends GetxController {
         for (BluetoothCharacteristic c in characteristics) {
           if(c.uuid.toString()=='1004') {
             await c.setNotifyValue(true);
-            spO2PrSubscription=c.value.listen((value2) async {
+            spO2PrSubscription=c.lastValueStream.listen((value2) async {
               var data=ascii.decode(value2);
               print('SpO2 and pulse rate received from device : $data');
 
@@ -670,7 +670,7 @@ class PulseTransitTimeController extends GetxController {
         for (BluetoothCharacteristic c in characteristics) {
           if(c.uuid.toString()=='2a49'){
             await c.setNotifyValue(true);
-            bpSubscription=c.value.listen((value2) async {
+            bpSubscription=c.lastValueStream.listen((value2) async {
               try{
                 var data = ascii.decode(value2);
                 if (data.toString().split(',')[0].toString() == 'f' ||
@@ -907,7 +907,7 @@ class PulseTransitTimeController extends GetxController {
         for (BluetoothCharacteristic c in characteristics) {
           if(c.uuid.toString()=='2a6e'){
             await c.setNotifyValue(true);
-            tempSubscription=c.value.listen((value2) async {
+            tempSubscription=c.lastValueStream.listen((value2) async {
               var data=ascii.decode(value2);
               print('Temperature, battery and PTT received from device : $data');
 

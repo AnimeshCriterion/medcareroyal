@@ -365,11 +365,11 @@ class StethoBluetoothController extends GetxController{
       String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
       print("Connected Microphone: $microphone");
 
-      if((microphone??'')=='Bluetooth Microphone') {
+      // if((microphone??'')=='Bluetooth Microphone') {
         // print('nnnvnvnnv'+data.length.toString());
         channel.sink.add(data);
         updateGraphData = data;
-      }
+      // }
 
 
     });

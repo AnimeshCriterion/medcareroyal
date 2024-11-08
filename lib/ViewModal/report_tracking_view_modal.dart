@@ -14,6 +14,8 @@ import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../View/Pages/lab_feild_view.dart';
+
 class ReportTrackingViewModal extends ChangeNotifier{
 
  
@@ -64,7 +66,8 @@ class ReportTrackingViewModal extends ChangeNotifier{
       if (response.statusCode == 200) {
 
         await  getPatientMediaData(context);
-        // await labReportExtraction(context,'https://apimedcareroyal.medvantage.tech:7082/Upload/Image/'+url.toString());
+        // https://apimedcareroyal.medvantage.tech:7082/Upload\Image\1730805217123_image_cropper_1730805195025.jpg
+        await labReportExtraction(context,'https://apimedcareroyal.medvantage.tech:7082/'+url.toString());
         alertToast(context, 'Report uploaded successfully');
 
 
@@ -159,8 +162,9 @@ class ReportTrackingViewModal extends ChangeNotifier{
 
 
   labReportExtraction(context,url) async {
-    UserRepository userRepository =
-    Provider.of<UserRepository>(context, listen: false);
+
+
+    ProgressDialogue().show(context, loadingText: 'Loading...');
 
     try {
       var data = await _api.callMedvanatagePatient7082(context,
@@ -169,22 +173,25 @@ class ReportTrackingViewModal extends ChangeNotifier{
           localStorage: true,
           apiCallType: ApiCallType.get());
 
-      print(data.toString()+' kgvbnvcbnfxg');
-      if(Map.from(data).keys.contains('response')){
-        updatePatientReportExtraction=data['response'];
+      if(Map.from(data).keys.toList().contains('response')){
+        print(Map.from(data).keys.toList().toString()+' kgvbnvcbnfxg');
+        updatePatientReportExtraction=data['response']['patient_details'];
 
+        print(data.toString()+' nnnnnn');
 
-        for(int i=0;i<=data['response']['report'].length;i++){
-          data['response']['report'][i].add(
+        for(int i=0;i<data['response']['report'].length;i++){
+          data['response']['report'][i].addAll(
               {'val': TextEditingController(text:data['response']['report'][i]['result'].toString())});
         }
 
         updateReportExtraction=data['response']['report'];
 
-        // Get.to(LabFeildView());
+        Get.back();
+        Get.to(LabFeildView());
       }
 
     } catch (e) {
+      Get.back();
       print(e.toString()+' kgvbnvcbnfxg');
     }
   }
@@ -193,28 +200,47 @@ class ReportTrackingViewModal extends ChangeNotifier{
   insertInvesigation(context) async {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
+
+    ProgressDialogue().show(context, loadingText: 'Loading...');
+    List temp=[];
+
+    for(int i=0;i<getReportExtraction.length;i++){
+    //   subTestId INT PATH '$.subTestId',
+    // subTestname VARCHAR(50) PATH '$.subTestname',
+    // isNormal INT PATH '$.isNormal',
+    // result DECIMAL(10,2) PATH '$.result',
+    // unit VARCHAR(50) PATH '$.unit',
+    // `range` VARCHAR(50) PATH '$.range',
+    // resultDateTime VARCHAR(50) PATH '$.resultDateTime'
+          temp.add({ "itemName":' ',
+            "itemId":'',
+            "labName": getPatientReportExtraction['lab_name'].toString(),
+            "receiptNo":'',
+            "resultDateTime": getPatientReportExtraction['collection_date'].toString(),
+            "investigationResultJson": [
+              { "subTestId": getReportExtraction[i]['id'].toString() ,
+                "subTestName": getReportExtraction[i]['test_name'].toString() ,
+                "range": getReportExtraction[i]['normal_values'].toString() ,
+                "resultDateTime":getPatientReportExtraction['collection_date'].toString(),
+              "result": getReportExtraction[i]['result'].toString() ,
+              "unit": getReportExtraction[i]['unit'].toString() ,
+              "isNormal":'1' ,
+              }
+            ],
+            "clientId": userRepository.getUser.clientId.toString()
+          });
+      }
+
    var body= {
       "uhid": userRepository.getUser.uhID.toString(),
-    "investigationDetailsJson": [
-      { "itemName": '',
-    "itemId":'',
-    "labName":'',
-    "receiptNo":'',
-    "resultDateTime":'',
-    "investigationResultJson": [
-      { "subTestId":'',
-      "subTestName":'',
-      "range":'',
-      "resultDateTime":'',
-      }
-    ],
-    "clientId": userRepository.getUser.clientId.toString()
-  }]};
+    "investigationDetailsJson": temp
+    };
     try {
       var data = await _api.callMedvanatagePatient7096(context,
           url:'api/InvestigationByPatient/InsertResult',
           localStorage: true,
           apiCallType: ApiCallType.post(body: body));
+      Get.back();
       print(data.toString()+' kgvbnvcbnfxg');
       if (data["status"] == 1) {
         updatePatientReportList=data['responseValue'];
@@ -222,6 +248,7 @@ class ReportTrackingViewModal extends ChangeNotifier{
 
       }
     } catch (e) {
+      Get.back();
       print(e.toString()+' kgvbnvcbnfxg');
     }
 }

@@ -68,8 +68,8 @@ class _CTBpScreenViewState extends State<CTBpScreenView> {
     }
 
 
-    deviceStateStream = device.device.state.listen((scan) async {
-      if (scan == BluetoothDeviceState.connected) {
+    deviceStateStream = device.device.connectionState.listen((scan) async {
+      if (scan == BluetoothConnectionState.connected) {
         List<BluetoothService> services = await device.device.discoverServices();
         for (var service in services) {
           bpMachine.initiateCTService(service);
@@ -93,8 +93,8 @@ class _CTBpScreenViewState extends State<CTBpScreenView> {
         title: Text(localization.getLocaleData.bloodPressure.toString()),
         actions: <Widget>[
           StreamBuilder<BluetoothConnectionState>(
-            stream: device.device.state,
-            initialData: BluetoothConnectionState.connecting,
+            stream: device.device.connectionState,
+            initialData: BluetoothConnectionState.connected,
             builder: (c, snapshot) {
               VoidCallback? onPressed;
               String text;

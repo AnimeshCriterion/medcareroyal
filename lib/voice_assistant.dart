@@ -1061,7 +1061,8 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
                         context,
                         pmid,
                         medDetails['prescriptionRowID'],
-                       addvitalVM.time.toString()
+                       addvitalVM.time.toString(),
+                      // addvitalVM.time.toString(),
                     );
                     Get.to(()=>PrescriptionCheckListView());
                   },

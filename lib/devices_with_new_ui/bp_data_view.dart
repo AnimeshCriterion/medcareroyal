@@ -32,10 +32,10 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
 
 
   onPressBack() async {
+    print('nnnnnnnnnnnn ');
     try{
 
       controller.updateSelectedDeviceIndex = '';
-      await controller.devicesData!.disconnect();
 
 
       await  controller.subscription!.cancel();
@@ -53,7 +53,12 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
     catch(e){
 
     }
-    Get.back();
+    Get.back(); try{
+      await controller.devicesData!.disconnect();
+    }
+    catch(e){
+
+    }
     controller.updateSelectedDevice = Map.from({});
   }
   @override
@@ -96,8 +101,8 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
               //     primaryBackColor:
               //         themeChange.darkTheme ? AppColor.white : AppColor.greyDark,
               //     title: controller.getSelectedDevice.name.toString()),
-              body: WillPopScope(
-                onWillPop: () async {
+              body: PopScope(
+                onPopInvoked: (va) async {
                   await onPressBack();
                   return Future.value(false);
                 },
@@ -303,6 +308,7 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
 
                   func: () async {
                     // await controller.deviceData();
+                    ProgressDialogue().show(context, loadingText: 'Loading...');
                     final BuildContext? _context=NavigationService.navigatorKey.currentContext;
                     try{
                         await LiveVitalModal().addVitals(_context,
@@ -310,10 +316,11 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
                             BPDias: controller.getBpDia.toString(),
                             pr: controller.getPr.toString(),
                             spo2: controller.getSpo2.toString());
+                        Get.back();
                       }
                       catch(e){
-
                         Get.back();
+
                       }
                   }),
             ),

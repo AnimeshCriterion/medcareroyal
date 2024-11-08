@@ -384,15 +384,18 @@ class DeviceConnectController extends GetxController{
     services.forEach((service) async {
 
       print('Service UUID : ' + service.uuid.toString()  == getSelectedDevice.suuid.toString().toString());
-      print('nnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnvnnnvnnnnnn : ' + service.uuid.toString());
+      print('nnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnvnnnvnnnnnnnn : ' + service.uuid.toString());
+      print('nnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnvnnnvnnnnnn : ' + service.serviceUuid.toString());
       print('Service UUID : ' + getSelectedDevice.suuid.toString());
-      if (service.uuid.toString().toUpperCase()  == getSelectedDevice.suuid.toString().toUpperCase()) {
+      if (service.uuid.toString().toUpperCase()  == getSelectedDevice.suuid.toString().substring(4, 8).toUpperCase()||
+      service.uuid.toString().toUpperCase()  == getSelectedDevice.suuid.toString().toUpperCase()) {
 
         var characteristics = service.characteristics;
         for (BluetoothCharacteristic c in characteristics) {
 
           print('Characteristics UUID : ' + c.uuid.toString());
-          if (c.uuid.toString().toUpperCase() == getSelectedDevice.cuuid.toString().toUpperCase()) {
+          if (c.uuid.toString().toUpperCase() == getSelectedDevice.cuuid.toString().substring(4, 8).toUpperCase()||
+          c.uuid.toString().toUpperCase() == getSelectedDevice.cuuid.toString().toUpperCase()) {
             try{
               await c.setNotifyValue(true);
             }
@@ -404,10 +407,10 @@ class DeviceConnectController extends GetxController{
               try{
                 print("nnnnnnnnnnnnnnnnnnnnnnnnvnnvnnn : " + value.toString());
                 if(value.toList().isNotEmpty){
-                  selectedDeviceData(
+                  await   selectedDeviceData(
                       getSelectedDevice.device.toString() +
                           getSelectedDevice.modal.toString(),
-                      value);
+                      value.toList());
                 }
               }
               catch(e){

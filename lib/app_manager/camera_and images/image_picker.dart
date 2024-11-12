@@ -4,8 +4,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 // import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../../common_libs.dart';
 
 class MyImagePicker{
 
@@ -32,14 +35,24 @@ class MyImagePicker{
       }
     }
   }
-  // static _cropImage(filePath) async {
-  //   CroppedFile? croppedImage = await ImageCropper().cropImage(
-  //     sourcePath: filePath,
-  //     maxWidth: 1080,
-  //     maxHeight: 1080,
-  //   );
-  //   return croppedImage;
-  // }
+  static  cropImage(filePath) async {
+    CroppedFile? croppedImage = await ImageCropper().cropImage(
+      sourcePath: filePath,
+      maxWidth: 1080,
+      maxHeight: 1080,
+      uiSettings: [AndroidUiSettings(
+      toolbarTitle: 'Crop Image',
+      toolbarColor: Colors.deepOrange,
+      toolbarWidgetColor: Colors.white,
+      initAspectRatio: CropAspectRatioPreset.original,
+      lockAspectRatio: false,
+    ),
+       IOSUiSettings(
+        title: 'Crop Image',
+      ),]
+    );
+    return croppedImage!.path;
+  }
 
  static Future pickImageFromCamera({
     bool? cropImage

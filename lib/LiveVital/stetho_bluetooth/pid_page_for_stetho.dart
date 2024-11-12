@@ -311,7 +311,8 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
                                         }
                                         String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
                                           print("Connected Microphone: $microphone");
-
+                                        MyNavigator.push(
+                                            context, StethoBluetoothView());
                                           if((microphone??'')=='Bluetooth Microphone'){
                                           MyNavigator.push(
                                               context, StethoBluetoothView());

@@ -158,7 +158,7 @@ class WatchController extends GetxController {
         for (BluetoothCharacteristic c in characteristics) {
           if(c.uuid.toString()=='cc03'){
             await c.setNotifyValue(true);
-            bpSubscription=c.value.listen((value2) async {
+            bpSubscription=c.lastValueStream.listen((value2) async {
 
               print('values list : $value2');
 

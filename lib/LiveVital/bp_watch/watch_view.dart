@@ -21,6 +21,7 @@ class _WatchState extends State<Watch> {
   WatchController watchController = Get.put(WatchController());
 
   get() async {
+    watchController.updateIsDeviceConnected=false;
     await watchController.scanDevices();
   }
 

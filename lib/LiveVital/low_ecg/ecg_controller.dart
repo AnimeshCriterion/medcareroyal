@@ -141,13 +141,16 @@ class EcgController extends GetxController {
         await devicesData!.device.discoverServices();
     print('Service Length' + services.length.toString());
     services.forEach((service) async {
-      if (service.uuid.toString().toUpperCase().substring(4, 8).toString() == 'C201') {
+      if (service.uuid.toString()  == 'C201' ||
+      service.uuid.toString().toUpperCase().substring(4, 8).toString() == 'C201') {
         var characteristics = service.characteristics;
 
         for (BluetoothCharacteristic c in characteristics) {
-          if (c.uuid.toString().toUpperCase().substring(4, 8).toString() == '483E') {
+          if (
+          c.uuid.toString().toUpperCase() == '483E'||
+          c.uuid.toString().toUpperCase().substring(4, 8).toString() == '483E') {
             c.setNotifyValue(true);
-            subscription = c.value.listen((value2) async {
+            subscription = c.lastValueStream.listen((value2) async {
               // print('nnnnnnnnnn'+value2.toString());
               try{
                 var data = ascii.decode(value2);

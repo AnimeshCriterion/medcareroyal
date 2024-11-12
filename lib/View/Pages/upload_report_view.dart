@@ -1,4 +1,6 @@
 
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 import 'package:medvantage_patient/LiveVital/pmd/my_text_theme.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
@@ -318,8 +320,9 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                               child: InkWell(
                                 onTap: () async {
 
-                                  // Get.to(()=>MyImageView(url: data['url'].toString()) );
-                                 await reportTrackingVM.labReportExtraction(context, 'https://cdn.flabs.in/webassets/33806e7015fbfcaff211.png'.toString());
+                                  Get.to(()=>MyImageView(url: data['url'].toString()) );
+                                 // await reportTrackingVM.labReportExtraction(context, 'https://cdn.flabs.in/webassets/33806e7015fbfcaff211.png'.toString());
+                                 // await reportTrackingVM.labReportExtraction(context, data['url'].toString());
 
                                 },
                                 child: Padding(
@@ -338,8 +341,8 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                                                 style:themeChange.darkTheme?  MyTextTheme().largeWCB: MyTextTheme().largeBCB,
                                               ),
                                               Text(
-                                                DateFormat('dd-MM-yyyy hh:ss a')
-                                                    .format(DateTime.parse(
+                                                DateFormat('dd-MM-yyyy hh:mm a')
+                                                    .format(  DateTime.parse(
                                                         data['dateTime'].toString()))
                                                     .toString(),
                                                 style: themeChange.darkTheme? MyTextTheme().smallWCN: MyTextTheme().smallGCN,
@@ -447,8 +450,16 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                           Get.back();
                          var data = await MyImagePicker.pickImageFromCamera();
                          print(data.path.toString());
-                         reportTrackingVM.updateImgPath = data.path.toString();
+                       var path=  await  MyImagePicker.cropImage(data!.path.toString());
+                          // var  compressedFile = await FlutterImageCompress.compressAndGetFile(
+                          //   data.path,
+                          //   "${data.path.toString().replaceAll('.jpg', '')}_compressed.jpg", // Output file path
+                          //   quality: 18 // Quality level (0-100), where 100 is the original quality
+                          // );
 
+                         reportTrackingVM.updateImgPath =path.toString();
+
+                          print("mdkgmg"+path.toString());
                          await reportTrackingVM
                              .insertPatientMediaData(context,admitDoctorId:userRepository.getUser.admitDoctorId,
                          uhId: userRepository.getUser.uhID.toString());
@@ -481,7 +492,8 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                        onTap: () async {
                           Get.back();
                          var data = await MyImagePicker.pickImageFromGallery();
-                         reportTrackingVM.updateImgPath = data.path;
+                          var path=  await  MyImagePicker.cropImage(data!.path.toString());
+                         reportTrackingVM.updateImgPath = path;
                          // await reportTrackingVM
                          //     .insertPatientMediaData(context); reportTrackingVM.updateImgPath = data.path.toString();
 

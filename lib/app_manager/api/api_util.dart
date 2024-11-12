@@ -19,6 +19,7 @@ class ApiUtil {
   late String baseUrlMedvanatge7096 = "https://apimedcareroyal.medvantage.tech:7096/";
   late String baseUrlMedvanatge7100 = "https://apimedcareroyal.medvantage.tech:7100/";
   late String baseUrlMedvanatge7083 = "https://apimedcareroyal.medvantage.tech:7083/";
+   late String voiceAssistance = "http://food.shopright.ai:3478/api/echo/";
 
    //without http
    //  late String baseUrlMedvanatge = "http://apimedcareroyal.medvantage.tech:1080/";

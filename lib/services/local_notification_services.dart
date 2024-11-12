@@ -78,11 +78,11 @@ class NotificationService {
   showNotification(
       {int id = 0, String? title, String? body, String? payload}) async {
     print('nnnnnnnnnnnnvvvvvvvvvvvv ');
-    showNotificationPanel(
-      ["New message received", "Your download is complete", "Don't miss our update!"],
-    );
-    // return notificationsPlugin.show(
-    //     id, title, body, await notificationDetails());
+    // showNotificationPanel(
+    //   ["New message received", "Your download is complete", "Don't miss our update!"],
+    // );
+    return notificationsPlugin.show(
+        id, title, body, await notificationDetails());
   }
 
   //...create for select time for sehedule notification.....//

@@ -492,6 +492,7 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
 
   deviceModal(context,Deviceindex) {
     controller.updateSelectedDeviceIndex='';
+    controller.updateSelectedModal='';
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -523,10 +524,12 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                               return InkWell(
                                 onTap: (){
 
+                                  print(data.toString());
                                     controller.updateSelectedDeviceIndex=Deviceindex.toString();
                                     controller.updateSelectedDevice = Map.from(data);
                                     controller.updateSelectedModal= data['modal'].toString();
 
+                                  print( controller.getSelectedDevice.suuid.toString());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
@@ -534,9 +537,11 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                                     color:  controller.getSelectedModal==data['modal'].toString()?
                                     AppColor.primaryColor:Colors.white,
                                     child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
+                                      padding: const EdgeInsets.all(3),
                                       child: Row(
                                         children: [
+                                          Image.asset(data['image'].toString(),height: 52,width: 52,),
+                                          SizedBox(width: 15,),
                                           Text(data['modal'].toString(),
                                           style: controller.getSelectedModal==data['modal'].toString()?
                                           MyTextTheme().mediumWCB:MyTextTheme().mediumBCB,),
@@ -552,6 +557,7 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
 
                         MyButton(title: 'Connect Device',
                         onPress: () async {
+                          Get.back();
                           await controller.scanDevices();
                           controller.update();
                         },),

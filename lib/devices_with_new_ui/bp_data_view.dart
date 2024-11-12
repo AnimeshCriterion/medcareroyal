@@ -101,8 +101,8 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
               //     primaryBackColor:
               //         themeChange.darkTheme ? AppColor.white : AppColor.greyDark,
               //     title: controller.getSelectedDevice.name.toString()),
-              body: PopScope(
-                onPopInvoked: (va) async {
+              body:  WillPopScope(
+                onWillPop: () async {
                   await onPressBack();
                   return Future.value(false);
                 },

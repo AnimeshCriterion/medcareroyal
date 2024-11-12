@@ -36,6 +36,7 @@ import 'ViewModal/login_view_modal.dart';
 import 'ViewModal/prescription_checklist_viewmodel.dart';
 import 'ViewModal/symptoms_tracker_view_modal.dart';
 import 'app_manager/alert_toast.dart';
+import 'app_manager/api/api_util.dart';
 import 'app_manager/app_color.dart';
 import 'app_manager/bottomSheet/bottom_sheet.dart';
 import 'app_manager/bottomSheet/functional_sheet.dart';
@@ -996,8 +997,8 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     // String url = 'http://182.156.200.178:8007/api/echo/';  /// OLD
 
     //String url = 'http://182.156.200.178:8005/api/echo/';   /// Live
-    String url = 'http://food.shopright.ai:3478/api/echo/';
-
+    // String url = 'http://food.shopright.ai:3478/api/echo/';
+    String url =  ApiUtil().voiceAssistance.toString();
     /// Live Cloud Url
     // String url = 'http://172.16.20.234:5003/api/echo/';  /// LOCAL
 

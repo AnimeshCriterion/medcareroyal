@@ -198,13 +198,13 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                                 onTap: () async {
                                   // Get.to(AddLabResultsView());
 
-                                  UserRepository userRepository =
-                                  Provider.of<UserRepository>(context, listen: false);
-                                  print(userRepository.getUser.token.toString());
-                                  showNotificationPanel(
-                                    ["New message received", "Your download is complete", "Don't miss our update!"],
-                                  );
-                                  // await picImageWidget(context);
+                                  // UserRepository userRepository =
+                                  // Provider.of<UserRepository>(context, listen: false);
+                                  // print(userRepository.getUser.token.toString());
+                                  // showNotificationPanel(
+                                  //   ["New message received", "Your download is complete", "Don't miss our update!"],
+                                  // );
+                                  await picImageWidget(context);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(16),

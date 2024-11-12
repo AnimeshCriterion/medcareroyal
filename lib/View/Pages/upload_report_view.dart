@@ -15,6 +15,8 @@ import '../../ViewModal/report_tracking_view_modal.dart';
 import '../../app_manager/bottomSheet/bottom_sheet.dart';
 import '../../app_manager/camera_and images/image_picker.dart';
 import '../../app_manager/imageViewer/ImageView.dart';
+import '../../app_manager/my_button.dart';
+import '../../app_manager/web_view.dart';
 import '../../app_manager/widgets/buttons/custom_ink_well.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../assets.dart';
@@ -196,7 +198,13 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                                 onTap: () async {
                                   // Get.to(AddLabResultsView());
 
-                                 await picImageWidget(context);
+                                  UserRepository userRepository =
+                                  Provider.of<UserRepository>(context, listen: false);
+                                  print(userRepository.getUser.token.toString());
+                                  showNotificationPanel(
+                                    ["New message received", "Your download is complete", "Don't miss our update!"],
+                                  );
+                                  // await picImageWidget(context);
                                 },
                                 child: Container(
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(16),
@@ -320,9 +328,9 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                               child: InkWell(
                                 onTap: () async {
 
-                                  Get.to(()=>MyImageView(url: data['url'].toString()) );
+                                  // Get.to(()=>MyImageView(url: data['url'].toString()) );
                                  // await reportTrackingVM.labReportExtraction(context, 'https://cdn.flabs.in/webassets/33806e7015fbfcaff211.png'.toString());
-                                 // await reportTrackingVM.labReportExtraction(context, data['url'].toString());
+                                 await reportTrackingVM.labReportExtraction(context, data['url'].toString());
 
                                 },
                                 child: Padding(
@@ -691,3 +699,124 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
     );
   }
 }
+
+
+
+
+void showNotificationPanel(List<String> notifications) {
+    GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  final overlayContext = navigatorKey.currentContext;
+  if (overlayContext == null) {
+    print("Overlay context is not available.");
+    return;
+  }
+
+  final overlay = Overlay.of(overlayContext);
+  final animationController = AnimationController(
+    vsync: navigatorKey.currentState!,  // Make sure the navigator is available
+    duration: Duration(milliseconds: 300),
+  );
+
+  final animation = Tween<Offset>(begin: Offset(0, -1), end: Offset(0, 0)).animate(
+    CurvedAnimation(parent: animationController, curve: Curves.easeInOut),
+  );
+
+  late OverlayEntry overlayEntry;
+
+  overlayEntry = OverlayEntry(
+    builder: (context) => Positioned(
+      top: 0,
+      left: 0,
+      right: 0,
+      child: SlideTransition(
+        position: animation,
+        child: NotificationPanel(
+          notifications: notifications,
+          onClose: () {
+            animationController.reverse().then((_) => overlayEntry.remove());
+          },
+        ),
+      ),
+    ),
+  );
+
+  overlay?.insert(overlayEntry);
+  animationController.forward();
+
+  // Optional: Automatically close the notification panel after a few seconds
+  Future.delayed(Duration(seconds: 5)).then((_) {
+    if (overlayEntry.mounted) {
+      animationController.reverse().then((_) => overlayEntry.remove());
+    }
+  });
+}
+
+
+class NotificationPanel extends StatelessWidget {
+  final List<String> notifications;
+  final VoidCallback onClose;
+
+  const NotificationPanel({
+    Key? key,
+    required this.notifications,
+    required this.onClose,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.transparent,
+      child: Container(
+        padding: const EdgeInsets.all(16),
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(10),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black26,
+              blurRadius: 8,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Notifications',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.close, color: Colors.black),
+                  onPressed: onClose,
+                ),
+              ],
+            ),
+            Divider(),
+            ...notifications.map((notification) => Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Row(
+                children: [
+                  Icon(Icons.notifications, color: Colors.blueAccent),
+                  SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      notification,
+                      style: TextStyle(fontSize: 16, color: Colors.black87),
+                    ),
+                  ),
+                ],
+              ),
+            )),
+          ],
+        ),
+      ),
+    );
+  }}

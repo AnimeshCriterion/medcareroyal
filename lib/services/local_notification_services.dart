@@ -1,3 +1,4 @@
+import 'package:medvantage_patient/View/Pages/upload_report_view.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
 import 'package:medvantage_patient/services/firebase_service/fireBaseService.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,6 +12,7 @@ import '../ViewModal/medicine_reminder_view_moda.dart';
 import '../app_manager/app_color.dart';
 import '../assets.dart';
 import '../common_libs.dart';
+import '../main.dart';
 
 class NotificationService {
   // instance of flutternotification plugin
@@ -76,10 +78,11 @@ class NotificationService {
   showNotification(
       {int id = 0, String? title, String? body, String? payload}) async {
     print('nnnnnnnnnnnnvvvvvvvvvvvv ');
-
-
-    return notificationsPlugin.show(
-        id, title, body, await notificationDetails());
+    showNotificationPanel(
+      ["New message received", "Your download is complete", "Don't miss our update!"],
+    );
+    // return notificationsPlugin.show(
+    //     id, title, body, await notificationDetails());
   }
 
   //...create for select time for sehedule notification.....//

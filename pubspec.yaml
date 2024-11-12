@@ -92,7 +92,7 @@ dependencies:
   loading_animation_widget: ^1.2.0+4
   flutter_tts: ^4.0.2
   #  gender_selector:
-  flutter_local_notifications:
+  flutter_local_notifications: ^17.2.3
   timezone: ^0.9.1
   #  rxdart: ^0.27.7
   #  android_alarm_manager_plus: ^3.0.3

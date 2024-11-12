@@ -3,12 +3,14 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:location/location.dart';
 import 'package:medvantage_patient/app_manager/alert_toast.dart';
+import 'package:medvantage_patient/app_manager/my_button.dart';
 import 'package:medvantage_patient/devices_with_new_ui/device_connnect_controller.dart';
 import '../../LiveVital/pmd/my_text_theme.dart';
 import '../../ViewModal/add_device_view_modal.dart';
@@ -385,7 +387,8 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                     children:
                     List.generate(controller.addDeviceConnect.length, (index) {
                       var data = controller.addDeviceConnect[index];
-                      return    ((Platform.isAndroid) &&  data['name']=='Apple')? SizedBox():InkWell(onTap: () async {
+                      return    ((Platform.isAndroid) &&  data['name']=='Apple'
+                          || (data['name'].toString() =='Omron'  &&     data['id'].toString()!='2') )? SizedBox():InkWell(onTap: () async {
                         try{
                               await _enableBluetooth(
                                 context,
@@ -399,6 +402,9 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                           //     macAddress:
                           //     controller.macAddress.toString());
                         } catch (e) {}
+
+
+
                         if (  data['name'].toString() != 'BPW1 Watch' && data['name'].toString() !='Apple'&& data['name'].toString() !='ECG'&& data['name'].toString() !='StethoScope'&& data['name'].toString() !='PTT') {
 
 
@@ -406,9 +412,14 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                                 // controller.Ctoximeter(context);
 
                               } else {
+                                if ( data['name'].toString().toUpperCase() == 'Omron'.toUpperCase()) {
+                               deviceModal(context,index);
+                              }
+                                else{
 
                                 await controller.scanDevices();
-                              }
+          }
+          }
                             }
                         else if (data['name'].toString() =='Apple'){
 
@@ -478,6 +489,82 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
     );
   }
 
+
+  deviceModal(context,Deviceindex) {
+    controller.updateSelectedDeviceIndex='';
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
+        return AlertDialog(
+            title:  Text('Select Modal No',
+                style:themeChange.darkTheme==true? MyTextTheme().largeWCN:MyTextTheme().largeBCB),
+            contentPadding: const EdgeInsets.all(8),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(15.0),
+            ),
+            backgroundColor:  themeChange.darkTheme==true?AppColor.neoBGGrey2:AppColor.neoBGWhite1,
+            content: GetBuilder(
+                init: DeviceConnectController(),
+                builder: (_) {
+                return Padding(
+                  padding: const EdgeInsets.only(top: 25),
+                  child: SizedBox(
+                    height: 374,
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: Column(
+                            children:  List.generate(controller.addDeviceConnect.where((e) =>
+                            e['name'].toString().toUpperCase()=='omron'.toString().toUpperCase()).toList().length,
+                                    (index) {
+                              var data=controller.addDeviceConnect.where((e) => e['name'].toString().toUpperCase()=='omron'.toString().toUpperCase()).toList()[index];
+
+                              return InkWell(
+                                onTap: (){
+
+                                    controller.updateSelectedDeviceIndex=Deviceindex.toString();
+                                    controller.updateSelectedDevice = Map.from(data);
+                                    controller.updateSelectedModal= data['modal'].toString();
+
+                                },
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    color:  controller.getSelectedModal==data['modal'].toString()?
+                                    AppColor.primaryColor:Colors.white,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        children: [
+                                          Text(data['modal'].toString(),
+                                          style: controller.getSelectedModal==data['modal'].toString()?
+                                          MyTextTheme().mediumWCB:MyTextTheme().mediumBCB,),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                                  })
+                          ),
+                        ),
+
+                        MyButton(title: 'Connect Device',
+                        onPress: () async {
+                          await controller.scanDevices();
+                          controller.update();
+                        },),
+
+                      ],
+                    ),
+                  ),
+                );
+              }
+            ));
+      },
+    );
+  }
   deviceWidget({device, deviceType, image, required Color color,modal}) {
     final themeChange = Provider.of<ThemeProviderLd>(context, listen: false);
     return GetBuilder(

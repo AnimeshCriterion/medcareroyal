@@ -46,9 +46,9 @@ class DeviceConnectController extends GetxController{
     // '28:FF:B2:F9:B4:14',
       "id":2,
       "name":"Omron",
-      "modal":" ",
+      "modal":"HEM-7600T",
       "deviceType":"BP Machine",
-      "image":'assets/omron_bp.png',
+      "image":'assets/hem7600t.png',
       'device':'BLESmart_00000' ,
       'suuid':'00001810-0000-1000-8000-00805f9b34fb',
       'cuuid':'00002a35-0000-1000-8000-00805f9b34fb'
@@ -149,7 +149,7 @@ class DeviceConnectController extends GetxController{
       "name":"Omron",
       "modal":"HEM-7361T",
       "deviceType":"BP Machine",
-      "image":'assets/omron_bp.png',
+      "image":'assets/hem7361t.png',
       'device':'BLESmart',
       'suuid':'00001810-0000-1000-8000-00805f9b34fb',
       'cuuid':'00002a35-0000-1000-8000-00805f9b34fb'
@@ -159,7 +159,7 @@ class DeviceConnectController extends GetxController{
       "name":"Omron",
       "modal":"HEM-7530T",
       "deviceType":"BP Machine",
-      "image":'assets/omron_bp.png',
+      "image":'assets/hem7530t.png',
       'device':'BLESmart',
       'suuid':'00001810-0000-1000-8000-00805f9b34fb',
       'cuuid':'00002a35-0000-1000-8000-00805f9b34fb'
@@ -169,7 +169,7 @@ class DeviceConnectController extends GetxController{
       "name":"Omron",
       "modal":"HEM-7156T",
       "deviceType":"BP Machine",
-      "image":'assets/omron_bp.png',
+      "image":'assets/hem7156t.png',
       'device':'BLESmart',
       'suuid':'00001810-0000-1000-8000-00805f9b34fb',
       'cuuid':'00002a35-0000-1000-8000-00805f9b34fb'
@@ -196,6 +196,18 @@ class DeviceConnectController extends GetxController{
     // },
 
   ];
+
+
+
+
+  String selectedModal='';
+  String get getSelectedModal=>selectedModal;
+  set updateSelectedModal(String val){
+    selectedModal=val;
+    update();
+  }
+
+
   String deviceType='';
   String get getSelecetedDeviceType=>deviceType;
   set updateSelectedDeviceType(String val){
@@ -265,25 +277,33 @@ class DeviceConnectController extends GetxController{
       for(int i=0;i<data.length;i++){
         if(data[i].platformName.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())  ){
           // tempName=data[i].name.toString();
-          print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
 
           Future.delayed(Duration(seconds: 1)).then((value) async {
             updateDevicesData =data[i];
             isAlreadyConnected = true;
-            await  connectionState();
+            // await  connectionState();
 
             print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + isConnected.toString());
             // if (!isConnected) {
             //   await devicesData!.connect();
             // }
             try{
+              print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : '  );
               await devicesData!.connect();
+              tempint=tempint+1;
+
+              if(tempint==1){
+                print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
+                Get.to(() => BpDeviceDataView());
+              }
             }catch(e){
 
+              print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +e.toString() );
             }
             tempint=tempint+1;
 
             if(tempint==1){
+              print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
               Get.to(() => BpDeviceDataView());
             }
           });
@@ -315,18 +335,27 @@ class DeviceConnectController extends GetxController{
 
             print('nnvnnvnvnvnnnvnnvnnnnnnn nnvnnvnvnvnnnvnnvnnnnnnnnnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.name.toString().toString());
             updateDevicesData = r.device;
-            await   connectionState();
+            // await   connectionState();
             Future.delayed(Duration(seconds: 1)).then((value) async {
               FlutterBluePlus.stopScan();
               try{
+                print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : '  );
                 await r.device.connect();
+                tempint=tempint+1;
+
+                if(tempint==1){
+                  print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
+                  Get.to(() => BpDeviceDataView());
+                }
               }catch(e){
 
+                print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +e.toString() );
               }
 
               tempint=tempint+1;
 
               if(tempint==1){
+                print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
                 Get.to(() => BpDeviceDataView());
               }
             });

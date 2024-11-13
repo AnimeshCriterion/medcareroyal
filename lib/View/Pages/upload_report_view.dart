@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/widgets.dart';
 import 'package:medvantage_patient/LiveVital/pmd/my_text_theme.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
@@ -415,7 +416,7 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
            return Consumer<ReportTrackingViewModal>(
                builder:  (BuildContext _context, reportTrackingVM,_) {
                return Container(
-                 height: 221,
+                 height: 274,
                  padding: EdgeInsets.all(15),
                  decoration: BoxDecoration(
                      borderRadius: BorderRadius.circular(15),
@@ -528,6 +529,45 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                              Icon(Icons.image,color: themeChange.darkTheme? Colors.white:AppColor.greyDark,),
                              const SizedBox(width: 5),
                              Text(localization.getLocaleData.chooseFromGallery.toString(),style: themeChange.darkTheme? MyTextTheme().smallWCB:MyTextTheme().smallBCB,),
+                           ],
+                         ),
+                       ),
+                     ),
+                     SizedBox(height: 15,),
+                     InkWell(
+                       onTap: () async {
+                         // Get.back();
+                         // var data = await MyImagePicker.pickImageFromGallery();
+                         // var path=  await  MyImagePicker.cropImage(data!.path.toString());
+                         // reportTrackingVM.updateImgPath = path;
+                         // // await reportTrackingVM
+                         // //     .insertPatientMediaData(context); reportTrackingVM.updateImgPath = data.path.toString();
+                         //
+                         // await reportTrackingVM
+                         //     .insertPatientMediaData(context,admitDoctorId:userRepository.getUser.admitDoctorId,
+                         //     uhId: userRepository.getUser.uhID.toString());
+                         FilePickerResult? result = await FilePicker.platform.pickFiles();
+                         reportTrackingVM.updateImgPath = result!.paths.isEmpty? '':result.paths[0].toString() ;
+                       },
+                       child: Container(
+                         padding: const EdgeInsets.all(8),
+                         decoration:  BoxDecoration(
+                             borderRadius: BorderRadius.circular(15),
+                             border: Border.all(color:  themeChange.darkTheme?Colors.grey.shade700:Colors.transparent ),
+                             gradient: LinearGradient(
+                                 begin: Alignment.topCenter,
+                                 end: Alignment.bottomCenter,
+                                 colors: [
+                                   themeChange.darkTheme?AppColor.neoBGGrey1:AppColor.white,
+                                   themeChange.darkTheme?AppColor.neoBGGrey2:AppColor.neoBGWhite2,
+                                 ]
+                             )
+                         ),
+                         child: Row(mainAxisAlignment: MainAxisAlignment.center,
+                           children: [
+                             Icon(Icons.image,color: themeChange.darkTheme? Colors.white:AppColor.greyDark,),
+                             const SizedBox(width: 5),
+                             Text('Pick File',style: themeChange.darkTheme? MyTextTheme().smallWCB:MyTextTheme().smallBCB,),
                            ],
                          ),
                        ),

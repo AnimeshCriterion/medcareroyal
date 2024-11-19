@@ -49,7 +49,7 @@ class DeviceConnectController extends GetxController{
       "modal":"HEM-7600T",
       "deviceType":"BP Machine",
       "image":'assets/hem7600t1.png',
-      'device':'BLESmart_00000' ,
+      'device':'BLESmart' ,
       'suuid':'00001810-0000-1000-8000-00805f9b34fb',
       'cuuid':'00002a35-0000-1000-8000-00805f9b34fb'
     },
@@ -491,7 +491,7 @@ class DeviceConnectController extends GetxController{
   selectedDeviceData(val,value) async {
 
     switch (val){
-        case 'CT033':
+        case 'CT033 ':
           await ctBp(value);
         case 'YK-BPA1YK-BPA1':
           await yonkerBpMachine(value);
@@ -503,7 +503,7 @@ class DeviceConnectController extends GetxController{
         await yonkerOximeterData(value);
       case 'OxySmart':
         await oximeterValue(value);
-      case 'BLESmart':
+      case 'BLESmartHEM-7600T':
         await omranData(value);
       case 'BLESmartHEM-7361T':
         await OmronHEMCS24(value);
@@ -532,14 +532,14 @@ class DeviceConnectController extends GetxController{
 
   ctBp( List value) {
     int val =value.isEmpty? value[0]:value[2];
-    if(val==252){
+    if(value[2]==252){
       updateBpSys=value[3].toString();
       updateBpDia= value[4].toString();
       updatePr=value[5].toString();
       updateMesasringbpValue='0.0';
       updateIsMeasring=false;
     }
-    else if(val==251){
+    else if(value[2]==251){
       updateMesasringbpValue=value[4].toString();
       updateIsMeasring=true;
     }

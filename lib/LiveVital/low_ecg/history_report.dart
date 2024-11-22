@@ -9,6 +9,7 @@ import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 import 'history_controller.dart';
 import 'package:pdf/widgets.dart' as pw;
 
@@ -39,7 +40,7 @@ class _HistoryReportState extends State<HistoryReport> {
 
   void _resetZoom() {
     zoomTransformationController.value = Matrix4.identity();
-    print('reset zoom');
+    dPrint('reset zoom');
   }
 
   @override

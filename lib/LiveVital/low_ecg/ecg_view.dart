@@ -85,7 +85,7 @@ class _ECGViewState extends State<ECGView> {
                   //           padding: EdgeInsets.only(right: 5),
                   //           child: ElevatedButton(
                   //             onPressed: () async {
-                  //                 print(ecgController.devicesData!.device.name);
+                  //                 dPring(ecgController.devicesData!.device.name);
                   //                 await ecgController.devicesData!.device.connect(autoConnect: true);
                   //                 ecgController.getData();
                   //             },
@@ -109,7 +109,7 @@ class _ECGViewState extends State<ECGView> {
                   //         padding: EdgeInsets.only(right: 5),
                   //         child: ElevatedButton(
                   //           onPressed: () async {
-                  //             print(ecgController.devicesData!.device.name);
+                  //             dPring(ecgController.devicesData!.device.name);
                   //             await ecgController.devicesData!.device.connect(autoConnect: true);
                   //             ecgController.getData();
                   //           },

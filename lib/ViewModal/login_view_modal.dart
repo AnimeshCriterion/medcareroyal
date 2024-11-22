@@ -1,4 +1,8 @@
 
+import 'dart:convert';
+import 'dart:developer';
+
+import 'package:crypto/crypto.dart';
 import 'package:get/get.dart';
 import 'package:medvantage_patient/View/Pages/login_view.dart';
 import 'package:medvantage_patient/View/Pages/otp_view.dart';
@@ -29,6 +33,7 @@ import '../app_manager/widgets/buttons/primary_button.dart';
 import '../authenticaton/user.dart';
 import '../authenticaton/user_repository.dart';
 import '../common_libs.dart';
+import '../encyption.dart';
 
 class LoginViewModal extends ChangeNotifier {
   final Api _api = Api();
@@ -53,7 +58,7 @@ class LoginViewModal extends ChangeNotifier {
 
   set updateLoginWithOtp(bool value) {
     loginWithOtp = value;
-    print('LoginWithOtp :$getLoginWithOtp');
+    dPrint('LoginWithOtp :$getLoginWithOtp');
     notifyListeners();
   }
 
@@ -67,7 +72,7 @@ class LoginViewModal extends ChangeNotifier {
   }
 
   onPressedContinue(context) async {
-    print("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnn $logindetail");
+    dPrint("nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnn $logindetail");
     var uhid = logindetail.isNotEmpty ? logindetail[0]['uhId'] : '';
 
     var token = await FireBaseService().getToken();
@@ -75,17 +80,22 @@ class LoginViewModal extends ChangeNotifier {
     if (otpC.text.isNotEmpty) {
       UserRepository userRepository =
           Provider.of<UserRepository>(context, listen: false);
+
       var data = await _api.callMedvanatagePatient7082(context,
           // newBaseUrl: 'https://apishfc.medvantage.tech:7082/',
           url:
               "api/LogInForSHFCApp/VerifyLogInOTPForSHFCApp?UHID=${uhid}&otp=${otpC.value.text.toString()}&deviceToken=${token}&ifLoggedOutFromAllDevices=0",
           // "api/Users/VerifyOtp?userName=${userMobile.toString()}&otp=${otpC.value.text.toString()}",
-          apiCallType: ApiCallType.get());
-      print('${logindetail[0]}');
+          apiCallType: ApiCallType.get(),
+        loginHeader:  {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer '+ logindetail[0]['token'].toString()
+        },);
+      dPrint('${logindetail[0]}');
 
       if (data['status'] == 1) {
 
-        logindetail[0].addAll({'token':token});
+        // logindetail[0].addAll({'token':token});
         // Alert.show("Otp Verified");
 
         await userRepository
@@ -94,7 +104,7 @@ class LoginViewModal extends ChangeNotifier {
         //       DashboardViewModal dashboardVM =
         // Provider.of<DashboardViewModal>(context, listen: false);
         // await dashboardVM.appDetails(context) ;
-          print("Aniemsh $value");
+          dPrint("Aniemsh $value");
           Get.offAll(RMDView());
           // MyNavigator.pushAndRemoveUntil(context, const RMDView());
         });
@@ -127,24 +137,29 @@ class LoginViewModal extends ChangeNotifier {
 
   generateOTPForPatient(context, {ifLoggedOutFromAllDevices = 0}) async {
 
-    print('nnnnnnnnnnnnnnnnnnnnnnvnnnvnnnn $logindetail');
+    dPrint('nnnnnnnnnnnnnnnnnnnnnnvnnnvnnnn $logindetail');
     var uhid = logindetail.isNotEmpty ? logindetail[0]['uhId'].toString() : '';
     var pmid= logindetail[0]['pmId'];
     final box = GetStorage();
     box.write('pmid',pmid);
-    print(box.read('pmid').toString()+'sdxfcgvhbjnkml');
+    dPrint(box.read('pmid').toString()+'sdxfcgvhbjnkml');
     UserRepository userRepository =
         Provider.of<UserRepository>(context, listen: false);
     ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
     ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString());
+    var incr=await EncryptDecrypt.encryptString('UHID=${uhid.toString()}&ifLoggedOutFromAllDevices=${ifLoggedOutFromAllDevices}',EncryptDecrypt.key);
     var data = await _api.callMedvanatagePatient7082(context,
         // newBaseUrl: 'https://apishfc.medvantage.tech:7082/',
         url:
-            "api/LogInForSHFCApp/SentLogInOTPForSHFCApp?UHID=${uhid.toString()}&ifLoggedOutFromAllDevices=${ifLoggedOutFromAllDevices}",
+            "api/LogInForSHFCApp/SentLogInOTPForSHFCApp?UHID=${uhid.toString()}&ifLoggedOutFromAllDevices=${ifLoggedOutFromAllDevices}" ,
         // "api/Users/SendOtp?userName=${userMobile.toString()}&isPatient=true",
-        apiCallType: ApiCallType.get());
+       loginHeader:  {
+         'Content-Type': 'application/json',
+         'Authorization': 'Bearer '+ logindetail[0]['token'].toString()
+       },
+          apiCallType: ApiCallType.get( ));
      Get.back();
-    print('nnnnvv${data['status']}');
+    dPrint('nnnnvv ${data['status']}');
     if (data['status'] == 1) {
       Alert.show(data['message']);
       WidgetsBinding.instance
@@ -156,10 +171,10 @@ class LoginViewModal extends ChangeNotifier {
 
 
       // await userRepository.updateUserData(User.fromJson(data['responseValue'][0])).then((value) async {
-      //   print("Aniemsh"+value.toString());
+      //   dPring("Aniemsh"+value.toString());
       //   MyNavigator.push(context, const LoginWithOtp());
       // });
-      print("Aniemsh${userRepository.getUser.mobileNo}");
+      dPrint("Aniemsh${userRepository.getUser.mobileNo}");
     } else if (data['responseValue'] == 'Already LoggedIn On 2 Devices') {
       vitalDialog(context);
     } else {
@@ -279,19 +294,32 @@ class LoginViewModal extends ChangeNotifier {
         Provider.of<UserRepository>(context, listen: false);
     ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
     ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString());
-    var data = await _api.callMedvanatagePatient7082(context,
+    var incr=await EncryptDecrypt.encryptString('userName=${mobileNoC.value.text.toString()}',EncryptDecrypt.key);
+    // var incr= encryption('userName=${mobileNoC.value.text.toString()}');
+
+    var data = await _api.callMedvanatagePatient7084(context,
+        // var data = await _api.callMedvanatagePatient7082(context,
         // newBaseUrl: 'https://apishfc.medvantage.tech:7082/',
         url:
-            "api/PatientPersonalDashboard/GetPatientDetailsByUHID?UHID=${mobileNoC.value.text.toString()}",
-        apiCallType: ApiCallType.get());
-
+            // "api/PatientPersonalDashboard/GetPatientDetailsByUHID?UHID=${mobileNoC.value.text.toString()}",
+        "api/Users/PatientLoginByKey?userName=${mobileNoC.value.text.toString()}",
+        // "api/Users/PatientLoginByKey?"+incr.toString() ,
+        apiCallType: ApiCallType.post(body: {
+          // "userName":incr.toString()
+        },  ),
+        loginHeader: {});
+    log("nnnnnnnnnnnn ${data }");
      Get.back();
 
-    print("nnnnnnnnnnnn $data");
     if (data['status'] == 1) {
       // Alert.show(data['message']);
-      print("nnnnnnnnnnnn ${data['responseValue']}");
-      updateLoginDetails = data['responseValue'];
+      // dPrint("nnnnnnnnnnnn ${data['responseValue']}");
+      if(Map.from(data).keys.toList().contains('token')){
+        data['responseValue'][0]['token']=data['token'];
+        updateLoginDetails = data['responseValue'];
+        dPrint("nnnnnnnnnnnnnnvnn ${ data['responseValue'][0]['token'] }");
+      }
+
 
       int isNotificationRequired=0;
 
@@ -302,14 +330,14 @@ class LoginViewModal extends ChangeNotifier {
       }
 
       generateOTPForPatient(context);
-      print("Aniemsh${userRepository.getUser.mobileNo}");
+      dPrint("Aniemsh${userRepository.getUser.mobileNo}");
 
       await prefs.setString('isActive', (data['responseValue'][0]['isActive']??'0').toString());
       // var value=(data['responseValue'][0]['isActive'].toString());
-      // print(value+ ' ertyuio');
+      // dPring(value+ ' ertyuio');
       // final box = GetStorage();
       // box.write('isActive', value);
-      // print(box.read('isActive').toString()+'asdfghjkrtyuiofghj');
+      // dPring(box.read('isActive').toString()+'asdfghjkrtyuiofghj');
 
 
     } else {
@@ -328,14 +356,14 @@ class LoginViewModal extends ChangeNotifier {
               "api/Users/SaveDeviceToken?userId=${userRepository.getUser.uhID.toString()}&deviceToken=${token.toString()}&isPatient=true",
           apiCallType: ApiCallType.get());
 
-      print('nnnnnnnnnnnnn$data');
+      dPrint('nnnnnnnnnnnnn$data');
       if (data['status'] == 1) {
 
       } else {
         Alert.show(data['message']);
       }
     } catch (e) {
-      print('nnnn$e');
+      dPrint('nnnn$e');
     }
   }
 
@@ -354,7 +382,7 @@ class LoginViewModal extends ChangeNotifier {
         // "api/Users/VerifyOtp?userName=${userMobile.toString()}&otp=${otpC.value.text.toString()}",
         apiCallType: ApiCallType.get());
      ProgressDialogue().hide();
-    print(data.toString());
+    dPrint(data.toString());
     // if (data['status'] == 1) {
       await userRepository.updateUserData(User());
       Get.offAll(() => LoginView());
@@ -368,19 +396,19 @@ class LoginViewModal extends ChangeNotifier {
 
   connectServer() async {
     final hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
-    print(hubConnection.state.toString());
+    dPrint(hubConnection.state.toString());
     await hubConnection.start();
-    print('nnnnnnn${hubConnection.connectionId}');
+    dPrint('nnnnnnn${hubConnection.connectionId}');
 
     // var clientId = UserData().getUserData.clientId.toString();
     // var id = UserData().getUserData.id.toString();
 
     //hubConnection.on("PatientAdded", PatientAdded([id,clientId]));
 
-    // print("clientId:$clientId");
-    print(hubConnection.state.toString());
+    // dPring("clientId:$clientId");
+    dPrint(hubConnection.state.toString());
     dynamic data =  await hubConnection.invoke("logOut", args: <Object>[0, 0]);
-    print('nnnnnnnnnnn$data');
+    dPrint('nnnnnnnnnnn$data');
 
     // if(data['status']==1){
 

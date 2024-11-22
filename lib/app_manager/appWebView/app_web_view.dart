@@ -112,7 +112,7 @@ import '../app_color.dart';
 //                       }
 //                     }
 //
-//                     print('----------------------'+url.toString());
+//                     dPring('----------------------'+url.toString());
 //                     setState(() {
 //                       this.url = url.toString();
 //                       urlController.text = this.url;
@@ -167,7 +167,7 @@ import '../app_color.dart';
 //                     });
 //                   },
 //                   onConsoleMessage: (controller, consoleMessage) {
-//                     print(consoleMessage);
+//                     dPring(consoleMessage);
 //                   },
 //                 ),
 //                 progress < 1.0

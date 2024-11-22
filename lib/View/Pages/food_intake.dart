@@ -16,6 +16,7 @@ import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../app_manager/widgets/text_field/primary_date_time_field.dart';
 import '../../assets.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 import '../../theme/style.dart';
 class FoodIntakeView extends StatefulWidget {
   const FoodIntakeView({Key? key}) : super(key: key);
@@ -52,7 +53,7 @@ class _SupplementIntakeViewState extends State<FoodIntakeView> {
        controller.dateC.text=DateTime.now().toString();
       await controller.apiCall(context);
     });
-    print('nnnnnnnnnn${controller.getIntakeList.length}');
+    dPrint('nnnnnnnnnn${controller.getIntakeList.length}');
   }
 
 

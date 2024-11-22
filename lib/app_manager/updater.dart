@@ -69,9 +69,9 @@ class Updater{
   //     //     latestVersion = Version.parse(status.storeVersion.toString());
   //
   //         //
-  //         // print(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+  //         // dPring(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
   //         //
-  //         // print(currentVersion.toString()+'\n'+latestVersion.toString());
+  //         // dPring(currentVersion.toString()+'\n'+latestVersion.toString());
   //         if(latestVersion > currentVersion){
   //           showUpdateDialogue(latestVersion, context,
   //               showCancelButton: true);
@@ -79,7 +79,7 @@ class Updater{
   //
   //       }
   //       catch (e){
-  //         print(e);
+  //         dPring(e);
   //         var retry=await apiDialogue(context,'Alert', 'Internet connection issue, try to reconnect.',
   //             showCanCelButton: true
   //         );

@@ -130,7 +130,7 @@ class FullBodyCheckupDataModal extends ChangeNotifier {
 // .......RemoveListData..............................
 
   removeListData(index,problemID) {
-    print(index);
+    dPrint(index);
 
     if(addedSymptoms[index]["isVisible"].toString()=="0"){
         addedSymptoms[index]["isVisible"]='1';
@@ -144,7 +144,7 @@ class FullBodyCheckupDataModal extends ChangeNotifier {
 //.......changeTextColor..........
 
   changeIsVisible(index, problemMap){
-    print(index);
+    dPrint(index);
     if (searchProblem[index]["isVisible"].toString() == '0') {
       updateAddedSymptomsList = problemMap;
       searchProblem[index]["isVisible"] =  '1';
@@ -320,7 +320,7 @@ class FullBodyCheckupDataModal extends ChangeNotifier {
         for(int i=0; i<data['responseValue'].length;i++){
           data['responseValue'][i].addAll({"isSelected":false});
         }
-        print('nnnnnnnnnn'+data.toString());
+        dPrint('nnnnnnnnnn'+data.toString());
         organResponse.data=(List<OrganSymptomDataModal>.from(((data['responseValue'] ?? []) as List).map((e) =>
             OrganSymptomDataModal.fromJson(e))));
         updateOrganResponse=ApiResponse<List<OrganSymptomDataModal>>.completed(getOrganResponse.data??[]);
@@ -354,8 +354,8 @@ class FullBodyCheckupDataModal extends ChangeNotifier {
 
   onPressRadioButon(Index,selectedData,context) async {
 
-    print('vvvvvvvvvvvvvvvv'+Index.toString());
-    print('vvvvvvvvvvvvvvvv'+selectedData.toString());
+    dPrint('vvvvvvvvvvvvvvvv'+Index.toString());
+    dPrint('vvvvvvvvvvvvvvvv'+selectedData.toString());
     updateSelectedBodyPart=selectedData;
 
     await getSymptomByProblem(context);

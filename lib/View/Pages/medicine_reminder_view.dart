@@ -135,7 +135,7 @@ class _MedicineReminderViewState extends State<MedicineReminderView> {
                                   textStyle: MyTextTheme.smallWCB,
                                   color: AppColor.darkYellow,
                                   onPressed: () {
-                                    print(medicineData.medicineId.toString());
+                                    dPrint(medicineData.medicineId.toString());
                                     SetReminderDialog(context, medicinereminderVM.getMedicineList[index],
                                     );
                                     },
@@ -297,14 +297,14 @@ class _MedicineReminderViewState extends State<MedicineReminderView> {
 
                  Get.back();
 
-                print(val);
+                dPrint(val);
               },
               validator: (val) {
                 if (val!.isEmpty) {
                   // return localization.getLocaleData.pleaseEnterDob.toString();
                 }
               },
-              onSaved: (val) => print(val),
+              onSaved: (val) => dPrint(val),
             ),
           ]),
         );

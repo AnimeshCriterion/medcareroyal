@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../../../Localization/app_localization.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/theme/text_theme.dart';
+import '../../medcare_utill.dart';
 import '../../theme/theme.dart';
 import '../CTBP/scan_ct_bp_machine_controller.dart';
 import 'termometer_view.dart';
@@ -181,13 +182,13 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                                       i < snapshot.data!.length;
                                       i++) {
 
-                                    // print(snapshot.data![i].device.id.id.toString());
+                                    // dPring(snapshot.data![i].device.id.id.toString());
                                     if(snapshot.data![i].device.name.toString().length>13){
-                                      print('nnn'+snapshot.data![i].device.name
+                                      dPrint('nnn'+snapshot.data![i].device.name
                                           .toString()
                                           .substring(0, 12).toString()+'nnn'+foundDeviceName);
                                       if (snapshot.data![i].device.name.toString().substring(0, 12).toString()==foundDeviceName.toString()) {
-                                        print('nnnnnnnnnnnnnnn');
+                                        dPrint('nnnnnnnnnnnnnnn');
                                         isDeviceFound = true;
                                         // isScanning = true;
                                       }
@@ -199,7 +200,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                                     children: snapshot.data!
                                         .map(
                                             (r) {
-                                          print(r.device.id.toString()+r.device.name.toString());
+                                          dPrint(r.device.id.toString()+r.device.name.toString());
 
                                           return Visibility(
                                             // visible: r.device.id.toString()!='F8:33:31:46:86:CA',
@@ -211,7 +212,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
                                                   ScanResultTile(
                                                     result: r,
                                                     onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) {
-                                                      // print( 'nnnnnnnnn'+r.device.id.toString());
+                                                      // dPring( 'nnnnnnnnn'+r.device.id.toString());
                                                       r.device.connect();
                                                       return ThermometerView(device: r.device,  deviceName: foundDeviceName
                                                           .toString(),);
@@ -325,7 +326,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
 //         characteristicTiles: s.characteristics
 //             .map(
 //                 (c) {
-//               print('nnnnnnnnnnnnnnnn${c.value}');
+//               dPring('nnnnnnnnnnnnnnnn${c.value}');
 //               return CharacteristicTile(
 //                 characteristic: c,
 //                 onReadPressed: () => c.read(),
@@ -472,7 +473,7 @@ class _FindDevicesScreenState extends State<FindDevicesScreen> {
 //                                         builder: (c, snapshot) {
 //                                           for(int i=0;i<snapshot.data!.length;i++){
 //                                             for(int j=0;j<snapshot.data!.length;j++){
-//                                               print('nnnnnnnn'+snapshot.data![i].characteristics[j].uuid.toString());
+//                                               dPring('nnnnnnnn'+snapshot.data![i].characteristics[j].uuid.toString());
 //                                             }
 //                                           }
 //

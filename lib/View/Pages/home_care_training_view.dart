@@ -456,7 +456,7 @@ class _HomeCareTrainingViewState extends State<HomeCareTrainingView> {
                               groupValue: _value,
                               onChanged: (value) {
                                 setState(() {
-                                  print(value);
+                                  dPrint(value);
                                   _value = value as int;
                                 });
                               }),

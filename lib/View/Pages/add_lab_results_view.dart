@@ -162,7 +162,7 @@ imgCapture(img,title,subTitle,textColor){
     return InkWell(
       onTap: () async {
         var data = await MyImagePicker.pickImageFromCamera();
-        print(data.path.toString());
+        dPrint(data.path.toString());
         reportTrackingVM.updateImgPath = data.path.toString();
 
         await reportTrackingVM

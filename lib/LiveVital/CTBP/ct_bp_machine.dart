@@ -8,6 +8,7 @@ import 'dart:async';
 
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 
+import '../../medcare_utill.dart';
 import 'ct_bp_gatt.dart';
 
 
@@ -34,7 +35,7 @@ class CTBpMachine {
           await gattCharacteristic.setNotifyValue(true);
           gattCharacteristic.value.listen((value) {
 
-           print("Device Data: "+value.toString());
+           dPrint("Device Data: "+value.toString());
 
            if(value.isNotEmpty){
              _controller.add( CTBpMachineData(
@@ -51,7 +52,7 @@ class CTBpMachine {
         }
         if (uuid1.toString().toUpperCase().contains(CTBpGattAttributes.WRITE_UU.toUpperCase())) {
 
-          print("qwertyyyyyyyyyyyyyyyyyyyyyy");
+          dPrint("qwertyyyyyyyyyyyyyyyyyyyyyy");
           List<int> send = [-3,-3,-6,5,13,10];
           gattCharacteristic.write(send);
          // await gattCharacteristic.write([0x12, 0x34]);

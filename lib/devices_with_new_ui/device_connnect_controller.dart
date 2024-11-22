@@ -6,6 +6,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import '../../devices_with_new_ui/bp_data_view.dart';
 import '../../devices_with_new_ui/device_list_data_data_modal.dart';
+import '../medcare_utill.dart';
 
 class DeviceConnectController extends GetxController{
 
@@ -267,12 +268,12 @@ class DeviceConnectController extends GetxController{
 
     List<BluetoothDevice> data= await FlutterBluePlus.connectedDevices;
 
-    print('nnvnnvnvnvnnnnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.length.toString());
+    dPrint('nnvnnvnvnvnnnnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.length.toString());
 
-    print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + getSelectedDevice.device.toString());
+    dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + getSelectedDevice.device.toString());
   if(data.isNotEmpty){
 
-    print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
+    dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
       // String tempName='';
       for(int i=0;i<data.length;i++){
         if(data[i].platformName.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())  ){
@@ -283,7 +284,7 @@ class DeviceConnectController extends GetxController{
             isAlreadyConnected = true;
             // await  connectionState();
 
-            print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + isConnected.toString());
+            dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + isConnected.toString());
             // if (!isConnected) {
             //   await devicesData!.connect();
             // }
@@ -291,13 +292,13 @@ class DeviceConnectController extends GetxController{
             tempint=tempint+1;
 
             if(tempint==1){  try{
-              print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : '  );
+              dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : '  );
               await devicesData!.connect();
             }catch(e){
 
-              print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +e.toString() );
+              dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +e.toString() );
             }
-              print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
+              dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
               Get.to(() => BpDeviceDataView());
             await  connectionState();
             }
@@ -311,7 +312,7 @@ class DeviceConnectController extends GetxController{
 
     }
     else {
-      print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvn : ' + data.toString());
+      dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvn : ' + data.toString());
       FlutterBluePlus
           .startScan(timeout: const Duration(minutes: 15),  )
           .then((value) {
@@ -325,10 +326,10 @@ class DeviceConnectController extends GetxController{
       // Listen to scan results
       FlutterBluePlus.scanResults.listen((List<ScanResult> results) async {
         // do something with scan results
-        for (ScanResult r in results) {   print('nnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.platformName.toString());
+        for (ScanResult r in results) {   dPrint('nnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.platformName.toString());
           if (r.device.platformName.toString().toUpperCase().contains(getSelectedDevice.device.toString().toUpperCase())) {
 
-            print('nnvnnvnvnvnnnvnnvnnnnnnn nnvnnvnvnvnnnvnnvnnnnnnnnnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.name.toString().toString());
+            dPrint('nnvnnvnvnvnnnvnnvnnnnnnn nnvnnvnvnvnnnvnnvnnnnnnnnnvnnvnvnvnnnvnnvnnnnnnn : ' + r.device.name.toString().toString());
             updateDevicesData = r.device;
             // await   connectionState();
             Future.delayed(Duration(seconds: 1)).then((value) async {
@@ -338,13 +339,13 @@ class DeviceConnectController extends GetxController{
               tempint=tempint+1;
 
               if(tempint==1){ try{
-                print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : '  );
+                dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : '  );
                 await r.device.connect();
               }catch(e){
 
-                print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +e.toString() );
+                dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +e.toString() );
               }
-                print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
+                dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnnconnect : ' +tempint.toString() );
                 Get.to(() => BpDeviceDataView());
               await  connectionState();
               }
@@ -369,7 +370,7 @@ class DeviceConnectController extends GetxController{
 
   connectionState(){
     subscription1=devicesData!.connectionState.listen((event) async {
-      print('nnvnnvnvnvnnnvnnv nnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + event.toString());
+      dPrint('nnvnnvnvnvnnnvnnv nnvnnnnnnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + event.toString());
 
     if(BluetoothConnectionState.disconnected==event){
         try{
@@ -399,20 +400,20 @@ class DeviceConnectController extends GetxController{
   deviceData( ) async {
 
     List<BluetoothService> services = await devicesData!.discoverServices();
-    // print('Bluetooth services : ' + services.toString());
+    // dPring('Bluetooth services : ' + services.toString());
     services.forEach((service) async {
 
-      print('Service UUID : ' + service.uuid.toString()  == getSelectedDevice.suuid.toString().toString());
-      print('nnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnvnnnvnnnnnnnn : ' + service.uuid.toString());
-      print('nnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnvnnnvnnnnnn : ' + service.serviceUuid.toString());
-      print('Service UUID : ' + getSelectedDevice.suuid.toString());
+      dPrint('Service UUID : ' + service.uuid.toString()  == getSelectedDevice.suuid.toString().toString());
+      dPrint('nnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnvnnnvnnnnnnnn : ' + service.uuid.toString());
+      dPrint('nnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnvnnnvnnnnnn : ' + service.serviceUuid.toString());
+      dPrint('Service UUID : ' + getSelectedDevice.suuid.toString());
       if (service.uuid.toString().toUpperCase()  == getSelectedDevice.suuid.toString().substring(4, 8).toUpperCase()||
       service.uuid.toString().toUpperCase()  == getSelectedDevice.suuid.toString().toUpperCase()) {
 
         var characteristics = service.characteristics;
         for (BluetoothCharacteristic c in characteristics) {
 
-          print('Characteristics UUID : ' + c.uuid.toString());
+          dPrint('Characteristics UUID : ' + c.uuid.toString());
           if (c.uuid.toString().toUpperCase() == getSelectedDevice.cuuid.toString().substring(4, 8).toUpperCase()||
           c.uuid.toString().toUpperCase() == getSelectedDevice.cuuid.toString().toUpperCase()) {
             try{
@@ -424,7 +425,7 @@ class DeviceConnectController extends GetxController{
 
             subscription=   c.lastValueStream.listen((value) async {
               try{
-                print("nnnnnnnnnnnnnnnnnnnnnnnnvnnvnnn : " + value.toString());
+                dPrint("nnnnnnnnnnnnnnnnnnnnnnnnvnnvnnn : " + value.toString());
                 if(value.toList().isNotEmpty){
                   await   selectedDeviceData(
                       getSelectedDevice.device.toString() +
@@ -433,7 +434,7 @@ class DeviceConnectController extends GetxController{
                 }
               }
               catch(e){
-                print('nnnnnnnnnnnnvnn '+e.toString());
+                dPrint('nnnnnnnnnnnnvnn '+e.toString());
               }
 
             });
@@ -598,7 +599,7 @@ yonkerBpMachine(value){
       if(hexData[1].toString()=='55'){
         if(hexData[2].toString().toUpperCase()=='F'){
           if(hexData[3].toString()=='8'){
-            print('nnnnnn'+hexData.toString());
+            dPrint('nnnnnn'+hexData.toString());
 
             if (oxiList[6].toString() != '0') {
 
@@ -654,7 +655,7 @@ yonkerBpMachine(value){
   // Ctoximeter(context){
   //
   //   timer=Timer.periodic(Duration(seconds: 5), (timer) {
-  //     print('nnnnnnvnnnnnnnnnvnnvnvnnnn ' );
+  //     dPring('nnnnnnvnnnnnnnnnvnnvnvnnnn ' );
   //      oxi.startScanDevice();
   //   });
   //
@@ -677,7 +678,7 @@ yonkerBpMachine(value){
     //    // oxi.connect(macAddress: event!.macAddress??'', deviceName: event!.deviceName??'');
     //     updateIsConnected=true;
     //     updateMacAddress=event.macAddress.toString();
-    //     print('nnnnnnvnnnnnnnnnvnnvnvnnnn '+event.macAddress.toString().toString());
+    //     dPring('nnnnnnvnnnnnnnnnvnnvnvnnnn '+event.macAddress.toString().toString());
     //     if( isConnected){
     //       if(i==1){
     //         Get.to(() => Oximeters());

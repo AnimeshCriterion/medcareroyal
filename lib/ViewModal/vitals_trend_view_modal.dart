@@ -130,7 +130,7 @@ class VitalsTrendsViewModal extends ChangeNotifier{
           }));
 
       if(data["responseCode"]==1){
-        print("mmmmmmmmmmm"+data.toString());
+        dPrint("mmmmmmmmmmm"+data.toString());
         updateVitalData=data["responseValue"];
       }
 

@@ -426,8 +426,8 @@ class _MyDrawerState extends State<MyDrawer> {
                             child: InkWell(
                               onTap: () async {
                                Get.back();
-                               print('nnnvnnnnvnvnnvnvnnnn '+userRepository.getUser.bloodGroupId.toString());
-                                print('nnnvnnnnvnvnnvnvnnnn '+Get.currentRoute.toString());
+                               dPrint('nnnvnnnnvnvnnvnvnnnn '+userRepository.getUser.bloodGroupId.toString());
+                                dPrint('nnnvnnnnvnvnnvnvnnnn '+Get.currentRoute.toString());
                                 Get.until(  (route) =>  route.settings.name=='/RMDView');
                                 masterDashboardViewModal.updateSelectedPage =drawerList[index]
                                             ['navigation']
@@ -1196,10 +1196,10 @@ class _MyDrawerState extends State<MyDrawer> {
               localization.getLocaleData.areuSureYouWantToLogOut.toString(),
           buttonName: localization.getLocaleData.yes.toString(),
           onPressButton: () async {
-            print('nnnnnnnvvvv');
+            dPrint('nnnnnnnvvvv');
             await loginVM.logOut(context);
             // await userRepository.logOutUser(context);
-            print('nnnnnnnvvvv');
+            dPrint('nnnnnnnvvvv');
           },
           cancelBtn: localization.getLocaleData.cancel.toString(),
         ));

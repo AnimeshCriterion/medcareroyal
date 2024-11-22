@@ -61,19 +61,19 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
     Provider.of<ApplicationLocalizations>(context, listen: false);
     if (Platform.isAndroid) {
       bool permissionGiven = false;
-      print('nnnnnnnvvvvvvv');
+      dPrint('nnnnnnnvvvvvvv');
       _serviceEnabled = await location.serviceEnabled();
       if (!_serviceEnabled) {
         _serviceEnabled = await location.requestService();
         if (!_serviceEnabled) {
-          debugPrint('Location Denied once');
+           dPrint('Location Denied once');
         }
       }
 
       var permissionStatus = await Permission.location.request();
       permissionGiven = permissionStatus.isGranted;
       var permissionloc = await Permission.locationWhenInUse.request();
-      print('nnnnnnnn'+permissionStatus.isGranted.toString());
+      dPrint('nnnnnnnn'+permissionStatus.isGranted.toString());
       permissionGiven = permissionloc.isGranted;
       var permissionBluC = await Permission.bluetoothConnect.request();
       permissionGiven = permissionBluC.isGranted;
@@ -311,6 +311,7 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
               padding: const EdgeInsets.fromLTRB(0, 0, 20, 10),
               child: Column(
                 children: [
+
                   Row(
                     children: [
                       controller.getSelectedIndex.isNotEmpty?
@@ -524,12 +525,12 @@ class _AddDeviceConnectViewState extends State<AddDeviceConnectView> {
                               return InkWell(
                                 onTap: (){
 
-                                  print(data.toString());
+                                  dPrint(data.toString());
                                     controller.updateSelectedDeviceIndex=Deviceindex.toString();
                                     controller.updateSelectedDevice = Map.from(data);
                                     controller.updateSelectedModal= data['modal'].toString();
 
-                                  print( controller.getSelectedDevice.suuid.toString());
+                                  dPrint( controller.getSelectedDevice.suuid.toString());
                                 },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),

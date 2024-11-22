@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 import '../Localization/app_localization.dart';
 import '../app_manager/imageViewer/ImageView.dart';
 import '../app_manager/pdf_viewer.dart';
+import '../medcare_utill.dart';
 
 class PrescriptionViewModal extends ChangeNotifier {
   final Api _api = Api();
@@ -120,7 +121,7 @@ class PrescriptionViewModal extends ChangeNotifier {
         Alert.show(data['message']);
       }
 
-      print(data);
+      dPrint(data);
     } catch (e) {}
   }
 
@@ -130,7 +131,7 @@ class PrescriptionViewModal extends ChangeNotifier {
 
   set updateSelectedImage(String val) {
     selectedImage = val;
-    print('nnnnnnnnnnnn' + getSelectedImage.toString());
+    dPrint('nnnnnnnnnnnn' + getSelectedImage.toString());
     notifyListeners();
   }
 
@@ -146,7 +147,7 @@ class PrescriptionViewModal extends ChangeNotifier {
     // if (jsonDecode(data['data'])['responseCode'] == 1) {
     //   data = jsonDecode(data['data'])['responseValue'];
     // }
-    // print('vvvvvvvvv'+jsonDecode(data['responseValue'])[0]['filePath'].toString());
+    // dPring('vvvvvvvvv'+jsonDecode(data['responseValue'])[0]['filePath'].toString());
     return jsonDecode(data['responseValue'])[0]['filePath'];
   }
 
@@ -172,7 +173,7 @@ class PrescriptionViewModal extends ChangeNotifier {
               "filePath": jsonEncode(myFile).toString(),
               // "dtDataTable": jsonEncode(dtTableList),
             }));
-        print(data.toString());
+        dPrint(data.toString());
         ProgressDialogue().hide();
         if (data['responseCode'] == 1) {
           Alert.show(data['responseMessage']);
@@ -185,7 +186,7 @@ class PrescriptionViewModal extends ChangeNotifier {
        Alert.show("Please Pick the File First");
      }
     } catch (e) {
-      print(e.toString());
+      dPrint(e.toString());
     }
   }
 
@@ -213,7 +214,7 @@ class PrescriptionViewModal extends ChangeNotifier {
         )
         );
         // updateAppointmentId = data['responseValue'];
-        print("nnnnnn" + data['responseValue']);
+        dPrint("nnnnnn" + data['responseValue']);
       }
     } catch (e) {}
   }

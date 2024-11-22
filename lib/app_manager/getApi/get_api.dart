@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
+import '../../medcare_utill.dart';
 import '../alert_toast.dart';
 class GetApiService{
 
@@ -14,30 +15,30 @@ class GetApiService{
     }
     try {
       var url = Uri.parse(baseUrl+endUrl);
-      print(url);
+      dPrint(url);
       var response = await http.get(url);
-      print("############${response.body}");
+      dPrint("############${response.body}");
       return jsonDecode(response.body);
     }
     on SocketException{
-      //print("abe internet to On kr pehle");
+      //dPrint("abe internet to On kr pehle");
       Alert.show("please check your internet connection");
       // CommonWidgets.showBottomAlert(message: "please check your internet connection");
     }
     on TimeoutException catch (e){
-      print(e);
-      //print("time out");
+      dPrint(e);
+      //dPrint("time out");
       Alert.show("Time out");
       // CommonWidgets.showBottomAlert(message: "Time out");
     }
     on HttpException{
-      print("no service found");
+      dPrint("no service found");
       Alert.show("No service found");
       // CommonWidgets.showBottomAlert(message: "No service found");
     }
     on FormatException{
       Alert.show("Invalid data format");
-      print("invalid data format");
+      dPrint("invalid data format");
       // CommonWidgets.showBottomAlert(message: "invalid data format");
     }
     catch (e) {

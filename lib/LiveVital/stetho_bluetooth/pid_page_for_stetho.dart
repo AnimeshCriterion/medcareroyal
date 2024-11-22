@@ -47,7 +47,7 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
         'PatientRegistration/GetPatientRegistrationDetails', body, context,
         token: true);
     ProgressDialogue().hide();
-    print('nnnvnnv ' + data.toString());
+    dPrint('nnnvnnv ' + data.toString());
 
     if ((data['patientRegistration'] ?? []).isNotEmpty) {
       if (isListenPage) {
@@ -107,7 +107,7 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
                               type: AppSettingsType.bluetooth,
                             );
                             // String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
-                            // print("Connected Microphone: $microphone");
+                            // dPring("Connected Microphone: $microphone");
                           },
                           style: ElevatedButton.styleFrom(
                             elevation: 0,
@@ -293,7 +293,7 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
                                     // MyButton(title: 'Connected',onPress: () async {
                                     //
                                     //   String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
-                                    //   print("Connected Microphone: $microphone");
+                                    //   dPring("Connected Microphone: $microphone");
                                     // },),
                                     MyButton(
                                       title: localizations.getLocaleData.connectStetho.toString(),
@@ -310,7 +310,7 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
 
                                         }
                                         String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
-                                          print("Connected Microphone: $microphone");
+                                          dPrint("Connected Microphone: $microphone");
                                         MyNavigator.push(
                                             context, StethoBluetoothView());
                                           if((microphone??'')=='Bluetooth Microphone'){
@@ -437,7 +437,7 @@ class _PidPageForStethoViewState extends State<PidPageForStethoView> {
                               ),
                             ),
                             // MyButton(title: 'n',onPress: (){
-                            //   print('${DateFormat('dd-MM-yyyy-HH-mm-ss').format(DateTime.now()).toString()}');
+                            //   dPring('${DateFormat('dd-MM-yyyy-HH-mm-ss').format(DateTime.now()).toString()}');
                             // },)
                           ],
                         ),

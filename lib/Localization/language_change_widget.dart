@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../medcare_utill.dart';
 import 'app_localization.dart';
 
 class LanguageChangeWidget extends StatefulWidget {
@@ -56,7 +57,7 @@ class _LanguageChangeWidgetState extends State<LanguageChangeWidget> {
               else if( Language.arabic==newValue){
                   await prefs.setString('lang',"10");
                 }
-              print("language.....${await prefs.getString("lang").toString()}");
+              dPrint("language.....${await prefs.getString("lang").toString()}");
                 localization.updateLanguage(newValue);
                 localization.notifyListeners();
                  Get.back();

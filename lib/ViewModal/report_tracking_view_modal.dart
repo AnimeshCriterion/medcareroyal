@@ -15,6 +15,7 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../View/Pages/lab_feild_view.dart';
+import '../medcare_utill.dart';
 
 class ReportTrackingViewModal extends ChangeNotifier{
 
@@ -41,7 +42,7 @@ class ReportTrackingViewModal extends ChangeNotifier{
         // 'formFile':getImgPath.toString()
 
       };
-    print("mdkgmg"+body.toString());
+    dPrint("mdkgmg"+body.toString());
 
 
       var request = http.MultipartRequest(
@@ -58,10 +59,10 @@ class ReportTrackingViewModal extends ChangeNotifier{
 
     Get.back();
     var data=await response.stream.bytesToString();
-    print('nnvnnvnvnvnnnvnnnnnn https://apimedcareroyal.medvantage.tech:7082/api/PatientMediaData/InsertPatientMediaData?uhId=${uhId}&category=investigation&userId=${admitDoctorId.toString()}&dateTime=${DateTime.now().toString()}'+response.reasonPhrase.toString());
-    print('nnvnnvnvnvnnnvnnnnnn '+getImgPath.toString());
-    print('nnvnnvnvnvnnnvnnnnnn '+response.request.toString());
-    print('nnvnnvnvnvnnnvnnnnnn '+data.toString());
+    dPrint('nnvnnvnvnvnnnvnnnnnn https://apimedcareroyal.medvantage.tech:7082/api/PatientMediaData/InsertPatientMediaData?uhId=${uhId}&category=investigation&userId=${admitDoctorId.toString()}&dateTime=${DateTime.now().toString()}'+response.reasonPhrase.toString());
+    dPrint('nnvnnvnvnvnnnvnnnnnn '+getImgPath.toString());
+    dPrint('nnvnnvnvnvnnnvnnnnnn '+response.request.toString());
+    dPrint('nnvnnvnvnvnnnvnnnnnn '+data.toString());
     var url=jsonDecode(data)['responseValue'].isEmpty? '':jsonDecode(data)['responseValue'][0]['url'].toString();
       if (response.statusCode == 200) {
 
@@ -74,7 +75,7 @@ class ReportTrackingViewModal extends ChangeNotifier{
 
 
       } else {
-        print(response.reasonPhrase);
+        dPrint(response.reasonPhrase);
       }
 
 
@@ -99,14 +100,14 @@ class ReportTrackingViewModal extends ChangeNotifier{
           url:'api/PatientMediaData/GetPatientMediaData?uhId=${userRepository.getUser.uhID.toString()}&category=investigation',
           localStorage: true,
           apiCallType: ApiCallType.get());
-      print(data.toString()+' kgvbnvcbnfxg');
+      dPrint(data.toString()+' kgvbnvcbnfxg');
       if (data["status"] == 1) {
         updatePatientReportList=data['responseValue'];
       } else {
 
       }
     } catch (e) {
-      print(e.toString()+' kgvbnvcbnfxg');
+      dPrint(e.toString()+' kgvbnvcbnfxg');
     }
   }
 
@@ -174,10 +175,10 @@ class ReportTrackingViewModal extends ChangeNotifier{
           apiCallType: ApiCallType.get());
 
       if(Map.from(data).keys.toList().contains('response')){
-        print(Map.from(data).keys.toList().toString()+' kgvbnvcbnfxg');
+        dPrint(Map.from(data).keys.toList().toString()+' kgvbnvcbnfxg');
         updatePatientReportExtraction=data['response']['patient_details'];
 
-        print(data.toString()+' nnnnnn');
+        dPrint(data.toString()+' nnnnnn');
 
         for(int i=0;i<data['response']['report'].length;i++){
           data['response']['report'][i].addAll(
@@ -192,7 +193,7 @@ class ReportTrackingViewModal extends ChangeNotifier{
 
     } catch (e) {
       Get.back();
-      print(e.toString()+' kgvbnvcbnfxg');
+      dPrint(e.toString()+' kgvbnvcbnfxg');
     }
   }
 
@@ -241,7 +242,7 @@ class ReportTrackingViewModal extends ChangeNotifier{
           localStorage: true,
           apiCallType: ApiCallType.post(body: body));
       Get.back();
-      print(data.toString()+' kgvbnvcbnfxg');
+      dPrint(data.toString()+' kgvbnvcbnfxg');
       if (data["status"] == 1) {
         updatePatientReportList=data['responseValue'];
       } else {
@@ -249,7 +250,7 @@ class ReportTrackingViewModal extends ChangeNotifier{
       }
     } catch (e) {
       Get.back();
-      print(e.toString()+' kgvbnvcbnfxg');
+      dPrint(e.toString()+' kgvbnvcbnfxg');
     }
 }
 }

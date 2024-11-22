@@ -18,6 +18,7 @@ import '../app_manager/alert_toast.dart';
 import '../app_manager/api/api_call.dart';
 import '../assets.dart';
 import '../authenticaton/user_repository.dart';
+import '../medcare_utill.dart';
 
 class RMDViewModal extends ChangeNotifier{
 
@@ -212,7 +213,7 @@ class RMDViewModal extends ChangeNotifier{
           localStorage: false,
           apiCallType: ApiCallType.get());
 
-      print("nnnnnnnnnnnnnn${jsonEncode(data)}");
+      dPrint("nnnnnnnnnnnnnn${jsonEncode(data)}");
       if (data["status"] == 1) {
         updatepatientLastVitalList= data['responseValue'];
 
@@ -223,7 +224,7 @@ class RMDViewModal extends ChangeNotifier{
       }
     }
     catch (e) {
-      print(e.toString());
+      dPrint(e.toString());
 
     }
   }
@@ -247,13 +248,13 @@ class RMDViewModal extends ChangeNotifier{
         "userID": userRepository.getUser.userId.toString(),
 
       };
-      print("BODY $body");
+      dPrint("BODY $body");
 
       var data = await _api.callMedvanatagePatient7082(context,
           url: "api/PatientMedication/InsertPatientMedication",
           apiCallType: ApiCallType.rawPost(body: body),
           isSavedApi: true);
-      print("DATA @@ $data");
+      dPrint("DATA @@ $data");
 
       Get.back();
       if (data['status'] == 1) {
@@ -296,7 +297,7 @@ List  ManualFoodList=[];
           apiCallType: ApiCallType.get());
 
       // Get.back();
-      print("nnnnnnnnnnnnnn${jsonEncode(data)}");
+      dPrint("nnnnnnnnnnnnnn${jsonEncode(data)}");
       if (data["status"] == 1) {
         updateManualFoodList=data['responseValue'];
       } else {
@@ -336,7 +337,7 @@ set updatetmedNameandDate(List val){
           url:
               "api/PatientMedication/GetAllPatientMedication?UhID=${userRepository.getUser.uhID.toString()}&languageId=${langId.toString()}",
           apiCallType: ApiCallType.get());
-      print('nnnn' + data.toString());
+      dPrint('nnnn' + data.toString());
 
       // Get.back();
       if (data["status"] == 1) {
@@ -382,7 +383,7 @@ set updatetmedNameandDate(List val){
    int hr= int.parse(DateFormat('HH').format(DateTime.now()).toString());
 
    ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
-   print('nnnn' + hr.toString());
+   dPrint('nnnn' + hr.toString());
    if(hr>0 && hr <=12){
      return localization.getLocaleData.gm.toString();
    }
@@ -440,16 +441,16 @@ set updatetmedNameandDate(List val){
   // Start the step counter and manage the step data
   Future<void> startStepCounter() async {
     final prefs = await SharedPreferences.getInstance();
-    print("nnvnnnnnvnnnnvnnnnvn : $_steps");
+    dPrint("nnvnnnnnvnnnnvnnnnvn : $_steps");
     final dateFormat = DateFormat('yyyy-MM-dd');
     final currentDate = dateFormat.format(DateTime.now());
 
-    print("nnvnnnnnvnnnnvnnnnvn : $_steps");
+    dPrint("nnvnnnnnvnnnnvnnnnvn : $_steps");
     _subscription = Pedometer.stepCountStream.listen(
           (StepCount event) async {
         _steps = event.steps;
 
-        print("Today's Step: $_steps");
+        dPrint("Today's Step: $_steps");
         var storedData = prefs.getString('step');
 
         if (storedData != null) {
@@ -473,11 +474,11 @@ set updatetmedNameandDate(List val){
           _initializeStepData(prefs, currentDate);
         }
 
-        print("Today's Step: $_todaysStep");
-        print("Distance: $_distance km");
+        dPrint("Today's Step: $_todaysStep");
+        dPrint("Distance: $_distance km");
       },
       onError: (error) {
-        print('ErrorToday: $error');
+        dPrint('ErrorToday: $error');
       },
     );
 
@@ -488,7 +489,7 @@ set updatetmedNameandDate(List val){
       updateTodayStep = int.parse(decodedData['currentstep'].toString()) - int.parse(decodedData['steps'].toString());
     }
 
-    print("Initial Today's Step: $_todaysStep");
+    dPrint("Initial Today's Step: $_todaysStep");
   }
 
   // Calculate the distance based on the number of steps
@@ -525,7 +526,7 @@ set updatetmedNameandDate(List val){
       var data = await _api.callMedvanatagePatient7084(context,
           url: "api/Users/GetClient?id=${userRepository.getUser.clientId.toString()}",localStorage: true,
           apiCallType: ApiCallType.get( ));
-      print("nnnnnnnnnnnnnn $data");
+      dPrint("nnnnnnnnnnnnnn $data");
       if (data["status"] == 1) {
         updateClintDetails=data["responseValue"].isEmpty? {}:data["responseValue"][0];
       } else {
@@ -543,7 +544,7 @@ set updatetmedNameandDate(List val){
       var data = await _api.callMedvanatagePatient7082(context,
           url: "api/PatientParameterSetting/Get?Pid=${userRepository.getUser.pid.toString()}&ClientId=${userRepository.getUser.clientId.toString()}",localStorage: true,
           apiCallType: ApiCallType.get( ));
-      print("nnnnnnnnnnnnnn $data");
+      dPrint("nnnnnnnnnnnnnn $data");
       if (data["status"] == 1) {
         updateClintDetails=data["responseValue"].isEmpty? {}:data["responseValue"][0];
       } else {
@@ -568,7 +569,7 @@ set updatetmedNameandDate(List val){
       var data = await _api.callMedvanatagePatient(context,
           url: "api/AppBanner/GetImagesForAppBanner",localStorage: true,
           apiCallType: ApiCallType.get());
-      print("nnnnnnnnnnnnnn $data");
+      dPrint("nnnnnnnnnnnnnn $data");
       if (data["status"] == 1) {
         updateBannerList = data['responseValue'];
       } else {
@@ -583,7 +584,7 @@ set updatetmedNameandDate(List val){
     var currentDate=(DateFormat('yyyy-MM-dd').format(DateTime.now())).toString();
 
     morningTime=(DateTime.parse('${currentDate} 23:00:00').difference(DateTime.now()).inMinutes).toString();
-    print('nnnnvnnnvnnnv '+morningTime.toString());
+    dPrint('nnnnvnnnvnnnv '+morningTime.toString());
     return morningTime;
   }
 }

@@ -26,6 +26,8 @@ import '../../common_libs.dart';
 
 import 'package:get/get.dart';
 
+import '../../medcare_utill.dart';
+
 class ReportTrackingView extends StatefulWidget {
   const ReportTrackingView({super.key});
 
@@ -201,7 +203,7 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
 
                                   // UserRepository userRepository =
                                   // Provider.of<UserRepository>(context, listen: false);
-                                  // print(userRepository.getUser.token.toString());
+                                  // dPring(userRepository.getUser.token.toString());
                                   // showNotificationPanel(
                                   //   ["New message received", "Your download is complete", "Don't miss our update!"],
                                   // );
@@ -458,7 +460,7 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                        onTap: () async {
                           Get.back();
                          var data = await MyImagePicker.pickImageFromCamera();
-                         print(data.path.toString());
+                         dPrint(data.path.toString());
                        var path=  await  MyImagePicker.cropImage(data!.path.toString());
                           // var  compressedFile = await FlutterImageCompress.compressAndGetFile(
                           //   data.path,
@@ -468,7 +470,7 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
 
                          reportTrackingVM.updateImgPath =path.toString();
 
-                          print("mdkgmg"+path.toString());
+                          dPrint("mdkgmg"+path.toString());
                          await reportTrackingVM
                              .insertPatientMediaData(context,admitDoctorId:userRepository.getUser.admitDoctorId,
                          uhId: userRepository.getUser.uhID.toString());
@@ -656,7 +658,7 @@ class _ReportTrackingViewState extends State<ReportTrackingView> {
                                      Get.back();
                                     var data =
                                         await MyImagePicker.pickImageFromCamera();
-                                    print(data.path.toString());
+                                    dPrint(data.path.toString());
                                     reportTrackingVM.updateImgPath =
                                         data.path.toString();
                                     await reportTrackingVM
@@ -747,7 +749,7 @@ void showNotificationPanel(List<String> notifications) {
     GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
   final overlayContext = navigatorKey.currentContext;
   if (overlayContext == null) {
-    print("Overlay context is not available.");
+    dPrint("Overlay context is not available.");
     return;
   }
 

@@ -170,7 +170,7 @@ import 'package:get/get.dart';
                   color: AppColor.orange,
                   onPressed: () {
                      Get.back();
-                    // print('nnnnnn' +
+                    // dPring('nnnnnn' +
                     //     bodycheckupVM.getOrganList[0].isSelected.toString());
                   },
                 ),

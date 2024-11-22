@@ -9,6 +9,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
 import '../../View/widget/common_method/show_progress_dialog.dart';
+import '../../medcare_utill.dart';
 
 
 class YonkerBpMachineController extends GetxController{
@@ -53,13 +54,13 @@ class YonkerBpMachineController extends GetxController{
       // do something with scan results
 
       for (ScanResult r in results) {
-        print(r.device.id.toString());
+        dPrint(r.device.id.toString());
         if (r.device.name.toString() == 'BleModuleB') {
           updateDevicesData=r;
           updateIsDeviceFound=true;
         }
 
-        print('${r.device.name.toString()}');
+        dPrint('${r.device.name.toString()}');
       }
     });
 
@@ -127,17 +128,17 @@ class YonkerBpMachineController extends GetxController{
     List<BluetoothService> services =  await devicesData!.device.discoverServices();
 
     services.forEach((service) async {
-      print('Service Length' + service.uuid.toString());
+      dPrint('Service Length' + service.uuid.toString());
       if(service.uuid.toString()=='cdeacd80-5235-4c07-8846-93a37ee6b86d'){
         var characteristics = service.characteristics;
 
         for (BluetoothCharacteristic c in characteristics) {
-          print('nnnnnvnvnnvn' + c.uuid.toString());
+          dPrint('nnnnnvnvnnvn' + c.uuid.toString());
 
           if(c.uuid.toString()=='cdeacd81-5235-4c07-8846-93a37ee6b86d'){
             c.setNotifyValue(true);
             c.value.listen((value) async {
-              print('nnnnnnnn'+value.toString());
+              dPrint('nnnnnnnn'+value.toString());
               try{
                 if (value.isNotEmpty) {
                   if (value[0] == 128) {
@@ -192,7 +193,7 @@ class YonkerBpMachineController extends GetxController{
       updateActiveConnection = false;
 
     }
-    print('Turn On the data and repress again'+ActiveConnection.toString());
+    dPrint('Turn On the data and repress again'+ActiveConnection.toString());
   }
 
 
@@ -273,7 +274,7 @@ class YonkerBpMachineController extends GetxController{
   //     Alert.show("Vital Added Successfully !");
   //   }
   //
-  //   print("ANimesh$data");
+  //   dPring("ANimesh$data");
   // }
 
 

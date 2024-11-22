@@ -111,7 +111,7 @@ class _SplashScreenState extends State<SplashScreen>  {
         Provider.of<UserRepository>(context, listen: false);
     await  checkForAppStoreVersion();
 
-    print('userLoginId ${userRepository.getUser.uhID}');
+    dPrint('userLoginId ${userRepository.getUser.uhID}');
 
     await Future.delayed(const Duration(seconds: 4), () async {
       if (userRepository.getUser.uhID != null) {
@@ -134,7 +134,7 @@ String currentVersion='';
 
       });
 
-      print('nnnnvnnvnnvnnnnnvnnnvnn  ' + currentVersion.toString());
+      dPrint('nnnnvnnvnnvnnnnnvnnnvnn  ' + currentVersion.toString());
     }
     catch(e){
 
@@ -150,7 +150,7 @@ String currentVersion='';
   @override
   Widget build(BuildContext context) {
     UserRepository userRepository =  Provider.of<UserRepository>(context, listen: true);
-    print("object");
+    dPrint("object");
     return ColoredSafeArea(
       child: SafeArea(
           child: Scaffold(

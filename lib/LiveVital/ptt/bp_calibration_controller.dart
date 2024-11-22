@@ -6,6 +6,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../../medcare_utill.dart';
+
 alertToast(context,message){
   Fluttertoast.showToast(
     msg: message,
@@ -65,7 +67,7 @@ class BPCalibrationController extends GetxController {
     updateIsDeviceFound=false;
     updateIsDeviceScanning=true;
 
-    print('Device scanning : $getIsDeviceScanning');
+    dPrint('Device scanning : $getIsDeviceScanning');
 
     // Start scanning
     FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
@@ -77,12 +79,12 @@ class BPCalibrationController extends GetxController {
 
       // do something with scan results
       for (ScanResult r in results) {
-        print('Device name : ${r.device.platformName}');
+        dPrint('Device name : ${r.device.platformName}');
         if (r.device.platformName.toString()=='CT_PTT_Device') {
           updateIsDeviceFound=true;
           updateDevicesData=r;
         }
-        print('Device name : ${r.device.platformName}');
+        dPrint('Device name : ${r.device.platformName}');
       }
     });
     update();
@@ -149,7 +151,7 @@ class BPCalibrationController extends GetxController {
             c.setNotifyValue(true);
             subscription1=c.value.listen((event) {
               var data=ascii.decode(value);
-              print('Systolic Value $data');
+              dPrint('Systolic Value $data');
             });
           }
         }

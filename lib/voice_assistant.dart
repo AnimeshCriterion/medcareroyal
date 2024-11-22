@@ -113,7 +113,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     await initSpeechState();
     _currentLocaleId = 'en_IN';
 
-    print('${localization.getLanguage}rtyui');
+    dPrint('${localization.getLanguage}rtyui');
     // timer = Timer(
     //   Duration(seconds: waitingTime),
     //       () {
@@ -123,7 +123,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     // );
     startListening();
     // Future.delayed(const Duration(milliseconds: 999), () {
-    //   print('startListening');
+    //   dPring('startListening');
     //
     //
     // });
@@ -152,7 +152,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
   }
 
   Future<void> initSpeechState() async {
-    print('oktesting');
+    dPrint('oktesting');
     textEditingController.text = text;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       initLanguages();
@@ -174,9 +174,9 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
       setState(() {
         _hasSpeech = hasSpeech;
       });
-      print('oktesting2');
+      dPrint('oktesting2');
     } catch (e) {
-      print('oktesting');
+      dPrint('oktesting');
       setState(() {
         lastError = 'Speech recognition failed: ${e.toString()}';
         _hasSpeech = false;
@@ -204,8 +204,8 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     final String? defaultLangCode = await tts.getDefaultLanguage();
     if (defaultLangCode != null && languageCodes.contains(defaultLangCode)) {
       languageCode = defaultLangCode;
-      print('$languageCodes selested lang');
-      print('$defaultLangCode selested lang');
+      dPrint('$languageCodes selested lang');
+      dPrint('$defaultLangCode selested lang');
     } else {
       languageCode = defaultLanguage;
     }
@@ -313,7 +313,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
 
     flutterTts.setStartHandler(() {
       setState(() {
-        print("Playing");
+        dPrint("Playing");
         ttsState = TtsState.playing;
       });
     });
@@ -321,42 +321,42 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     if (isAndroid) {
       // flutterTts.setInitHandler(() {
       //   setState(() {
-      //     print("TTS Initialized");
+      //     dPring("TTS Initialized");
       //   });
       // });
     }
 
     flutterTts.setCompletionHandler(() {
       setState(() {
-        print("Complete");
+        dPrint("Complete");
         ttsState = TtsState.stopped;
       });
     });
 
     flutterTts.setCancelHandler(() {
       setState(() {
-        print("Cancel");
+        dPrint("Cancel");
         ttsState = TtsState.stopped;
       });
     });
 
     flutterTts.setPauseHandler(() {
       setState(() {
-        print("Paused");
+        dPrint("Paused");
         ttsState = TtsState.paused;
       });
     });
 
     flutterTts.setContinueHandler(() {
       setState(() {
-        print("Continued");
+        dPrint("Continued");
         ttsState = TtsState.continued;
       });
     });
 
     flutterTts.setErrorHandler((msg) {
       setState(() {
-        print("error: $msg");
+        dPrint("error: $msg");
         ttsState = TtsState.stopped;
       });
     });
@@ -369,14 +369,14 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
   Future _getDefaultEngine() async {
     var engine = await flutterTts.getDefaultEngine;
     if (engine != null) {
-      print(engine);
+      dPrint(engine);
     }
   }
 
   Future _getDefaultVoice() async {
     var voice = await flutterTts.getDefaultVoice;
     if (voice != null) {
-      print(voice);
+      dPrint(voice);
     }
   }
 
@@ -388,14 +388,14 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     UserRepository userRepository =
         Provider.of<UserRepository>(context, listen: false);
 
-    print('step 0');
+    dPrint('step 0');
 
     await flutterTts.setVolume(volumeOfSpeech);
     await flutterTts.setSpeechRate(rateOfSpeech);
     await flutterTts.setPitch(pitchOfSpeech);
 
     var page = widget.isFrom ?? 'main dashboard';
-    print(widget.isFrom.toString() + '1234567890');
+    dPrint(widget.isFrom.toString() + '1234567890');
 
     /// MONTH
     var month;
@@ -431,7 +431,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
                 .replaceAll('can', '')
                 .replaceAll('you', '');
             flutterTts.speak(textToSay);
-            print(textToSay.toString());
+            dPrint(textToSay.toString());
             Get.back();
           } else if (spokenText == 'add vitals' ||
               spokenText.contains('vitals') ||
@@ -544,7 +544,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
               spokenText.contains('emergency Call')) {
             String morningTime = '';
             morningTime = await dashboardVM.callTiming();
-            print('nnnnnnnvnnnv' + morningTime.toString());
+            dPrint('nnnnnnnvnnnv' + morningTime.toString());
 
             if (int.parse(morningTime.toString()) >= 0 &&
                 int.parse(morningTime.toString()) <= 960) {
@@ -556,10 +556,10 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
               spokenText.contains('hindi') ||
               spokenText.contains('indian') ||
               spokenText.contains('india')) {
-            print('step 1');
+            dPrint('step 1');
             flutterTts.speak(
                 'Ok , your language is being changed to Hindi,अब आप हिंदी में बातचीत कर सकते हैं');
-            print('step 2');
+            dPrint('step 2');
             changeLangToHindi(context);
           } else if (spokenText == 'change the language to english' ||
               spokenText.contains('english') ||
@@ -646,10 +646,10 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
                       .toString(),
                   buttonName: localization.getLocaleData.yes.toString(),
                   onPressButton: () async {
-                    print('nnnnnnnvvvv');
+                    dPrint('nnnnnnnvvvv');
                     await loginVM.logOut(context);
                     // await userRepository.logOutUser(context);
-                    print('nnnnnnnvvvv');
+                    dPrint('nnnnnnnvvvv');
                   },
                   cancelBtn: localization.getLocaleData.cancel.toString(),
                 ));
@@ -775,7 +775,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
 
       case "medical history":
         {
-          print("");
+          dPrint("");
         }
         break;
 
@@ -872,7 +872,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
             aiCommandSheet(context, isFrom: 'add vitals');
           }
 
-          print("add vitals page");
+          dPrint("add vitals page");
         }
         break;
 
@@ -890,7 +890,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
 
       default:
         {
-          print("default switch case");
+          dPrint("default switch case");
         }
         break;
     }
@@ -977,7 +977,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
   bool weAreListening = true;
 
   Future<void> postData(text) async {
-    print('debouncedhits');
+    dPrint('debouncedhits');
 
     ApplicationLocalizations localization =
         Provider.of<ApplicationLocalizations>(context, listen: false);
@@ -989,7 +989,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     AddVitalViewModal addvitalVM =
         Provider.of<AddVitalViewModal>(context, listen: false);
 
-    print('yes its working');
+    dPrint('yes its working');
     // String url = 'http://172.16.19.162:8002/api/echo/';
 
     // String url = 'http://172.16.61.15:8007/api/echo/';
@@ -1008,8 +1008,8 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
       /// local
       //   "text": jsonEncode(text),/// live
     };
-    print(url.toString());
-    print("AnimeshRequest" + requestBody.toString());
+    dPrint(url.toString());
+    dPrint("AnimeshRequest" + requestBody.toString());
     String requestBodyJson = jsonEncode(requestBody);
     try {
       final response = await http.post(
@@ -1020,9 +1020,9 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
         body: requestBodyJson,
       );
       var data = response.body;
-      print('data is $data');
+      dPrint('data is $data');
       addvitalVM.allData = jsonDecode(data)['echo']['myvital'];
-      print('Response: is ${addvitalVM.allData}');
+      dPrint('Response: is ${addvitalVM.allData}');
       if (response.statusCode == 200) {
         // Navigator.pop(context);
 
@@ -1045,7 +1045,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
           addvitalVM.allData['fluidValue'].forEach((key, value) {
             addvitalVM.fluidAdded = double.parse(value.toString() ?? '0');
             addvitalVM.valueFromVoice = key.toString();
-            print('Key: $key, Value: $value');
+            dPrint('Key: $key, Value: $value');
             addvitalVM.notifyListeners();
           });
 
@@ -1055,16 +1055,16 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
               ));
 
           //
-          // print('setp1');
+          // dPring('setp1');
           //
           //   await addvitalVM.manualFoodAssign(context);
-          //   print('setp2');
+          //   dPring('setp2');
           //
           //  int index=  addvitalVM.getManualFoodList.indexWhere((item) => item.foodName == addvitalVM.valueFromVoice.toLowerCase());
-          //   print('setp3');
+          //   dPring('setp3');
           //
           //   addvitalVM.updateSelectedFoodID = addvitalVM.getManualFoodList[index].foodID.toString();
-          //   print('setp4');
+          //   dPring('setp4');
           //   await CustomBottomSheet.open(context,
           //       child: FunctionalSheet(
           //         message:
@@ -1092,7 +1092,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
                 throughVoice: true,
               ));
           // for(int i =0;i<symptomtrackerVM.symptomsVoiceList.length;i++){
-          //   print('loop working');
+          //   dPring('loop working');
           //   symptomtrackerVM.symptomsAdded.add(SymptomsProblemModal(
           //       problemId: symptomtrackerVM.symptomsVoiceList[i]['id'],
           //       problemName: symptomtrackerVM.symptomsVoiceList[i]['symptom']));
@@ -1105,7 +1105,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
           var medDetails = addvitalVM.allData['myMedication'][0];
           var medicineName = addvitalVM.allData['myMedication'][0]['drugName'];
 
-          print(box.read('pmid'));
+          dPrint(box.read('pmid'));
           await compareTimes(addvitalVM);
           await CustomBottomSheet.open(context,
               child: FunctionalSheet(
@@ -1126,13 +1126,13 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
               ));
         }
 
-        print('Response: ${data}  wowwwww');
+        dPrint('Response: ${data}  wowwwww');
         // Get.back();
       } else {
-        print('Request failed with status: ${response.statusCode}.');
+        dPrint('Request failed with status: ${response.statusCode}.');
       }
     } catch (e) {
-      print('Exception occurred: $e');
+      dPrint('Exception occurred: $e');
     }
   }
 
@@ -1146,15 +1146,15 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
 
     if (now.isAfter(time8AM) && now.isBefore(time2PM)) {
       addvital.time = "8:00";
-      print("8:00");
+      dPrint("8:00");
     } else if (now.isAfter(time2PM) && now.isBefore(time6PM)) {
-      print("14:00 PM");
+      dPrint("14:00 PM");
       addvital.time = "14:00";
     } else if (now.isAfter(time6PM) && now.isBefore(time10PM)) {
-      print("18:00 PM");
+      dPrint("18:00 PM");
       addvital.time = "18:00";
     } else if (now.isAfter(time10PM)) {
-      print("22:00");
+      dPrint("22:00");
       addvital.time = "22:00";
     }
     addvital.notifyListeners();
@@ -1164,7 +1164,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     // changeLanguage();
   }
   changeLangToHindi(context) {
-    print('step 3');
+    dPrint('step 3');
 
     ApplicationLocalizations localization =
         Provider.of<ApplicationLocalizations>(context, listen: false);
@@ -1207,13 +1207,13 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     //  Get.back();
   }
   // navigateToLogin(context){
-  //   print('test login 3');
+  //   dPring('test login 3');
   //
   //   Navigator.pushReplacement(
   //     context,
   //     MaterialPageRoute(builder: (context) =>   LogIn(index: '1')),
   //   );
-  //   print('test login 4');
+  //   dPring('test login 4');
   //
   // }
   // navigateToDashboard(context){
@@ -1226,7 +1226,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
   //   );
   // }
 //  navigateConsultDoctor(context,bool symptom){
-  // print('test doctor');
+  // dPring('test doctor');
   // if (UserData().getUserData.isNotEmpty) {
   //   if(symptom==false){
   //     flutterTts.speak('you can find the doctors by speciality here');
@@ -1364,8 +1364,8 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
     MedicineViewCheckListDataMOdel controller =
         Provider.of<MedicineViewCheckListDataMOdel>(context, listen: false);
     if (!mounted) return;
-    print(result.recognizedWords);
-    print(result.finalResult);
+    dPrint(result.recognizedWords);
+    dPrint(result.finalResult);
     _logEvent(
         'Result listener final: ${result.finalResult}, words: ${result.recognizedWords}');
     setState(() {
@@ -1432,14 +1432,14 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
         Get.log(data.toString());
         Get.log(controller.medNameandDate.toString());
         if (widget.isFrom != 'add vitals') {
-          print('hits');
+          dPrint('hits');
           EasyDebounce.debounce(
               'apihit', Duration(milliseconds: 500), () => postData(data));
         }
 
-        print('${text}08978967954');
+        dPrint('${text}08978967954');
 
-        print('${text}08978967954');
+        dPrint('${text}08978967954');
         //  Get.back();
         //   });
       }
@@ -1474,16 +1474,16 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
   void _logEvent(String eventDescription) {
     if (_logEvents) {
       var eventTime = DateTime.now().toIso8601String();
-      print('$eventTime $eventDescription');
+      dPrint('$eventTime $eventDescription');
     }
   }
 
   void _switchLang(selectedVal) {
     setState(() {
       _currentLocaleId = 'hi_IN';
-      print(selectedVal.toString());
+      dPrint(selectedVal.toString());
     });
-    print(selectedVal);
+    dPrint(selectedVal);
   }
 
   void _switchLogging(bool? val) {

@@ -10,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../Modal/app_details_data_modal.dart';
+import '../medcare_utill.dart';
 
 class UserRepository  extends ChangeNotifier {
 
@@ -26,13 +27,13 @@ class UserRepository  extends ChangeNotifier {
   // bool get getGoneThrowFP=>goneThrowFP??false;
 
   Future updateUserData(User userData) async{
-    print("Aniemshssssss${userData.toJson()}");
+    dPrint("Aniemshssssss${userData.toJson()}");
     String user=jsonEncode(userData.toJson());
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString(Constant.userStore,user);
     currentUser=await fetchUserData();
     var abc=await fetchUserData();
-    print('nnnnnnnnnnnnnn${abc.patientName}');
+    dPrint('nnnnnnnnnnnnnn${abc.patientName}');
     notifyListeners();
   }
 
@@ -53,7 +54,7 @@ class UserRepository  extends ChangeNotifier {
 
     final prefs = await SharedPreferences.getInstance();
     currentUser = User.fromJson(jsonDecode(prefs.getString(Constant.userStore)??"{}"));
-    print('nnnnnnnvnnn '+User.fromJson(jsonDecode(prefs.getString(Constant.userStore)??"{}")).patientName.toString());
+    dPrint('nnnnnnnvnnn '+User.fromJson(jsonDecode(prefs.getString(Constant.userStore)??"{}")).patientName.toString());
     notifyListeners();
     return User.fromJson(jsonDecode(prefs.getString(Constant.userStore)??"{}"));
 

@@ -22,13 +22,46 @@ class ApiUtil {
    late String voiceAssistance = "http://food.shopright.ai:3478/api/echo/";
 
 
+   // AppbaseUrl = ":7082"
+   // AdminbaseUrl = ":7083"
+   // UserbaseUrl = ":7084"
+   // BillingbaseUrl = ":7088"
+   // OTBaseURL = ":7091/api/"
+   // BloodbaseUrl = ":7092"
+   // LabServicebaseUrl = ":7090"
+   // SendXMLDatabaseUl = ":7082"
+   // PatientMonitorDashboard = ":7085"
+   // PatientMonitorDashboardAPI = ":7087"
+   // SendXMLDatabaseUl = ":7082"
+   // InventoryBaseUrl = ":7093"
+   // SpringBoardServicesUrl = ":7097/"
+   // MaintenanceUrl = ":7099"
+   // BMSservicesUrl = ":7094"
+   // DietservicesUrl = ":7096"
+   // RadiologyservicesUrl = ":7086"
+   // PharmacyServicesUrl = ":8000"
+   // NotificationUrl = ":7101"
+   // ChattingUrl = ":7100"
+   // LogBaseUrl = ":7089/"
+   // CounsellingUrl = ":7102/"
+   // FinanceBaseUrl = ":7109"\
+
+
+
    //without http
-    late String baseUrlMedvanatge = "http://demo.medvantage.tech:1080/";
-    late String baseUrlMedvanatge7084 = "http://demo.medvantage.tech:1084/";
-    late String baseUrlMedvanatge7082 = "http://demo.medvantage.tech:1082/";
-    late String baseUrlMedvanatge7096 = "http://demo.medvantage.tech:1096/";
-    late String baseUrlMedvanatge7100 = "http://demo.medvantage.tech:1100/";
-    late String baseUrlMedvanatge7083 = "http://demo.medvantage.tech:1083/";
+   late String baseUrlMedvanatge = "https://apidemo.medvantage.tech/1080/";
+   late String baseUrlMedvanatge7084 = "https://apidemo.medvantage.tech/UserService/";
+   late String baseUrlMedvanatge7082 = "https://apidemo.medvantage.tech/MedvantageService/";
+   late String baseUrlMedvanatge7096 = "https://apidemo.medvantage.tech/DietService/";
+   late String baseUrlMedvanatge7100 = "https://apidemo.medvantage.tech/ChatService/";
+   late String baseUrlMedvanatge7083 = "https://apidemo.medvantage.tech/AdminService/";
+   // //without http
+   //  late String baseUrlMedvanatge = "http://demo.medvantage.tech:1080/";
+   //  late String baseUrlMedvanatge7084 = "http://demo.medvantage.tech:1084/";
+   //  late String baseUrlMedvanatge7082 = "http://demo.medvantage.tech:1082/";
+   //  late String baseUrlMedvanatge7096 = "http://demo.medvantage.tech:1096/";
+   //  late String baseUrlMedvanatge7100 = "http://demo.medvantage.tech:1100/";
+   //  late String baseUrlMedvanatge7083 = "http://demo.medvantage.tech:1083/";
 
    //
    // late String baseUrlMedvanatge = "https://demo.medvantage.tech:7080/";

@@ -5,6 +5,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../../medcare_utill.dart';
+
 alertToast(context,message){
   FocusScope.of(context).unfocus();
   Fluttertoast.showToast(
@@ -27,7 +29,7 @@ class EcgController extends GetxController {
 
   set updateECGData(double val) {
     ecgData.add(val);
-    print(val);
+    dPrint(val);
     update();
   }
 
@@ -65,7 +67,7 @@ class EcgController extends GetxController {
 
   checkDeviceConnection() {
     devicesData!.device.connectionState.listen((event) {
-      print(event);
+      dPrint(event);
       if (event == BluetoothConnectionState.connected) {
         updateIsDeviceConnected = true;
       } else if (event == BluetoothConnectionState.disconnected) {
@@ -114,9 +116,9 @@ class EcgController extends GetxController {
 // Listen to scan results
     subscription = FlutterBluePlus.scanResults.listen((results) {
       // do something with scan
-      print('Device Name :  '+results.length.toString());
+      dPrint('Device Name :  '+results.length.toString());
       for (ScanResult r in results) {
-        print('Device Name : ${r.device.name.toString()}');
+        dPrint('Device Name : ${r.device.name.toString()}');
         if (r.device.name.toString() == 'CT_ECG') {
         //
         // if (r.device.name.toString().contains('BLEsmart')) {
@@ -139,7 +141,7 @@ class EcgController extends GetxController {
 
     List<BluetoothService> services =
         await devicesData!.device.discoverServices();
-    print('Service Length' + services.length.toString());
+    dPrint('Service Length' + services.length.toString());
     services.forEach((service) async {
       if (service.uuid.toString()  == 'C201' ||
       service.uuid.toString().toUpperCase().substring(4, 8).toString() == 'C201') {
@@ -151,11 +153,11 @@ class EcgController extends GetxController {
           c.uuid.toString().toUpperCase().substring(4, 8).toString() == '483E') {
             c.setNotifyValue(true);
             subscription = c.lastValueStream.listen((value2) async {
-              // print('nnnnnnnnnn'+value2.toString());
+              // dPring('nnnnnnnnnn'+value2.toString());
               try{
                 var data = ascii.decode(value2);
-                // print('nvnvnnv'+data.toString());
-                // print('nnnnnnnnnn' + (double.parse(data.replaceAll('\n', '').split(',')[0].toString())*0.00166).toString());
+                // dPring('nvnvnnv'+data.toString());
+                // dPring('nnnnnnnnnn' + (double.parse(data.replaceAll('\n', '').split(',')[0].toString())*0.00166).toString());
 
                 // Ecg graph values
                 //     if(!getIsCountDone)   changes...

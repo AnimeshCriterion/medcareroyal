@@ -44,9 +44,9 @@
 //          await file.delete();
 //          storageFile();
 //          get();
-//         print('File deleted successfully');
+//         dPring('File deleted successfully');
 //     } catch (e) {
-//       print('Error deleting file : ' + e.toString());
+//       dPring('Error deleting file : ' + e.toString());
 //     }
 //   }
 //
@@ -59,7 +59,7 @@
 //     for(var i=0; i<temp.length; i++){
 //       if(await File(temp[i]['file']).exists()) {
 //         isExitingsFiles.add(temp[i]);
-//         print('==============='+temp.length.toString());
+//         dPring('==============='+temp.length.toString());
 //       }
 //
 //       SharedPreferences prefs = await SharedPreferences.getInstance();

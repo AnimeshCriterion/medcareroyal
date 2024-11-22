@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import '../../../authenticaton/user_repository.dart';
+import '../../../medcare_utill.dart';
 import '../../live_vital_controller.dart';
 import '../ecg_controller.dart';
 
@@ -57,9 +58,9 @@ class GenerateReportController extends GetxController{
             .toList().join(',')
       }
     };
-    print('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv'+jsonEncode(body).toString());
+    dPrint('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv'+jsonEncode(body).toString());
     (json.encode(body).toString());
-    print(json.encode(body).toString());
+    dPrint(json.encode(body).toString());
     try{
       var response = await http.post(Uri.parse('http://182.156.200.179:1880/ecg'),
           body: json.encode(body),
@@ -69,14 +70,14 @@ class GenerateReportController extends GetxController{
           }
       );
 
-      print(response.toString());
+      dPrint(response.toString());
       var data = await json.decode(response.body);
 
-      print('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv1112222' + data.toString());
+      dPrint('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv1112222' + data.toString());
       updatePerLead=data['perlead'][0];
     }
     catch(e){
-      print('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv1112222' + e.toString());
+      dPrint('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv1112222' + e.toString());
     }
   }
 

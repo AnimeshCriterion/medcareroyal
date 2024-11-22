@@ -981,10 +981,10 @@ class _IntakeMenusWidgetState extends State<IntakeMenusWidget> {
                                     addvitalVM.confirmAddVital.removeWhere((element) =>
                                     element.toString()==addvitalVM.getaddintakeQty[index].toString());
                                     addvitalVM.addintakeQty.removeAt(index);
-                                    print("nnnnnnnnnnnnnn ${ addvitalVM.getaddintakeQty.length}");
+                                    dPrint("nnnnnnnnnnnnnn ${ addvitalVM.getaddintakeQty.length}");
 
                                     addvitalVM.notifyListeners();
-                                    print("nnnnnnnnnnnnnn ${ addvitalVM.confirmAddVital}");
+                                    dPrint("nnnnnnnnnnnnnn ${ addvitalVM.confirmAddVital}");
 
                                   },
                                   child: Icon(
@@ -1023,7 +1023,7 @@ class _IntakeMenusWidgetState extends State<IntakeMenusWidget> {
                     Expanded(
                       child: PrimaryButton(
                         onPressed: () {
-                          // print("jjjjjjjj"+actChronicleVM.addVital.where((element) =>
+                          // dPring("jjjjjjjj"+actChronicleVM.addVital.where((element) =>
                           // element["value"]==true).toList().toString());
                           if(addvitalVM.getaddintakeQty.isEmpty){
 

@@ -4,13 +4,14 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:printing/printing.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import '../../../app_manager/theme/text_theme.dart';
 import '../../../authenticaton/user_repository.dart';
+import '../../../medcare_utill.dart';
 import '../ecg_controller.dart';
 import 'genrate_report_controller.dart';
 
@@ -63,7 +64,7 @@ class _GenerateReportState extends State<GenerateReport> {
 
   void _resetZoom(){
     zoomTransformationController.value = Matrix4.identity();
-    print('reset zoom');
+    dPrint('reset zoom');
   }
 
   @override
@@ -2338,7 +2339,7 @@ class _GenerateReportState extends State<GenerateReport> {
     await file.writeAsBytes(await pdf.save());
 
     // Open the share dialog to allow the user to share the PDF file
-    await Printing.sharePdf(bytes: await file.readAsBytes(), filename: '${DateFormat('dd MMM yyyy, hh.mm.ss a').format(DateTime.now())}.pdf');
+    await  Printing.sharePdf(bytes: await file.readAsBytes(), filename: '${DateFormat('dd MMM yyyy, hh.mm.ss a').format(DateTime.now())}.pdf');
     // await OpenFile.open(filePath);
 
   }

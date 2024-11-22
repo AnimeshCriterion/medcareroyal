@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import '../../Localization/app_localization.dart';
 import '../../app_manager/appBar/custom_app_bar.dart';
 import '../../app_manager/web_view.dart';
+import '../../medcare_utill.dart';
 import 'login_view.dart';
 
 class SignUpVerifyView extends StatefulWidget {
@@ -54,7 +55,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
             _remainingSeconds--;
           } else {
             _timer.cancel();
-            print('Timer is finished');
+            dPrint('Timer is finished');
           }
         });
       },
@@ -63,7 +64,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
 
   void _resetTimer() {
     _timer.cancel();
-    print('nnnnnnnnnnnnn');
+    dPrint('nnnnnnnnnnnnn');
     setState(() {
       _remainingSeconds = 30;
     });
@@ -161,7 +162,7 @@ class _SignUpVerifyViewState extends State<SignUpVerifyView> {
                                     );
                                   }).toList(),
                                   onChanged: (value) {
-                                    print(value.toString());
+                                    dPrint(value.toString());
                                     setState(() {
                                       dropdownValue = value.toString();
                                     });

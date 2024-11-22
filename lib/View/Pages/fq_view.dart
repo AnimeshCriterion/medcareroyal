@@ -158,9 +158,9 @@ class _FAndQViewState extends State<FAndQView> {
                                  setState(() {
                                    faqVM.isExpanded = expanded;
                                  });
-                               print(val);
+                               dPrint(val);
                                        faqVM.updateQuestionId=faqdata.questionID.toString();
-                                       print(int.parse(faqdata.questionID.toString()) );
+                                       dPrint(int.parse(faqdata.questionID.toString()) );
                              },
                              backgroundColor:themeChange.darkTheme?AppColor.black12.withOpacity(.9):Colors.grey.shade300.withOpacity(0.6),
 

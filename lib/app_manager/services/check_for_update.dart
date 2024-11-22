@@ -18,6 +18,7 @@ import 'package:lottie/lottie.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:version/version.dart';
 
+import '../../medcare_utill.dart';
 import '../my_button.dart';
 import '../updater.dart';
 
@@ -39,17 +40,17 @@ class Updater{
   Future<void> checkForUpdate() async {
     InAppUpdate.checkForUpdate().then((info) {
 
-      print(('nnnnvnnv '+info.updateAvailability .toString()));
+      dPrint(('nnnnvnnv '+info.updateAvailability .toString()));
       if(info.updateAvailability ==
           UpdateAvailability.updateAvailable){
         InAppUpdate.performImmediateUpdate()
             .catchError((e) {
-              print(('nnnnvnnv '+e.toString()));
+              dPrint(('nnnnvnnv '+e.toString()));
               return alert(e.toString());
             });
       }
     }).catchError((e) {
-      print(('nnnnvnnv '+e.toString()));
+      dPrint(('nnnnvnnv '+e.toString()));
       alert(e.toString());
     });
   }
@@ -65,15 +66,15 @@ class Updater{
   //
   //
   //   if(Platform.isAndroid){
-  //     print('nnnnnvnnnvnn');
+  //     dPring('nnnnnvnnnvnn');
   //
   //    await checkForUpdate();
   //
-  //     print('nnnnnvnnnvnn3');
+  //     dPring('nnnnnvnnnvnn3');
   //   }
   //   else{
   //
-  //     // print('nnnnnvnnnvnn1');
+  //     // dPring('nnnnnvnnnvnn1');
   //     // final newVersion = NewVersion();
   //     //
   //     // VersionStatus? status = await newVersion.getVersionStatus();
@@ -88,9 +89,9 @@ class Updater{
   //         latestVersion = Version.parse(status.storeVersion.toString());
   //
   //         //
-  //         // print(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
+  //         // dPring(currentVersion.toString()+' '+latestVersion.toString()+' uuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu');
   //         //
-  //         // print(currentVersion.toString()+'\n'+latestVersion.toString());
+  //         // dPring(currentVersion.toString()+'\n'+latestVersion.toString());
   //         if(latestVersion > currentVersion){
   //           showUpdateDialogue(latestVersion, context,
   //               showCancelButton: true);
@@ -98,7 +99,7 @@ class Updater{
   //
   //       }
   //       catch (e){
-  //         print('nnnnvnnnvvnn '+e.toString());
+  //         dPring('nnnnvnnnvvnn '+e.toString());
   //         var retry=await apiDialogue(context,'Alert', 'Internet connection issue, try to reconnect.',
   //             showCanCelButton: true
   //         );

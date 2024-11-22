@@ -14,6 +14,7 @@ import 'package:medvantage_patient/theme/theme.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_manager/theme/text_theme.dart';
+import '../../medcare_utill.dart';
 
 class MasterDashboardView extends StatefulWidget {
   const MasterDashboardView({super.key});
@@ -41,7 +42,7 @@ class _MasterDashboardViewState extends State<MasterDashboardView> {
             onWillPop: (){
 
 
-              // print('nnnnvnnnnnvn '+drawerMenuListVM.getIsSelectedDrawer.toString());
+              // dPring('nnnnvnnnnnvn '+drawerMenuListVM.getIsSelectedDrawer.toString());
               // if(drawerMenuListVM.getIsSelectedDrawer){
               //   drawerMenuListVM.updateIsSelectedDrawer=false;
               //   //  Get.back();
@@ -52,7 +53,7 @@ class _MasterDashboardViewState extends State<MasterDashboardView> {
               else{
                 changeQtyAlert2();
               }
-              print('nnnnvnnnnnvn '+drawerMenuListVM.getSelectedPage.toString());
+              dPrint('nnnnvnnnnnvn '+drawerMenuListVM.getSelectedPage.toString());
               return Future(() => false);
             },
             child: Column(

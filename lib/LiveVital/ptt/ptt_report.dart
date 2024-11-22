@@ -9,8 +9,8 @@ import 'package:medvantage_patient/LiveVital/ptt/ptt_controller.dart';
 import 'package:medvantage_patient/authenticaton/user_repository.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
-import 'package:printing/printing.dart';
 import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -1460,7 +1460,7 @@ class _PulseTransitTimeReportState extends State<PulseTransitTimeReport> {
     await file.writeAsBytes(await pdf.save());
 
     // Open the share dialog to allow the user to share the PDF file
-    await Printing.sharePdf(bytes: await file.readAsBytes(), filename: '${DateFormat('dd MMM yyyy, hh.mm.ss a').format(DateTime.now())}.pdf');
+    await  Printing.sharePdf(bytes: await file.readAsBytes(), filename: '${DateFormat('dd MMM yyyy, hh.mm.ss a').format(DateTime.now())}.pdf');
     // await OpenFile.open(filePath);
 
   }

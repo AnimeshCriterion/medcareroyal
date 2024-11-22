@@ -82,7 +82,7 @@ class _PillsReminderScheduledPrescriptionState extends State<PillsReminderSchedu
                   ),
                   // Switch(
                   //     value:themeChange.darkTheme, onChanged: (val)async{
-                  //   print(DateTime.now());
+                  //   dPring(DateTime.now());
                   //   themeChange.darkTheme=val;
                   //   themeChangeProvider.darkTheme = await themeChangeProvider.getTheme();
                   // })

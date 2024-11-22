@@ -202,7 +202,7 @@ class _UrinOutputViewState extends State<UrinOutputView> {
                                                 //   onTap: () async {
                                                 //
                                                 //     addvitalVM.urineC.text=urinData['quantity'].toString();
-                                                //     print('nnnnn '+addvitalVM.urineC.text.toString());
+                                                //     dPring('nnnnn '+addvitalVM.urineC.text.toString());
                                                 //     addvitalVM.updateSelectedPmID=urinData['pmID'].toString();
                                                 //     addvitalVM.updateSelectedID=urinData['id'].toString();
                                                 //     addvitalVM.isUpdate=true;

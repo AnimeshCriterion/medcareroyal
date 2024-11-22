@@ -24,6 +24,7 @@ import '../app_manager/app_color.dart';
 import '../app_manager/my_button.dart';
 import '../app_manager/widgets/text_field/primary_date_time_field.dart';
 import '../authenticaton/user_repository.dart';
+import '../medcare_utill.dart';
 import '../theme/theme.dart';
 
 class SupplementIntakeViewModal extends ChangeNotifier {
@@ -82,14 +83,14 @@ class SupplementIntakeViewModal extends ChangeNotifier {
           newBaseUrl: ApiUtil.supplementUrl,
           apiCallType: ApiCallType.rawPost(body: {}));
 
-      print(data.toString());
+      dPrint(data.toString());
 
       if (data['responseCode'] == 1) {
         intakeResponse.data = List<FoodListDataModel>.from(
             ((data['foodIntakeList'] ?? []) as List)
                 .map((e) => FoodListDataModel.fromJson(e)));
 
-        print('nnnnnnnnnn' + getIntakeList.length.toString());
+        dPrint('nnnnnnnnnn' + getIntakeList.length.toString());
         _updateIntakeResponse = ApiResponse<List<FoodListDataModel>>.completed(
             getIntakeResponse.data ?? []);
 
@@ -110,7 +111,7 @@ class SupplementIntakeViewModal extends ChangeNotifier {
   TextEditingController intakeTimeC=TextEditingController();
   Widget iconAccordingToGivenStatus(
       context, String isGiven, SupplementIntakeDataModel data) {
-    print('nnnnvnnn '+isGiven.toString());
+    dPrint('nnnnvnnn '+isGiven.toString());
     if (isGiven == "0") {
       return Consumer<ThemeProviderLd>(
           builder: (BuildContext __context, themeChange, _) {
@@ -139,7 +140,7 @@ class SupplementIntakeViewModal extends ChangeNotifier {
                                 dateTimePickerType: DateTimePickerType.time,
                                 hintText: 'Select Intake Time',
                                 onChanged: (val){
-                                  print('intakeTimeCintakeTimeC '+intakeTimeC.toString());
+                                  dPrint('intakeTimeCintakeTimeC '+intakeTimeC.toString());
                                   notifyListeners();
                                 },
                               ),
@@ -240,7 +241,7 @@ class SupplementIntakeViewModal extends ChangeNotifier {
                                 dateTimePickerType: DateTimePickerType.time,
                                 hintText: 'Select Intake Time',
                                 onChanged: (val){
-                                  print('intakeTimeCintakeTimeC '+intakeTimeC.toString());
+                                  dPrint('intakeTimeCintakeTimeC '+intakeTimeC.toString());
                                   notifyListeners();
                                 },
                               ),
@@ -343,7 +344,7 @@ class SupplementIntakeViewModal extends ChangeNotifier {
      // Get.back();
     if (data['status'] == 1) {
       updateDataList = data['foodIntakeList'];
-      print("Animesh"+dataList.toList().toString());
+      dPrint("Animesh"+dataList.toList().toString());
     } else {
       Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
       // Alert.show(data['responseValue'].toString());

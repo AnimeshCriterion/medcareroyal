@@ -49,7 +49,7 @@ class _PillsReminderViewState extends State<PillsReminderView> {
       pillsRemindVM.notifyListeners();
 
       int currentTime=int.parse(DateFormat('HH').format(DateTime.now()).toString());
-      print('nnnvnnvnn '+currentTime.toString());
+      dPrint('nnnvnnvnn '+currentTime.toString());
       var type='';
 
 
@@ -130,7 +130,7 @@ class _PillsReminderViewState extends State<PillsReminderView> {
                         ),
                         // Switch(
                         //     value:themeChange.darkTheme, onChanged: (val)async{
-                        //   print(DateTime.now());
+                        //   dPring(DateTime.now());
                         //   themeChange.darkTheme=val;
                         //   themeChangeProvider.darkTheme = await themeChangeProvider.getTheme();
                         // })
@@ -169,7 +169,7 @@ class _PillsReminderViewState extends State<PillsReminderView> {
                   List.generate(pillsRemindVM.Daylist.length, (index) {
 
                     int currentTime=int.parse(DateFormat('HH').format(DateTime.now()).toString());
-                    print('nnnvnnvnn '+currentTime.toString());
+                    dPrint('nnnvnnvnn '+currentTime.toString());
                     var type='';
 
 
@@ -378,7 +378,7 @@ class _PillsReminderViewState extends State<PillsReminderView> {
                                       ),
                                       // Expanded(
                                       //   child:button(text:"Skip" ,onPressed: (){
-                                      //     print(data.drugName);
+                                      //     dPring(data.drugName);
                                       //   },color: Colors.grey.shade200 ,textColor: Colors.grey.shade700
                                       //   ),
                                       // ),
@@ -418,7 +418,7 @@ class _PillsReminderViewState extends State<PillsReminderView> {
                                                                         .toString()
                                                                         .toLowerCase())
                                                                 .toList();
-                                                            // print('nnnnnnnnnnnnn '+jsonTimeData[0].time.toString());
+                                                            // dPring('nnnnnnnnnnnnn '+jsonTimeData[0].time.toString());
 
                                                             await pillsRemindVM.insertMedicine(
                                                                 context,
@@ -437,7 +437,7 @@ class _PillsReminderViewState extends State<PillsReminderView> {
                                                             // }
                                                             // await userRepository.updateUserData(User());
                                                             // await userRepository.logOutUser(context);
-                                                            // print('nnnnnnnvvvv');
+                                                            // dPring('nnnnnnnvvvv');
                                                             // vitalDialog(context);
                                                           },
                                                         ));

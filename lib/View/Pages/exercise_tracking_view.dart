@@ -253,7 +253,7 @@ var localization=local.getLocaleData;
                                         reportTrackingVM.getExerciseVideos[index];
                                     return InkWell(
                                       onTap: (){
-                                        print('nnnnn');
+                                        dPrint('nnnnn');
                                     MyNavigator.push(context,    WorkOutDetails(response:response));
 
 
@@ -462,7 +462,7 @@ var localization=local.getLocaleData;
                     onPressed: () async {
                       // Handle the text input (save or process it)
                       String text = textEditingController.text;
-                      print('You entered: $text');
+                      dPrint('You entered: $text');
                       Get.back();
                       await  reportTrackingVM.insertExercise(
                           context, data.id, text.toString());
@@ -477,7 +477,7 @@ var localization=local.getLocaleData;
                     onPressed: () async {
                       // Handle the text input (save or process it)
                       String text = textEditingController.text;
-                      print('You entered: $text');
+                      dPrint('You entered: $text');
                       Get.back();
                     await  reportTrackingVM.insertExercise(
                           context, data.id, text.toString());
@@ -590,7 +590,7 @@ class _AllExercisePageState extends State<AllExercisePage>  {
                           ExerciseVideos response = reportTrackingVM.getExerciseVideos[index];
                           return InkWell(
                             onTap: () {
-                              print('nnnnn');
+                              dPrint('nnnnn');
                               MyNavigator.push(context, WorkOutDetails(response:response));
                             },
                             child: Padding(

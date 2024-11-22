@@ -23,6 +23,7 @@ import '../../app_manager/widgets/buttons/custom_ink_well.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../assets.dart';
 import '../../common_libs.dart';
+import '../../medcare_utill.dart';
 import 'drawer_view.dart';
 
 class ChatView extends StatefulWidget {
@@ -597,7 +598,7 @@ class _ChatViewState extends State<ChatView> {
 
                 Get.back();
                var data = await MyImagePicker.pickImageFromCamera();
-               print(data.path.toString());
+               dPrint(data.path.toString());
                chatVM.updateImgPath = data.path.toString();
              },
              child:
@@ -703,7 +704,7 @@ class _ChatViewState extends State<ChatView> {
                         onTap: () async {
 
                           var data = await MyImagePicker.pickImageFromCamera();
-                          print(data.path.toString());
+                          dPrint(data.path.toString());
                           chatVM.updateImgPath = data.path.toString();
                            Get.back();
                         },
@@ -741,7 +742,7 @@ class _ChatViewState extends State<ChatView> {
             Text('Or' ,style: MyTextTheme.largeGCN,),
             CustomInkWell(
               onTap: () async {
-                print('nnnnnnnnnnn');
+                dPrint('nnnnnnnnnnn');
                 var data =await MyImagePicker.pickImageFromGallery();
                 chatVM.updateImgPath = data.path;
                  Get.back();

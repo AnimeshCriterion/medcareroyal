@@ -66,7 +66,7 @@ class FeedbackViewModal extends ChangeNotifier{
 
   }
 
-  print("kkkkkkkkkkkkk"+data.toString());
+  dPrint("kkkkkkkkkkkkk"+data.toString());
       // }
       // catch(e){}
    }
@@ -94,7 +94,7 @@ class FeedbackViewModal extends ChangeNotifier{
         newBaseUrl: "http://172.16.61.31:7082/",
         localStorage: true
     );
-    print("tttttttttttttttttttt"+data.toString());
+    dPrint("tttttttttttttttttttt"+data.toString());
          updateAllStatusData=data["responseValue"];
    }
 

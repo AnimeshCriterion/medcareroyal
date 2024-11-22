@@ -26,6 +26,7 @@ import '../authenticaton/user_repository.dart';
 
 import 'package:get/get.dart';
 
+import '../medcare_utill.dart';
 import '../theme/theme.dart';
 class FoodIntakeViewModel extends ChangeNotifier {
   final Api _api = Api();
@@ -84,14 +85,14 @@ class FoodIntakeViewModel extends ChangeNotifier {
           newBaseUrl: ApiUtil.supplementUrl,
           apiCallType: ApiCallType.rawPost(body: {}));
 
-      print(data.toString());
+      dPrint(data.toString());
 
       if (data['responseCode'] == 1) {
         intakeResponse.data = List<FoodListDataModel>.from(
             ((data['foodIntakeList'] ?? []) as List)
                 .map((e) => FoodListDataModel.fromJson(e)));
 
-        print('nnnnnnnnnn' + getIntakeList.length.toString());
+        dPrint('nnnnnnnnnn' + getIntakeList.length.toString());
         _updateIntakeResponse = ApiResponse<List<FoodListDataModel>>.completed(
             getIntakeResponse.data ?? []);
 
@@ -138,7 +139,7 @@ TextEditingController intakeTimeC=TextEditingController();
                         dateTimePickerType: DateTimePickerType.time,
                         hintText: 'Select Intake Time',
                         onChanged: (val){
-                          print('intakeTimeCintakeTimeC '+intakeTimeC.toString());
+                          dPrint('intakeTimeCintakeTimeC '+intakeTimeC.toString());
                           notifyListeners();
                         },
                       ),
@@ -224,7 +225,7 @@ TextEditingController intakeTimeC=TextEditingController();
                             dateTimePickerType: DateTimePickerType.time,
                             hintText: 'Select Intake Time',
                             onChanged: (val){
-                              print('intakeTimeCintakeTimeC '+intakeTimeC.toString());
+                              dPrint('intakeTimeCintakeTimeC '+intakeTimeC.toString());
                               notifyListeners();
                             },
                           ),
@@ -282,7 +283,7 @@ TextEditingController intakeTimeC=TextEditingController();
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
     ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
-    print( 'nvnnvnnvnnv '+dateC.text);
+    dPrint( 'nvnnvnnvnnv '+dateC.text);
     updateFoodDataList=[];
     updateShowNoData=false;
     ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString());
@@ -295,13 +296,13 @@ TextEditingController intakeTimeC=TextEditingController();
               "api/FoodIntake/GetFoodIntake?Uhid=${userRepository.getUser.uhID.toString()}&entryType=D&languageId=${langId.toString()}&fromDate=${DateFormat('yyyy-MM-dd').format(DateTime.parse(dateC.text.toString()))}",
           localStorage: true,
           apiCallType: ApiCallType.get());
-      print('nnnvnnnv '+data  .toString());
+      dPrint('nnnvnnnv '+data  .toString());
       updateShowNoData=true;
        // Get.back();
       if (data['status'] == 1) {
         updateFoodDataList = data['foodIntakeList'];
 
-        print("animesh" + getDataList.toList().toString());
+        dPrint("animesh" + getDataList.toList().toString());
       } else {
 
         Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));

@@ -6,6 +6,7 @@ import 'package:medvantage_patient/common_libs.dart';
 import 'package:flutter/material.dart';
 
 import '../../../app_manager/app_color.dart';
+import '../../../medcare_utill.dart';
 
 late BuildContext currentContext;
 
@@ -21,7 +22,7 @@ class ProgressDialogue {
     try {
      Get.back();
     } catch (e) {
-      print(e);
+      dPrint(e);
     }
   }
 

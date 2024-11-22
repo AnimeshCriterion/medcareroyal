@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../medcare_utill.dart';
+
 class PulseTransitTimeController extends GetxController {
 
   FlutterBluePlus flutterBluePlus = FlutterBluePlus();
@@ -59,7 +61,7 @@ class PulseTransitTimeController extends GetxController {
     }
 
 
-    print('Device scanning : $getIsDeviceScanning');
+    dPrint('Device scanning : $getIsDeviceScanning');
 
     // Start scanning
     FlutterBluePlus.startScan(timeout: const Duration(hours: 1)).then((value) {
@@ -70,7 +72,7 @@ class PulseTransitTimeController extends GetxController {
       updateIsDeviceScanning=false;
     });
     List<BluetoothDevice> data= await FlutterBluePlus.connectedDevices;
-    print('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnn  : ${data}');
+    dPrint('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnnnnnnnnnnnn  : ${data}');
     for(int i=0;i<data.length;i++){
       if(data[i].platformName.toString().contains('CT_PTT_Device')) {
         isAlreadyConnected=true;
@@ -89,7 +91,7 @@ class PulseTransitTimeController extends GetxController {
       scanSubscription = FlutterBluePlus.scanResults.listen((results) {
         // do something with scan results
         for (ScanResult r in results) {
-          print('Device name : ${r.device.platformName}');
+          dPrint('Device name : ${r.device.platformName}');
           if (r.device.platformName.toString() == 'CT_PTT_Device') {
             FlutterBluePlus.stopScan();
             // if (r.device.platformName.toString()=='CT_PMonitor_1') {
@@ -101,7 +103,7 @@ class PulseTransitTimeController extends GetxController {
               await onPressConnect();
             });
           }
-          print('Device name : ${r.device.platformName}');
+          dPrint('Device name : ${r.device.platformName}');
         }
       });
       update();
@@ -248,7 +250,7 @@ class PulseTransitTimeController extends GetxController {
             liveSubscription=c.lastValueStream.listen((value2) async {
               try{
                 var data = ascii.decode(value2);
-                print('ECG and SpO2 received from device : $data');
+                dPrint('ECG and SpO2 received from device : $data');
 
                 // For ECG Graph
                 updateHrList = double.parse(data.split(',')[0].toString());
@@ -331,22 +333,22 @@ class PulseTransitTimeController extends GetxController {
  String averageHr() {
    double avg=0.0;
     try{
-      print("heart rate value list graph length :  ${hrValueListGraph.length}");
+      dPrint("heart rate value list graph length :  ${hrValueListGraph.length}");
 
       int sum=0;
 
 
       for(int i=0; i<hrValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += int.parse(hrValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(hrValueListGraph.map((e)=>e['value']).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
 
 
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
    return hrValueListGraph.isEmpty?'0':avg.toStringAsFixed(2).toString();
   }
@@ -364,18 +366,18 @@ class PulseTransitTimeController extends GetxController {
             await c.setNotifyValue(true);
             hrSubscription=c.lastValueStream.listen((value2) async {
               var data=ascii.decode(value2);
-              print('Heart rate received from device : $data');
+              dPrint('Heart rate received from device : $data');
 
               try{
                 updateHrValue=data.toString();
-                print('Heart rate 1 : $data');
+                dPrint('Heart rate 1 : $data');
 
                 updateHrValueList=data.toString().split(',')[0];
 
                 updateEcgPercentage=data.toString();
               }
               catch(e){
-                print('Error heart rate 1 : $e');
+                dPrint('Error heart rate 1 : $e');
               }
 
             });
@@ -444,19 +446,19 @@ class PulseTransitTimeController extends GetxController {
 
     double avg=0.0;
     try {
-      print("SpO2 value list graph length : ${spO2ValueListGraph.length}");
+      dPrint("SpO2 value list graph length : ${spO2ValueListGraph.length}");
 
       int sum=0;
 
       for(int i=0; i<spO2ValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += int.parse(spO2ValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(spO2ValueListGraph.map((e)=>e['value']).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
 
     return spO2ValueListGraph.isEmpty?'0':avg.toStringAsFixed(2).toString();
@@ -506,20 +508,20 @@ class PulseTransitTimeController extends GetxController {
 
     double avg=0.0;
     try{
-      print("Pulse rate value list graph length : ${prValueListGraph.length}");
+      dPrint("Pulse rate value list graph length : ${prValueListGraph.length}");
 
       int sum=0;
 
       for(int i=0; i<prValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += int.parse(prValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(prValueListGraph.map((e)=>e['value']).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
 
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
     return prValueListGraph.isEmpty?'0':avg.toStringAsFixed(2).toString();
 
@@ -539,14 +541,14 @@ class PulseTransitTimeController extends GetxController {
             await c.setNotifyValue(true);
             spO2PrSubscription=c.lastValueStream.listen((value2) async {
               var data=ascii.decode(value2);
-              print('SpO2 and pulse rate received from device : $data');
+              dPrint('SpO2 and pulse rate received from device : $data');
 
               try{
                 updateSpO2Value=data.toString().split(',')[0];
-                print('SpO2 2 : ${data.toString().split(',')[0]}');
+                dPrint('SpO2 2 : ${data.toString().split(',')[0]}');
 
                 updatePrValue=data.toString().split(',')[1];
-                print('Pulse rate 3 : ${data.toString().split(',')[1]}');
+                dPrint('Pulse rate 3 : ${data.toString().split(',')[1]}');
 
                 updateSpO2ValueList=data.toString().split(',')[0];
 
@@ -554,7 +556,7 @@ class PulseTransitTimeController extends GetxController {
 
                 updateSpO2Percentage=data.toString().split(',')[0];
               } catch (e) {
-                print('Error SpO2 and pulse rate : $e');
+                dPrint('Error SpO2 and pulse rate : $e');
               }
 
             });
@@ -617,21 +619,21 @@ class PulseTransitTimeController extends GetxController {
 
     double avg=0.0;
     try {
-      print("Blood pressure systolic value list graph length : ${bpValueListGraph.length}");
+      dPrint("Blood pressure systolic value list graph length : ${bpValueListGraph.length}");
 
       var sum=0.0;
 
       for(var i=0; i<bpValueListGraph.map((e)=>e['value'].split(',')[1]).toList().length; i++) {
         sum += double.parse(bpValueListGraph.map((e)=>e['value'].split(',')[1]).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(bpValueListGraph.map((e)=>e['value'].split(',')[1]).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
       // return avg.toStringAsFixed(2);
 
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
 
     return bpValueListGraph.isEmpty?'0':avg.toStringAsFixed(2).toString();
@@ -641,19 +643,19 @@ class PulseTransitTimeController extends GetxController {
 
     double avg=0.0;
     try {
-      print("Blood pressure diastolic value list graph length : ${bpValueListGraph.length}");
+      dPrint("Blood pressure diastolic value list graph length : ${bpValueListGraph.length}");
 
       var sum=0.0;
 
       for(var i=0; i<bpValueListGraph.map((e)=>e['value'].split(',')[2]).toList().length; i++) {
         sum += double.parse(bpValueListGraph.map((e)=>e['value'].split(',')[2]).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(bpValueListGraph.map((e)=>e['value'].split(',')[2]).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
 
     return bpValueListGraph.isEmpty?'0':avg.toStringAsFixed(2).toString();
@@ -685,7 +687,7 @@ class PulseTransitTimeController extends GetxController {
                   updateBpValueList = data.toString().split('-')[1];
                   updateBpValueList = data.toString().split(',')[2];
                 }
-                print('Blood pressure 4 : $data');
+                dPrint('Blood pressure 4 : $data');
               }
               catch(e){
 
@@ -746,21 +748,21 @@ class PulseTransitTimeController extends GetxController {
   String averageTemp() {
     double avg=0.0;
     try {
-      print("Temperature value list graph length : ${tempValueListGraph.length}");
+      dPrint("Temperature value list graph length : ${tempValueListGraph.length}");
 
       var sum=0.0;
       double avg=0.0;
 
       for(var i=0; i<tempValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += double.parse(tempValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(tempValueListGraph.map((e)=>e['value']).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
 
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
     return tempValueListGraph.isEmpty?'0':avg.toStringAsFixed(2).toString();
   }
@@ -812,22 +814,22 @@ class PulseTransitTimeController extends GetxController {
   averageBattery() {
 
     try{
-      print("Battery value list graph length : ${batteryValueListGraph.length}");
+      dPrint("Battery value list graph length : ${batteryValueListGraph.length}");
 
       int sum=0;
       double avg=0.0;
 
       for(int i=0; i<batteryValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += int.parse(batteryValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(batteryValueListGraph.map((e)=>e['value']).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
       return batteryValueListGraph.isEmpty?'0':avg.toStringAsFixed(2);
 
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
 
   }
@@ -876,19 +878,19 @@ class PulseTransitTimeController extends GetxController {
 
     double avg=0.0;
     try{
-      print("Pulse transit time value list graph length : ${pttValueListGraph.length}");
+      dPrint("Pulse transit time value list graph length : ${pttValueListGraph.length}");
 
       int sum=0;
       for(int i=0; i<pttValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += int.parse(pttValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sum : "+sum.toString());
+        dPrint("sum : "+sum.toString());
       }
 
       avg = sum/(pttValueListGraph.map((e)=>e['value']).length);
-      print('average : '+avg.toString());
+      dPrint('average : '+avg.toString());
 
     } catch (e) {
-      print("Error about sum and average related : $e");
+      dPrint("Error about sum and average related : $e");
     }
 
     return pttValueListGraph.isEmpty?'0':avg.toStringAsFixed(2).toString();
@@ -909,17 +911,17 @@ class PulseTransitTimeController extends GetxController {
             await c.setNotifyValue(true);
             tempSubscription=c.lastValueStream.listen((value2) async {
               var data=ascii.decode(value2);
-              print('Temperature, battery and PTT received from device : $data');
+              dPrint('Temperature, battery and PTT received from device : $data');
 
               try {
                 updateTempValue=data.toString().split(',')[0];
-                print('Temperature 5 : ${data.split(',')[0]}');
+                dPrint('Temperature 5 : ${data.split(',')[0]}');
 
                 updateBatteryValue=data.toString().split(',')[2];
-                print('Battery 6 : ${data.split(',')[2]}');
+                dPrint('Battery 6 : ${data.split(',')[2]}');
 
                 updatePttValue=data.toString().split(',')[3];
-                print('Pulse Transit Time 7 : ${data.split(',')[3]}');
+                dPrint('Pulse Transit Time 7 : ${data.split(',')[3]}');
 
                 updateTempValueList=data.toString().split(',')[0];
 
@@ -932,7 +934,7 @@ class PulseTransitTimeController extends GetxController {
 
               }
               catch (e) {
-                print('Error temperature 5 : $e');
+                dPrint('Error temperature 5 : $e');
               }
 
             });

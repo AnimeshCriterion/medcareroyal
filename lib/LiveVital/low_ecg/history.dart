@@ -257,7 +257,7 @@ class _ReportHistoryState extends State<ReportHistory> {
                                       children: [
                                         ...List.generate(jsonDecode(controller.getPreviousDataList[index]['responce'] == "NA" ? "[]" : controller.getPreviousDataList[index]['responce'])['perlead'].length, (index2) {controller.selectedData.length;
 
-                                          print('vvvvvvvvvvvv' + jsonDecode(controller.getPreviousDataList[index]['responce'])['perlead'][index2].toString());
+                                          dPrint('vvvvvvvvvvvv' + jsonDecode(controller.getPreviousDataList[index]['responce'])['perlead'][index2].toString());
 
                                           var data = jsonDecode(controller.getPreviousDataList[index]['responce'] == "NA" ? "[]" : controller.getPreviousDataList[index]['responce'])['perlead'][index2];
 

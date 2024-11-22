@@ -42,7 +42,7 @@ class PlanOfCareViewModal  extends ChangeNotifier{
         apiCallType: ApiCallType.get());
     ProgressDialogue().hide();
     updateIsLoading=false;
-    print('nnnn'+data.toString());
+    dPrint('nnnn'+data.toString());
     updatePlanList=data['responseValue'];
     // https://apimedcareroyal.medvantage.tech:7082/api/PatientNotes/GetAllPatientNotes?pdmID=16&pid=29484&ClientId=223
 

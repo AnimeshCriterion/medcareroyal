@@ -48,7 +48,7 @@ class _ArchiveViewState extends State<ArchiveView> {
     final prefs = await SharedPreferences.getInstance();
      var data= jsonDecode(prefs.getString('stetho'  )??"[]");
 
-    print('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnvnnvnnnn '+data.toString());
+    dPrint('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnvnnvnnvnnnn '+data.toString());
     for(var i=0; i<data.length; i++){
       if(await File(data[i]['filePath']).exists() ) {
         if(data[i]['isSaved']==false ) {
@@ -190,14 +190,14 @@ class _ArchiveViewState extends State<ArchiveView> {
                                   // controller.updateIsPlaying=true;
                                   // myAudioPlayer.onPlayerStateChanged.listen((event) {
                                   //
-                                  //   print("Connected Microphone: $event");
+                                  //   dPring("Connected Microphone: $event");
                                   //   if(PlayerState.completed==event) {
                                   //     controller.updateIsPlaying = false;
                                   //     myAudioPlayer.stop();
                                   //   }
                                   // });
 
-                                  // print("Connected Microphone: $microphone");
+                                  // dPring("Connected Microphone: $microphone");
                                   // Get.to( VideoPlayer(url: controller.getStethoAudio[index]['url'].toString()));
                                   Get.to( AudioPlayerScreen(audioUrl: controller.getStethoAudio[index]['url'].toString()));
                                 },
@@ -248,7 +248,7 @@ class _ArchiveViewState extends State<ArchiveView> {
                                           elevation: 2,
                                           onSelected: (val){
                                             shareLinkWithDescription(controller.getStethoAudio[index]['url'].toString(), 'Hi there!! \n listen stethoscope audio by tapping on the link');
-                                            print(val);
+                                            dPrint(val);
                                           },
                                         )
                                       ],

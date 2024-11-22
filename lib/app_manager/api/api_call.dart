@@ -13,7 +13,10 @@ import 'package:medvantage_patient/app_manager/api/error_alert.dart';
 // ignore: depend_on_referenced_packages
 import 'package:http/http.dart' as http;
 import 'package:medvantage_patient/app_manager/local_storage/local_storage.dart';
+import 'package:medvantage_patient/common_libs.dart';
 import 'package:provider/provider.dart';
+
+import '../../encyption.dart';
 
 
 
@@ -62,6 +65,7 @@ class Api {
     String? newBaseUrl,
     bool localStorage=false,
     bool isHISrHeader=false,
+    Map<String, String>? loginHeader,
     ValueChanged? onFoundStoredData
   }) async {
 
@@ -74,26 +78,37 @@ class Api {
       // String myUrl = (newBaseUrl ?? userRepository.getAppDetails.appBaseUrl.toString()) + url;
       String myUrl = (newBaseUrl ?? ApiUtil.baseUrl) + url;
 
+      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
+      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
+      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
+      dPrint("myUrl: $myUrl");
+
+
+
       String accessToken = userRepository.getUser.patientName.toString();
       String userId = userRepository.getUser.uhID.toString();
       Map body = apiCallType.body ?? {};
 
       var basicAuth =
-          'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+          'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
 
-      Map<String, String>? header = token
-          ? {
-              'x-access-token': accessToken.toString(),
-              'userID': userId.toString(),
-            }
-          : isHISrHeader
-              ? {'authorization': basicAuth}
-              : null;
-      if (apiCallType.apiType == ApiType.rawPost) {
-        header = header ?? {};
-        header.addAll({'Content-Type': 'application/json'});
-      }
+      // Map<String, String>? header = token
+      //     ? {
+      //         'x-access-token': accessToken.toString(),
+      //         'userID': userId.toString(),
+      //       }
+      //     : isHISrHeader
+      //         ? {'authorization': basicAuth}
+      //         : null;
+      // if (apiCallType.apiType == ApiType.rawPost) {
+      //   header = header ?? {};
+      //   header.addAll({'Content-Type': 'application/json'});
+      // }
 
+      Map<String, String>? header =loginHeader??  {
+        'Content-Type': 'application/json',
+        'Authorization': basicAuth
+      };
       if (onFoundStoredData != null) {
         var storedData = (await _localStorage.fetchData(key: url));
         if (storedData != null) {
@@ -104,14 +119,15 @@ class Api {
       http.Response? response;
       http.StreamedResponse? streamResponse;
       // if (kDebugMode) {
-        log("Api call at ${DateTime.now()}");
-        log("Type: ${apiCallType.apiType.name.toString()}");
+        dPrint("Api call at ${DateTime.now()}");
+        dPrint("Type: ${apiCallType.apiType.name.toString()}");
         if (header != null) {
-          log("Header: $header");
+          dPrint("Header: $header");
         }
-        log("URL: $myUrl");
-        log("BODY: $body");
+        dPrint("URL: $myUrl");
+        dPrint("BODY: $body");
       // }
+
 
       try {
         switch (apiCallType.apiType) {
@@ -246,6 +262,7 @@ class Api {
     String? newBaseUrl,
     bool localStorage=false,
     bool isHISrHeader=false,
+    Map<String, String>? loginHeader,
     ValueChanged? onFoundStoredData
   }) async {
 
@@ -260,27 +277,39 @@ class Api {
       // String myUrl = (newBaseUrl ?? userRepository.getAppDetails.appBaseUrl.toString()+'7080/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge) + url;
 
+      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
+      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
+      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
+      dPrint("myUrl: $myUrl");
+
+
+
       String accessToken = userRepository.getUser.patientName.toString();
       String userId = userRepository.getUser.uhID.toString();
       Map body = apiCallType.body ?? {};
 
-      var basicAuth = 'Basic ${base64Encode(
+      var basicAuth = 'Bearer ${base64Encode(
           utf8.encode('$username:$password'))}';
 
 
-      Map<String, String>? header = token ? {
-        'x-access-token': accessToken.toString(),
-        'userID': userId.toString(),
-      } : isHISrHeader ?
-      {'authorization': basicAuth}
-          : null;
-      if (apiCallType.apiType == ApiType.rawPost) {
-        header = header ?? {};
-        header.addAll({
-          'Content-Type': 'application/json'
-        });
-      }
+      // Map<String, String>? header = token ? {
+      //   'x-access-token': accessToken.toString(),
+      //   'userID': userId.toString(),
+      // } : isHISrHeader ?
+      // {'authorization': basicAuth}
+      //     : null;
+      // if (apiCallType.apiType == ApiType.rawPost) {
+      //   header = header ?? {};
+      //   header.addAll({
+      //     'Content-Type': 'application/json'
+      //   });
+      // }
 
+
+      Map<String, String>? header =loginHeader??  {
+        'Content-Type': 'application/json',
+        'Authorization': basicAuth
+      };
 
       if (onFoundStoredData != null) {
         var storedData = (await _localStorage.fetchData(key: url));
@@ -292,15 +321,14 @@ class Api {
       http.Response? response;
       http.StreamedResponse? streamResponse;
       // if (kDebugMode) {
-        log("Api call at ${DateTime.now()}");
-        log("Type: ${apiCallType.apiType.name.toString()}");
+        dPrint("Api call at ${DateTime.now()}");
+        dPrint("Type: ${apiCallType.apiType.name.toString()}");
         if (header != null) {
-          log("Header: $header");
+          dPrint("Header: $header");
         }
-        log("URL: $myUrl");
-        log("BODY: $body");
+        dPrint("URL: $myUrl");
+        dPrint("BODY: $body");
       // }
-
 
       try {
         switch (apiCallType.apiType) {
@@ -363,8 +391,11 @@ class Api {
             url: url,
             localStorage: localStorage,
             encodeData: response.body,
-
           );
+
+
+
+
           return data;
         }
         else if (streamResponse != null) {
@@ -443,6 +474,7 @@ class Api {
     String? newBaseUrl,
     bool localStorage=false,
     bool isHISrHeader=false,
+    Map<String, String>? loginHeader,
     ValueChanged? onFoundStoredData
   }) async {
 
@@ -458,27 +490,39 @@ class Api {
       // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7096/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7096) + url;
 
+      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
+      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
+      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
+      dPrint("myUrl: $myUrl");
+
+
+
       String accessToken = userRepository.getUser.patientName.toString();
       String userId = userRepository.getUser.uhID.toString();
       Map body = apiCallType.body ?? {};
 
-      var basicAuth = 'Basic ${base64Encode(
+      var basicAuth = 'Bearer ${base64Encode(
           utf8.encode('$username:$password'))}';
 
 
-      Map<String, String>? header = token ? {
-        'x-access-token': accessToken.toString(),
-        'userID': userId.toString(),
-      } : isHISrHeader ?
-      {'authorization': basicAuth}
-          : null;
-      if (apiCallType.apiType == ApiType.rawPost) {
-        header = header ?? {};
-        header.addAll({
-          'Content-Type': 'application/json'
-        });
-      }
+      // Map<String, String>? header = token ? {
+      //   'x-access-token': accessToken.toString(),
+      //   'userID': userId.toString(),
+      // } : isHISrHeader ?
+      // {'authorization': basicAuth}
+      //     : null;
+      // if (apiCallType.apiType == ApiType.rawPost) {
+      //   header = header ?? {};
+      //   header.addAll({
+      //     'Content-Type': 'application/json'
+      //   });
+      // }
 
+
+      Map<String, String>? header =loginHeader??  {
+        'Content-Type': 'application/json',
+        'Authorization': basicAuth
+      };
 
       if (onFoundStoredData != null) {
         var storedData = (await _localStorage.fetchData(key: url));
@@ -490,13 +534,13 @@ class Api {
       http.Response? response;
       http.StreamedResponse? streamResponse;
       // if (kDebugMode) {
-        log("Api call at ${DateTime.now()}");
-        log("Type: ${apiCallType.apiType.name.toString()}");
+        dPrint("Api call at ${DateTime.now()}");
+        dPrint("Type: ${apiCallType.apiType.name.toString()}");
         if (header != null) {
-          log("Header: $header");
+          dPrint("Header: $header");
         }
-        log("URL: $myUrl");
-        log("BODY: $body");
+        dPrint("URL: $myUrl");
+        dPrint("BODY: $body");
       // }
 
 
@@ -639,6 +683,7 @@ class Api {
     String? newBaseUrl,
     bool localStorage=false,
     bool isHISrHeader=false,
+    Map<String, String>? loginHeader,
     ValueChanged? onFoundStoredData
   }) async {
 
@@ -653,30 +698,42 @@ class Api {
     // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7100/') + url;
     String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7100) + url;
 
+    String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
+    String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
+    myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
+    dPrint("myUrl: $myUrl");
+
+
+
 
     String accessToken = userRepository.getUser.patientName.toString();
     String userId =userRepository.getUser.uhID.toString();
     Map body = apiCallType.body??{};
 
-    var basicAuth =  'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+    var basicAuth =  'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
 
 
-    Map<String,String>? header = token? {
-      // 'x-access-token': accessToken.toString(),
-      // 'userID': userId.toString(),
-      'Content-Type': 'multipart/form-data',
-      'accept': '*/*'
-    }:isHISrHeader?
-    {'authorization': basicAuth}
-        :null;
-    if(apiCallType.apiType==ApiType.rawPost){
-      header=header??{};
-      header.addAll({
-        'Content-Type': 'multipart/form-data',
-        'accept': '*/*'
-      });
-    }
+    // Map<String,String>? header = token? {
+    //   // 'x-access-token': accessToken.toString(),
+    //   // 'userID': userId.toString(),
+    //   'Content-Type': 'multipart/form-data',
+    //   'accept': '*/*'
+    // }:isHISrHeader?
+    // {'authorization': basicAuth}
+    //     :null;
+    // if(apiCallType.apiType==ApiType.rawPost){
+    //   header=header??{};
+    //   header.addAll({
+    //     'Content-Type': 'multipart/form-data',
+    //     'accept': '*/*'
+    //   });
+    // }
 
+
+    Map<String, String>? header =loginHeader??  {
+      'Content-Type': 'application/json',
+      'Authorization': basicAuth
+    };
 
     if(onFoundStoredData!=null){
       var storedData=(await _localStorage.fetchData(key: url));
@@ -689,14 +746,15 @@ class Api {
     http.Response? response;
     http.StreamedResponse? streamResponse;
     // if (kDebugMode) {
-      log("Api call at ${DateTime.now()}");
-      log("Type: ${apiCallType.apiType.name.toString()}");
+      dPrint("Api call at ${DateTime.now()}");
+      dPrint("Type: ${apiCallType.apiType.name.toString()}");
       if(header!=null){
-        log("Header: $header");
+        dPrint("Header: $header");
       }
-      log("URL: $myUrl");
-      log("BODY: $body");
+      dPrint("URL: $myUrl");
+      dPrint("BODY: $body");
     // }
+
 
 
     try {
@@ -842,6 +900,7 @@ class Api {
     String? newBaseUrl,
     bool localStorage=false,
     bool isHISrHeader=false,
+    Map<String, String>? loginHeader,
     ValueChanged? onFoundStoredData
   }) async {
 
@@ -856,27 +915,42 @@ class Api {
       // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7082/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7082) + url;
 
+      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
+      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
+      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
+      dPrint("myUrl: $myUrl");
+
+
+
       String accessToken = userRepository.getUser.patientName.toString();
       String userId = userRepository.getUser.patientName.toString();
       Map body = apiCallType.body ?? {};
 
-      var basicAuth = 'Basic ${base64Encode(
-          utf8.encode('$username:$password'))}';
+      // var basicAuth = 'Bearer ${base64Encode(
+      //     utf8.encode('$username:$password'))}';
+
+      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
 
 
-      Map<String, String>? header = token ? {
-        'x-access-token': accessToken.toString(),
-        'userID': userId.toString(),
-      } : isHISrHeader ?
-      {'authorization': basicAuth}
-          : null;
-      if (apiCallType.apiType == ApiType.rawPost) {
-        header = header ?? {};
-        header.addAll({
-          'Content-Type': 'application/json'
-        });
-      }
+      // Map<String, String>? header = token ? {
+      //   'x-access-token': accessToken.toString(),
+      //   'userID': userId.toString(),
+      //   'authorization': basicAuth
+      // } : isHISrHeader ?
+      // {'authorization': basicAuth}
+      //     : null;
+      // if (apiCallType.apiType == ApiType.rawPost) {
+      //   header = header ?? {'authorization': basicAuth};
+      //   header.addAll({
+      //     'Content-Type': 'application/json',
+      //     'authorization': basicAuth
+      //   });
+      // }
 
+      Map<String, String>? header =loginHeader??  {
+        'Content-Type': 'application/json',
+        'Authorization': basicAuth
+      };
 
       if (onFoundStoredData != null) {
         var storedData = (await _localStorage.fetchData(key: url));
@@ -888,16 +962,16 @@ class Api {
       http.Response? response;
       http.StreamedResponse? streamResponse;
       // if (kDebugMode) {
-        log("Api call at ${DateTime.now()}");
-        log("Type: ${apiCallType.apiType.name.toString()}");
+        dPrint("Api call at ${DateTime.now()}");
+        dPrint("Type: ${apiCallType.apiType.name.toString()}");
         if (header != null) {
-          log("Header: $header");
+          dPrint("Header: $header");
         }
-        log("URL: $myUrl");
-        log("BODY: $body");
+        dPrint("URL: $myUrl");
+        dPrint("BODY: $body");
       // }
 
-
+      dPrint("header: $header");
       try {
         switch (apiCallType.apiType) {
           case ApiType.post:
@@ -973,7 +1047,9 @@ class Api {
             encodeData: response.body,
 
           );
-          return data;
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          log("nnnnnnnnnnnn $decryptData");
+          return jsonDecode(decryptData);
         }
         else if (streamResponse != null) {
           var res = await streamResponse.stream.bytesToString();
@@ -1050,6 +1126,7 @@ class Api {
 
     String? newBaseUrl,
     bool localStorage=false,
+    Map<String, String>? loginHeader,
     bool isHISrHeader=false,
     ValueChanged? onFoundStoredData
   }) async {
@@ -1065,26 +1142,42 @@ class Api {
     // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7084/') + url;
     String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7084) + url;
 
+
+    String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
+    String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
+    myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
+    dPrint("myUrl: $myUrl");
+
+
+
+
+
+
     String accessToken = userRepository.getUser.patientName.toString();
     String userId =userRepository.getUser.uhID.toString();
     Map body = apiCallType.body??{};
 
-    var basicAuth =  'Basic ${base64Encode(utf8.encode('$username:$password'))}';
+    var basicAuth =  'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
 
 
-    Map<String,String>? header = token? {
-      'x-access-token': accessToken.toString(),
-      'userID': userId.toString(),
-    }:isHISrHeader?
-    {'authorization': basicAuth}
-        :null;
-    if(apiCallType.apiType==ApiType.rawPost){
-      header=header??{};
-      header.addAll({
-        'Content-Type': 'application/json'
-      });
-    }
+    // Map<String,String>? header = token? {
+    //   'x-access-token': accessToken.toString(),
+    //   'userID': userId.toString(),
+    // }:isHISrHeader?
+    // {'authorization': basicAuth}
+    //     :null;
+    // if(apiCallType.apiType==ApiType.rawPost){
+    //   header=header??{};
+    //   header.addAll({
+    //     'Content-Type': 'application/json'
+    //   });
+    // }
 
+
+    Map<String, String>? header =loginHeader??  {
+      'Content-Type': 'application/json',
+      'Authorization': basicAuth
+    };
 
     if(onFoundStoredData!=null){
       var storedData=(await _localStorage.fetchData(key: url));
@@ -1097,13 +1190,13 @@ class Api {
     http.Response? response;
     http.StreamedResponse? streamResponse;
     // if (kDebugMode) {
-      log("Api call at ${DateTime.now()}");
-      log("Type: ${apiCallType.apiType.name.toString()}");
+      dPrint("Api call at ${DateTime.now()}");
+      dPrint("Type: ${apiCallType.apiType.name.toString()}");
       if(header!=null){
-        log("Header: $header");
+        dPrint("Header: $header");
       }
-      log("URL: $myUrl");
-      log("BODY: $body");
+      dPrint("URL: $myUrl");
+      dPrint("BODY: $body");
     // }
 
 
@@ -1170,7 +1263,9 @@ class Api {
           encodeData: response.body,
 
         );
-        return data;
+        var decryptdata= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+
+        return  jsonDecode(decryptdata);
       }
       else if (streamResponse != null) {
         var res = await streamResponse.stream.bytesToString();
@@ -1250,7 +1345,7 @@ class Api {
   required bool localStorage,
 }) async{
     // if (kDebugMode) {
-      log("Response: $encodeData\n");
+      dPrint("Response: $encodeData\n");
     // }
     try{
       var decodeData=(await json.decode(encodeData));

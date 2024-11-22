@@ -1,3 +1,5 @@
+import 'medcare_utill.dart';
+
 void main() {
 
 
@@ -7,9 +9,9 @@ void main() {
 
   total= add(firstno:a,secondno:b);
 
-  print(total) ;
+  dPrint(total) ;
   total=substact(b,a,7);
-  print(total);
+  dPrint(total);
 
 }
 

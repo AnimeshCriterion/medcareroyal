@@ -113,7 +113,7 @@ class _PillsReminderIntakeAnayticsState extends State<PillsReminderIntakeAnaytic
                   ),
                   Switch(
                       value:themeChange.darkTheme, onChanged: (val)async{
-                    print(DateTime.now());
+                    dPrint(DateTime.now());
                     themeChange.darkTheme=val;
                     themeChangeProvider.darkTheme = await themeChangeProvider.getTheme();
                   })

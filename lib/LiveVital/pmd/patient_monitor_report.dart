@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:pdf/pdf.dart';
 import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -1578,7 +1577,7 @@ class _PatientReportState extends State<PatientReport> {
     await file.writeAsBytes(await pdf.save());
 
     // Open the share dialog to allow the user to share the PDF file
-    await Printing.sharePdf(
+    await  Printing.sharePdf(
         bytes: await file.readAsBytes(),
         filename:
             '${DateFormat('dd MMM yyyy, hh.mm.ss a').format(DateTime.now())}.pdf');

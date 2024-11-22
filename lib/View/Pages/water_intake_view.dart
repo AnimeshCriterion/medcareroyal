@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:medvantage_patient/View/Pages/urin_output.dart';
 import '../../app_manager/comman_widget.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
+import '../../medcare_utill.dart';
 import '../../theme/style.dart';
 import 'package:get/get.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
@@ -80,13 +81,13 @@ class _SliderVerticalWidgetState extends State<SliderVerticalWidget> {
       }
       addvitalVM.fluidC.text = addvitalVM.fluidAdded.toString();
 
-      print('setp1');
+      dPrint('setp1');
 
       int index = addvitalVM.getManualFoodList.indexWhere((item) => item.foodName?.toLowerCase() == addvitalVM.valueFromVoice.toLowerCase());
-      print('setp3');
+      dPrint('setp3');
 
       addvitalVM.updateSelectedFoodID = addvitalVM.getManualFoodList[index].foodID.toString();
-      print('setp4');
+      dPrint('setp4');
       await CustomBottomSheet.open(context,
           child: FunctionalSheet(
             message: localization.getLocaleData.areYouSureYouWantTo.toString() + ' ${addvitalVM.valueFromVoice} (${addvitalVM.fluidAdded.toString()} ml)?',
@@ -958,7 +959,7 @@ class _SliderVerticalWidgetState extends State<SliderVerticalWidget> {
                           //                           InkWell(
                           //                             onTap: () async {
                           //                               addvitalVM.urineC.text = urinData['quantity'].toString();
-                          //                               print('nnnnn ${addvitalVM.urineC.text}');
+                          //                               dPring('nnnnn ${addvitalVM.urineC.text}');
                           //                               addvitalVM.updateSelectedPmID = urinData['pmID'].toString();
                           //                               addvitalVM.updateSelectedID = urinData['id'].toString();
                           //                               addvitalVM.isUpdate = true;
@@ -1364,7 +1365,7 @@ class _SliderVerticalWidgetState extends State<SliderVerticalWidget> {
                                                             InkWell(
                                                               onTap: () async {
                                                                 addvitalVM.urineC.text = urinData['quantity'].toString();
-                                                                print('nnnnn ${addvitalVM.urineC.text}');
+                                                                dPrint('nnnnn ${addvitalVM.urineC.text}');
                                                                 addvitalVM.updateSelectedPmID = urinData['pmID'].toString();
                                                                 addvitalVM.updateSelectedID = urinData['id'].toString();
                                                                 addvitalVM.isUpdate = true;

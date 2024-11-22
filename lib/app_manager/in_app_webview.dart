@@ -139,7 +139,7 @@ import 'app_color.dart';
 //                         });
 //                       },
 //                       onConsoleMessage: (controller, consoleMessage) {
-//                         print(consoleMessage);
+//                         dPring(consoleMessage);
 //                       },
 //                     ),
 //                     progress < 1.0

@@ -85,7 +85,7 @@ ShowSymptomsAttributeDataShow(context) {
                                 return CustomInkWell(
                                   onTap: () {
                                     symptomtrackerVM.OnPressedSelectAttributeSymptom(attributeData:attributeDetailsData);
-                                    print('nnnnnnnnnnn');
+                                    dPrint('nnnnnnnnnnn');
                                   },
                                   child: Padding(
                                     padding: const EdgeInsets.all(5),

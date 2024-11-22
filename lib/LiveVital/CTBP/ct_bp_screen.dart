@@ -13,6 +13,7 @@ import '../../../../Localization/app_localization.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/theme/text_theme.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 import '../../theme/theme.dart';
 import '../live_vital_controller.dart';
 import 'ct_bp_machine.dart';
@@ -324,7 +325,7 @@ class CompletedCTBp extends StatelessWidget {
             ScanCtBpMachineModal scanCtBpMachineModal=ScanCtBpMachineModal();
 
 
-            print('----------nn'+data.sys.toString());
+            dPrint('----------nn'+data.sys.toString());
            await modal.addVitalsData(context,pr:data.pulseRate.toString(),
                BPSys: data.sys.toString(),
                BPDias: data.dia.toString(),

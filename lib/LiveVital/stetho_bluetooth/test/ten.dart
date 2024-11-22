@@ -65,7 +65,7 @@
 //     );
 //
 //
-//     // print('Recording and sampling ');
+//     // dPring('Recording and sampling ');
 //     // final socket = await Socket.connect('ws://aws.edumation.in:5031/echo', 5031);
 //     // Stream<Uint8List>? stream = await MicStream.mi
 //
@@ -88,7 +88,7 @@
 //
 //   Future<void> initPlugin() async {
 //     _audioStream =  stethoController.audioPlayer.onLog.listen((recordState) {
-//      print(recordState.toString());
+//      dPring(recordState.toString());
 //     });
 //   }
 //

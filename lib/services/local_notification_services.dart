@@ -46,7 +46,7 @@ class NotificationService {
     await notificationsPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse:
             (NotificationResponse notificationResponse) async {
-         print("Animeshhshs ${notificationResponse.payload}");
+         dPrint("Animeshhshs ${notificationResponse.payload}");
          onNotificationNavi(notificationResponse.payload.toString());
             });
   }
@@ -77,7 +77,7 @@ class NotificationService {
   //1st create method of show notification//
   showNotification(
       {int id = 0, String? title, String? body, String? payload}) async {
-    print('nnnnnnnnnnnnvvvvvvvvvvvv ');
+    dPrint('nnnnnnnnnnnnvvvvvvvvvvvv ');
     // showNotificationPanel(
     //   ["New message received", "Your download is complete", "Don't miss our update!"],
     // );

@@ -106,7 +106,7 @@ dependencies:
   syncfusion_flutter_pdfviewer: ^21.1.41
   flutter_staggered_animations: ^1.1.1
   flutter_file_downloader:
-#  file_picker: ^5.2.6
+  #  file_picker: ^5.2.6
   flutter_pdfview: ^1.2.2
   path_provider: ^2.0.10
   http: ^0.13.5

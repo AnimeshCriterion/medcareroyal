@@ -28,6 +28,7 @@ import '../app_manager/pdf_viewer.dart';
 import '../app_manager/web_view.dart';
 import '../assets.dart';
 import '../authenticaton/user.dart';
+import '../medcare_utill.dart';
 
 class DrawerViewModals extends ChangeNotifier {
   final Api _api = Api();
@@ -148,13 +149,13 @@ class DrawerViewModals extends ChangeNotifier {
           message: localization.getLocaleData.areuSureYouWantToLogOut.toString(),
           buttonName: localization.getLocaleData.yes.toString(),
           onPressButton: () async {
-            print('nnnnnnnvvvv');
+            dPrint('nnnnnnnvvvv');
 
 
             await userRepository.updateUserData(User());
             await userRepository.logOutUser(context);
             MyNavigator.pushAndRemoveUntil(context, const StartupPage());
-            print('nnnnnnnvvvv');
+            dPrint('nnnnnnnvvvv');
           },
         ));
 

@@ -162,6 +162,10 @@ dependencies:
   audio_input_type_plugin: ^0.0.2
   just_audio:
   in_app_purchase:
+  encrypt: ^5.0.0
+  cryptography: ^2.0.0
+  crypto: ^3.0.0
+  flutter_js:
   #    path: audio_input_type_plugin
 
   #  share_plus: ^7.0.2

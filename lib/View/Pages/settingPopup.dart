@@ -134,10 +134,10 @@ class _PushNotificationSettingsDialogState
           "api/PatientRegistrationForSHFC/UpdatePatientNotification?uhId=${userRepository.getUser.uhID.toString()}&isNotificationRequired=${_pushNotificationEnabled.toString()}",
           apiCallType: ApiCallType.rawPut(body: {}));
 
-      print('nnnnnnnnnnnnn$data');
+      dPrint('nnnnnnnnnnnnn$data');
       if (data['status'] == 1) {
         _isLoading=false;
-        print("Dataaa$data");
+        dPrint("Dataaa$data");
         await _pushNotificationEnabled?
 
         Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'Enabled'.toString()))
@@ -160,7 +160,7 @@ class _PushNotificationSettingsDialogState
       }
     } catch (e) {
       _isLoading=false;
-      print('nnnn$e');
+      dPrint('nnnn$e');
     }
   }
 }

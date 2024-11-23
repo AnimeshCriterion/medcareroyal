@@ -60,10 +60,10 @@ final Api _api=Api();
 
     var data=await getDateTimeData();
 
-    print('nnnnnnnnnnnnnnnnnnnn $data');
+    dPrint('nnnnnnnnnnnnnnnnnnnn $data');
 
      reminderData=data??[];
-     print("mmmmmmmmm"+data.toString());
+     dPrint("mmmmmmmmm"+data.toString());
 
      reminderData.add({'mid':mid,'time':time.toString()});
 
@@ -94,18 +94,18 @@ final Api _api=Api();
    getDateTimeData()async{
      final SharedPreferences prefs = await SharedPreferences.getInstance();
      final String? reminderTime = prefs.getString('reminder');
-    print(reminderTime);
+    dPrint(reminderTime);
      var data=jsonDecode(reminderTime??"[]");
      updateReminderDateTime=data;
-     print(reminderTime);
+     dPrint(reminderTime);
      return data;
    }
 
    onPressedRemove(mId, time) async {
-     print(mId);
-     print(time);
+     dPrint(mId);
+     dPrint(time);
      reminderDateAndTime.removeWhere((element) =>(element['mid'].toString().trim()==mId.toString().trim() && element['time'].toString().trim()==time.toString().trim()));
-     print(reminderDateAndTime);
+     dPrint(reminderDateAndTime);
      final SharedPreferences prefs = await SharedPreferences.getInstance();
      await prefs.setString('reminder',jsonEncode(reminderDateAndTime));
      getDateTimeData();

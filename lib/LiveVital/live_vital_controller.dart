@@ -96,7 +96,7 @@ class LiveVitalModal{
       //   localStorage: true,
       //   apiCallType: ApiCallType.post(body: request),
       // );
-print('nnnnnnvnnnnvnnn '+data.toString());
+dPrint('nnnnnnvnnnnvnnn '+data.toString());
       if (data['status'] == 0) {
         Alert.show(data["message"]);
       } else {

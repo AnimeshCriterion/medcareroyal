@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../app_manager/app_color.dart';
 import '../../app_manager/theme/text_theme.dart';
+import '../../medcare_utill.dart';
 
 
 String tempVar = '0.0';
@@ -47,7 +48,7 @@ class _ThermometerViewState extends State<ThermometerView> {
           (s) => ServiceTile(
             service: s,
             characteristicTiles: s.characteristics.map((c) {
-              // print('nnnnnnnnnnnnnnnn${c.value}');
+              // dPring('nnnnnnnnnnnnnnnn${c.value}');
               return CharacteristicTile(
                 characteristic: c,
                 onReadPressed: () => c.read(),
@@ -220,7 +221,7 @@ get();
                     builder: (c, snapshot) {
                       // for(int i=0;i<snapshot.data!.length;i++){
                       //   for(int j=0;j<snapshot.data!.length;j++){
-                      //     print('nnnnnnnn'+snapshot.data![i].characteristics[j].uuid.toString());
+                      //     dPring('nnnnnnnn'+snapshot.data![i].characteristics[j].uuid.toString());
                       //   }
                       // }
                       return Column(
@@ -331,20 +332,20 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
           .toString() ==
           '2A1C') {
 
-        print("ssssssssssssssssssssss"+value.toString());
+        dPrint("ssssssssssssssssssssss"+value.toString());
 
         if (value!.isNotEmpty && value.toString() != '') {
 
-          print("ssssssssssssssssssssss");
-          print(value);
+          dPrint("ssssssssssssssssssssss");
+          dPrint(value);
           c = value[2].toRadixString(16) + value[1].toRadixString(16);
-          print('cccccccccccc' + c.toString());
+          dPrint('cccccccccccc' + c.toString());
           final number = int.parse(c, radix: 16);
 
           for (int i = 0; i < number
               .toString()
               .length - 1; i++) {
-            print(number.toString()[i].toString());
+            dPrint(number.toString()[i].toString());
             tempv = tempv + number.toString()[i];
           }
           tempv = tempv + '.' + number.toString()[number
@@ -353,8 +354,8 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
         }
 
         else {
-          print("ddddddddddddddddd");
-          print(value);
+          dPrint("ddddddddddddddddd");
+          dPrint(value);
         }
         if (tempv.toString() != '') {
           var typet = value[0].toRadixString(2);
@@ -368,11 +369,11 @@ class _CharacteristicTileState extends State<CharacteristicTile> {
               .toString()
               .length - 1];
 
-           print('tttttttttttt111111' );
+           dPrint('tttttttttttt111111' );
           // temp2=tempv;
         }
 
-        print('tttttttttttt' + tempv.toString());
+        dPrint('tttttttttttt' + tempv.toString());
       }
 
 

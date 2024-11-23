@@ -15,6 +15,7 @@ import '../../Localization/app_localization.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/theme/text_theme.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
+import '../../medcare_utill.dart';
 import '../../theme/theme.dart';
 import 'ct_bp_screen.dart';
 
@@ -32,7 +33,7 @@ class _ScanCTBpMachineState extends State<ScanCTBpMachine> {
 
   @override
   void initState() {
-    print('nnnnnnnnnnnnnnnnn');
+    dPrint('nnnnnnnnnnnnnnnnn');
 
     // TODO: implement initState
     super.initState();

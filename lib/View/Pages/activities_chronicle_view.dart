@@ -150,7 +150,7 @@ class _ActivitiesChronicleViewState extends State<ActivitiesChronicleView> {
                                       // Switch(
                                       //     value: themeChange.darkTheme,
                                       //     onChanged: (val) async {
-                                      //       print(val);
+                                      //       dPring(val);
                                       //       themeChange.darkTheme = val;
                                       //       themeChangeProvider.darkTheme =
                                       //           await themeChangeProvider.getTheme();
@@ -281,7 +281,7 @@ class _ActivitiesChronicleViewState extends State<ActivitiesChronicleView> {
                                                               'YES'
                                                               ? 'No'
                                                               : 'Yes';
-                                                          print(temp[index]);
+                                                          dPrint(temp[index]);
                                                           actChronicleVM
                                                               .allActivityChronicleData['answers'] =
                                                               jsonEncode(temp);
@@ -1782,8 +1782,8 @@ class _ActivitiesChronicleViewState extends State<ActivitiesChronicleView> {
                         onTap: (){
                           actChronicleVM.vitalsList[index]["isSelected"]=! actChronicleVM.vitalsList[index]["isSelected"];
 
-                          print( vital["id"]);
-                          print( vital["vital"].toString());
+                          dPrint( vital["id"]);
+                          dPrint( vital["vital"].toString());
                           actChronicleVM.notifyListeners();
                           },
                         child: Row(children: [
@@ -1807,7 +1807,7 @@ class _ActivitiesChronicleViewState extends State<ActivitiesChronicleView> {
                         icon:       Icon(Icons.add,color: AppColor.white,),
                         onPressed: (){
 
-                          // print("jjjjjjjj"+actChronicleVM.addVital.where((element) => element["value"]==true).toList().toString());
+                          // dPring("jjjjjjjj"+actChronicleVM.addVital.where((element) => element["value"]==true).toList().toString());
 
                           actChronicleVM.updateAddVitalData= actChronicleVM.vitalsList.where((element) =>
                           element["isSelected"]==true).toList();
@@ -1815,7 +1815,7 @@ class _ActivitiesChronicleViewState extends State<ActivitiesChronicleView> {
                           for(int i=0;i<actChronicleVM.getAddVitalData.length;i++){
                             actChronicleVM.addVitalData[i]['controller']=TextEditingController();
                             actChronicleVM.notifyListeners();
-                            print("jjjjjjjj"+actChronicleVM.addVitalData.toString());
+                            dPrint("jjjjjjjj"+actChronicleVM.addVitalData.toString());
                           }
 
 

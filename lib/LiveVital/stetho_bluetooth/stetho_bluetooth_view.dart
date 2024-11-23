@@ -163,7 +163,7 @@ class _StethoBluetoothViewState extends State<StethoBluetoothView> {
               ),];
             },
             onSelected: (val) async {
-            print('nnnnnnnn$val');
+            dPrint('nnnnnnnn$val');
             switch(val) {
             case 1:
       // BluetoothState().requestDisableBluetooth();
@@ -471,7 +471,7 @@ class _StethoBluetoothViewState extends State<StethoBluetoothView> {
                             InkWell(
                               onTap: () async {
             String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
-            // print("Connected Microphone: $microphone");
+            // dPring("Connected Microphone: $microphone");
 
             if((microphone??'')=='Bluetooth Microphone'){
                                  // BluetoothState().requestEnableBluetooth();
@@ -822,7 +822,7 @@ class _StethoBluetoothViewState extends State<StethoBluetoothView> {
   countDown(){
     return   SlideCountdown(style: MyTextTheme.mediumWCB,
       onChanged: (val){
-      print('nnnnvnnnvnnnnnn '+val.toString());
+      dPrint('nnnnvnnnvnnnnnn '+val.toString());
       if(stethoController.getTimerVal<15){
           stethoController.updateTimerVal = stethoController.getTimerVal + 1;
         }

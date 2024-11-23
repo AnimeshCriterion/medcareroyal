@@ -14,6 +14,7 @@ import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../app_manager/widgets/text_field/primary_date_time_field.dart';
 import '../../app_manager/widgets/text_field/primary_text_field.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 
 class HomeIsolation extends StatefulWidget {
   const HomeIsolation({Key? key}) : super(key: key);
@@ -282,7 +283,7 @@ class _HomeIsolationState extends State<HomeIsolation> {
             listToSearch: homeIsolationVM.getHospitalList,
             valFrom: 'name',
             onChanged: (value) {
-              print(value.toString());
+              dPrint(value.toString());
               if(value!=null){
                 homeIsolationVM.updateHospitalId=int.parse(value['id'].toString());
               }
@@ -312,7 +313,7 @@ class _HomeIsolationState extends State<HomeIsolation> {
                     groupValue: _value,
                     onChanged: (value) {
                       setState(() {
-                        print(value);
+                        dPrint(value);
                         _value = value as int;
                       });
                     }),
@@ -326,7 +327,7 @@ class _HomeIsolationState extends State<HomeIsolation> {
                     groupValue: _value,
                     onChanged: (value) {
                       setState(() {
-                        print(value);
+                        dPrint(value);
                         _value = value as int;
                       });
                     }),
@@ -380,7 +381,7 @@ class _HomeIsolationState extends State<HomeIsolation> {
                       value: int.parse(homeIsolationVM.homeCarePackageList[index]['id'].toString()),
                       groupValue: _homeValue,
                       onChanged: (value) {
-                        print(value);
+                        dPrint(value);
                         homeIsolationVM.updatePackageId=int.parse(value.toString());
                         homeIsolationVM.updatePackageName=homeIsolationVM.homeCarePackageList[index]["packageName"].toString()+'  \u{20B9}'+
                             homeIsolationVM.homeCarePackageList[index]["packagePrice"];
@@ -479,12 +480,12 @@ class _HomeIsolationState extends State<HomeIsolation> {
                     //   firstDate:   DateTime((DateTime.now().year-10)) ,
                     //   lastDate:    DateTime.now(),
                     //   dateLabelText: "Date",
-                    //   onChanged: (val)=>print(val),
+                    //   onChanged: (val)=>dPring(val),
                     //   validator: (val){
-                    //     print(val);
+                    //     dPring(val);
                     //     return null;
                     //   },
-                    //   onSaved: (val)=>print(val),
+                    //   onSaved: (val)=>dPring(val),
                     // ),
                     PrimaryDateTimeField( controller: homeIsolationVM.covidtestdateC ,
                       hintText: "Select Covid TestDate",

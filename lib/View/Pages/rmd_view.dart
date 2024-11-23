@@ -33,6 +33,7 @@ import '../../assets.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
 import '../../main.dart';
+import '../../medcare_utill.dart';
 import '../../theme/theme.dart';
 import '../../voice_assistant.dart';
 import '../request_Calback_View.dart';
@@ -94,10 +95,10 @@ class _RMDViewState extends State<RMDView> {
           PermissionStatus status =
               await Permission.activityRecognition.request();
           if (status.isGranted) {
-            print("nnvnnnnnvnnnnvnnnnvn isGranted");
+            dPrint("nnvnnnnnvnnnnvnnnnvn isGranted");
             await rmdViewModal.startStepCounter();
           } else {
-            print("nnvnnnnnvnnnnvnnnnvn  ");
+            dPrint("nnvnnnnnvnnnnvnnnnvn  ");
             // Permission denied, handle appropriately
           }
         }else{
@@ -208,7 +209,7 @@ class _RMDViewState extends State<RMDView> {
           drawer: const MyDrawer(),
           body: WillPopScope(
             onWillPop: () async {
-              print("nnvnnnnnvnnnnvnnnnvnnnvnnnnnvnnnnvnnnnvnnnvnnnnnvnnnnvnnnnvn  ");
+              dPrint("nnvnnnnnvnnnnvnnnnvnnnvnnnnnvnnnnvnnnnvnnnvnnnnnvnnnnvnnnnvn  ");
               // changeQtyAlert2();
               await CustomBottomSheet.open(_context,
                   child: FunctionalSheet(
@@ -305,7 +306,7 @@ class _RMDViewState extends State<RMDView> {
 
                                       // String morningTime='';
                                       //           morningTime= await dashboardVM.callTiming();
-                                      //           print('nnnnnnnvnnnv'+morningTime.toString());
+                                      //           dPring('nnnnnnnvnnnv'+morningTime.toString());
                                       //
                                       //           if(int.parse(morningTime.toString())>=0 && int.parse(morningTime.toString())<=960){
                                       //
@@ -655,7 +656,7 @@ class _RMDViewState extends State<RMDView> {
   //     drawer: const MyDrawer(),
   //     body:  WillPopScope(
   //     onWillPop: () async {
-  //       print('dr;ighldfjklg');
+  //       dPring('dr;ighldfjklg');
   //   // changeQtyAlert2();
   //         await CustomBottomSheet.open(context,
   //           child: FunctionalSheet(
@@ -1122,7 +1123,7 @@ class _RMDViewState extends State<RMDView> {
   //
   //                             // String morningTime='';
   //                             //           morningTime= await dashboardVM.callTiming();
-  //                             //           print('nnnnnnnvnnnv'+morningTime.toString());
+  //                             //           dPring('nnnnnnnvnnnv'+morningTime.toString());
   //                             //
   //                             //           if(int.parse(morningTime.toString())>=0 && int.parse(morningTime.toString())<=960){
   //                             //
@@ -1354,7 +1355,7 @@ class _RMDViewState extends State<RMDView> {
                 onTap: () {
                   String morningTime = '';
                   morningTime = rmdViewModal.callTiming();
-                  print('nnnnnnnvnnnv$morningTime');
+                  dPrint('nnnnnnnvnnnv$morningTime');
 
                   if (int.parse(morningTime.toString()) >= 0 &&
                       int.parse(morningTime.toString()) <= 960) {

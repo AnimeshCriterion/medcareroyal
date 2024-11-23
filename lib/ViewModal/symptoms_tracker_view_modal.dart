@@ -177,7 +177,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
           url: AllApi.getAllSuggestedProblem,localStorage: true,
           apiCallType:
               ApiCallType.rawPost(body: {"alphabet": searchC.text.toString()}));
-      print('nnnnnnnnnnnn$data');
+      dPrint('nnnnnnnnnnnn$data');
       if (data["responseCode"] == 1) {
         symptomsProblemsResponse.data = (List<SymptomsProblemModal>.from(
             ((data['responseValue'] ?? []) as List)
@@ -230,7 +230,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
 
         // symptomResponse.data=(List<SymptomsProblemModal>.from(((data['responseValue'] ?? []) as List).map((e) =>
         //     SymptomsProblemModal.fromJson(e))));
-        print('nnnnnnnnnnnnnnnnnnn${data['responseCode']}');
+        dPrint('nnnnnnnnnnnnnnnnnnn${data['responseCode']}');
         updateSymptomResponse = ApiResponse<List<AttributeDataModal>>.completed(
             getSymptomResponse.data ?? []);
 
@@ -269,7 +269,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         .toList()
         .contains(selectedSymptoms.problemId.toString())) {
       symptomsAdded.removeWhere((element) => element.problemId.toString()==selectedSymptoms.problemId.toString());
-      print('nnnnnnnnnnnnnnnn${selectedSymptoms.problemId}nnn'); // symptomsAdded.removeAt(symptomsAdded
+      dPrint('nnnnnnnnnnnnnnnn${selectedSymptoms.problemId}nnn'); // symptomsAdded.removeAt(symptomsAdded
       //     .map((e) => e.problemId.toString())
       //     .toList()
       //     .indexOf(selectedSymptoms.problemId.toString()));
@@ -279,12 +279,12 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       symptomsAdded.add(selectedSymptoms);
     }
     updateSelectedSymptomProblem = selectedSymptoms;
-    print('nnnnnnnnnnnnnnnn${symptomsAdded.length}');
+    dPrint('nnnnnnnnnnnnnnnn${symptomsAdded.length}');
     if (getSelectedMoreSymptomAttribute
         .map((e) => e.id.toString())
         .toList()
         .contains(selectedSymptoms.problemId.toString())) {
-      // print( 'nnnn'+SelectedSymptomsAttributeList.map((e) => e.organ!.id.toString()).toList().toString());
+      // dPring( 'nnnn'+SelectedSymptomsAttributeList.map((e) => e.organ!.id.toString()).toList().toString());
       // SelectedSymptomsAttributeList.removeAt( SelectedSymptomsAttributeList.map((e) => e.organ!.id.toString()).toList().indexOf(selectedSymptoms.problemId.toString()));
       SelectedSymptomsAttributeList.removeWhere((item) =>
           item.organ!.id.toString() == selectedSymptoms.problemId.toString());
@@ -337,7 +337,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         apiCallType: ApiCallType.rawPost(body: {
           "language": prefs.getString("lang").toString(),
         }));
-    print("xxxxxxxxxxxx ${jsonDecode(data["d"])["responseValue"]}");
+    dPrint("xxxxxxxxxxxx ${jsonDecode(data["d"])["responseValue"]}");
     if (jsonDecode(data["d"])["responseCode"] == 1) {
       List myDAta=jsonDecode(data["d"])["responseValue"];
       for(int i=0;i<myDAta.length;i++){
@@ -361,7 +361,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
 
 // .......RemoveListData..............................
   removeListData(index, problemID) {
-    print(index);
+    dPrint(index);
     if (symptomsAdded
         .map((e) => e.problemId.toString())
         .toList()
@@ -382,7 +382,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
 
 //.......changeTextColor..........
   changeIsVisible(context, index, problemMap) async {
-    print(index);
+    dPrint(index);
 
     if (searchProblem[index]["isVisible"].toString() == '0') {
       updateAddedSymptomsList = {'problemId': problemMap['id'].toString(),'problemName': problemMap['symptoms'].toString()};
@@ -420,7 +420,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       SelectedSymptomsAttributeList;
 
   OnPressedSelectAttributeSymptom({AttributeDetailsDataModal? attributeData}) {
-    // print("xxxxxxxxxxxx$attributeData");
+    // dPring("xxxxxxxxxxxx$attributeData");
     if (SelectedSymptomsAttributeList.map((e) => e.id.toString())
         .toList()
         .contains(attributeData!.attributeValueId.toString())) {
@@ -455,7 +455,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         // .contains(getSelectedSymptomProblem.problemId.toString()))
     {
 
-      print('nnvvvvvvv '+selectedMoreSymptomAttributeList
+      dPrint('nnvvvvvvv '+selectedMoreSymptomAttributeList
           .map((e) => e.id.toString())
           .toList().toString()+'nnnv');
 
@@ -473,7 +473,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
           img: getSelectedSymptomProblem.displayIcon.toString(),
         ),
       );
-      print('nnvvvvvvnnnnnnv '+getSelectedSymptomProblem.problemId.toString());
+      dPrint('nnvvvvvvnnnnnnv '+getSelectedSymptomProblem.problemId.toString());
     }
     notifyListeners();
   }
@@ -521,7 +521,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
           //     "HomeCareService/GetPatientLastVital?uhID=${userRepository.getUser.uhID.toString()}",
           localStorage: true,
           apiCallType: ApiCallType.get());
-      print("nnnnnnnnnnnnnn$data");
+      dPrint("nnnnnnnnnnnnnn$data");
 
        Get.back();
       if (data["status"] == 1) {
@@ -530,8 +530,8 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
             ? DateTime.now().toString()
             : data['responseValue'][0]['vitalDateTime'];
 
-        print(DateTime.now().toString());
-        print(dateTime);
+        dPrint(DateTime.now().toString());
+        dPrint(dateTime);
         final difference = DateTime.now()
             .difference(DateTime.parse(dateTime.toString()))
             .inMinutes;
@@ -540,7 +540,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         if (getVitalTimeDiff >= 15) {
           inputVital(context);
         }
-        print("nnnvnnnvn$difference");
+        dPrint("nnnvnnnvn$difference");
       } else {
 
         Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: "Symptoms Added Successfully !".toString()));
@@ -749,14 +749,14 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
     }
 
     try {
-      print('save');
+      dPrint('save');
       var data = await _api.callMedvanatagePatient7082(context,
           url:
           // 'api/PatientIPDPrescription/InsertSymtoms?uhID=${userRepository.getUser.uhID.toString()}&doctorId=0&jsonSymtoms=${jsonEncode(dtDataTable).toString()}&userId=${userRepository.getUser.userId.toString()}&clientID=${userRepository.getUser.clientId.toString()}',
               "${AllApi.addSymptompsHm}uhID=${userRepository.getUser.uhID.toString()}&userID=${userRepository.getUser.userId.toString()}&isProvisionalDiagnosis=0&isFromPatient=1&doctorId=0&jsonSymtoms=${jsonEncode(dtDataTable).toString()}",
           apiCallType: ApiCallType.post(body: {}),
       isSavedApi: true);
-      print("Check$data");
+      dPrint("Check$data");
 
        Get.back();
       if (data["status"] == 0) {
@@ -804,7 +804,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
               "api/HomeCareSymtoms/GetHomeCareSymtoms?uhID=${userRepository.getUser.uhID.toString()}&clientID=${userRepository.getUser.clientId.toString()}",
           localStorage: true,
           apiCallType: ApiCallType.post(body: {}));
-      print("nnnnnnnnnnnn $data");
+      dPrint("nnnnnnnnnnnn $data");
 
       updateShowNoData=true;
        // Get.back();
@@ -813,12 +813,12 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         // Alert.show(data["responseValue"].toString());
       } else {
 
-        print('nnnnvvvn '+data['responseValue'].toString());
+        dPrint('nnnnvvvn '+data['responseValue'].toString());
         for(int i=0;i<data['responseValue'].length;i++){
           data['responseValue'][i].addAll({'isSymptom':''});
         }
 
-        print('nnnnvvvn '+data['responseValue'].toString());
+        dPrint('nnnnvvvn '+data['responseValue'].toString());
         updateSymptomHistory = data['responseValue'];
       }
     } catch (e) {
@@ -894,7 +894,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
           "${AllApi.addSymptompsHm}uhID=${userRepository.getUser.uhID.toString()}&isProvisionalDiagnosis=0&doctorId=0&jsonSymtoms=${jsonEncode(dtDataTable).toString()}",
           apiCallType: ApiCallType.post(body: {}),
           isSavedApi: true);
-      print("Check$data");
+      dPrint("Check$data");
        Get.back();
       if (data["status"] == 0) {
         Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data["responseValue"].toString()));

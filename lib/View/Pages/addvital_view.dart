@@ -40,6 +40,7 @@ import '../../assets.dart';
 import '../../common_libs.dart';
 import '../../devices_with_new_ui/add_device_connect.dart';
 import '../../devices_with_new_ui/add_device_view.dart';
+import '../../medcare_utill.dart';
 import '../../voice_assistant.dart';
 
 class AddVitalView extends StatefulWidget {
@@ -91,8 +92,8 @@ class _AddVitalViewState extends State<AddVitalView> {
 
     }else{
       addvitalVM.systollicC.text=addvitalVM.allData['vmValueBPSys'].toString();
-      print(addvitalVM.allData['vmValueBPSys'].toString());
-      print(addvitalVM.systollicC.value.text.toString()+'ok');
+      dPrint(addvitalVM.allData['vmValueBPSys'].toString());
+      dPrint(addvitalVM.systollicC.value.text.toString()+'ok');
       // addvitalVM.systollicC.text='90';
       addvitalVM.diatollicC.text=addvitalVM.allData['vmValueBPDias'].toString();
       addvitalVM.respiratoryC.text=addvitalVM.allData['vmValueRespiratoryRate'].toString();
@@ -315,10 +316,7 @@ class _AddVitalViewState extends State<AddVitalView> {
                                       onTap: () async{
 
                                         final prefs = await SharedPreferences.getInstance();
-                                        // final box = GetStorage();
-                                        //   await box.read('isActive');
-                                        // var value= await box.read('isActive');
-                                        // print('asdfghjkrtyuiofghj'+value.toString());
+
 
                                         var value= await prefs.getString('isActive');
 
@@ -330,18 +328,10 @@ class _AddVitalViewState extends State<AddVitalView> {
 
                                             });
                                           }else{
-                                           // Get.showSnackbar(MySnackbar.SuccessSnackBar(message: 'Coming Soon!'));
+
                                             alertToast(context, 'Coming Soon!');
                                           }
-
-                                        // setState(() {
-                                        //
-                                        //   addvitalVM.subscriptionIndex = 1;
-                                        //   addvitalVM.isIntake = false;
-                                        // });
-
-                                          // MyNavigator.push(context, const VitalHistoryPage());
-                                          //  MyNavigator.navigateTransparent(context, const HistoryPage());
+                                        addvitalVM.isIntake = false;
 
                                       },
                                       child: Container(
@@ -1781,7 +1771,7 @@ class _AddVitalViewState extends State<AddVitalView> {
                     ? NeoButton(
                         func: () async {
                           if(FormKey.currentState!.validate()){
-                            print('nnnnnnnnnnnnn');
+                            dPrint('nnnnnnnnnnnnn');
                             // await addvitalVM.AddVitalRequest(context);
 
                             if (addvitalVM.systollicC.text != '' &&
@@ -1876,19 +1866,19 @@ class _AddVitalViewState extends State<AddVitalView> {
     Provider.of<ApplicationLocalizations>(context, listen: false);
     if (Platform.isAndroid) {
       bool permissionGiven = false;
-      print('nnnnnnnvvvvvvv');
+      dPrint('nnnnnnnvvvvvvv');
       _serviceEnabled = await location.serviceEnabled();
       if (!_serviceEnabled) {
         _serviceEnabled = await location.requestService();
         if (!_serviceEnabled) {
-          debugPrint('Location Denied once');
+          dPrint('Location Denied once');
         }
       }
 
       var permissionStatus = await Permission.location.request();
       permissionGiven = permissionStatus.isGranted;
       var permissionloc = await Permission.locationWhenInUse.request();
-      print('nnnnnnnn'+permissionStatus.isGranted.toString());
+      dPrint('nnnnnnnn'+permissionStatus.isGranted.toString());
       permissionGiven = permissionloc.isGranted;
       var permissionBluC = await Permission.bluetoothConnect.request();
       permissionGiven = permissionBluC.isGranted;

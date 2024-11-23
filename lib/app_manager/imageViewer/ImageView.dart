@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:get/get.dart';
+import '../../medcare_utill.dart';
 import '../app_color.dart';
 
 class MyImageView extends StatefulWidget {
@@ -23,7 +24,7 @@ class MyImageView extends StatefulWidget {
 class _MyImageViewState extends State<MyImageView> {
   @override
   void initState() {
-    print(widget.url);
+    dPrint(widget.url);
     super.initState();
   }
 

@@ -71,7 +71,7 @@ class RawData{
 
     }
     on SocketException {
-      print('No Internet connection');
+      dPrint('No Internet connection');
       if(showRetry){
         var retry=await apiDialogue(context, 'Alert  !!!', 'Internet connection issue, try to reconnect.',
         );
@@ -101,16 +101,16 @@ class RawData{
   async {
     UserRepository  userRepository = Provider.of<UserRepository>(context, listen: false);
 
-    // print('**********************');
-    //   print(data);
-    //  print("*********************i");
+    // dPring('**********************');
+    //   dPring(data);
+    //  dPring("*********************i");
     try{
       //Map<String, String> headerC;
       // var formData = FormData.fromMap(body);
       var fullUrl=ApiUtil.baseUrl+url;
-      //  print('bodyyyyyyyyy:  '+body.toString());
-      print('baseurl:  '+fullUrl.toString());
-      // print('userId:  '+user.getUserId.toString());
+      //  dPring('bodyyyyyyyyy:  '+body.toString());
+      dPrint('baseurl:  '+fullUrl.toString());
+      // dPring('userId:  '+user.getUserId.toString());
 
       var response = !(token??   false)?  await Dio().get(fullUrl,
         options: Options(
@@ -130,7 +130,7 @@ class RawData{
       );
 
       var data = await jsonDecode(response.toString());
-      print(data);
+      dPrint(data);
       if(data is List){
         return data[0];
       }
@@ -142,7 +142,7 @@ class RawData{
 
     }
     on SocketException {
-      print('No Internet connection');
+      dPrint('No Internet connection');
       if(showRetry){
         var retry=await apiDialogue(context, 'Alert  !!!', 'Internet connection issue, try to reconnect.',
         );

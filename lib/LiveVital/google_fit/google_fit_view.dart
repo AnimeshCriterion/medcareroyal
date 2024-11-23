@@ -1,6 +1,7 @@
 
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:get/get.dart';
 import 'package:medvantage_patient/LiveVital/google_fit/vitals_moitoring_widget.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
@@ -96,7 +97,7 @@ class _GoogleFitViewState extends State<GoogleFitView> {
     // needed, since we only want READ access.
     bool requested =
         await health.requestAuthorization(types, permissions: permissions);
-    print('requested: $requested');
+    dPrint('requested: $requested');
 
     // If we are trying to read Step Count, Workout, Sleep or other data that requires
     // the ACTIVITY_RECOGNITION permission, we need to request the permission first.
@@ -178,14 +179,14 @@ class _GoogleFitViewState extends State<GoogleFitView> {
         }
         setState(() {});
       } catch (error) {
-        print("Exception in getHealthDataFromTypes: $error");
+        dPrint("Exception in getHealthDataFromTypes: $error");
       }
 
       // filter out duplicates
       _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
 
-      // print the results
-      _healthDataList.forEach((x) => print(x));
+      // dPring the results
+      _healthDataList.forEach((x) => dPrint(x));
 
       // update the UI to display the results
       setState(() {
@@ -193,7 +194,7 @@ class _GoogleFitViewState extends State<GoogleFitView> {
             _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
       });
     } else {
-      print("Authorization not granted");
+      dPrint("Authorization not granted");
       setState(() => _state = AppState.DATA_NOT_FETCHED);
     }
   }
@@ -295,17 +296,17 @@ class _GoogleFitViewState extends State<GoogleFitView> {
       try {
         steps = await health.getTotalStepsInInterval(midnight, now);
       } catch (error) {
-        print("Caught exception in getTotalStepsInInterval: $error");
+        dPrint("Caught exception in getTotalStepsInInterval: $error");
       }
 
-      print('Total number of steps: $steps');
+      dPrint('Total number of steps: $steps');
 
       setState(() {
         _nofSteps = (steps == null) ? 0 : steps;
         _state = (steps == null) ? AppState.NO_DATA : AppState.STEPS_READY;
       });
     } else {
-      print("Authorization not granted - error in authorization");
+      dPrint("Authorization not granted - error in authorization");
       setState(() => _state = AppState.DATA_NOT_FETCHED);
     }
   }

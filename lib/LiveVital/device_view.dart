@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 
 import '../../../Localization/app_localization.dart';
 import '../app_manager/alert_toast.dart';
+import '../medcare_utill.dart';
 import '../theme/theme.dart';
 import 'CTBP/scan_ct_bp_machine.dart';
 import 'HelixTimex/helix_timex.dart';
@@ -60,19 +61,19 @@ class _DeviceViewState extends State<DeviceView> {
         Provider.of<ApplicationLocalizations>(context, listen: false);
     if (Platform.isAndroid) {
       bool permissionGiven = false;
-      print('nnnnnnnvvvvvvv');
+      dPrint('nnnnnnnvvvvvvv');
       _serviceEnabled = await location.serviceEnabled();
       if (!_serviceEnabled) {
         _serviceEnabled = await location.requestService();
         if (!_serviceEnabled) {
-          debugPrint('Location Denied once');
+            dPrint('Location Denied once');
         }
       }
 
       var permissionStatus = await Permission.location.request();
       permissionGiven = permissionStatus.isGranted;
       var permissionloc = await Permission.locationWhenInUse.request();
-      print('nnnnnnnn'+permissionStatus.isGranted.toString());
+      dPrint('nnnnnnnn'+permissionStatus.isGranted.toString());
       permissionGiven = permissionloc.isGranted;
       var permissionBluC = await Permission.bluetoothConnect.request();
       permissionGiven = permissionBluC.isGranted;

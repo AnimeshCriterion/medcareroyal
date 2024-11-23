@@ -23,20 +23,20 @@ class ThermometerVM extends ChangeNotifier{
 
     var c;
 
-    print('vvvvvvvvvvvvvvvvnnnnnnnnnnnv'+val.toString());
+    dPrint('vvvvvvvvvvvvvvvvnnnnnnnnnnnv'+val.toString());
     if(val.isNotEmpty){
       c = val[2].toRadixString(16) + val[1].toRadixString(16);
 
       final number = int.parse(c, radix: 16);
 
       for (int i = 0; i < number.toString().length - 1; i++) {
-        print(number.toString()[i].toString());
+        dPrint(number.toString()[i].toString());
         tempalue = tempalue + number.toString()[i];
       }
       tempalue =
           tempalue + '.' + number.toString()[number.toString().length - 1];
     }
-    print('vvvvvvvvvvvvvvvvv'+tempalue.toString());
+    dPrint('vvvvvvvvvvvvvvvvv'+tempalue.toString());
 
     notifyListeners();
   }

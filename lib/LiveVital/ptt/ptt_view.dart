@@ -191,7 +191,7 @@ class _PulseTransitTimeViewState extends State<PulseTransitTimeView> {
                     //             Navigator.pop(context);
                     //
                     //           } catch (e) {
-                    //             print('Device connecting related issues : $e');
+                    //             dPring('Device connecting related issues : $e');
                     //           }
                     //
                     //           // await pulseTransitTimeController.devicesData!.device.connect();

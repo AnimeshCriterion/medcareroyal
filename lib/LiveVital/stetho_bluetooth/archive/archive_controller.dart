@@ -56,7 +56,7 @@ class ArchiveController extends GetxController{
           apiCallType: ApiCallType.get());
 
       ProgressDialogue().hide();
-      print(data.toString()+' kgvbnvcbnfxg');
+      dPrint(data.toString()+' kgvbnvcbnfxg');
       if (data["status"] == 1) {
         updateStethoAudio=data['responseValue'];
       } else {
@@ -64,7 +64,7 @@ class ArchiveController extends GetxController{
       }
     } catch (e) {
       ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString());
-      print(e.toString());
+      dPrint(e.toString());
     }
   }
 
@@ -82,7 +82,7 @@ class ArchiveController extends GetxController{
   //   var data=await App().api('patientConnectedDevice/GetPatientStethoFileList', body, context,token: true);
   //
   //   updateShowNoData=true;
-  //   print('nnnnnnn '+data.toString());
+  //   dPring('nnnnnnn '+data.toString());
   //   updateStethoAudio=data['stethofileList'];
   // }
 

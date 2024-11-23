@@ -17,8 +17,8 @@ class User {
   String? patientType;
   String? wardName;
   int? wardId;
-  double? height;
-  double? weight;
+  String? height;
+  String? weight;
   String? admitDate;
   String? dischargeDate;
   String? modality;
@@ -123,8 +123,8 @@ class User {
     patientType = json['patientType'];
     wardName = json['wardName'];
     wardId = json['wardId'];
-    height = json['height'];
-    weight = json['weight'];
+    height = json['height'].toString();
+    weight = json['weight'].toString();
     admitDate = json['admitDate'];
     dischargeDate = json['dischargeDate'];
     modality = json['modality'];

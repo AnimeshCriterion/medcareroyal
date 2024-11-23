@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 
+import '../../medcare_utill.dart';
 import '../live_vital_controller.dart';
 
 class BPController extends GetxController{
@@ -44,10 +45,10 @@ set updateIsScanning(bool val){
         if(r.device.id.toString()=='28:FF:B2:F9:B4:14'){
           updateDevicesData=r.device;
           updateIsFound=true;
-          print('nnnnnnnnnnnnnn: ' + r.device.id.toString());
-          print('nnnnnnnnnnnnnn: ' + r.device.name.toString());
+          dPrint('nnnnnnnnnnnnnn: ' + r.device.id.toString());
+          dPrint('nnnnnnnnnnnnnn: ' + r.device.name.toString());
         }
-        print('Device MAC Address : ' + r.device.id.toString());
+        dPrint('Device MAC Address : ' + r.device.id.toString());
 
       }
     });
@@ -98,21 +99,21 @@ set updateIsScanning(bool val){
       }}
     ) ;
     List<BluetoothService> services = await devicesData!.discoverServices();
-    // print('Bluetooth services : ' + services.toString());
+    // dPring('Bluetooth services : ' + services.toString());
     services.forEach((service) async {
 
-      print('Service UUID : ' + service.serviceUuid.toString());
+      dPrint('Service UUID : ' + service.serviceUuid.toString());
       if (service.serviceUuid.toString()  == '1810') {
 
         var characteristics = service.characteristics;
         for (BluetoothCharacteristic c in characteristics) {
 
-          print('Characteristics UUID : ' + c.uuid.toString());
+          dPrint('Characteristics UUID : ' + c.uuid.toString());
           if (c.uuid.toString() == '2a35') {
             await  c.setNotifyValue(true,forceIndications:true,  );
 
             subscription=   c.lastValueStream.listen((value2) async {
-                print("Data received from device : " + value2.toString());
+                dPrint("Data received from device : " + value2.toString());
                 try{
                   if (value2.toList()[0].toString() == '22') {
                     updateSys = value2.toList()[1].toString();
@@ -129,7 +130,7 @@ set updateIsScanning(bool val){
                 catch(e){
 
                 }
-                print("Data received from device : " + value2.toString());
+                dPrint("Data received from device : " + value2.toString());
             });
           }
         }

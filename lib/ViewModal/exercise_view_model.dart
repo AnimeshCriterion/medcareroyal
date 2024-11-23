@@ -63,12 +63,12 @@ class ExerciseViewModel extends ChangeNotifier {
       var data = await _api.callMedvanatagePatient7082(context,
           url: 'api/PhysicalActivityMaster/GetAllPhysicalActivity',localStorage: true,
           apiCallType: ApiCallType.get());
-      print(data.toString());
+      dPrint(data.toString());
       if (data["status"] == 1) {
         updateExerciseList = data['responseValue'];
       } else {}
     } catch (e) {
-      print(e.toString());
+      dPrint(e.toString());
     }
   }
 
@@ -84,7 +84,7 @@ class ExerciseViewModel extends ChangeNotifier {
           apiCallType: ApiCallType.post(body: {}),
           isSavedApi: true);
       ProgressDialogue().hide();
-      print(data.toString());
+      dPrint(data.toString());
       if (data["status"] == 1) {
         Alert.show("Exercise Recorded Successfully !");
 
@@ -93,7 +93,7 @@ class ExerciseViewModel extends ChangeNotifier {
       }
     } catch (e) {
       ProgressDialogue().hide();
-      print(e.toString());
+      dPrint(e.toString());
     }
   }
 
@@ -120,7 +120,7 @@ class ExerciseViewModel extends ChangeNotifier {
           localStorage: true,
           apiCallType: ApiCallType.get());
       ProgressDialogue().hide();
-      print(data.toString());
+      dPrint(data.toString());
       if (data["status"] == 1) {
         updateExerciseHistory = data['responseValue'];
       } else {
@@ -128,7 +128,7 @@ class ExerciseViewModel extends ChangeNotifier {
       }
     } catch (e) {
       ProgressDialogue().hide();
-      print(e.toString());
+      dPrint(e.toString());
     }
   }
 
@@ -145,7 +145,7 @@ class ExerciseViewModel extends ChangeNotifier {
           url: 'Exercise/GetAllRecordByProblemId',localStorage: true,
         apiCallType:  ApiCallType.rawPost(body: body));
 
-    print('nnnnnn'+data.toString());
+    dPrint('nnnnnn'+data.toString());
 
     if (data['responseMessage'] == "Success!") {
       updateExerciseVideos = data['responseValue'] ?? [];

@@ -52,7 +52,7 @@ class AppColor {
   static Color get black  {
     UserRepository userRepository = Provider.of<UserRepository>(_context!, listen: false);
 
-    // print('nnnnnvnnnv :'+userRepository.getAppDetails.appColorSecondary.toString());
+    // dPring('nnnnnvnnnv :'+userRepository.getAppDetails.appColorSecondary.toString());
 
     // return  userRepository.getAppDetails.appColorSecondary.toString().toColor();
     return '#000000'.toColor();

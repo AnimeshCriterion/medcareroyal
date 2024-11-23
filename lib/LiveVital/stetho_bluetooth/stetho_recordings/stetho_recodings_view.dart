@@ -10,6 +10,7 @@ import 'package:medvantage_patient/app_manager/alert_dialogue.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../app_manager/alert_toast.dart';
+import '../../../medcare_utill.dart';
 import '../stetho_bluetooth_controller.dart';
 
 class StethoRecordingView extends StatefulWidget {
@@ -50,7 +51,7 @@ class _StethoRecordingViewState extends State<StethoRecordingView> {
          Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'File deleted successfully'.toString()));
         // alertToast(context,'File deleted successfully');
     } catch (e) {
-      print('Error deleting file : ' + e.toString());
+      dPrint('Error deleting file : ' + e.toString());
     }
   }
 
@@ -63,7 +64,7 @@ class _StethoRecordingViewState extends State<StethoRecordingView> {
     for(var i=0; i<temp.length; i++){
       if(await File(temp[i]['file']).exists()) {
         isExitingsFiles.add(temp[i]);
-        print('==============='+temp.length.toString());
+        dPrint('==============='+temp.length.toString());
       }
 
       SharedPreferences prefs = await SharedPreferences.getInstance();

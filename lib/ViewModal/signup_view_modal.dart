@@ -86,7 +86,7 @@ else {
         await generateOTPForPatient(context);
         otpC.clear();
         updateMobileNo = true;
-        print('nnnnnnnnnnnnnnn' + getMobileNo.toString());
+        dPrint('nnnnnnnnnnnnnnn' + getMobileNo.toString());
       } else {
         await checkLogin(context);
       }
@@ -203,7 +203,7 @@ else {
     }
     catch(e){
 
-      print(e);
+      dPrint(e);
     }
   }
 

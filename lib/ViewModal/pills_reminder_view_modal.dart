@@ -31,17 +31,17 @@ class PillsReminderViewModal extends ChangeNotifier{
 
   List typeIndex=[];
     updateTypeIndex(int val, ){
-      print('nnnvnnvn $typeIndex');
+      dPrint('nnnvnnvn $typeIndex');
 
       if (!typeIndex.contains(val)) {
-        print('nnnvnnvn $val');
+        dPrint('nnnvnnvn $val');
         typeIndex.add(val);
       } else {
-        print('nnnvvvvvvn $val');
+        dPrint('nnnvvvvvvn $val');
         typeIndex.remove(val);
 
     }
-      print('nnnvnnvn $typeIndex');
+      dPrint('nnnvnnvn $typeIndex');
       notifyListeners();
   }
 
@@ -73,7 +73,7 @@ class PillsReminderViewModal extends ChangeNotifier{
     var langId=await prefs.getString("lang").toString();
 
     var data=await _api.callMedvanatagePatient7082(context, url: "api/PatientMedication/GetAllPatientMedication?UhID=${userRepository.getUser.uhID.toString()}&languageId=${langId.toString()}", apiCallType:ApiCallType.get());
-    print('nnnn$data');
+    dPrint('nnnn$data');
 
      // Get.back();
     if(data["status"]==1){
@@ -93,7 +93,7 @@ class PillsReminderViewModal extends ChangeNotifier{
   insertMedicine(context , {required int pmID, required int prescriptionID, required String time}) async {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
-    print(time); String formattedDate = DateFormat('yyyy-MM-dd HH:mm ').format(DateTime.now());
+    dPrint(time); String formattedDate = DateFormat('yyyy-MM-dd HH:mm ').format(DateTime.now());
     try{
       var body={
         "pmID": pmID,
@@ -102,7 +102,7 @@ class PillsReminderViewModal extends ChangeNotifier{
         "prescriptionID": prescriptionID,
         "userID": userRepository.getUser.userId.toString()
       };
-      print("BODY $body");
+      dPrint("BODY $body");
       var data = await _api.callMedvanatagePatient7082(context,
           url: "api/PatientMedication/InsertPatientMedication",
           apiCallType: ApiCallType.rawPost(body: body),

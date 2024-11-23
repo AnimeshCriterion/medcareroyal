@@ -24,7 +24,7 @@ class ListenStethoStreamController extends GetxController{
 
   List<double> get getGraphData=>graphData;
   set updateGraphData(List val){
-    // print(getGraphData.length.toString());
+    // dPring(getGraphData.length.toString());
     for(int i=0;i<val.length;i++){
       if(getGraphData.length<300){
         graphData.add(double.parse(val[i].toString()));
@@ -76,7 +76,7 @@ class ListenStethoStreamController extends GetxController{
   Future<void> webSocketConnect(context) async {
     UserRepository  userRepository = Provider.of<UserRepository>(context, listen: false);
 
-    print('ws://corncall.in:8888/${uhidC.text.toString()}');
+    dPrint('ws://corncall.in:8888/${uhidC.text.toString()}');
 
     try{
       // 'ws://172.16.19.162:5001/ws/audio/'
@@ -107,14 +107,14 @@ class ListenStethoStreamController extends GetxController{
 
 
       //
-       print('nnnvvv' + channel.toString());
+       dPrint('nnnvvv' + channel.toString());
 
       await player.startPlayerFromStream(
           codec: Codec.pcm16, numChannels: 1, sampleRate: 44100
       );
 
       subscription= channel.stream.listen( (data) async {
-         print('nnnvvv' + data.toString());
+         dPrint('nnnvvv' + data.toString());
 
         updateIsWebSocketConnected=true;
          if(data is Uint8List) {
@@ -128,7 +128,7 @@ class ListenStethoStreamController extends GetxController{
             }
           }
           catch(e){
-            print(e);
+            dPrint(e);
           }
         }
 
@@ -141,7 +141,7 @@ class ListenStethoStreamController extends GetxController{
       );
     }
     catch(e){
-      print('response '+e.toString());
+      dPrint('response '+e.toString());
     }
 
 
@@ -158,17 +158,17 @@ class ListenStethoStreamController extends GetxController{
     //   //
     //   // await player.startPlayerFromStream(
     //   //     codec: codec, numChannels: 1, sampleRate: 44100);
-    //    print('kkkkkkkkkkkkkkkk' + channel.toString());
+    //    dPring('kkkkkkkkkkkkkkkk' + channel.toString());
     //
     //   // subscription = channel.stream.listen((data) async {
     //   //
-    //   //   print('kkkkkkkkkkkkkkkk' + data.toString());
+    //   //   dPring('kkkkkkkkkkkkkkkk' + data.toString());
     //   //
     //   //   player.foodSink!.add(FoodData(data));
-    //   //   print('kkkkkkkkkkkkkkkk' + data.toString());
+    //   //   dPring('kkkkkkkkkkkkkkkk' + data.toString());
     //   // },  onDone: reconnect);
     // } catch (e) {
-    //   print('Connection error: $e');
+    //   dPring('Connection error: $e');
     // }
   }
 

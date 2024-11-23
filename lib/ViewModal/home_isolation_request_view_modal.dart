@@ -17,8 +17,8 @@ class HomeIsolationRequestListViewModal extends ChangeNotifier{
   // ApiResponse get getHomeIsoResponse=>homeIsoResponse;
   // set updateHomeIsoResponse(ApiResponse val){
   //   homeIsoResponse=val;
-  //   print("wwwwwwwwww${homeIsoResponse.data}");
-  //   print(getHomeIsoPatientList.length);
+  //   dPring("wwwwwwwwww${homeIsoResponse.data}");
+  //   dPring(getHomeIsoPatientList.length);
   //   notifyListeners();
   // }
   //
@@ -35,7 +35,7 @@ class HomeIsolationRequestListViewModal extends ChangeNotifier{
   //           "memberId":userRepository.getUser.uhID.toString()
   //         }));
   //     if (data['responseCode'] == 1) {
-  //       print("kkkkkkkkkkkkkkkk"+data['responseValue']);
+  //       dPring("kkkkkkkkkkkkkkkk"+data['responseValue']);
   //       homeIsoResponse.data = (List<HomeIsolationRequestDataModal>.from(((data['responseValue'] ?? []) as List).map((e)
   //       => HomeIsolationRequestDataModal.fromJson(e))));
   //

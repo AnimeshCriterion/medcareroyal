@@ -28,6 +28,7 @@ import '../../app_manager/widgets/buttons/primary_button.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../assets.dart';
 import '../../common_libs.dart';
+import '../../medcare_utill.dart';
 import 'drawer_view.dart';
 
 class SymptomTracker extends StatefulWidget {
@@ -66,7 +67,7 @@ class _SymptomTrackerState extends State<SymptomTracker> {
     if(widget.throughVoice==true){
       WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       for(int i =0;i<symptomtrackerVM.symptomsVoiceList.length;i++){
-        print('loop working');
+        dPrint('loop working');
         // symptomtrackerVM.symptomsAdded.add(SymptomsProblemModal(
         //     problemId: symptomtrackerVM.symptomsVoiceList[i]['id'],
         //     problemName: symptomtrackerVM.symptomsVoiceList[i]['symptom'])
@@ -76,8 +77,8 @@ class _SymptomTrackerState extends State<SymptomTracker> {
         symptomtrackerVM.symptomsAdded.add(SymptomsProblemModal(
             problemId: symptomtrackerVM.symptomsVoiceList[i]['id'],
             problemName: symptomtrackerVM.symptomsVoiceList[i]['symptom'].toString()));
-        print("SYMPTOMS TRACKER LIST ${symptomtrackerVM.symptomsAdded.length}");
-        print("length"+symptomtrackerVM.getAddedSymptomsList.length.toString());
+        dPrint("SYMPTOMS TRACKER LIST ${symptomtrackerVM.symptomsAdded.length}");
+        dPrint("length"+symptomtrackerVM.getAddedSymptomsList.length.toString());
         symptomtrackerVM.updateSelectedSymptomProblem = SymptomsProblemModal(
             problemId: symptomtrackerVM.symptomsVoiceList[i]['id'],
             problemName: symptomtrackerVM.symptomsVoiceList[i]['symptom'].toString());
@@ -209,13 +210,13 @@ class _SymptomTrackerState extends State<SymptomTracker> {
                           // if(symptomtrackerVM.addedSymptoms.length==0){
                           //   Alert.show("Please select any symptoms");
                           // }else{
-                            print("SYMPTOMS ADDED LENGTH ${symptomtrackerVM.symptomsAdded.length}");
+                            dPrint("SYMPTOMS ADDED LENGTH ${symptomtrackerVM.symptomsAdded.length}");
                           if(symptomtrackerVM.symptomsAdded.isEmpty){
-                            print("length ${symptomtrackerVM.getSymptomHistory.length}");
+                            dPrint("length ${symptomtrackerVM.getSymptomHistory.length}");
                            // Alert.show(localization.getLocaleData.pleaseSelectSymptomsFirst.toString());
                             if( symptomtrackerVM.getSymptomHistory.isNotEmpty)
                             {
-                              print("PRINT ERRRRRRRRR00000000 ");
+                              dPrint("dPring ERRRRRRRRR00000000 ");
                                       symptomtrackerVM.inputVital2(context);
                             }
                             else{
@@ -225,7 +226,7 @@ class _SymptomTrackerState extends State<SymptomTracker> {
                             }
                           }
                           else{
-                            print("PRINT ERRRRRRRR111111");
+                            dPrint("dPring ERRRRRRRR111111");
                             symptomtrackerVM.symdateC.text=DateTime.now().toString();
                             symptomtrackerVM.notifyListeners();
                             await symptomsDate(context);
@@ -344,7 +345,7 @@ class _SymptomTrackerState extends State<SymptomTracker> {
                   // await symptomtrackerVM.getPatientAllProblems(context);
                   symptomtrackerVM.updateTempProblemList=symptomtrackerVM.getProblemList;
                   setState(() {});
-                  print("dddddddddd"+symptomtrackerVM.getProblemList.toString());
+                  dPrint("dddddddddd"+symptomtrackerVM.getProblemList.toString());
                 },
                 controller: symptomtrackerVM.searchC,
                 borderColor:themeChange.darkTheme==true?Colors.transparent:Colors.grey.shade300,
@@ -387,7 +388,7 @@ class _SymptomTrackerState extends State<SymptomTracker> {
                   itemBuilder: (BuildContext context, int index) {
                     return CustomInkWell(
                       onTap: () async {
-                        print("ali mz ");
+                        dPrint("ali mz ");
                         await symptomtrackerVM.changeIsVisible(context,index,
                             symptomtrackerVM.getTempProblemList[index]);
 
@@ -545,7 +546,7 @@ class _SymptomTrackerState extends State<SymptomTracker> {
                           SymptomsProblemModal problemsData = symptomtrackerVM.getSymptomsTrackerProblemList[index];
                           return  InkWell(
                             onTap: () async {
-                              print('yesss');
+                              dPrint('yesss');
                               await symptomtrackerVM.onPressedSymptoms(index: index, selectedSymptoms: problemsData, context: context);
                             },
                             child: Column(
@@ -768,7 +769,7 @@ class _SymptomTrackerState extends State<SymptomTracker> {
                       //           padding: const EdgeInsets.fromLTRB(5, 6, 5, 5),
                       //           child: InkWell(
                       //             onTap: ()async{
-                      //               print('${symptomHistoryData.problemId}  $index');
+                      //               dPring('${symptomHistoryData.problemId}  $index');
                       //
                       //
                       //               await symptomtrackerVM.onPressedSymptoms(index: index,

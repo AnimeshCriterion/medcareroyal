@@ -12,6 +12,7 @@ import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 
 import '../../app_manager/theme/text_theme.dart';
+import '../../medcare_utill.dart';
 import '../live_vital_controller.dart';
 
 
@@ -175,7 +176,7 @@ class HelixController extends GetxController{
     }
 
     timex.getScanningStateStream.listen((event) {
-      print('My Scanning State '+ event.toString());
+      dPrint('My Scanning State '+ event.toString());
       isScanning.value=event;
       update();
     });
@@ -192,7 +193,7 @@ class HelixController extends GetxController{
             update();
       }
 
-      print('My Connection State'+event.connectionState.toString());
+      dPrint('My Connection State'+event.connectionState.toString());
       conState.value=event.connectionState!;
       update();
     });
@@ -210,7 +211,7 @@ class HelixController extends GetxController{
       if(selectedTimePeriod=='Repeat'){
         measureSpO2();
       }
-      print('My Heart Rate'+event.toString());
+      dPrint('My Heart Rate'+event.toString());
       heartRate.value=event.toString();
       update();
     });
@@ -225,7 +226,7 @@ class HelixController extends GetxController{
       liveVitalModal.addVitalsData(context,hr:event.toString());
 
 
-      print('My SpO2'+event.toString());
+      dPrint('My SpO2'+event.toString());
 
 
       measureBP();
@@ -247,13 +248,13 @@ class HelixController extends GetxController{
 
       measureHR();
       update();
-      print('My Blood Pressure'+event.toString());
+      dPrint('My Blood Pressure'+event.toString());
       sis.value=event['sbp'].toString();
       dis.value=event['dbp'].toString();
       update();
     });
 
-    print('MYYYYY'+(await timex.isConnected()).toString());
+    dPrint('MYYYYY'+(await timex.isConnected()).toString());
 
 
 

@@ -12,6 +12,7 @@ import '../Modal/ChatDataModal.dart';
 import '../View/widget/common_method/show_progress_dialog.dart';
 import '../app_manager/api/api_util.dart';
 import '../authenticaton/user_repository.dart';
+import '../medcare_utill.dart';
 
 class ChatViewModal extends ChangeNotifier {
 
@@ -53,7 +54,7 @@ class ChatViewModal extends ChangeNotifier {
       'GroupId': '0',
       'IsPatient': "true"
     };
-    print(body);
+    dPrint(body);
     var request = http.MultipartRequest(
         'POST', Uri.parse("https://apimedcareroyal.medvantage.tech:7100/SaveUserChat"));
 
@@ -71,15 +72,15 @@ class ChatViewModal extends ChangeNotifier {
 
 
     var data=await response.stream.bytesToString();
-    print('nnnnn ${data}');
+    dPrint('nnnnn ${data}');
 
     if (response.statusCode == 200) {
       ProgressDialogue().hide();
-      // print(await response.stream.bytesToString());
+      // dPring(await response.stream.bytesToString());
       // await userChat(context);
       Map abc=Map.from(jsonDecode(data))['responseValue'];
 
-      print('nnnnn${abc.runtimeType}');
+      dPrint('nnnnn${abc.runtimeType}');
 
        chatList.insert(0,ChatDataModal(
          chatDate: abc['chatDate'],
@@ -102,7 +103,7 @@ class ChatViewModal extends ChangeNotifier {
     }
     else {
       ProgressDialogue().hide();
-      print(response.reasonPhrase);
+      dPrint(response.reasonPhrase);
     }
 
     updateImgPath = '';
@@ -134,23 +135,23 @@ class ChatViewModal extends ChangeNotifier {
       var dataList=data['responseValue'].toList();
       if (data["status"] == 1) {
         updateChatList = dataList.toList();
-        print('nnnnnnnnnnnnnnnnnnnnvnvnnvn ${getChatList.length}');
+        dPrint('nnnnnnnnnnnnnnnnnnnnvnvnnvn ${getChatList.length}');
       } else {
       }
     } catch (e) {
       ProgressDialogue().hide();
-      print(e.toString());
+      dPrint(e.toString());
     }
   }
 
 
 
   set updateChat(var val){
-    print('nnnnnnvvnv${val.toList().runtimeType}');
+    dPrint('nnnnnnvvnv${val.toList().runtimeType}');
    if(val.toList().isNotEmpty) {
       chatList.insert(0,ChatDataModal.fromJson(val.toList()[0]['responseValue']));
     }
-   print('nnnnnnvvnv${val.toList().runtimeType}');
+   dPrint('nnnnnnvvnv${val.toList().runtimeType}');
     notifyListeners();
   }
 
@@ -176,32 +177,32 @@ class ChatViewModal extends ChangeNotifier {
 
       hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
       hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
-      print('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
+      dPrint('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
       await hubConnection.start();
 
-      print('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
-      print('nnnnndsffdsfdfdnn ${hubConnection.state.toString()}');
-      print('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
-      print('nnnnndsffdsfdfdnn ${userRepository.getUser.pid.toString()}');
+      dPrint('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
+      dPrint('nnnnndsffdsfdfdnn ${hubConnection.state.toString()}');
+      dPrint('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
+      dPrint('nnnnndsffdsfdfdnn ${userRepository.getUser.pid.toString()}');
       dynamic data = await hubConnection.invoke("AddUser", args: <Object>[
         int.parse(userRepository.getUser.clientId!.toString()), int.parse(userRepository.getUser.pid!.toString())
       ]);
-      print('nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn $data');
+      dPrint('nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn $data');
 
       hubConnection.on("ReceiveMessage", (arguments) {
-        print('nnnnnnvvnv$arguments');
+        dPrint('nnnnnnvvnv$arguments');
         updateChat = (arguments ?? []).toList();
-        print('nnnnnnvvnv$arguments');
+        dPrint('nnnnnnvvnv$arguments');
         scrollToBottom();
       });
 
       hubConnection.on("OnlineUser", (arguments) {
 
         updateIsOnline = (arguments ?? []).toList().isNotEmpty;
-        print('nnnnnnnnnnn OnlineUser $arguments');
+        dPrint('nnnnnnnnnnn OnlineUser $arguments');
       });
       hubConnection.onclose(({Exception? error}) async {
-        print('Connection closed: ${error?.toString() ?? 'Unknown error'}');
+        dPrint('Connection closed: ${error?.toString() ?? 'Unknown error'}');
         hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
         hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
         await hubConnection.start();
@@ -209,9 +210,9 @@ class ChatViewModal extends ChangeNotifier {
 
     }
     catch(e){
-      print('nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn $e nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn');
+      dPrint('nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn $e nnnnndsffdsfdfdnnnnnnndsffdsfdfdnn');
     }
-    // print('nnnnnnnnnnn'+data.toString());
+    // dPring('nnnnnnnnnnn'+data.toString());
   }
 
 
@@ -236,35 +237,35 @@ class ChatViewModal extends ChangeNotifier {
     await hubConnection.start();
       hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
       hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
-      print('Notification1 ${userRepository.getUser.clientId!.toString()}');
-      print('Notification1 ${hubConnection.state.toString()}');
+      dPrint('Notification1 ${userRepository.getUser.clientId!.toString()}');
+      dPrint('Notification1 ${hubConnection.state.toString()}');
 
       dynamic data = await hubConnection.invoke("AddUser", args: <Object>[
         int.parse(userRepository.getUser.clientId!.toString()), int.parse(userRepository.getUser.userId!.toString())
       ]);
-      print('Notification1 $data');
+      dPrint('Notification1 $data');
     updateNotificationList=data['notificationResponse'];
       // hubConnection.on("ReceiveMessage", (arguments) {
-      //   print('nnnnnnvvnv$arguments');
+      //   dPring('nnnnnnvvnv$arguments');
       //   updateChat = (arguments ?? []).toList();
-      //   print('nnnnnnvvnv$arguments');
+      //   dPring('nnnnnnvvnv$arguments');
       //   scrollToBottom();
       // });
       //
       // hubConnection.on("OnlineUser", (arguments) {
       //
       //   updateIsOnline = (arguments ?? []).toList().isNotEmpty;
-      //   print('nnnnnnnnnnn OnlineUser $arguments');
+      //   dPring('nnnnnnnnnnn OnlineUser $arguments');
       // });
       // hubConnection.onclose(({Exception? error}) async {
-      //   print('Connection closed: ${error?.toString() ?? 'Unknown error'}');
+      //   dPring('Connection closed: ${error?.toString() ?? 'Unknown error'}');
       //   hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
       //   hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
       //   await hubConnection.start();
       // });
 
 
-    // print('nnnnnnnnnnn'+data.toString());
+    // dPring('nnnnnnnnnnn'+data.toString());
   }
 
 

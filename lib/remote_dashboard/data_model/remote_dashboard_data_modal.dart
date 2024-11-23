@@ -759,7 +759,7 @@ bool _renderJsoForBlink(Map json,int id,{
 
 
 
- // print(dataListAfterCondition[0].toString());
+ // dPring(dataListAfterCondition[0].toString());
 
   if(parameter!='vitalDetail'){
 

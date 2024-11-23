@@ -117,7 +117,7 @@ class StethoBluetoothController extends GetxController{
     );
 
 
-    print('nnnnvnnvnn '+tempList.toString());
+    dPrint('nnnnvnnvnn '+tempList.toString());
 
     prefs.setString('audioFiles',jsonEncode(tempList));
 
@@ -169,7 +169,7 @@ class StethoBluetoothController extends GetxController{
     //
     timer = Timer(Duration(seconds: 15), ()
     async {
-      print('nvnnnvnnvv ');
+      dPrint('nvnnnvnnvv ');
           minutes = 0;
           seconds = 0;
 
@@ -177,7 +177,7 @@ class StethoBluetoothController extends GetxController{
 
       await stopRecording();
       initPlugin();
-      print("Connected Microphone: $microphone");
+      dPrint("Connected Microphone: $microphone");
       if((microphone??'')=='Bluetooth Microphone') {
 
         await  storeDataLocally(filePath: audioPath);
@@ -222,7 +222,7 @@ class StethoBluetoothController extends GetxController{
     var tempDir =   Platform.isAndroid? await getDownloadsDirectory() : await getApplicationSupportDirectory();
      updateAudioPath = "${tempDir!.path}/REC${DateFormat('ddMMyyyyHHmmss').format(DateTime.now()).toString()}.wav";
     String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
-    // print("Connected Microphone: $microphone");
+    // dPring("Connected Microphone: $microphone");
 
     if((microphone??'')=='Bluetooth Microphone') {
       await audioRecorder.start(
@@ -249,7 +249,7 @@ class StethoBluetoothController extends GetxController{
 
   List<double> get getGraphData=>graphData;
   set updateGraphData(List val){
-    // print(getGraphData.length.toString());
+    // dPring(getGraphData.length.toString());
     for(int i=0;i<val.length;i++){
       if(getGraphData.length<300){
         graphData.add(double.parse(val[i].toString()));
@@ -281,17 +281,17 @@ class StethoBluetoothController extends GetxController{
   // void processDataQueue() {
   //   // Process a limited number of chunks from the queue
   //   final int chunksToSend = 512; // Adjust the number based on your needs
-  //   print('#####################');
+  //   dPring('#####################');
   //   for (int i = 0; i < chunksToSend && dataQueue.isNotEmpty; i++) {
   //     final Uint8List chunk = dataQueue.removeFirst();
   //     // Send the chunk over WebSocket (replace this with your WebSocket logic)
-  //     print('Sending chunk: ${chunk.length} items');
+  //     dPring('Sending chunk: ${chunk.length} items');
   //   }
   // }
 
 
   Future<void> initPlugin() async {
-    print('nnnvnvnnv ');
+    dPrint('nnnvnvnnv ');
     if(Platform.isAndroid) {
       await AndroidAudioManager().startBluetoothSco();
       await AndroidAudioManager().setBluetoothScoOn(true);
@@ -303,7 +303,7 @@ class StethoBluetoothController extends GetxController{
         audioFormat: AudioFormat.ENCODING_PCM_16BIT
     );
 
-    print('nnnvnvnnv');
+    dPrint('nnnvnvnnv');
     // await player.openPlayer(enableVoiceProcessing: true);
     //
     // await player.startPlayerFromStream(
@@ -314,7 +314,7 @@ class StethoBluetoothController extends GetxController{
     //   // feedHim(samples);
     //   //player.foodSink!.add(FoodData(samples));
     //
-    //   print('nnnvnvnnv'+samples.length.toString());
+    //   dPring('nnnvnvnnv'+samples.length.toString());
     //
     //   channel.sink.add(samples);
     //   updateGraphData=samples;
@@ -363,10 +363,10 @@ class StethoBluetoothController extends GetxController{
     micStream= stream.listen((data) async {
 
       String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
-      print("Connected Microphone: $microphone");
+      dPrint("Connected Microphone: $microphone");
 
       // if((microphone??'')=='Bluetooth Microphone') {
-        // print('nnnvnvnnv'+data.length.toString());
+        // dPring('nnnvnvnnv'+data.length.toString());
         channel.sink.add(data);
         updateGraphData = data;
       // }
@@ -385,7 +385,7 @@ class StethoBluetoothController extends GetxController{
   stopRecording() async {
     String? microphone = await AudioInputTypePlugin.getConnectedMicrophone();
 
-    print("stopRecordingstopRecordingstopRecording Microphone: $microphone");
+    dPrint("stopRecordingstopRecordingstopRecording Microphone: $microphone");
     await  audioRecorder.stop();
     updateIsRecording = false;
   }
@@ -420,15 +420,15 @@ class StethoBluetoothController extends GetxController{
       // 'ws://172.16.19.162:5001/ws/audio?token=1'
       // channel = WebSocketChannel.connect(wsUrl);
 
-      print('nnvnvnnv '+userRepository.getUser.uhID.toString().toString());
+      dPrint('nnvnvnnv '+userRepository.getUser.uhID.toString().toString());
       channel =  IOWebSocketChannel.connect('ws://corncall.in:8888/${userRepository.getUser.uhID.toString()}');
 
-         print('kkkkkkkkkkkkkkkk' + channel.toString());
+         dPrint('kkkkkkkkkkkkkkkk' + channel.toString());
 
         subscription = channel.stream.listen((data) async {
 
 
-             print('nnnvvv' + data.length.toString());
+             dPrint('nnnvvv' + data.length.toString());
 
 
        },  onDone: (){
@@ -437,7 +437,7 @@ class StethoBluetoothController extends GetxController{
 
 
     } catch (e) {
-      print('Connection error: $e');
+      dPrint('Connection error: $e');
     }
   }
 
@@ -481,7 +481,7 @@ class StethoBluetoothController extends GetxController{
       // 'formFile':getImgPath.toString()
 
     };
-    print("mdkgmg"+body.toString());
+    dPrint("mdkgmg"+body.toString());
     try{
       var request = http.MultipartRequest(
           'POST',
@@ -503,7 +503,7 @@ class StethoBluetoothController extends GetxController{
       } else {
         isSavedData=false;
         await  saveFileLocally(filePath: filePath.toString() ,isSaved:false );
-        print(response.reasonPhrase);
+        dPrint(response.reasonPhrase);
       }
     } on SocketException catch (_) {
 
@@ -526,7 +526,7 @@ class StethoBluetoothController extends GetxController{
       final prefs = await SharedPreferences.getInstance();
       List data = [];
       data = jsonDecode(prefs.getString('stetho') ?? "[]");
-      print('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn '+data.toString());
+      dPrint('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn '+data.toString());
 
         data.add({'filePath': filePath.toString(), 'isSaved': isSaved});
         await prefs.setString('stetho', jsonEncode(data));
@@ -534,7 +534,7 @@ class StethoBluetoothController extends GetxController{
     }
     catch(e){
 
-      print('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn '+e.toString());
+      dPrint('nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn '+e.toString());
     }
   }
 
@@ -557,8 +557,8 @@ class StethoBluetoothController extends GetxController{
   //       'stethoName': 'stethoName',
   //     };
   //
-  //     print('nnnvnnvnv '+body.toString());
-  //     print(filePath.toString());
+  //     dPring('nnnvnnvnv '+body.toString());
+  //     dPring(filePath.toString());
   //     var request = http.MultipartRequest('POST', Uri.parse('http://182.156.200.179:201/patientStethoFile.ashx'));
   //     request.fields.addAll(body);
   //     // request.headers.addAll({
@@ -570,18 +570,18 @@ class StethoBluetoothController extends GetxController{
   //
   //     http.StreamedResponse response = await request.send();
   //
-  //     print(await response.statusCode.toString());
-  //     print('nnnnvnn ');
-  //     // print(await response.stream.bytesToString());
+  //     dPring(await response.statusCode.toString());
+  //     dPring('nnnnvnn ');
+  //     // dPring(await response.stream.bytesToString());
   //      Get.back();
   //
   //     if (response.statusCode == 200) {
   //       alertToast(context,await response.stream.bytesToString().toString());
   //
-  //       // print(await response.stream.bytesToString());
+  //       // dPring(await response.stream.bytesToString());
   //     }
   //     else {
-  //       // print(response.reasonPhrase);
+  //       // dPring(response.reasonPhrase);
   //     }
   // }
 
@@ -604,7 +604,7 @@ class StethoBluetoothController extends GetxController{
 
     ProgressDialogue().hide();
 
-    print('nnnvnnv '+data.toString());
+    dPrint('nnnvnnv '+data.toString());
 
     if((data['patientRegistration'] ?? []).isNotEmpty){
       updatePatientData =   data['patientRegistration'][0];
@@ -612,7 +612,7 @@ class StethoBluetoothController extends GetxController{
     }
 
 
-    print('nnnnnnnn'+patientData.toString());
+    dPrint('nnnnnnnn'+patientData.toString());
 
   }
 

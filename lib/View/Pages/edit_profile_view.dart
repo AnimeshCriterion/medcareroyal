@@ -60,10 +60,10 @@ class _EditProfileState extends State<EditProfile> {
           ? ''
           : DateFormat('yyyy-MM-dd').format(DateFormat("dd/MM/yyyy")
               .parse(userRepository.getUser.dob.toString()));
-      print('nnnnnnnnnnnnnn' + userRepository.getUser.gender.toString());
+      dPrint('nnnnnnnnnnnnnn' + userRepository.getUser.gender.toString());
       editProfileVM.updateSelectedGender =
           userRepository.getUser.gender.toString() == 'Male' ? 1 : 2;
-      print('nnnnnnnnnnnnnn' + editProfileVM.getSelectedGender.toString());
+      dPrint('nnnnnnnnnnnnnn' + editProfileVM.getSelectedGender.toString());
       editProfileVM.addressC.text = userRepository.getUser.address.toString();
     }
   }

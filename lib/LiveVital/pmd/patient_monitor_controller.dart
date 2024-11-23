@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 
 import '../../app_manager/alert_toast.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 import '../live_vital_controller.dart';
 
 
@@ -73,7 +74,7 @@ class MyPatientMonitorController extends GetxController{
     updateIsDeviceConnected=false;
     updateIsDeviceFound=false;
     updateIsDeviceScanning=true;
-    print('3DeviceScanning'+getIsDeviceScanning.toString());
+    dPrint('3DeviceScanning'+getIsDeviceScanning.toString());
 
     // Start scanning
     FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
@@ -85,12 +86,12 @@ class MyPatientMonitorController extends GetxController{
     scanSubscription = FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
-        print(r.device.name.toString());
+        dPrint(r.device.name.toString());
         if (r.device.name.toString() == 'CT_PMonitor_1') {
           updateIsDeviceFound=true;
           updateDevicesData = r;
         }
-        print('${r.device.name.toString()}');
+        dPrint('${r.device.name.toString()}');
       }
     });
     update();
@@ -240,7 +241,7 @@ class MyPatientMonitorController extends GetxController{
 
   checkDeviceConnection() {
     devicesData!.device.state.listen((event) {
-      print(event);
+      dPrint(event);
 
       // if(event==BluetoothDeviceState.connected) {
       if(event==BluetoothDeviceState.connected) {
@@ -266,8 +267,8 @@ class MyPatientMonitorController extends GetxController{
     spO2LiveGraphT();
     List<BluetoothService> services = await devicesData!.device.discoverServices();
     services.forEach((service) async {
-      print(service.uuid.toString().toUpperCase().substring(4, 8).toString());
-      print(service.uuid.toString());
+      dPrint(service.uuid.toString().toUpperCase().substring(4, 8).toString());
+      dPrint(service.uuid.toString());
 
       if (service.uuid.toString().toUpperCase().substring(4, 8).toString() ==
           '181C') {
@@ -276,7 +277,7 @@ class MyPatientMonitorController extends GetxController{
 
         for (BluetoothCharacteristic c in characteristics) {
 
-          print('characteristics'+c.uuid.toString());
+          dPrint('characteristics'+c.uuid.toString());
 
           if (c.uuid.toString().toUpperCase().substring(4, 8).toString() ==
               '0040') {
@@ -286,7 +287,7 @@ class MyPatientMonitorController extends GetxController{
 
               var data = ascii.decode(value2);
 
-              print('nnnnnnnnnn'+data.toString());
+              dPrint('nnnnnnnnnn'+data.toString());
 
               updateHrList=double.parse(data.split(',')[0].toString());
 
@@ -358,23 +359,23 @@ class MyPatientMonitorController extends GetxController{
   averagebpsys() {
 
     try{
-      print("hhhhhhhh"+bpValueListGraph.length.toString());
+      dPrint("hhhhhhhh"+bpValueListGraph.length.toString());
 
       var sum=0.0;
       double avg=0.0;
 
       for(var i=0; i<bpValueListGraph.map((e)=>e['value'].split(',')[1]).toList().length; i++) {
         sum += double.parse(bpValueListGraph.map((e)=>e['value'].split(',')[1]).toList()[i]);
-        print("sssss"+sum.toString());
+        dPrint("sssss"+sum.toString());
       }
 
       avg = sum/(bpValueListGraph.map((e)=>e['value'].split(',')[1]).length);
-      print('ddddddddddd'+avg.toString());
+      dPrint('ddddddddddd'+avg.toString());
       // return avg.toStringAsFixed(2);
       return bpValueListGraph.isEmpty?'0':avg.toStringAsFixed(2);
 
     } catch (e) {
-      print("eeeeee"+e.toString());
+      dPrint("eeeeee"+e.toString());
     }
 
   }
@@ -382,23 +383,23 @@ class MyPatientMonitorController extends GetxController{
   averagebpdia() {
 
     try{
-      print("hhhhhhhh"+bpValueListGraph.length.toString());
+      dPrint("hhhhhhhh"+bpValueListGraph.length.toString());
 
       var sum=0.0;
       double avg=0.0;
 
       for(var i=0; i<bpValueListGraph.map((e)=>e['value'].split(',')[2]).toList().length; i++) {
         sum += double.parse(bpValueListGraph.map((e)=>e['value'].split(',')[2]).toList()[i]);
-        print("sssss"+sum.toString());
+        dPrint("sssss"+sum.toString());
       }
 
       avg = sum/(bpValueListGraph.map((e)=>e['value'].split(',')[2]).length);
-      print('ddddddddddd'+avg.toString());
+      dPrint('ddddddddddd'+avg.toString());
       // return avg.toStringAsFixed(2);
       return bpValueListGraph.isEmpty?'0':avg.toStringAsFixed(2);
 
     } catch (e) {
-      print("eeeeee"+e.toString());
+      dPrint("eeeeee"+e.toString());
     }
 
   }
@@ -407,18 +408,18 @@ class MyPatientMonitorController extends GetxController{
     bpGraphT();
     List<BluetoothService> services =  await devicesData!.device.discoverServices();
     services.forEach((service) async {
-      print(service.uuid.toString().toUpperCase().substring(4, 8).toString());
-      // print(service.uuid.toString());
+      dPrint(service.uuid.toString().toUpperCase().substring(4, 8).toString());
+      // dPring(service.uuid.toString());
 
       if(service.uuid.toString().toUpperCase().substring(4, 8).toString()=='1810') {
         var characteristics = service.characteristics;
 
         for (BluetoothCharacteristic c in characteristics) {
-          print('nnnnnnnnnnnnnnnnnn' + c.uuid.toString().toUpperCase().substring(4, 8));
+          dPrint('nnnnnnnnnnnnnnnnnn' + c.uuid.toString().toUpperCase().substring(4, 8));
           if(c.uuid.toString().toUpperCase().substring(4, 8).toString()=='2A49'){
             c.setNotifyValue(true);
             subscription1 = c.value.listen((value2) async {
-              // print('nnnnnnnnnn'+value2.toString());
+              // dPring('nnnnnnnnnn'+value2.toString());
 
               var data = ascii.decode(value2);
               try{
@@ -442,7 +443,7 @@ class MyPatientMonitorController extends GetxController{
               catch(e){
 
               }
-              print('nnnnnnnnnn' + data.toString());
+              dPrint('nnnnnnnnnn' + data.toString());
             });
           }
         }
@@ -491,23 +492,23 @@ class MyPatientMonitorController extends GetxController{
   averagehr() {
 
   try{
-    print("hhhhhhhh"+hrValueListGraph.length.toString());
+    dPrint("hhhhhhhh"+hrValueListGraph.length.toString());
 
     int sum=0;
     double avg=0.0;
 
     for(int i=0; i<hrValueListGraph.map((e)=>e['value']).toList().length; i++) {
       sum += int.parse(hrValueListGraph.map((e)=>e['value']).toList()[i]);
-      print("sssss"+sum.toString());
+      dPrint("sssss"+sum.toString());
     }
 
     avg = sum/(hrValueListGraph.map((e)=>e['value']).length);
-    print('ddddddddddd'+avg.toString());
+    dPrint('ddddddddddd'+avg.toString());
     // return avg.toStringAsFixed(2);
     return hrValueListGraph.isEmpty?'0':avg.toStringAsFixed(2);
 
   } catch (e) {
-    print("eeeeee"+e.toString());
+    dPrint("eeeeee"+e.toString());
   }
 
   }
@@ -516,20 +517,20 @@ class MyPatientMonitorController extends GetxController{
     hrGraphT();
     List<BluetoothService> services =  await devicesData!.device.discoverServices();
     services.forEach((service) async {
-      print(service.uuid.toString().toUpperCase().substring(4, 8).toString());
-      // print(service.uuid.toString());
+      dPrint(service.uuid.toString().toUpperCase().substring(4, 8).toString());
+      // dPring(service.uuid.toString());
 
       if(service.uuid.toString().toUpperCase().substring(4, 8).toString()=='180D') {
         var characteristics = service.characteristics;
 
         for (BluetoothCharacteristic c in characteristics) {
-          print('nnnnnnnnnnnnnnnnnn' + c.uuid.toString().toUpperCase().substring(4, 8));
+          dPrint('nnnnnnnnnnnnnnnnnn' + c.uuid.toString().toUpperCase().substring(4, 8));
           if(c.uuid.toString().toUpperCase().substring(4, 8).toString()=='2A37'){
             c.setNotifyValue(true);
             subscription2 = c.value.listen((value2) async {
 
               var data = ascii.decode(value2);
-              print('hrrhrhrhrhrhrhrhrh' + data.toString());
+              dPrint('hrrhrhrhrhrhrhrhrh' + data.toString());
               try{
                 updateHrValue = data.toString();
                 updateHrValueList = data.toString().split(',')[0];
@@ -587,23 +588,23 @@ class MyPatientMonitorController extends GetxController{
   averagetemp() {
 
     try{
-      print("hhhhhhhh"+tempValueListGraph.length.toString());
+      dPrint("hhhhhhhh"+tempValueListGraph.length.toString());
 
       var sum=0.0;
       double avg=0.0;
 
       for(var i=0; i<tempValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += double.parse(tempValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sssss"+sum.toString());
+        dPrint("sssss"+sum.toString());
       }
 
       avg = sum/(tempValueListGraph.map((e)=>e['value']).length);
-      print('ddddddddddd'+avg.toString());
+      dPrint('ddddddddddd'+avg.toString());
       // return avg.toStringAsFixed(2);
       return tempValueListGraph.isEmpty?'0':avg.toStringAsFixed(2);
 
     } catch (e) {
-      print("eeeeee"+e.toString());
+      dPrint("eeeeee"+e.toString());
     }
 
   }
@@ -612,8 +613,8 @@ class MyPatientMonitorController extends GetxController{
     tempGraphT();
     List<BluetoothService> services =  await devicesData!.device.discoverServices();
     services.forEach((service) async {
-      print(service.uuid.toString().toUpperCase().substring(4, 8).toString());
-      // print(service.uuid.toString());
+      dPrint(service.uuid.toString().toUpperCase().substring(4, 8).toString());
+      // dPring(service.uuid.toString());
 
       if(service.uuid.toString().toUpperCase().substring(4, 8).toString()=='1809'){
         var characteristics = service.characteristics;
@@ -676,23 +677,23 @@ class MyPatientMonitorController extends GetxController{
   averagespO2() {
 
     try{
-      print("hhhhhhhh"+spO2ValueListGraph.length.toString());
+      dPrint("hhhhhhhh"+spO2ValueListGraph.length.toString());
 
       int sum=0;
       double avg=0.0;
 
       for(int i=0; i<spO2ValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += int.parse(spO2ValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sssss"+sum.toString());
+        dPrint("sssss"+sum.toString());
       }
 
       avg = sum/(spO2ValueListGraph.map((e)=>e['value']).length);
-      print('ddddddddddd'+avg.toString());
+      dPrint('ddddddddddd'+avg.toString());
       // return avg.toStringAsFixed(2);
       return spO2ValueListGraph.isEmpty?'0':avg.toStringAsFixed(2);
 
     } catch (e) {
-      print("eeeeee"+e.toString());
+      dPrint("eeeeee"+e.toString());
     }
 
   }
@@ -737,23 +738,23 @@ class MyPatientMonitorController extends GetxController{
   averagepr() {
 
     try{
-      print("hhhhhhhh"+prValueListGraph.length.toString());
+      dPrint("hhhhhhhh"+prValueListGraph.length.toString());
 
       int sum=0;
       double avg=0.0;
 
       for(int i=0; i<prValueListGraph.map((e)=>e['value']).toList().length; i++) {
         sum += int.parse(prValueListGraph.map((e)=>e['value']).toList()[i]);
-        print("sssss"+sum.toString());
+        dPrint("sssss"+sum.toString());
       }
 
       avg = sum/(prValueListGraph.map((e)=>e['value']).length);
-      print('ddddddddddd'+avg.toString());
+      dPrint('ddddddddddd'+avg.toString());
       // return avg.toStringAsFixed(2);
       return prValueListGraph.isEmpty?'0':avg.toStringAsFixed(2);
 
     } catch (e) {
-      print("eeeeee"+e.toString());
+      dPrint("eeeeee"+e.toString());
     }
 
   }
@@ -763,8 +764,8 @@ class MyPatientMonitorController extends GetxController{
     prGraphT();
     List<BluetoothService> services =  await devicesData!.device.discoverServices();
     services.forEach((service) async {
-      print(service.uuid.toString().toUpperCase().substring(4, 8).toString());
-      // print(service.uuid.toString());
+      dPrint(service.uuid.toString().toUpperCase().substring(4, 8).toString());
+      // dPring(service.uuid.toString());
 
       if(service.uuid.toString().toUpperCase().substring(4, 8).toString()=='1822') {
         var characteristics = service.characteristics;
@@ -774,7 +775,7 @@ class MyPatientMonitorController extends GetxController{
           if(c.uuid.toString().toUpperCase().substring(4, 8).toString()=='1004') {
             c.setNotifyValue(true);
             subscription4 = c.value.listen((value2) async {
-              print('nnnnvnnnnvnn'+value2.toString());
+              dPrint('nnnnvnnnnvnn'+value2.toString());
 
               var data = ascii.decode(value2);
 
@@ -795,21 +796,21 @@ class MyPatientMonitorController extends GetxController{
 
 
   Future<BluetoothCharacteristic?> getPatientData({required String myService, required String myCharacteristic,required String name}) async {
-    print(name.toString());
+    dPrint(name.toString());
 
     String data='';
     late BluetoothCharacteristic ch;
 
     List<BluetoothService> services =  await devicesData!.device.discoverServices();
     services.forEach((service) async {
-      print(service.uuid.toString().toUpperCase().substring(4, 8).toString());
-      // print(service.uuid.toString());
+      dPrint(service.uuid.toString().toUpperCase().substring(4, 8).toString());
+      // dPring(service.uuid.toString());
 
       if(service.uuid.toString().toUpperCase().substring(4, 8).toString()==myService){
         var characteristics = service.characteristics;
 
         for (BluetoothCharacteristic c in characteristics) {
-          print('nnnnnnnnnnnnnnnnnn' + c.uuid.toString().toUpperCase().substring(4, 8));
+          dPrint('nnnnnnnnnnnnnnnnnn' + c.uuid.toString().toUpperCase().substring(4, 8));
 
           if(c.uuid.toString().toUpperCase().substring(4, 8).toString()==myCharacteristic.toString()){
             ch=c;
@@ -817,7 +818,7 @@ class MyPatientMonitorController extends GetxController{
             // subscription = c.value.listen((value2) async{
             //    data = ascii.decode(value2);
             //
-            //   print('nnnnnnnnnn' + data.toString());
+            //   dPring('nnnnnnnnnn' + data.toString());
             // });
           }
         }
@@ -875,7 +876,7 @@ class MyPatientMonitorController extends GetxController{
       updateActiveConnection = false;
 
     }
-    print('Turn On the data and repress again'+ActiveConnection.toString());
+    dPrint('Turn On the data and repress again'+ActiveConnection.toString());
   }
 
 

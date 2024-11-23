@@ -9,6 +9,8 @@ import 'package:syncfusion_flutter_pdfviewer/pdfviewer.dart';
 
 import 'package:get/get.dart';
 
+import '../medcare_utill.dart';
+
 
 
 class PdfViewer extends StatefulWidget {
@@ -71,17 +73,17 @@ class _PdfViewerState extends State<PdfViewer> {
                         duration: const Duration(seconds: 2),
                       ),
                     );
-                    print('path  $value ');
+                    dPrint('path  $value ');
 
 
                     },
                     onDownloadError: (String error) {
-                      print('DOWNLOAD ERROR: $error');
+                      dPrint('DOWNLOAD ERROR: $error');
                     },
                   );
 
                 }catch (e){
-                  print(e);
+                  dPrint(e);
                 }
 
                     },

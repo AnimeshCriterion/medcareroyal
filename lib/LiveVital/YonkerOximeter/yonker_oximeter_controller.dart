@@ -10,6 +10,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 import '../devices_api.dart';
 
 
@@ -42,20 +43,20 @@ class YonkerOximeterController extends GetxController{
     // Start scanning
     bool isAlreadyConnected=false;
      List<BluetoothDevice> data=await FlutterBluePlus.connectedDevices;
-    print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
+    dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
      if(data.isNotEmpty){
 
        updateIsDeviceFound = false;
        updateIsScanning = true;
 
-       print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
+       dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
        // String tempName='';
        for(int i=0;i<data.length;i++){
          if(data[i].name.toString().contains('BleModuleA')){
            updateIsScanning = false;
            // tempName=data[i].name.toString();
            isAlreadyConnected=true;
-           print('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
+           dPrint('nnvnnvnvnvnnnvnnvnnnnnnnnvnnvnnnvnnvnnnn : ' + data.toString());
            updateDevicesData =data[i];
            Future.delayed(Duration(seconds: 3)).then((value) async {
              getData(context);
@@ -75,7 +76,7 @@ class YonkerOximeterController extends GetxController{
         // do something with scan results
 
         for (ScanResult r in results) {
-          print(r.device.id.toString());
+          dPrint(r.device.id.toString());
           if (r.device.name.toString() == 'BleModuleA') {
             updateDevicesData = r.device;
             updateIsDeviceFound = true;
@@ -85,7 +86,7 @@ class YonkerOximeterController extends GetxController{
             });
           }
 
-          print('${r.device.name.toString()}');
+          dPrint('${r.device.name.toString()}');
         }
       });
     }
@@ -101,7 +102,7 @@ class YonkerOximeterController extends GetxController{
 
   checkConnection(context){
     devicesData!.state.listen((event) {
-      print('nnnnnnnnnnnnnnnnnvnnvnnnnn' + getIsConnected.toString());
+      dPrint('nnnnnnnnnnnnnnnnnvnnvnnnnn' + getIsConnected.toString());
       if(event==BluetoothDeviceState.connected){
         updateIsConnected=true;
 
@@ -140,8 +141,8 @@ class YonkerOximeterController extends GetxController{
         }
       }
 
-      print('nnnnnnnnnnnnnnnnnvnnvnnnnn' + getIsConnected.toString());
-      print('nnnnnnnnnnnnnnnnnvnnvnnnnn' + devicesData.toString());
+      dPrint('nnnnnnnnnnnnnnnnnvnnvnnnnn' + getIsConnected.toString());
+      dPrint('nnnnnnnnnnnnnnnnnvnnvnnnnn' + devicesData.toString());
       Future.delayed(Duration(seconds: 3)).then((value) async {
         await devicesData!.connect();
         checkConnection(context);
@@ -151,12 +152,12 @@ class YonkerOximeterController extends GetxController{
     List<BluetoothService> services =  await devicesData!.discoverServices();
 
     services.forEach((service) async {
-      print('Service Length' + service.uuid.toString());
+      dPrint('Service Length' + service.uuid.toString());
       if(service.uuid.toString()=='cdeacd80-5235-4c07-8846-93a37ee6b86d'){
         var characteristics = service.characteristics;
 
         for (BluetoothCharacteristic c in characteristics) {
-          print('nnnnnvnvnnvn' + c.uuid.toString());
+          dPrint('nnnnnvnvnnvn' + c.uuid.toString());
 
           if(c.uuid.toString()=='cdeacd81-5235-4c07-8846-93a37ee6b86d'){
             c.setNotifyValue(true);
@@ -201,7 +202,7 @@ class YonkerOximeterController extends GetxController{
       updateActiveConnection = false;
 
     }
-    print('Turn On the data and repress again'+ActiveConnection.toString());
+    dPrint('Turn On the data and repress again'+ActiveConnection.toString());
   }
 
 

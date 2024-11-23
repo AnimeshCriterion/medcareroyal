@@ -32,7 +32,7 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
 
 
   onPressBack() async {
-    print('nnnnnnnnnnnn ');
+    dPrint('nnnnnnnnnnnn ');
     try{
 
       controller.updateSelectedDeviceIndex = '';

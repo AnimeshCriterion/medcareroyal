@@ -155,7 +155,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
         url: "api/PatientMedication/GetAllPatientMedication?UhID=${userRepository.getUser.uhID.toString()}&languageId=${langId.toString()}",
         localStorage: true,
         apiCallType: ApiCallType.get());
-    print('nnnn'+data.toString());
+    dPrint('nnnn'+data.toString());
 
     updateShowNoData=true;
     //  Get.back();
@@ -179,7 +179,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
     ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
-    print(  intakeTimeC.text.toString(),);
+    dPrint(  intakeTimeC.text.toString(),);
     String formattedDate = DateFormat('yyyy-MM-dd ').format(DateFormat('dd MMM yyyy').parse(dateShowController.value.text));
     // String time = DateFormat('HH:mm').format(DateFormat('yyyy-MM-ddHH:mm').parse(intakeTimeC.text));
     ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString()
@@ -187,7 +187,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
 
 
     );
-    print(formattedDate.toString()+ intakeTimeC.text.toString(),);
+    dPrint(formattedDate.toString()+ intakeTimeC.text.toString(),);
     try{
       var body = {
         // "uhID":userRepository.getUser.uhID.toString(),
@@ -199,13 +199,13 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
         "duration": duration.toString(),
         "compareTime": time.toString()
       };
-      print("BODY $body");
+      dPrint("BODY $body");
 
       var data = await _api.callMedvanatagePatient7082(context,
           url: "api/PatientMedication/InsertPatientMedication",
           apiCallType: ApiCallType.rawPost(body: body),
       isSavedApi: true);
-      print("DATA @@@ $data");
+      dPrint("DATA @@@ $data");
 
        Get.back();
       if (data['status'] == 1) {
@@ -225,7 +225,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
 
 
   bool checkDurationType(String duration){
-    print("Animes$duration");
+    dPrint("Animes$duration");
    return durationType.map((e) =>
         e.durationType.toString().trim().removeAllWhitespace.toLowerCase()).toList().contains(duration.toLowerCase());
   }
@@ -236,7 +236,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
     String iconString=jsonTimeData.isEmpty? '':jsonTimeData[0].icon.toString();
     String durationTypeString=jsonTimeData.isEmpty? '':jsonTimeData[0].durationType.toString();
     String timeString=jsonTimeData.isEmpty? '':jsonTimeData[jsonTimeData.map((e) => e.durationType.toString().toLowerCase()).toList().indexOf(duration.toLowerCase())].time.toString();
-    print('nnnnvnnvnnnnnn '+timeString);
+    dPrint('nnnnvnnvnnnnnn '+timeString);
 
      if(checkDurationType(duration) == false){
       return const Center(child: Text("--",textAlign: TextAlign.center,));
@@ -291,7 +291,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
                            dateTimePickerType: DateTimePickerType.time,
                            hintText: 'Select Intake Time',
                            onChanged: (val){
-                             print('intakeTimeCintakeTimeC '+intakeTimeC.toString());
+                             dPrint('intakeTimeCintakeTimeC '+intakeTimeC.toString());
                              notifyListeners();
                            },
                          ),
@@ -306,7 +306,7 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
                                  Get.back(
 
                                );
-                               print('intakeTimeCintakeTimeC '+intakeTimeC.value.text.toString());
+                               dPrint('intakeTimeCintakeTimeC '+intakeTimeC.value.text.toString());
 
                                await CustomBottomSheet.open(context,
                                    child: FunctionalSheet(

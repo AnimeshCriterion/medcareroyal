@@ -7,6 +7,7 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import '../../app_manager/updater.dart';
+import '../../medcare_utill.dart';
 
 class App {
   api(url, body, context, {
@@ -33,11 +34,11 @@ class App {
       }
 
 
-      print(myUrl);
-      print(body.toString());
-      print(myHeader.toString());
+      dPrint(myUrl);
+      dPrint(body.toString());
+      dPrint(myHeader.toString());
       if (token == true) {
-        print(myHeader.toString());
+        dPrint(myHeader.toString());
       }
 
 
@@ -55,11 +56,11 @@ class App {
           body: body
       );
 
-      print('fffffffffffdfgdfgdfg');
+      dPrint('fffffffffffdfgdfgdfg');
 
       log(response.body.toString());
       //log("dfffffffffffffffffffffff"+response.body.toString()+' dsddsfsdf');
-      print(
+      dPrint(
           "dfffffffffffffffffffffff" + response.body.toString() + ' dsddsfsdf');
       var data = await json.decode(response.body);
 
@@ -78,7 +79,7 @@ class App {
         //     'status': 0,
         //     'message': data,
         //   };
-        //   print(newData.toString());
+        //   dPring(newData.toString());
         //   return newData;
         // }
 
@@ -93,17 +94,17 @@ class App {
           data = newMap;
         }
         data['responseCode'] = response.statusCode;
-        //  print(data.toString());
+        //  dPring(data.toString());
         if (data['status'] == 0 && (data['message'] == 'Invalid Token' ||
             data['message'] == 'Unauthorised User')) {
-          print('tttttttttttttt');
+          dPrint('tttttttttttttt');
           // Navigator.popUntil(context, ModalRoute.withName('/RMDView'));
           // await user.removeUserData();
           // replaceNavigate(context, LoginPageView());
           // alertToast(context, data['message']);
         }
         else {
-          print('dddddddddddd');
+          dPrint('dddddddddddd');
           return data;
         }
       }
@@ -117,7 +118,7 @@ class App {
 
     }
     on SocketException {
-      print('No Internet connection');
+      dPrint('No Internet connection');
       var retry = await apiDialogue(
         context, 'Alert', 'Internet connection issue, try to reconnect.',
       );
@@ -134,7 +135,7 @@ class App {
       }
     }
     // on TimeoutException catch (e) {
-    //   print('Time Out ' + e.toString());
+    //   dPring('Time Out ' + e.toString());
     //   var retry = await apiDialogue(
     //     context, 'Alert', 'Time Out, plz check your connection.',
     //   );
@@ -148,7 +149,7 @@ class App {
     //   }
     // }
     // catch (e) {
-    //   print('Error in Api: $e');
+    //   dPring('Error in Api: $e');
     //   var retry = await apiDialogue(
     //     context, 'Alert', 'Some Error Occur, plz check your connection.',
     //   );

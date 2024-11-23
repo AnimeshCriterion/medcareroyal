@@ -2,9 +2,6 @@
 /// Consolidate shared imports that are common across the app.
 
 
-export 'dart:math';
-
-
 export 'package:lottie/lottie.dart';
 export 'package:shared_preferences/shared_preferences.dart';
 export 'package:chewie/chewie.dart';
@@ -42,3 +39,4 @@ export 'package:firebase_messaging/firebase_messaging.dart';
 export 'package:firebase_core/firebase_core.dart';
 export 'package:r_dotted_line_border/r_dotted_line_border.dart';
 export 'package:dotted_border/dotted_border.dart';
+export 'package:medvantage_patient/medcare_utill.dart';

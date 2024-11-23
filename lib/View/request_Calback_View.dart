@@ -6,6 +6,7 @@ import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.da
 
 import '../authenticaton/user_repository.dart';
 import '../common_libs.dart';
+import '../medcare_utill.dart';
 
 class RequestCallbackFormStyled extends StatefulWidget {
   @override
@@ -34,7 +35,7 @@ TextEditingController remarkC=TextEditingController();
 
     // Construct the full URL with parameters
     Uri url = Uri.parse('$apiUrl?Uhid=$uhid&deviceToken=$deviceToken&clientId=$clientId&remark=${remarkC.value.text.toString()}&emergencyNumber=$emergencyNumber');
-print("CheckUrl"+url.toString());
+dPrint("CheckUrl"+url.toString());
     try {
       // Make the GET request
       final response = await http.post(url);
@@ -43,7 +44,7 @@ print("CheckUrl"+url.toString());
       if (response.statusCode == 200) {
         // Parse the JSON response
         var responseData = json.decode(response.body);
-        print('Response data: $responseData');
+        dPrint('Response data: $responseData');
 
         // Handle response data, e.g., show success message or process the data
         ScaffoldMessenger.of(context).showSnackBar(
@@ -52,14 +53,14 @@ print("CheckUrl"+url.toString());
         Navigator.of(context).pop(
         );
       } else {
-        print('Failed to call API. Status code: ${response.statusCode}');
+        dPrint('Failed to call API. Status code: ${response.statusCode}');
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text('Something went wrong please try again .'))
         );
       }
     } catch (error) {
       // Handle any exceptions
-      print('Error calling API: $error');
+      dPrint('Error calling API: $error');
       ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(content: Text('Error in Communication with Server .'))
       );

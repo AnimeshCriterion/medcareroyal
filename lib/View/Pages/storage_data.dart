@@ -12,6 +12,7 @@ import 'package:workmanager/workmanager.dart';
 import '../../app_manager/alert_toast.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
+import '../../medcare_utill.dart';
 
 
 class MyHomePage extends StatefulWidget {
@@ -135,7 +136,7 @@ callbackDispatcher() {
 
 geet(){
   Timer.periodic(Duration(seconds: 5), (timer) {
-    print('nnnnnvnvnnv  Workmanager');
+    dPrint('nnnnnvnvnnv  Workmanager');
   });
 }
 
@@ -228,7 +229,7 @@ class InternalStorage{
   _createFolder()async{
     await Permission.manageExternalStorage.request();
     final nn = await getExternalStorageDirectory();
-    print(nn);
+    dPrint(nn);
     final folderName="mPateint";
     final path= Directory("${nn!.path.split('/data')[0]}/.$folderName");
     if ((await path.exists())){
@@ -246,7 +247,7 @@ class InternalStorage{
 
   _createFile(folderPath) async {
     final file = File(folderPath.toString()+fileName);
-    // print('nnnvnvnnv '+file.path.toString());
+    // dPring('nnnvnvnnv '+file.path.toString());
     return file;
   }
 
@@ -254,7 +255,7 @@ class InternalStorage{
     var folderPath= await _createFolder();
     var file= await  _createFile(folderPath);
 
-    print('nnnvnvnnv '+file.path.toString());
+    dPrint('nnnvnvnnv '+file.path.toString());
     return file;
   }
 
@@ -286,7 +287,7 @@ class InternalStorage{
     }
     initialData['dataList']=temp;
 
-    print('nnnvnvnnv '+initialData.toString());
+    dPrint('nnnvnvnnv '+initialData.toString());
     await file.writeAsString(jsonEncode(initialData));
     await getData();
 
@@ -305,9 +306,9 @@ class InternalStorage{
   getData() async {
     final file =await _returnFilePath();
     var jsonString = await   file.readAsString();
-    print('nnnvnvnnv '+jsonString.toString());
+    dPrint('nnnvnvnnv '+jsonString.toString());
     List temp=jsonDecode(jsonString)['dataList'];
-    print('nnnvnvnnv '+jsonDecode(jsonString)['dataList'].toString());
+    dPrint('nnnvnvnnv '+jsonDecode(jsonString)['dataList'].toString());
     return temp;
   }
 
@@ -321,8 +322,8 @@ class InternalStorage{
 
 
     for(int i=0;i<temp.length;i++){
-      print('nnnvnnvnnvvvnn nn '+temp[i]['parameters'].toString());
-      print('nnnvnnvnnvvvnn nn '+Map<String, String>.from(temp[i]['header']).toString());
+      dPrint('nnnvnnvnnvvvnn nn '+temp[i]['parameters'].toString());
+      dPrint('nnnvnnvnnvvvnn nn '+Map<String, String>.from(temp[i]['header']).toString());
       await apiMethods(context,temp[i]['methodName'].toString(),
         body: temp[i]['parameters'],
         myUrl: temp[i]['fullUrl'],
@@ -331,9 +332,9 @@ class InternalStorage{
         filePath:  temp[i]['filePath'],
         token: temp[i]['isToken'],
       );
-      print('nnnvnnvnnvvvnn nntemp '+temp .toString());
+      dPrint('nnnvnnvnnvvvnn nntemp '+temp .toString());
       temp.removeAt(i);
-      print('nnnvnnvnnvvvnn nntemp '+temp .toString());
+      dPrint('nnnvnnvnnvvvnn nntemp '+temp .toString());
       await InternalStorage().storeData(context, storedData: temp);
     }
 
@@ -341,7 +342,7 @@ class InternalStorage{
   }
 
   apiMethods(BuildContext context,ApiType,{myUrl,body, header,fileParameter,filePath,token }) async {
-    print('nnnvnnvnnvvvnn nn '+ApiType.toString());
+    dPrint('nnnvnnvnnvvvnn nn '+ApiType.toString());
     http.Response? response;
     http.StreamedResponse? streamResponse;
     try{
@@ -391,7 +392,7 @@ class InternalStorage{
       }
     }
     catch(e){
-      print('nnnvnnvnnvvvnn '+e.toString());
+      dPrint('nnnvnnvnnvvvnn '+e.toString());
       Map currentData={
         'fullUrl':myUrl,
         'parameters':body,

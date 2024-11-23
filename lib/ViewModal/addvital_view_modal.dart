@@ -22,6 +22,7 @@ import '../app_manager/bottomSheet/functional_sheet.dart';
 import '../app_manager/dialog.dart';
 import '../assets.dart';
 import '../main.dart';
+import '../medcare_utill.dart';
 
 class AddVitalViewModal extends ChangeNotifier {
 
@@ -160,7 +161,7 @@ set updatePauseFunc(val){
   AddVitalRequest(context) async {
     UserRepository userRepository =
         Provider.of<UserRepository>(context, listen: false);
-    print('nnnnnnnnnnnnn');
+    dPrint('nnnnnnnnnnnnn');
     List dtDataTable = [];
     dtDataTable.add({
       'vitalId': 4.toString(),
@@ -234,10 +235,10 @@ var tmp=temperatureC.value.text.toString()==''?"0":temperatureC.value.text.toStr
 var hr=heartrateC.text.toString()==''?"0":heartrateC.text.toString();
     var rbs=rbsC.text.toString()==''?'0':rbsC.text.toString();
     var weight=weightC.value.text.toString()==''?'0':weightC.value.text.toString();
-    print('nnnnnnnnnnnnnnv '+dateC.text.toString());
+    dPrint('nnnnnnnnnnnnnnv '+dateC.text.toString());
     var date=DateFormat('yyyy-MM-dd').format(DateTime.parse(dateC.text));
     var time=DateFormat('HH:mm').format(DateFormat('yyyy-MM-dd HH:mm').parse(dateC.text));
-    print('nnnnnnnnnnnnnnv '+time.toString());
+    dPrint('nnnnnnnnnnnnnnv '+time.toString());
 
 
     try{
@@ -285,7 +286,7 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
       //     apiCallType: ApiCallType.post(body: request),
       //     isSavedApi: true);
       Get.back();
-      print('echoechoechoechoechoecho '+data.toString());
+      dPrint('echoechoechoechoechoecho '+data.toString());
       if (data['status'] == 0) {
 
         Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data["responseValue"].toString()));
@@ -342,7 +343,7 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
       // Alert.show("Vital Added Successfully !");
     }
 
-    print("ANimesh$data");
+    dPrint("ANimesh$data");
   }
 
   addVitalsDataUrine(context) async {
@@ -362,7 +363,7 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
       'unitID': 1,
       'userID': userRepository.getUser.userId.toString()
     };
-    print("Request"+body.toString());
+    dPrint("Request"+body.toString());
     var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.currentContext!,
         url:'api/output/SavePatientOutput',
         localStorage: true,
@@ -394,7 +395,7 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
       myNewDialog(title: 'Output Added Successfully');
     }
 
-    print("ANimesh$data");
+    dPrint("ANimesh$data");
   }
 
 
@@ -599,7 +600,7 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
        Get.back();
     }
 
-    print("ANimesh$data");
+    dPrint("ANimesh$data");
   }
 
 
@@ -651,13 +652,13 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
           "userID": userRepository.getUser.userId.toString(),
         };
 
-        print("nnnnnnnnnnnnnn${jsonEncode(body)}");
+        dPrint("nnnnnnnnnnnnnn${jsonEncode(body)}");
         var data = await _api.callMedvanatagePatient7096(context,
             url: "api/FoodIntake/InsertFoodIntake",
             apiCallType: ApiCallType.rawPost(body: body),
             isSavedApi: true);
         ProgressDialogue().hide();
-        print("nnnnnnnnnnnnnn$data");
+        dPrint("nnnnnnnnnnnnnn$data");
         if (data["status"] == 0) {
           Get.showSnackbar( MySnackbar.ErrorSnackBar(message: data['responseValue'].toString()));
           // Alert.show(data['responseValue'].toString());
@@ -685,7 +686,7 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
     }
     catch (e) {
       ProgressDialogue().hide();
-      print(e.toString());
+      dPrint(e.toString());
 
     }
   }
@@ -708,8 +709,8 @@ var data = await _api.callMedvanatagePatient7082(NavigationService.navigatorKey.
     if (val >= 0 && val < getManualFoodList.length) {
       intakeIndex = val;
       // goToPage(intakeIndex);
-      print(val.toString());
-      print(manualFoodList.length.toString());
+      dPrint(val.toString());
+      dPrint(manualFoodList.length.toString());
       notifyListeners();
     }
   }
@@ -729,7 +730,7 @@ updateShowNoData=false;
 
       updateShowNoData=true;
        // Get.back();
-      print("nnnnnnnnnnnnnn${jsonEncode(data)}");
+      dPrint("nnnnnnnnnnnnnn${jsonEncode(data)}");
       if (data["status"] == 1) {
         updateManualFoodList=data['responseValue'];
       } else {
@@ -755,7 +756,7 @@ updateShowNoData=false;
   // https://apishfc.medvantage.tech:7082/api/output/GetPatientOutputList?UHID=UHID00759
   urinHistory(context)async{
     UserRepository userRepository = Provider.of<UserRepository>(context, listen: false);
-    print("vvvvvvvvvvvv ");
+    dPrint("vvvvvvvvvvvv ");
     updateShowNoData=false;
     try{
       var data=await _api.callMedvanatagePatient7082(context,
@@ -774,7 +775,7 @@ updateShowNoData=false;
 
     }catch(e){
       updateShowNoData=true;
-      print("vvvvvvvvvvvv ");}
+      dPrint("vvvvvvvvvvvv ");}
   }
 
 
@@ -786,7 +787,7 @@ ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading
       var data=await _api.callMedvanatagePatient7082(context, url: "api/output/DeletePatientOutput?pmID=${pmID}&Key=${id}&userID=${userRepository.getUser.userId.toString()}",
           apiCallType: ApiCallType.delete(body: {}),
           isSavedApi: true);
-      print("vvvvvvvvvvvv${jsonEncode(data)}");
+      dPrint("vvvvvvvvvvvv${jsonEncode(data)}");
      Get.back();
       if (data["status"] == 1) {
 
@@ -838,13 +839,13 @@ ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading
         'unitID': 1,
         'userID': userRepository.getUser.userId.toString()
       };
-      print("vvvvvvvvvvvv${body}");
+      dPrint("vvvvvvvvvvvv${body}");
       var data = await _api.callMedvanatagePatient7082(context,
           url: "api/output/UpdatePatientOutput",
           apiCallType: ApiCallType.rawPut(body: body),
           isSavedApi: true);
 
-      print("vvvvvvvvvvvv${jsonEncode(data)}");
+      dPrint("vvvvvvvvvvvv${jsonEncode(data)}");
        Get.back();
 
       if (data["status"] == 1) {
@@ -908,7 +909,7 @@ ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading
       clearData();
 
       updateShowNoData=true;
-      print("nnnnnnnnnnnnnn${jsonEncode(data)}");
+      dPrint("nnnnnnnnnnnnnn${jsonEncode(data)}");
       // final snackBar = SnackBar(
       //   content: Text("This is a SnackBar message!",style: MyTextTheme.mediumBCB,),
       //   duration: Duration(minutes: 2),  // Duration the SnackBar will be visible
@@ -941,7 +942,7 @@ ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading
         // })
         //     .toList();
         // updateVitalHistoryList = result;
-        // print("######################");
+        // dPring("######################");
         // log(getVitalHistoryList.toString());
 
       } else {
@@ -951,7 +952,7 @@ ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading
     }
     catch (e) {
       updateShowNoData=true;
-      print(e.toString());
+      dPrint(e.toString());
 
     }
 
@@ -1015,7 +1016,7 @@ set updateSelectedPosition(String val){
         apiCallType: ApiCallType.get( ),
         isSavedApi: true
     );
-    print(('nnnnn '+data.toString()));
+    dPrint(('nnnnn '+data.toString()));
     if (data['status'] == 0) {
       // Alert.show(data["responseValue"]);
     } else {
@@ -1023,6 +1024,6 @@ set updateSelectedPosition(String val){
 
     }
 
-    print("ANimesh$data");
+    dPrint("ANimesh$data");
   }
 }

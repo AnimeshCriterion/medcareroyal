@@ -56,7 +56,7 @@ class RemoteDashboardController extends GetxController {
       .map((element) => RemoteDashboardMonitoringDataModal.fromJson(element))));
 
   set updateRemoteData(List val) {
-    // print('nnvnnnvnvnvnvnnv'+val.toString());
+    // dPring('nnvnnnvnvnvnvnnv'+val.toString());
     remoteData = val;
     update();
   }
@@ -80,7 +80,7 @@ class RemoteDashboardController extends GetxController {
         .where((element) => element.vitalID.toString() == vitalId.toString())
         .toList();
     if (getRemoteData[index].patientDataList!.vitalParametersList != null) {
-      print('nvnvnvnvn${data.length}');
+      dPrint('nvnvnvnvn${data.length}');
     }
     if (data.isNotEmpty) {
       return data[0].vitalColor.toString().contains('#')
@@ -226,7 +226,7 @@ class RemoteDashboardController extends GetxController {
 
   // final hubConnection = new HubConnectionBuilder().withUrl(serverUrl).build();
 
-  // hubCallback: (methodName, message) => print('MethodName = $methodName, Message = $message'));
+  // hubCallback: (methodName, message) => dPring('MethodName = $methodName, Message = $message'));
 
 
   connectServer(context) async {
@@ -234,24 +234,24 @@ class RemoteDashboardController extends GetxController {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
     final hubConnection = HubConnectionBuilder().withUrl(serverUrl).build();
-    print(hubConnection.state.toString());
+    dPrint(hubConnection.state.toString());
     await hubConnection.start();
-    // print('nnnnnnn${hubConnection.connectionId}');
+    // dPring('nnnnnnn${hubConnection.connectionId}');
 
     // var clientId = UserData().getUserData.clientId.toString();
     // var id = UserData().getUserData.id.toString();
 
     //hubConnection.on("PatientAdded", PatientAdded([id,clientId]));
 
-    // print("clientId:$clientId");
-    print(hubConnection.state.toString());
+    // dPring("clientId:$clientId");
+    dPrint(hubConnection.state.toString());
 
     dynamic data =
         await hubConnection.invoke("AddUser", args: <Object>[int.parse(userRepository.getUser.clientId.toString()),
           int.parse(275.toString())]);
 
     // if(data['status']==1){
-    print('nnnnnnvnnnvnnnn${data['responseValue'].length.toString()}');
+    dPrint('nnnnnnvnnnvnnnn${data['responseValue'].length.toString()}');
     updateRemoteData = data['responseValue'];
 
   }
@@ -287,7 +287,7 @@ class RemoteDashboardController extends GetxController {
     data = val;
     update();
 
-    print('nnnnnnnn ' + getBp.length.toString());
+    dPrint('nnnnnnnn ' + getBp.length.toString());
     for (int i = 0; i < data.length; i++) {
       vitalList.add({
         'vitalDate': data[i]['vitalDateTime'],
@@ -315,12 +315,12 @@ class RemoteDashboardController extends GetxController {
     //   'PatientVital/GetPatientVitalGraphByDate?userId=${userId}&UHID=${UHID}&vitalIdSearchNew=${vitalIdSearchNew}&vitalDate=${DateFormat('yyyy-MM-dd').format(DateTime.now())}&CurrentDate=${DateFormat('yyyy-MM-dd').format(DateTime.now())}'
     // );
     // Get.back();
-    // print('nnnnnnn' + response.body.toString());
+    // dPring('nnnnnnn' + response.body.toString());
     // if (response.body['status'] == 1) {
     //   updateVitalData = response.body['responseValue']['patientGraph'].isEmpty? []:
     //   jsonDecode(response.body['responseValue']['patientGraph'][0]['vitalDetails']);
     //
-    //   print('nnnnnnn' + data.toString());
+    //   dPring('nnnnnnn' + data.toString());
     // }
   }
 
@@ -361,7 +361,7 @@ class RemoteDashboardController extends GetxController {
       'medicineId': medicineId.toString(),
       'problemId': problemId.toString()
     };
-    print(body.toString());
+    dPrint(body.toString());
     // Response response =
     //     await api7082.postDataByJson('ADRReport/sideEffectChecker', body);
 
@@ -397,7 +397,7 @@ class RemoteDashboardController extends GetxController {
   //     'brandId': brandId.toString(),
   //     'medicineName': medicineName.toString(),
   //   };
-  //   print(body.toString());
+  //   dPring(body.toString());
   //   Response response = await api7082.postDataByJson('ADRReport/getDrugIntraction', body);
   //
   //   if (response.body['status'] == 1) {
@@ -429,7 +429,7 @@ class RemoteDashboardController extends GetxController {
 
   //   Response response =
   //   await masterApi.getApi('AllMasters/SelectTestCategory', );
-  //   print(response.body.toString());
+  //   dPring(response.body.toString());
   //   if (response.body['status'] == 1) {
   //     updateTestCategoryList=response.body['responseValue'];
   //     investigationDetailsModule(context);

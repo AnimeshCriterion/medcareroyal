@@ -81,7 +81,7 @@ class WellueViewModal extends ChangeNotifier {
           updateIsDeviceFound=true;
 
         }
-        print('${r.device.name} ');
+        dPrint('${r.device.name} ');
       }
     });
 Timer(const Duration(seconds: 4), () {
@@ -97,7 +97,7 @@ Timer(const Duration(seconds: 4), () {
 
   ckeckDeviceConnection(){
     getDeviceData.state.listen((event) async {
-      print('nnnnnnnnnnnnnnnn'+event.toString());
+      dPrint('nnnnnnnnnnnnnnnn'+event.toString());
 
       if(event==BluetoothDeviceState.connected){
         updateIsDeviceConnected=true;
@@ -126,10 +126,10 @@ Timer(const Duration(seconds: 4), () {
 
     List<BluetoothService> services = await deviceData!.discoverServices();
 
-    print('service length : ${services.length}');
+    dPrint('service length : ${services.length}');
     services.forEach((service) async {
 
-      print('service uuid : ${service.uuid.toString().toUpperCase().substring(4, 8)}');
+      dPrint('service uuid : ${service.uuid.toString().toUpperCase().substring(4, 8)}');
 
           if(service.uuid.toString().toUpperCase().substring(4, 8).toString()=='0001'){
         var characteristics = service.characteristics;
@@ -147,7 +147,7 @@ Timer(const Duration(seconds: 4), () {
 
 
                oximeterValue(values);
-              // print('value ' + values.toString());
+              // dPring('value ' + values.toString());
             });
 
           }
@@ -181,7 +181,7 @@ Timer(const Duration(seconds: 4), () {
     if(hexData[1].toString()=='55'){
     if(hexData[2].toString().toUpperCase()=='F'){
     if(hexData[3].toString()=='8'){
-      print('nnnnnn'+hexData.toString());
+      dPrint('nnnnnn'+hexData.toString());
 
       updateOximeterData={"spo2":oxiList[5].toString() ,
         "pr":oxiList[6].toString()};
@@ -218,7 +218,7 @@ Timer(const Duration(seconds: 4), () {
       updateActiveConnection = false;
 
     }
-    print('Turn On the data and repress again$ActiveConnection');
+    dPrint('Turn On the data and repress again$ActiveConnection');
   }
 
 

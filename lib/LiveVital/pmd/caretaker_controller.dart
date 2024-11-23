@@ -6,6 +6,8 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
 
+import '../../medcare_utill.dart';
+
 alertToast(context,message){
   FocusScope.of(context).unfocus();
   Fluttertoast.showToast(
@@ -70,7 +72,7 @@ class CareTakerController extends GetxController {
     updateIsDeviceConnected=false;
     updateIsDeviceFound=false;
     updateIsDeviceScanning=true;
-    print('3DeviceScanning'+getIsDeviceScanning.toString());
+    dPrint('3DeviceScanning'+getIsDeviceScanning.toString());
 
     // Start scanning
     FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
@@ -82,12 +84,12 @@ class CareTakerController extends GetxController {
     scanSubscription = FlutterBluePlus.scanResults.listen((results) {
       // do something with scan results
       for (ScanResult r in results) {
-        print(r.device.name.toString());
+        dPrint(r.device.name.toString());
         if (r.device.name.toString() == 'CT_PMonitor_1') {
           updateIsDeviceFound=true;
           updateDevicesData = r;
         }
-        print('${r.device.name.toString()}');
+        dPrint('${r.device.name.toString()}');
       }
     });
     update();
@@ -121,7 +123,7 @@ class CareTakerController extends GetxController {
 
   checkDeviceConnection() {
     devicesData!.device.state.listen((event) {
-      print(event);
+      dPrint(event);
 
       // if(event==BluetoothDeviceState.connected) {
       if(event==BluetoothDeviceState.connected) {
@@ -143,32 +145,32 @@ class CareTakerController extends GetxController {
 
   getBPOtherData() async {
     List<BluetoothService> services =  await devicesData!.device.discoverServices();
-    // print('Service length' + services.length.toString());
+    // dPrint('Service length' + services.length.toString());
 
     services.forEach((service) async {
-      print(service.uuid.toString().toUpperCase().substring(4, 8).toString());
-      // print('Servic UUID' + service.uuid.toString());
+      dPrint(service.uuid.toString().toUpperCase().substring(4, 8).toString());
+      // dPrint('Servic UUID' + service.uuid.toString());
 
       if(service.uuid.toString().toUpperCase().substring(4, 8).toString()=='180A') {  // 180A
 
         var characteristics = service.characteristics;
 
         for (BluetoothCharacteristic c in characteristics) {
-          print('Characteristics UUID' + c.uuid.toString().toUpperCase().substring(4, 8));
+          dPrint('Characteristics UUID' + c.uuid.toString().toUpperCase().substring(4, 8));
 
           if(c.uuid.toString().toUpperCase().substring(4, 8).toString()=='2A38') {  // 2A38
 
           await c.write(utf8.encode(systolic.value.text));
 
             List<int> value = await c.read();
-            // print(value);
+            // dPrint(value);
 
             c.setNotifyValue(true);
 
             subscription1 = c.value.listen((event) {
 
               var data = ascii.decode(value);
-              print(data.toString());
+              dPrint(data.toString());
 
             });
 

@@ -61,7 +61,7 @@ class FAQViewModal extends ChangeNotifier{
           apiCallType: ApiCallType.get());
 
       Get.back();
-      // print("rrrrrrrrrrrrrrrrrr"+data["responseValue"].toString());
+      // dPring("rrrrrrrrrrrrrrrrrr"+data["responseValue"].toString());
       updateFaqList = (data["responseValue"] ?? []).isEmpty
           ? []
           : jsonDecode((data["responseValue"][0]["answers"] ?? "[]"));

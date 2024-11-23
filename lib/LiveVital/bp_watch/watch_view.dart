@@ -79,8 +79,8 @@ class _WatchState extends State<Watch> {
                         padding:  EdgeInsets.all(5),
                         child: ElevatedButton(
                           onPressed: () async {
-                            print('Connected Device Name : ${watchController.devicesData!.device.platformName}');
-                            print('Device Remote Id : ${watchController.devicesData!.device.remoteId}');
+                            dPrint('Connected Device Name : ${watchController.devicesData!.device.platformName}');
+                            dPrint('Device Remote Id : ${watchController.devicesData!.device.remoteId}');
 
                               try{
                                 // showAlertDialog(context);
@@ -90,7 +90,7 @@ class _WatchState extends State<Watch> {
                                 // Navigator.pop(context);
                               }
                             } catch (e) {
-                                print('Device connecting related issues : $e');
+                                dPrint('Device connecting related issues : $e');
                               }
 
                           },

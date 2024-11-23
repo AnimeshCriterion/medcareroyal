@@ -21,6 +21,7 @@ import '../../app_manager/widgets/buttons/primary_button.dart';
 import '../../app_manager/widgets/tab_responsive.dart';
 import '../../authenticaton/user.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 
 class LoginWithOtp extends StatefulWidget {
   const LoginWithOtp({Key? key}) : super(key: key);
@@ -219,7 +220,7 @@ class _LoginWithOtpState extends State<LoginWithOtp> {
 
                             },
                             // onTap: () {
-                            //   print("Pressed");
+                            //   dPring("Pressed");
                             // },
                             onChanged: (value) {},
                             beforeTextPaste: (text) {
@@ -347,12 +348,12 @@ class _LoginWithOtpState extends State<LoginWithOtp> {
           message: localization.getLocaleData.areuSureYouWantToLogOut.toString(),
           buttonName: localization.getLocaleData.yes.toString(),
           onPressButton: () async {
-            print('nnnnnnnvvvv');
+            dPrint('nnnnnnnvvvv');
 
             MyNavigator.pushAndRemoveUntil(context, const StartupPage());
             await userRepository.updateUserData(User());
             // await userRepository.logOutUser(context);
-            print('nnnnnnnvvvv');
+            dPrint('nnnnnnnvvvv');
           },
         ));
   }

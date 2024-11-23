@@ -4,6 +4,7 @@ import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../medcare_utill.dart';
 import '../live_vital_controller.dart';
 
 class WatchController extends GetxController {
@@ -54,7 +55,7 @@ class WatchController extends GetxController {
     updateIsDeviceFound=false;
     updateIsDeviceScanning=true;
 
-    print('Device scanning : $getIsDeviceScanning');
+    dPrint('Device scanning : $getIsDeviceScanning');
 
     // Start scanning
     FlutterBluePlus.startScan(timeout: const Duration(seconds: 4)).then((value) {
@@ -66,13 +67,13 @@ class WatchController extends GetxController {
 
       // do something with scan results
       for (ScanResult r in results) {
-        print('Device name : ${r.device.platformName}');
+        dPrint('Device name : ${r.device.platformName}');
         if (r.device.platformName.toString()=='BPW1') {
           // if (r.device.platformName.toString()=='CT_PMonitor_1') {
           updateIsDeviceFound=true;
           updateDevicesData=r;
         }
-        print('Device name : ${r.device.platformName}');
+        dPrint('Device name : ${r.device.platformName}');
       }
     });
     update();
@@ -160,7 +161,7 @@ class WatchController extends GetxController {
             await c.setNotifyValue(true);
             bpSubscription=c.lastValueStream.listen((value2) async {
 
-              print('values list : $value2');
+              dPrint('values list : $value2');
 
               List data = value2.toList() ;
               if(data.isNotEmpty){
@@ -181,9 +182,9 @@ class WatchController extends GetxController {
               pr: getBpPulData.toString()
               );
 
-              print('Systolic value : $systolic');
-              print('Diastolic value : $diastolic');
-              print('Pulse value : $pulse');
+              dPrint('Systolic value : $systolic');
+              dPrint('Diastolic value : $diastolic');
+              dPrint('Pulse value : $pulse');
             }
             });
           }

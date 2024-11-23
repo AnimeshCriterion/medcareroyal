@@ -21,6 +21,7 @@ import '../app_manager/alert_toast.dart';
 import '../app_manager/api/api_call.dart';
 import '../authenticaton/user_repository.dart';
 import '../main.dart';
+import '../medcare_utill.dart';
 
 class ActivitiesChronicleViewModal extends ChangeNotifier{
   final Api _api = Api();
@@ -169,8 +170,8 @@ set updateVVitalsList(List val){
      apiCallType: ApiCallType.post(body: {}),
    );
      Get.back();
-     print('nnnnnnnnnnnnnnnnvnnvn '+ data["responseValue"][0]  .toString());
-     print('nnnnnnnnnnnnnnnnvnnvn '+ data["responseValue"][0]['vitalList']  .toString());
+     dPrint('nnnnnnnnnnnnnnnnvnnvn '+ data["responseValue"][0]  .toString());
+     dPrint('nnnnnnnnnnnnnnnnvnnvn '+ data["responseValue"][0]['vitalList']  .toString());
 
      updateAllActivityChronicleData=(data["responseValue"]??[]).isEmpty? {}:data["responseValue"][0];
      updateVVitalsList=(data["responseValue"]??[]).isEmpty? {}:data["responseValue"][0]['vitalList'];
@@ -214,7 +215,7 @@ set updateVVitalsList(List val){
     var weight=weightC.toString()==''?'0':weightC.toString();
     var date=DateFormat('yyyy-MM-dd').format(DateTime.now());
     var time=DateFormat('HH:mm').format(DateTime.now());
-    print('nnnnnnnnnnnnnnv '+time.toString());
+    dPrint('nnnnnnnnnnnnnnv '+time.toString());
 
 
 
@@ -273,6 +274,6 @@ set updateVVitalsList(List val){
       Alert.show("Vital added successfully !");
     }
 
-    print("ANimesh$data");
+    dPrint("ANimesh$data");
   }
 }

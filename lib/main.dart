@@ -56,7 +56,7 @@ void main() async {
   /// temp
   FirebaseMessaging messaging = FirebaseMessaging.instance;
   // String? token = await messaging.getToken();
-  // print('Firebase Token: $token');
+  // dPring('Firebase Token: $token');
 
   /// temp
 
@@ -64,7 +64,7 @@ void main() async {
 
   // Invoke AddUser with ClientId and UserId
 
-  print('nnnnnnnvnnnnnvnvnvnn ' + user.patientName.toString());
+  dPrint('nnnnnnnvnnnnnvnvnvnn ' + user.patientName.toString());
   // AppDetailsDataModal appData=await UserRepository.fetchAppData();
   Language language = await ApplicationLocalizations.fetchLanguage();
   Lang localeData = await ApplicationLocalizations().load(language);

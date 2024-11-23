@@ -19,6 +19,7 @@ import '../app_manager/bottomSheet/bottom_sheet.dart';
 import '../app_manager/bottomSheet/functional_sheet.dart';
 import '../app_manager/dialog.dart';
 import '../authenticaton/user.dart';
+import '../medcare_utill.dart';
 
 class EditProfileViewModal extends ChangeNotifier {
   final Api _api = Api();
@@ -86,7 +87,7 @@ class EditProfileViewModal extends ChangeNotifier {
   }
 
   getProfilePath(context) async {
-    print(getSelectedImage.toString());
+    dPrint(getSelectedImage.toString());
     var data = await _api.call(context,
         url: AllApi.saveMultipleFile,
         apiCallType: ApiCallType.multiPartRequest(
@@ -130,7 +131,7 @@ class EditProfileViewModal extends ChangeNotifier {
     //
     // var myFile = getSelectedImage.toString() == '' ? '' : await getProfilePath(context);
     //
-    // print('nnnnnnnnnnnnnnnnnnnnnnnn');
+    // dPring('nnnnnnnnnnnnnnnnnnnnnnnn');
     // var data = await _api.call(context,
     //     url: AllApi.updateMember,
     //     apiCallType: ApiCallType.rawPost(body: {
@@ -203,7 +204,7 @@ class EditProfileViewModal extends ChangeNotifier {
     //     "profilePhotoPath": myFile.toString(),
     //   };
     //
-    //   print(body.toString());
+    //   dPring(body.toString());
     //
     //   var data = await _api.call(context,
     //       url: AllApi.addMember, apiCallType: ApiCallType.rawPost(body: body));
@@ -261,7 +262,7 @@ class EditProfileViewModal extends ChangeNotifier {
               .updateUserData(User.fromJson(data['responseValue'][0]));
         }
         notifyListeners();
-        print('nnnnnnnnnnnn' + userRepository.getUser.patientName.toString());
+        dPrint('nnnnnnnnnnnn' + userRepository.getUser.patientName.toString());
         notifyListeners();
 
 
@@ -376,8 +377,8 @@ class EditProfileViewModal extends ChangeNotifier {
           apiCallType: ApiCallType.rawPut(
               body: body));
       ProgressDialogue().hide();
-      print("objecsdsdst"+data.toString());
-      print("objecsdsdst"+jsonEncode(body));
+      dPrint("objecsdsdst"+data.toString());
+      dPrint("objecsdsdst"+jsonEncode(body));
       if (data['status'] == 1) {
 
        // Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'Profile updated Successfully !'));
@@ -412,11 +413,11 @@ class EditProfileViewModal extends ChangeNotifier {
      // Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: data['message'].toString()));
       // Alert.show(data['message']);
       await userRepository.updateUserData(User.fromJson(data['responseValue'][0])).then((value) async {
-        print("Aniemsh$value");
+        dPrint("Aniemsh$value");
  //       MyNavigator.pushAndRemoveUntil(context, const DashboardView());
       });
 
-      print("Aniemsh${userRepository.getUser.mobileNo}");
+      dPrint("Aniemsh${userRepository.getUser.mobileNo}");
     } else {
       Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
       // Alert.show(data['responseValue']);

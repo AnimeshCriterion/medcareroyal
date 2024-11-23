@@ -40,7 +40,7 @@ class StethoBluetoothModal{
         'userID': '1234567',
         'stethoName': '1'
       };
-      print('nnvvv '+body.toString());
+      dPrint('nnvvv '+body.toString());
 
       var request = await http.MultipartRequest(
           'POST', Uri.parse('http://182.156.200.179:201/patientStethoFile.ashx'));
@@ -52,17 +52,17 @@ class StethoBluetoothModal{
 
       http.StreamedResponse response = await request.send();
       Get.back();
-      print('responseresponse ' + await response.statusCode.toString());
+      dPrint('responseresponse ' + await response.statusCode.toString());
       if (response.statusCode == 200) {
         Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'Success'.toString()));
         // alertToast(context,'Success');
-        print('responseresponse ' + await response.stream.bytesToString());
+        dPrint('responseresponse ' + await response.stream.bytesToString());
       } else {
-        print(response.reasonPhrase);
+        dPrint(response.reasonPhrase);
       }
     }
     catch(e){
-      print('responseresponse ' + e.toString());
+      dPrint('responseresponse ' + e.toString());
     }
   }
 

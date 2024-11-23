@@ -20,6 +20,7 @@ import '../../app_manager/theme/text_theme.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import 'package:medvantage_patient/common_libs.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 import '../../voice_assistant.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 import '../../theme/style.dart';
@@ -58,7 +59,7 @@ class _DashboardViewState extends State<DashboardView> {
       callTime = int.parse(myData.toString());
     });
 
-    print('nnnnnn $callTime');
+    dPrint('nnnnnn $callTime');
 
     if (int.parse(callTime.toString()) >= 0 &&
         int.parse(callTime.toString()) <= 960) {
@@ -77,7 +78,7 @@ class _DashboardViewState extends State<DashboardView> {
      // Updater().checkVersion(context);
     });
 
-    print('nnnnnnnnnnnnvnnnv');
+    dPrint('nnnnnnnnnnnnvnnnv');
     super.initState();
   }
 
@@ -443,7 +444,7 @@ class _DashboardViewState extends State<DashboardView> {
 
                             // String morningTime='';
                             //           morningTime= await dashboardVM.callTiming();
-                            //           print('nnnnnnnvnnnv'+morningTime.toString());
+                            //           dPring('nnnnnnnvnnnv'+morningTime.toString());
                             //
                             //           if(int.parse(morningTime.toString())>=0 && int.parse(morningTime.toString())<=960){
                             //
@@ -799,7 +800,7 @@ class _DashboardViewState extends State<DashboardView> {
 //                                   onTap: () async {
 //                                     String morningTime='';
 //                                     morningTime= await dashboardVM.callTiming();
-//                                     print('nnnnnnnvnnnv'+morningTime.toString());
+//                                     dPring('nnnnnnnvnnnv'+morningTime.toString());
 //
 //                                     if(int.parse(morningTime.toString())>=0 && int.parse(morningTime.toString())<=960){
 //
@@ -840,7 +841,7 @@ class _DashboardViewState extends State<DashboardView> {
 //                                   onTap: () async {
 //                                     String morningTime='';
 //                                     morningTime= await dashboardVM.callTiming();
-//                                     print('nnnnnnnvnnnv'+morningTime.toString());
+//                                     dPring('nnnnnnnvnnnv'+morningTime.toString());
 //
 //                                     if(int.parse(morningTime.toString())>=0 && int.parse(morningTime.toString())<=960){
 //
@@ -1289,7 +1290,7 @@ class _DashboardViewState extends State<DashboardView> {
                 onTap: () {
                   String morningTime = '';
                   morningTime = dashboardVM.callTiming();
-                  print('nnnnnnnvnnnv' + morningTime.toString());
+                  dPrint('nnnnnnnvnnnv' + morningTime.toString());
 
                   if (int.parse(morningTime.toString()) >= 0 &&
                       int.parse(morningTime.toString()) <= 960) {

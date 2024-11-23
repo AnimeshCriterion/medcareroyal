@@ -18,6 +18,7 @@ import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../app_manager/widgets/text_field/primary_date_time_field.dart';
 import '../../assets.dart';
 import '../../common_libs.dart';
+import '../../medcare_utill.dart';
 import '../../theme/theme.dart';
 import '../../theme/style.dart';
 
@@ -119,7 +120,7 @@ class _PrescriptionCheckListViewState extends State<PrescriptionCheckListView> {
                 //       // Switch(
                 //       //     value: themeChange.darkTheme,
                 //       //     onChanged: (val) async {
-                //       //       print(DateTime.now());
+                //       //       dPring(DateTime.now());
                 //       //       themeChange.darkTheme = val;
                 //       //       themeChangeProvider.darkTheme =
                 //       //           await themeChangeProvider.getTheme();
@@ -187,10 +188,10 @@ class _PrescriptionCheckListViewState extends State<PrescriptionCheckListView> {
                                     lastDate: DateTime.now());
 
                                 if (pickedDate != null) {
-                                  print(pickedDate);
+                                  dPrint(pickedDate);
                                   String formattedDate =
                                       DateFormat('yyyy-MM-dd').format(pickedDate);
-                                  print(formattedDate);
+                                  dPrint(formattedDate);
                                   setState(() {
                                     controller.dateController.value.text =
                                         formattedDate;
@@ -198,7 +199,7 @@ class _PrescriptionCheckListViewState extends State<PrescriptionCheckListView> {
                                         DateFormat("dd MMM yyyy").format( DateFormat('yyyy-MM-dd').parse(formattedDate .toString() )) ;
                                   });
                                 } else {
-                                  print("Date is not selected");
+                                  dPrint("Date is not selected");
                                 }
                               }))
                     ],

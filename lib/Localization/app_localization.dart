@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../medcare_utill.dart';
 import 'language_class.dart';
 
 
@@ -49,7 +50,7 @@ class ApplicationLocalizations  extends ChangeNotifier {
   }
 
   void updateLocaleData(Lang val) async{
-    print("herrerewewr"+val.toJson().toString());
+    dPrint("herrerewewr"+val.toJson().toString());
     String localeD=jsonEncode(val.toJson());
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString("localeData",localeD);

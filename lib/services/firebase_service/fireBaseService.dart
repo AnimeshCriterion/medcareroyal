@@ -19,6 +19,7 @@ import 'package:get/get.dart';
 import '../../View/Pages/chat_view.dart';
 import '../../View/Pages/food_intake.dart';
 import '../../View/Pages/water_intake_view.dart';
+import '../../medcare_utill.dart';
 import '../local_notification_services.dart';
 // import 'package:jitsi_meet/jitsi_meet.dart';
 
@@ -35,7 +36,7 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
        title: message.notification!.title,
        body: message.notification!.body ,
        payload: jsonEncode(message.data));
-   print('Handling a background message ${message.messageId}');
+   dPrint('Handling a background message ${message.messageId}');
 
 }
 
@@ -57,7 +58,7 @@ class FireBaseService{
 
 
     FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-      //print('Initial Message'+message!.data.toString());
+      //dPring('Initial Message'+message!.data.toString());
 
       if(message!=null){
         if(message.notification!=null){
@@ -74,9 +75,9 @@ class FireBaseService{
 
     FirebaseMessaging.onBackgroundMessage((RemoteMessage? message) async{
 
-      print('onBackgroundMessage');
-      print('ON Message$message');
-      print('Message data: ${message!.data}');
+      dPrint('onBackgroundMessage');
+      dPrint('ON Message$message');
+      dPrint('Message data: ${message!.data}');
       NotificationService().showNotification(id: 0,
           title: message.notification!.title,
           body: message.notification!.body ,
@@ -92,10 +93,10 @@ class FireBaseService{
     FirebaseMessaging.onMessage.listen((RemoteMessage? message) {
 
 
-print('onMessageonMessage ${message!.data }');
-print('onMessageonMessage ${message!. notification!.title  }');
-print('onMessageonMessage ${message!. notification!.body  }');
-print('onMessageonMessage ${message!.data }');
+dPrint('onMessageonMessage ${message!.data }');
+dPrint('onMessageonMessage ${message!. notification!.title  }');
+dPrint('onMessageonMessage ${message!. notification!.body  }');
+dPrint('onMessageonMessage ${message!.data }');
 
       NotificationService().initNotification();
       NotificationService().showNotification(id: 0,
@@ -107,11 +108,11 @@ print('onMessageonMessage ${message!.data }');
 
 
     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      print('Got a message whilst in the open!');
-      print('Message data: ${message.data['type'].toString()}');
+      dPrint('Got a message whilst in the open!');
+      dPrint('Message data: ${message.data['type'].toString()}');
       if (message.notification != null) {
-        print('Message also contained a notification: ${message.notification!.title}');
-        print('Message also contained a notification: ${message.notification!.body}');
+        dPrint('Message also contained a notification: ${message.notification!.title}');
+        dPrint('Message also contained a notification: ${message.notification!.body}');
         onNotificationNavi(message.data);
       }
 
@@ -160,7 +161,7 @@ onNotificationNavi(val){
 //   // make sure you call `initializeApp` before using other Firebase services.
 //   // await Firebase.initializeApp();
 //   //
-//   // print("Handling a background message: ${message.messageId}");
+//   // dPring("Handling a background message: ${message.messageId}");
 // }
 
 
@@ -183,15 +184,15 @@ onNotificationNavi(val){
 //
 //   RemoteNotification?  callNotification= event.notification;
 //
-//   print('thissssss Here '+ callNotification!.title.toString());
-//   print('thissssss Here '+ (callNotification.title.toString()=='Call').toString());
+//   dPring('thissssss Here '+ callNotification!.title.toString());
+//   dPring('thissssss Here '+ (callNotification.title.toString()=='Call').toString());
 //   if(callNotification.title.toString()=='Incoming Call'){
 //     callStatusC.updateCurrentCall=MyCall.initiated;
 //
 //     if((DateTime.parse(event.data['time']).add(const Duration(seconds: 30))).isAfter(DateTime.now())){
 //
 //
-//       print(event.data);
+//       dPring(event.data);
 //
 //       App().navigate(_context, IncomingCallScreen(
 //         callerName: event.data['callerName'].toString(),

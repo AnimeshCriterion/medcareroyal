@@ -31,7 +31,7 @@ class MyImagePicker{
     }
     catch(e){
       if (kDebugMode) {
-        print(e);
+        dPrint(e);
       }
     }
   }
@@ -70,7 +70,7 @@ class MyImagePicker{
     }
     catch(e){
       if (kDebugMode) {
-        print(e);
+        dPrint(e);
       }
     }
   }
@@ -93,7 +93,7 @@ class MyImagePicker{
     }
     catch(e){
       if (kDebugMode) {
-        print(e);
+        dPrint(e);
       }
     }
   }
@@ -105,7 +105,7 @@ class MyImagePicker{
     }
     catch(e){
       if (kDebugMode) {
-        print(e);
+        dPrint(e);
       }
     }
   }

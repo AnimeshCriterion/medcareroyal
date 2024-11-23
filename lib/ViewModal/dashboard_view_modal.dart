@@ -374,7 +374,7 @@ class DashboardViewModal extends ChangeNotifier {
   set _updateDashboardResponse(ApiResponse val) {
     dashboardResponse = val;
     if (getDashboardResponse.data != null) {
-      print('vvvvvvvvvvvvv' +
+      dPrint('vvvvvvvvvvvvv' +
           getDashboardResponse.data['doctorDetails'].toString());
     }
     notifyListeners();
@@ -394,7 +394,7 @@ class DashboardViewModal extends ChangeNotifier {
             "long": "-122.084",
             "memberId": userRepository.getUser.uhID
           }));
-      print(data.toString());
+      dPrint(data.toString());
       if (data['responseCode'] == 1) {
         _updateDashboardResponse =
             ApiResponse<Map>.completed(data['responseValue'][0]);
@@ -425,7 +425,7 @@ class DashboardViewModal extends ChangeNotifier {
       var data = await _api.callMedvanatagePatient(context,
           url: "api/AppBanner/GetImagesForAppBanner",localStorage: true,
           apiCallType: ApiCallType.get());
-      print("nnnnnnnnnnnnnn $data");
+      dPrint("nnnnnnnnnnnnnn $data");
       if (data["status"] == 1) {
         updateBannerList = data['responseValue'];
       } else {
@@ -450,7 +450,7 @@ class DashboardViewModal extends ChangeNotifier {
       var data = await _api.callMedvanatagePatient7084(context,
           url: "api/Users/GetClient?id=${userRepository.getUser.clientId.toString()}",localStorage: true,
           apiCallType: ApiCallType.get( ));
-      print("nnnnnnnnnnnnnn $data");
+      dPrint("nnnnnnnnnnnnnn $data");
       if (data["status"] == 1) {
         updateClintDetails=data["responseValue"].isEmpty? {}:data["responseValue"][0];
       } else {
@@ -473,7 +473,7 @@ class DashboardViewModal extends ChangeNotifier {
   //     var data = await _api.callMedvanatagePatient(context,localStorage: true,
   //         url: "api/AppCustomizationForSHFC/GetAppCustomizationForSHFC?id=1&clientID=${userRepository.getUser.clientId.toString()}",newBaseUrl: 'http://182.156.200.178:7083/',
   //         apiCallType: ApiCallType.get());
-  //     print("nnnnnnnnnnnnnn $data");
+  //     dPring("nnnnnnnnnnnnnn $data");
   //     if (data["status"] == 1) {
   //       await userRepository.appData(AppDetailsDataModal.fromJson(data['responseValue']));
   //       // updateAppData=data['responseValue'];
@@ -497,7 +497,7 @@ class DashboardViewModal extends ChangeNotifier {
     var currentDate=(DateFormat('yyyy-MM-dd').format(DateTime.now())).toString();
 
     morningTime=(DateTime.parse('${currentDate} 23:00:00').difference(DateTime.now()).inMinutes).toString();
-    print('nnnnvnnnvnnnv '+morningTime.toString());
+    dPrint('nnnnvnnnvnnnv '+morningTime.toString());
     return morningTime;
   }
 

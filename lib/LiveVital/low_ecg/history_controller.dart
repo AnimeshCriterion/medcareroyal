@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 
 import '../../app_manager/alert_toast.dart';
 import '../../authenticaton/user_repository.dart';
+import '../../medcare_utill.dart';
 
 
 class HistoryController extends GetxController{
@@ -29,7 +30,7 @@ class HistoryController extends GetxController{
       }
 
     update();
-    print("ssssss"+selectedData.toString());
+    dPrint("ssssss"+selectedData.toString());
   }
 
   historyReportTableData({required int index,required String intervalValue,required String value}){
@@ -104,17 +105,17 @@ class HistoryController extends GetxController{
 
       var data=await json.decode(response.body);
       updatePreviosDataList=data;
-      print('dddddd' + data.toString());
+      dPrint('dddddd' + data.toString());
 
     }
     catch(e){
-      print('eeeeee' + e.toString());
+      dPrint('eeeeee' + e.toString());
     }
   }
 
 
   graphList(index){
-    print('nnnnnvvvvvvvvvvvvvnnnnnn'+getFileDataList.length.toString());
+    dPrint('nnnnnvvvvvvvvvvvvvnnnnnn'+getFileDataList.length.toString());
     var data=getFileDataList==null? '':getFileDataList.length>1? getFileDataList[index]['payLoad']['data'].split(','):[];
     return  data;
   }
@@ -128,7 +129,7 @@ class HistoryController extends GetxController{
 
   fileData() async {
     fileDataList=[];
-    print('ffffff'+fileDataList.toString());
+    dPrint('ffffff'+fileDataList.toString());
     for(int i=0;i<=selectedData.length;i++){
      await fileApiData(selectedData[i]['jsonFile']);
     }
@@ -142,11 +143,11 @@ class HistoryController extends GetxController{
             "content-type": "application/json",
           }
       );
-      print('uuuuuu http://182.156.200.179:1880/ecg/responce?file=${filePath}');
-      print('rrrrrr'+response.body.toString());
+      dPrint('uuuuuu http://182.156.200.179:1880/ecg/responce?file=${filePath}');
+      dPrint('rrrrrr'+response.body.toString());
 
       updateFileDataList=jsonDecode(response.body);
-      print('gggggg'+getFileDataList.length.toString());
+      dPrint('gggggg'+getFileDataList.length.toString());
     }catch(e){
     }
   }

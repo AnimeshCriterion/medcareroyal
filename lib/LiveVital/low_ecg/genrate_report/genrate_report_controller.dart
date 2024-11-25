@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -58,7 +59,6 @@ class GenerateReportController extends GetxController{
             .toList().join(',')
       }
     };
-    dPrint('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv'+jsonEncode(body).toString());
     (json.encode(body).toString());
     dPrint(json.encode(body).toString());
     try{
@@ -73,7 +73,6 @@ class GenerateReportController extends GetxController{
       dPrint(response.toString());
       var data = await json.decode(response.body);
 
-      dPrint('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv1112222' + data.toString());
       updatePerLead=data['perlead'][0];
     }
     catch(e){

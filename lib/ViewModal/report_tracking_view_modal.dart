@@ -15,6 +15,8 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 import '../View/Pages/lab_feild_view.dart';
+import '../app_manager/api/api_util.dart';
+import '../encyption.dart';
 import '../medcare_utill.dart';
 
 class ReportTrackingViewModal extends ChangeNotifier{
@@ -44,9 +46,11 @@ class ReportTrackingViewModal extends ChangeNotifier{
       };
     dPrint("mdkgmg"+body.toString());
 
+    String encryptedData = await EncryptDecrypt.encryptString(
+        'uhId=${uhId}&category=investigation&dateTime=${DateTime.now().toString()}&userId=${admitDoctorId.toString()}', EncryptDecrypt.key);
 
       var request = http.MultipartRequest(
-          'POST', Uri.parse('https://apimedcareroyal.medvantage.tech:7082/api/PatientMediaData/InsertPatientMediaData?uhId=${uhId}&category=investigation&dateTime=${DateTime.now().toString()}&userId=${admitDoctorId.toString()}'));
+          'POST', Uri.parse(ApiUtil().baseUrlMedvanatge7082+'/api/PatientMediaData/InsertPatientMediaData?'+encryptedData.toString()));
 
     http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
         'formFile', getImgPath.toString());
@@ -59,16 +63,19 @@ class ReportTrackingViewModal extends ChangeNotifier{
 
     Get.back();
     var data=await response.stream.bytesToString();
-    dPrint('nnvnnvnvnvnnnvnnnnnn https://apimedcareroyal.medvantage.tech:7082/api/PatientMediaData/InsertPatientMediaData?uhId=${uhId}&category=investigation&userId=${admitDoctorId.toString()}&dateTime=${DateTime.now().toString()}'+response.reasonPhrase.toString());
+    var decryptData= await EncryptDecrypt.decryptString(jsonDecode(data)['data'],EncryptDecrypt.key.toString() ) ;
+
+    // dPrint('nnvnnvnvnvnnnvnnnnnn https://apimedcareroyal.medvantage.tech:7082/api/PatientMediaData/InsertPatientMediaData?uhId=${uhId}&category=investigation&userId=${admitDoctorId.toString()}&dateTime=${DateTime.now().toString()}'+response.reasonPhrase.toString());
     dPrint('nnvnnvnvnvnnnvnnnnnn '+getImgPath.toString());
     dPrint('nnvnnvnvnvnnnvnnnnnn '+response.request.toString());
-    dPrint('nnvnnvnvnvnnnvnnnnnn '+data.toString());
-    var url=jsonDecode(data)['responseValue'].isEmpty? '':jsonDecode(data)['responseValue'][0]['url'].toString();
+    dPrint('nnvnnvnvnvnnnvnnnnnn '+decryptData.toString());
+    var url=jsonDecode(decryptData)['responseValue'].isEmpty? '':jsonDecode(decryptData)['responseValue'][0]['url'].toString();
       if (response.statusCode == 200) {
 
         await  getPatientMediaData(context);
         // https://apimedcareroyal.medvantage.tech:7082/Upload\Image\1730805217123_image_cropper_1730805195025.jpg
-        await labReportExtraction(context,'https://apimedcareroyal.medvantage.tech:7082/'+url.toString());
+        // await labReportExtraction(context,'https://apimedcareroyal.medvantage.tech:7082/'+url.toString());
+        await labReportExtraction(context,ApiUtil().baseUrlMedvanatge7082.toString()+url.toString());
         alertToast(context, 'Report uploaded successfully');
 
 

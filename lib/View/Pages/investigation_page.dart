@@ -12,6 +12,7 @@ import '../../app_manager/theme/text_theme.dart';
 import '../../assets.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
+import '../../encyption.dart';
 import '../../theme/theme.dart';
 
 class InvestigationPage extends StatefulWidget {
@@ -37,12 +38,14 @@ class _InvestigationPageState extends State<InvestigationPage> {
   Future<List<Investigation>> fetchInvestigations() async {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
-    final url = '${ApiUtil().baseUrlMedvanatge7082}api/PatientIPDPrescription/GetPrescribedInvestigations?uhID=${userRepository.currentUser!.uhID}&clientID=${userRepository.currentUser!.clientId}';
+    String encryptedData = await EncryptDecrypt.encryptString(
+        'uhID=${userRepository.currentUser!.uhID}&clientID=${userRepository.currentUser!.clientId}', EncryptDecrypt.key);
+    final url = '${ApiUtil().baseUrlMedvanatge7082}api/PatientIPDPrescription/GetPrescribedInvestigations?'+encryptedData.toString();
 
     final response = await http.get(Uri.parse(url));
-
+    var decryptData= await EncryptDecrypt.decryptString(jsonDecode(response.body)['data'],EncryptDecrypt.key.toString() ) ;
+     var jsonData=jsonDecode(decryptData);
     if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
       if (jsonData['status'] == 1) {
         List<dynamic> investigationsJson = jsonData['responseValue'];
         return investigationsJson.map((item) => Investigation.fromJson(item)).toList();

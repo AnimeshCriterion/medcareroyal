@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';  // For jsonEncode
 import 'package:http/http.dart' as http;
+import 'package:medvantage_patient/app_manager/api/api_util.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 
 import '../authenticaton/user_repository.dart';
 import '../common_libs.dart';
+import '../encyption.dart';
 import '../medcare_utill.dart';
 
 class RequestCallbackFormStyled extends StatefulWidget {
@@ -16,7 +18,6 @@ class RequestCallbackFormStyled extends StatefulWidget {
 
 class _RequestCallbackFormStyledState extends State<RequestCallbackFormStyled> {
   final _formKey = GlobalKey<FormState>();
-  final String apiUrl = "https://apimedcareroyal.medvantage.tech:7082/api/LogInForSHFCApp/EmergencyAlertAPI";
 TextEditingController remarkC=TextEditingController();
 
   String _reason = '';
@@ -25,6 +26,7 @@ TextEditingController remarkC=TextEditingController();
   // This function will be used to make the API call
   Future<void> callEmergencyAlertAPI() async {
 
+    final String apiUrl = ApiUtil().baseUrlMedvanatge7082+"/api/LogInForSHFCApp/EmergencyAlertAPI";
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
     // Set up query parameters
@@ -34,11 +36,16 @@ TextEditingController remarkC=TextEditingController();
     String emergencyNumber = '0';
 
     // Construct the full URL with parameters
-    Uri url = Uri.parse('$apiUrl?Uhid=$uhid&deviceToken=$deviceToken&clientId=$clientId&remark=${remarkC.value.text.toString()}&emergencyNumber=$emergencyNumber');
+    var encritpion='Uhid=$uhid&deviceToken=$deviceToken&clientId=$clientId&remark=${remarkC.value.text.toString()}&emergencyNumber=$emergencyNumber';
+
+    String encryptedData = await EncryptDecrypt.encryptString(
+        encritpion.toString(), EncryptDecrypt.key);
+    Uri url = Uri.parse('$apiUrl?'+encryptedData.toString());
 dPrint("CheckUrl"+url.toString());
     try {
       // Make the GET request
-      final response = await http.post(url);
+
+      var response = await http.post(url);
 
       // Check for a successful response
       if (response.statusCode == 200) {

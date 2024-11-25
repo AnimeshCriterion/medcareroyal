@@ -86,10 +86,12 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
           localStorage: true,
           apiCallType: ApiCallType.rawPost(body: {
             "problemName": '',
-              "languageId": await prefs.getString("lang").toString()
+              // "languageId": await prefs.getString("lang").toString()
           }));
+
+      dPrint("nnnnnnnnnnnnnnvnn ${data }");
       updateShowNoData=true;
-      if (data["responseCode"] == 1) {
+      if (data["status"] == 1) {
         problemsResponse.data = (List<SymptomsProblemModal>.from(
             ((data['responseValue'] ?? []) as List)
                 .map((e) => SymptomsProblemModal.fromJson(e))));
@@ -107,6 +109,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         // Alert.show(data['message']);
       }
     } catch (e) {
+      dPrint("datadatadata: $e");
       updateShowNoData=true;
       updateProblemsResponse = ApiResponse.error(e.toString());
     }
@@ -332,8 +335,9 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
 
 
     var data = await _api.call(context,
-        url: "Services/patientProblem.asmx/getAllSymptoms",
-        newBaseUrl: "http://182.156.200.178:192/",
+        // url: "Services/patientProblem.asmx/getAllSymptoms",
+        url: "api/DigiDoctorApis/GetAllSymptoms",
+        // newBaseUrl: "http://182.156.200.178:192/",
         apiCallType: ApiCallType.rawPost(body: {
           "language": prefs.getString("lang").toString(),
         }));

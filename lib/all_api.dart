@@ -22,7 +22,8 @@ class AllApi{
   static String getAllUnit="Doctor/getAllUnit";
   static String savePatientInvestigation="Patient/patientInvestigation";
   static String PatientVitalList="Patient/getPatientVitalList";
-  static String getProblemsWithIcon="Patient/getProblemsWithIcon";
+  // static String getProblemsWithIcon="Patient/getProblemsWithIcon";
+  static String getProblemsWithIcon="api/DigiDoctorApis/GetProblemsWithIcon";
   static String patientAllProblems="Patient/getAllProblems";
   static String patientOnlineAppointment="Patient/onlineAppointment";
   static String checkTimeSlotAvailability="Patient/checkTimeSlotAvailability";
@@ -38,7 +39,8 @@ class AllApi{
   static String getHomeIsolationRequest="Patient/homeIsolationRequest";
   static String homeIsolationRequestList="Patient/homeIsolationRequestList";
   static String getpatientMedication="Patient/patientMedication";
-  static String getAllSuggestedProblem="Patient/getAllSuggestedProblem";
+  // static String getAllSuggestedProblem="Patient/getAllSuggestedProblem";
+  static String getAllSuggestedProblem="api/DigiDoctorApis/GetAllSuggestedProblem";
   static String getAttributeByProblem="Patient/getAttributeByProblem";
   static String getMedicineReminder="Patient/medicineReminderList";
   static String getTrendingDiseaseList="trendingDiseaseList";

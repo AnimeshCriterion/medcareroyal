@@ -103,6 +103,7 @@ class HistoryController extends GetxController{
           }
       );
 
+      dPrint('dddddd   http://182.156.200.179:1880/ecg/responce?pid=${userRepository.getUser.pid.toString()}&limit=5'   );
       var data=await json.decode(response.body);
       updatePreviosDataList=data;
       dPrint('dddddd' + data.toString());

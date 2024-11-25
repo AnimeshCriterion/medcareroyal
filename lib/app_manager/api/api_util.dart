@@ -7,7 +7,8 @@ class ApiUtil {
 
 
 
-   static const String baseUrl = "http://52.172.134.222:205/api/v1.0/";
+   // static const String baseUrl = "http://52.172.134.222:205/api/v1.0/";
+   static const String baseUrl = "https://apidemo.medvantage.tech/MedvantageService/";
 
 
    // api.medcareroyal.medvantage.tech
@@ -49,7 +50,8 @@ class ApiUtil {
 
 
    //without http
-   late String baseUrlMedvanatge = "https://apidemo.medvantage.tech/1080/";
+   late String baseUrlMedvanatge = "https://apidemo.medvantage.tech/MedvantageService/";
+   // late String baseUrlMedvanatge = "https://apidemo.medvantage.tech/1080/";
    late String baseUrlMedvanatge7084 = "https://apidemo.medvantage.tech/UserService/";
    late String baseUrlMedvanatge7082 = "https://apidemo.medvantage.tech/MedvantageService/";
    late String baseUrlMedvanatge7096 = "https://apidemo.medvantage.tech/DietService/";
@@ -63,7 +65,7 @@ class ApiUtil {
    //  late String baseUrlMedvanatge7100 = "http://demo.medvantage.tech:1100/";
    //  late String baseUrlMedvanatge7083 = "http://demo.medvantage.tech:1083/";
 
-   //
+
    // late String baseUrlMedvanatge = "https://demo.medvantage.tech:7080/";
    // late String baseUrlMedvanatge7084 = "https://demo.medvantage.tech:7084/";
    // late String baseUrlMedvanatge7082 = "https://demo.medvantage.tech:7082/";

@@ -1433,8 +1433,8 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
         Get.log(controller.medNameandDate.toString());
         if (widget.isFrom != 'add vitals') {
           dPrint('hits');
-          EasyDebounce.debounce(
-              'apihit', Duration(milliseconds: 500), () => postData(data));
+          // EasyDebounce.debounce(
+          //     'apihit', Duration(milliseconds: 500), () => postData(data));
         }
 
         dPrint('${text}08978967954');

@@ -78,6 +78,7 @@ class Api {
       // String myUrl = (newBaseUrl ?? userRepository.getAppDetails.appBaseUrl.toString()) + url;
       String myUrl = (newBaseUrl ?? ApiUtil.baseUrl) + url;
 
+      dPrint("myUrl: $myUrl");
       String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
       String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
       myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
@@ -277,6 +278,7 @@ class Api {
       // String myUrl = (newBaseUrl ?? userRepository.getAppDetails.appBaseUrl.toString()+'7080/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge) + url;
 
+      dPrint("myUrl: $myUrl");
       String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
       String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
       myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
@@ -490,6 +492,7 @@ class Api {
       // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7096/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7096) + url;
 
+      dPrint("myUrl: $myUrl");
       String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
       String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
       myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
@@ -698,6 +701,7 @@ class Api {
     // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7100/') + url;
     String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7100) + url;
 
+    dPrint("myUrl: $myUrl");
     String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
     String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
     myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
@@ -915,6 +919,7 @@ class Api {
       // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7082/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7082) + url;
 
+      dPrint("myUrl: $myUrl");
       String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
       String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
       myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
@@ -1143,6 +1148,7 @@ class Api {
     String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7084) + url;
 
 
+    dPrint("myUrl: $myUrl");
     String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
     String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
     myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;

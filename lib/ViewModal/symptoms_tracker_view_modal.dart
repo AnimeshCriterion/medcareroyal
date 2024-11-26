@@ -805,7 +805,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
     try {
       var data = await _api.callMedvanatagePatient(context,
           url:
-              "api/HomeCareSymtoms/XexzlJ5ieSNjbDvoxA/OoxdDgohhKjW7kLYMlqLCaSqxuw3+SRN/Gl2Nac4nMnmSzp7S6ZUqii5/UhPp5fnf4NcH1ycSZXN4d07+aVVTox+AiIiJ2arJum6lOa89KbG+bNAzgiEylVU4XqhlchmhcmAipse8mdxJSJKOxe85WCw=?uhID=${userRepository.getUser.uhID.toString()}&clientID=${userRepository.getUser.clientId.toString()}",
+              "api/HomeCareSymtoms/GetHomeCareSymtoms?uhID=${userRepository.getUser.uhID.toString()}&clientID=${userRepository.getUser.clientId.toString()}",
           localStorage: true,
           apiCallType: ApiCallType.post(body: {}));
       dPrint("nnnnnnnnnnnn $data");

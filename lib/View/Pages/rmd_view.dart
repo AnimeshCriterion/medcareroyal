@@ -88,7 +88,7 @@ class _RMDViewState extends State<RMDView> {
             await rmdViewModal.bannerImg(context);
         await rmdViewModal.GetClient(context);
         await rmdViewModal.hitVitalHistory(context);
-        rmdViewModal.getVitalsValue();
+        // rmdViewModal.getVitalsValue();
         await rmdViewModal.manualFoodAssign(context);
         await rmdViewModal.pillsReminderApi(context);
         if (Platform.isAndroid) {

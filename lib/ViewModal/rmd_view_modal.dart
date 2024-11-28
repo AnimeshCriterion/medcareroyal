@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
@@ -33,7 +34,8 @@ class RMDViewModal extends ChangeNotifier{
   List get GetPatientLastVitalList=>patientLastVitalList;
   set updatepatientLastVitalList(List val){
     patientLastVitalList=val;
-    notifyListeners();
+
+        notifyListeners();
   }
 
   getValue(vitalID,vitalKey){
@@ -104,30 +106,57 @@ class RMDViewModal extends ChangeNotifier{
   List vitalId=[
     {'id':7,
     'name':'Resp. Rate',
-    'img':ImagePaths.rr2,},
+    'img':ImagePaths.rr2,
+      'val':'',
+      'unit':'',
+      'time':''
+    },
     {'id':6,
       'name':'BP Dia',
-      'img':  ImagePaths.bp2, },
+      'img':  ImagePaths.bp2,
+      'val':'',
+      'unit':'',
+      'time':'' },
     {'id':4,
       'name':'BP Sys',
-      'img':  ImagePaths.bp, },
+      'img':  ImagePaths.bp,
+      'val':'',
+      'unit':'',
+      'time':''},
     {'id':56,
       'name':'Spo2',
-      'img':  ImagePaths.spo2, },
+      'img':  ImagePaths.spo2,
+      'val':'',
+      'unit':'',
+      'time':'' },
     {'id':74,
       'name':'Heart Rate',
-      'img':  ImagePaths.heartRate, },
+      'img':  ImagePaths.heartRate,
+      'val':'',
+      'unit':'',
+      'time':'' },
     {'id':10,
       'name':'RBS',
-      'img':  ImagePaths.rr2, },
+      'img':  ImagePaths.rr2,
+      'val':'',
+      'unit':'',
+      'time':'' },
     {'id':5,
       'name':'Temperature',
-      'img':  ImagePaths.temp, },
+      'img':  ImagePaths.temp,
+      'val':'',
+      'unit':'',
+      'time':''},
     {'id':3,
       'name':'Pulse Rate',
-      'img':  ImagePaths.pulse, },
+      'img':  ImagePaths.pulse,
+      'val':'',
+      'unit':'',
+      'time':''},
 
   ];
+
+
   String vitalValue='';
   set updateVitalValue(String val){
     vitalValue=val;
@@ -153,26 +182,32 @@ class RMDViewModal extends ChangeNotifier{
     vitalVitalImg=val;
     notifyListeners();
   }
+  int vIndex=0;
+  set updateVIndex(int val)
+  {
+    vIndex=val;
+    notifyListeners();
+  }
   getVitalsValue() async {
-    if(vitalId.isNotEmpty){
-        updateVitalName=vitalId[4]['name'].toString();
-        updateVitalImg=vitalId[4]['img'].toString();
-        updateVitalValue=getValue(vitalId[4]['id'].toString(),'vitalValue');
-        updateVitalUnit=getUnit(vitalId[4]['id'].toString(),'unit' );
-        vitalVitalTime= getVitalTime(vitalId[4]['id'].toString(),).toString();
-
-    }
-    Timer.periodic(Duration(seconds: vitalId.length*5 ), (timer) async {
-      for(int i=0;i<vitalId.length;i++){
-        await Future.delayed(Duration(seconds: 5))  .then((value) async {
-          updateVitalName=vitalId[i]['name'].toString();
-          updateVitalImg=vitalId[i]['img'].toString();
-          updateVitalValue=getValue(vitalId[i]['id'].toString(),'vitalValue');
-          updateVitalUnit=getUnit(vitalId[i]['id'].toString(),'unit' );
-          vitalVitalTime= getVitalTime(vitalId[i]['id'].toString(),).toString();
-        });
-      }
-    });
+    // if(vitalId.isNotEmpty){
+    //     updateVitalName=vitalId[4]['name'].toString();
+    //     updateVitalImg=vitalId[4]['img'].toString();
+    //     updateVitalValue=getValue(vitalId[4]['id'].toString(),'vitalValue');
+    //     updateVitalUnit=getUnit(vitalId[4]['id'].toString(),'unit' );
+    //     vitalVitalTime= getVitalTime(vitalId[4]['id'].toString(),).toString();
+    //
+    // }
+    // Timer.periodic(Duration(seconds: vitalId.length*5 ), (timer) async {
+    //   for(int i=0;i<vitalId.length;i++){
+    //     await Future.delayed(Duration(seconds: 5))  .then((value) async {
+    //       updateVitalName=vitalId[i]['name'].toString();
+    //       updateVitalImg=vitalId[i]['img'].toString();
+    //       updateVitalValue=getValue(vitalId[i]['id'].toString(),'vitalValue');
+    //       updateVitalUnit=getUnit(vitalId[i]['id'].toString(),'unit' );
+    //       vitalVitalTime= getVitalTime(vitalId[i]['id'].toString(),).toString();
+    //     });
+    //   }
+    // });
 
   }
 
@@ -182,20 +217,22 @@ class RMDViewModal extends ChangeNotifier{
    var dateTime=GetPatientLastVitalList.firstWhere((element) => element['vitalID'].toString()==vitalID.toString(),
         orElse: ()=>{"uhID":" ","homecareId":0,"vitalID":0,"vitalName":"Weight","vitalValue":0,"unit":" ","vitalDateTime":"","userId":0} )['vitalDateTime'].toString();
 
+    if(dateTime!=''){
+      dPrint("nnnnnnnnnnnnnn dateTime ${jsonEncode(vitalID)}");
+      dPrint("nnnnnnnnnnnnnn dateTime ${jsonEncode(dateTime)}");
       difference = DateTime.now()
-        .difference(DateTime.parse(dateTime.toString()))
-        .inMinutes;
-    unit='Min';
-    if(difference>=60){
-
-        difference = DateTime.now()
           .difference(DateTime.parse(dateTime.toString()))
-          .inHours;
-        unit='Hr';
+          .inMinutes;
+      unit = 'Min';
+      if (difference >= 60) {
+        difference = DateTime.now()
+            .difference(DateTime.parse(dateTime.toString()))
+            .inHours;
+        unit = 'Hr';
+      }
     }
 
-
-   return difference==0? '':difference.toString()+' '+unit;
+    return difference==0? '':difference.toString()+' '+unit;
     }
 
   hitVitalHistory(context) async {
@@ -216,8 +253,6 @@ class RMDViewModal extends ChangeNotifier{
       dPrint("nnnnnnnnnnnnnn${jsonEncode(data)}");
       if (data["status"] == 1) {
         updatepatientLastVitalList= data['responseValue'];
-
-
       } else {
 
         // Alert.show(data['responseValue'].toString());

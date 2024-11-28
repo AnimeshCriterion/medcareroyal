@@ -1,10 +1,10 @@
 // This is a generated file; do not edit or check into version control.
-FLUTTER_ROOT=/Users/animesh/Documents/flutter
-FLUTTER_APPLICATION_PATH=/Users/animesh/AndroidStudioProjects/medcareroyal
+FLUTTER_ROOT=C:\flutter3139\flutter
+FLUTTER_APPLICATION_PATH=C:\Gitea_Projects\medcareroyal
 COCOAPODS_PARALLEL_CODE_SIGN=true
 FLUTTER_BUILD_DIR=build
-FLUTTER_BUILD_NAME=1.2.14
-FLUTTER_BUILD_NUMBER=40
+FLUTTER_BUILD_NAME=1.2.15
+FLUTTER_BUILD_NUMBER=41
 DART_OBFUSCATION=false
 TRACK_WIDGET_CREATION=true
 TREE_SHAKE_ICONS=false

@@ -55,7 +55,7 @@ class _HistoryReportState extends State<HistoryReport> {
   }
 
   get() async {
-    await controller.fileData();
+    await controller.fileData(context);
   }
 
   @override

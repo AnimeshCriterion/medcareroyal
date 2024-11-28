@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
@@ -75,7 +76,7 @@ class _RMDViewState extends State<RMDView> {
     rmdViewModal. updateCurrentIndex=0;
 
     try{
-      //Updater().checkVersion(context);
+      // Updater().checkVersion(context);
     }
   catch(e){
 
@@ -96,13 +97,13 @@ class _RMDViewState extends State<RMDView> {
               await Permission.activityRecognition.request();
           if (status.isGranted) {
             dPrint("nnvnnnnnvnnnnvnnnnvn isGranted");
-            await rmdViewModal.startStepCounter();
+            // await rmdViewModal.startStepCounter();
           } else {
             dPrint("nnvnnnnnvnnnnvnnnnvn  ");
             // Permission denied, handle appropriately
           }
         }else{
-          await rmdViewModal.startStepCounter();
+          // await rmdViewModal.startStepCounter();
         }
       });
     }
@@ -145,58 +146,94 @@ class _RMDViewState extends State<RMDView> {
     return data;
   }
 
-   showHealthKitInfoDialog(BuildContext context) async {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        // Automatically dismiss the dialog after 3 seconds
-        Future.delayed(Duration(seconds: 3), () {
-          if (Navigator.of(context).canPop()) {
-            Navigator.of(context).pop();  // Dismiss the dialog
-          }
-        });
+  //  showHealthKitInfoDialog(BuildContext context) async {
+  //   showDialog(
+  //     context: context,
+  //     builder: (BuildContext context) {
+  //       // Automatically dismiss the dialog after 3 seconds
+  //       Future.delayed(Duration(seconds: 3), () {
+  //         if (Navigator.of(context).canPop()) {
+  //           Navigator.of(context).pop();  // Dismiss the dialog
+  //         }
+  //       });
+  //
+  //       return AlertDialog(
+  //         title: Text('HealthKit Integration'),
+  //         content: Text('This feature uses Apple Health (HealthKit) to track your health data like steps and heart rate. Your data stays private and secure.'),
+  //         actions: [
+  //           TextButton(
+  //             child: Text('OK'),
+  //             onPressed: () {
+  //               Navigator.of(context).pop();  // Manually dismiss the dialog
+  //             },
+  //           ),
+  //         ],
+  //       );
+  //     },
+  //   );
+  // }
 
-        return AlertDialog(
-          title: Text('HealthKit Integration'),
-          content: Text('This feature uses Apple Health (HealthKit) to track your health data like steps and heart rate. Your data stays private and secure.'),
-          actions: [
-            TextButton(
-              child: Text('OK'),
-              onPressed: () {
-                Navigator.of(context).pop();  // Manually dismiss the dialog
-              },
-            ),
-          ],
-        );
-      },
-    );
-  }
+  upperList(){
 
+    ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
+ return[
+    {
+      'title': localization.getLocaleData.symptomTracker,
+      'img': 'chills.svg',
+      'navigation': 'Symptoms Tracker'
+    },
+    {
+      'title': localization.getLocaleData.VitalManagement,
+      'img': 'vitals.svg',
+      'navigation': 'Vital Management'
+    },
+    {
+      'title': localization.getLocaleData.FluidManagement,
+      'img': 'fluidmanagement.svg',
+      'navigation': 'Fluid Management'
+    },
+    {
+      'title': localization.getLocaleData.PrescriptionChecklist,
+      'img': 'pills.svg',
+      'navigation': 'Prescription Checklist'
+    },
+    {
+      'title': localization.getLocaleData.presribedMedicine,
+      'img': 'dietchecklist.svg',
+      'navigation': 'Prescribed Investigation'
+    },
+    // {'title': localization.getLocaleData.SupplementChecklist, 'img': 'suppliment.svg', 'navigation': 'Supplement Checklist'},
+  ];
+}
+
+  other(){
+
+    ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
+ return [
+    {
+      'title': localization.getLocaleData.UploadReport,
+      'img': 'uploadReport.svg',
+      'navigation': 'Upload Report'
+    },
+    {
+      'title': localization.getLocaleData.LifestyleInterventions,
+      'img': 'lifestyle.svg',
+      'navigation': 'Lifestyle Interventions'
+    },
+  ];
+}
 
   @override
   Widget build(BuildContext context) {
 
     final BuildContext? _context=NavigationService.navigatorKey.currentContext;
     MasterDashboardViewModal masterDashboardViewModal = Provider.of<MasterDashboardViewModal>(context, listen: true);
-    final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
-    final color = style.themeData(themeChange.darkTheme, context);
+    final dark = Provider.of<ThemeProviderLd>(context, listen: true).darkTheme;
     ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: true);
     RMDViewModal rmdViewModal = Provider.of<RMDViewModal>(context, listen: true);
 
     UserRepository userRepository = Provider.of<UserRepository>(context, listen: true);
-    List upperList = [
-      {'title': localization.getLocaleData.symptomTracker, 'img': 'chills.svg', 'navigation': 'Symptoms Tracker'},
-      {'title': localization.getLocaleData.VitalManagement, 'img': 'vitals.svg', 'navigation': 'Vital Management'},
-      {'title': localization.getLocaleData.FluidManagement, 'img': 'fluidmanagement.svg', 'navigation': 'Fluid Management'},
-      {'title': localization.getLocaleData.PrescriptionChecklist, 'img': 'pills.svg', 'navigation': 'Prescription Checklist'},
-       {'title': localization.getLocaleData.presribedMedicine, 'img': 'dietchecklist.svg', 'navigation': 'Prescribed Investigation'},
-     // {'title': localization.getLocaleData.SupplementChecklist, 'img': 'suppliment.svg', 'navigation': 'Supplement Checklist'},
-    ];
-    List other = [
-      {'title': localization.getLocaleData.UploadReport, 'img': 'uploadReport.svg', 'navigation': 'Upload Report'},
-      {'title': localization.getLocaleData.LifestyleInterventions, 'img': 'lifestyle.svg', 'navigation': 'Lifestyle Interventions'},
-    ];
-    var dark = themeChange.darkTheme;
+
     var bgColor = dark ? VitalioColors.bgDark : Colors.white;
     var bgColor2 = dark ? VitalioColors.bgDark2 : VitalioColors.primaryBlueLight;
 
@@ -272,7 +309,7 @@ class _RMDViewState extends State<RMDView> {
                                               padding: const EdgeInsets.all(8.0),
                                               child: CircleAvatar(
                                                   radius: 25,
-                                                  backgroundColor: themeChange.darkTheme == true ? Colors.grey.shade400 : Colors.grey.shade400,
+                                                  backgroundColor: dark == true ? Colors.grey.shade400 : Colors.grey.shade400,
                                                   child: ClipRRect(
                                                       borderRadius: BorderRadius.circular(10),
                                                       child: CachedNetworkImage(
@@ -322,9 +359,9 @@ class _RMDViewState extends State<RMDView> {
                                         padding: const EdgeInsets.symmetric(horizontal: 18.0),
                                         child: Column(
                                           children: [
-                                            Image.asset(themeChange.darkTheme ? 'assets/darkm_patient/sos.png' : "assets/lightm_patient/sos.png", height: 25),
+                                            Image.asset(dark ? 'assets/darkm_patient/sos.png' : "assets/lightm_patient/sos.png", height: 25),
                                             const SizedBox(height: 5),
-                                            Text(localization.getLocaleData.SOS.toString(), style: MyTextTheme.smallGCN.copyWith(color: themeChange.darkTheme ? Colors.grey.shade400 : AppColor.greyDark)),
+                                            Text(localization.getLocaleData.SOS.toString(), style: MyTextTheme.smallGCN.copyWith(color: dark ? Colors.grey.shade400 : AppColor.greyDark)),
                                           ],
                                         ),
                                       ),
@@ -339,85 +376,89 @@ class _RMDViewState extends State<RMDView> {
                             ),
 
 
-                            ...List.generate(rmdViewModal.getMediconeCount().length, (index) {
-                              var data=rmdViewModal.getMediconeCount()[index];
-                              return   Padding(
-                                padding: const EdgeInsets.fromLTRB(0,8,0,8),
-                                child: Container(
-                                  height: 95,
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), color: bgColor2),
-                                  child: Row(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Image.asset('assets/A Vitalio/Pill.png', height: 30, width: 30),
-                                      ),
-                                      Expanded(
-                                        child: Column(
-                                          mainAxisAlignment: MainAxisAlignment.center,
-                                          crossAxisAlignment: CrossAxisAlignment.start,
+                               ...List.generate(
+                                   rmdViewModal.getMediconeCount().length,
+                                       (  int index)   {
+                                    var data=rmdViewModal.getMediconeCount()[index];
+                                    return   Padding(
+                                      padding: const EdgeInsets.fromLTRB(0,8,0,8),
+                                      child: Container(
+                                        height: 95,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), color: bgColor2),
+                                        child: Row(
                                           children: [
-                                            Container(
-                                                padding: const EdgeInsets.symmetric(horizontal: 4),
-                                                decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(4),
-                                                  color: dark?VitalioColors.greyBlue:Colors.white,
+                                            Padding(
+                                              padding: const EdgeInsets.all(20.0),
+                                              child: Image.asset('assets/A Vitalio/Pill.png', height: 30, width: 30),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Container(
+                                                      padding: const EdgeInsets.symmetric(horizontal: 4),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius: BorderRadius.circular(4),
+                                                        color: dark?VitalioColors.greyBlue:Colors.white,
+                                                      ),
+                                                      child: Text(toCamelCase(data['dosageForm'].toString()).toString(),
+                                                          style: MyTextTheme.mediumBCN.copyWith(
+                                                            color: dark ? Colors.white : null,
+                                                          ))),
+                                                  Text(toCamelCase(data['drugName'].toString()).toString(), style: MyTextTheme.mediumBCB.copyWith(color: dark ? Colors.white : Colors.black, fontWeight: FontWeight.w600)),
+                                                  Text(toCamelCase(data['remark'].toString()).toString(), style: MyTextTheme.mediumGCN.copyWith(color: dark ? Colors.white : VitalioColors.greyText))
+                                                ],
+                                              ),
+                                            ),
+                                            InkWell(
+                                              onTap: () async {
+
+                                                // Get.to(()=> Dose());
+
+                                                await CustomBottomSheet.open(context,
+                                                  child: FunctionalSheet(
+                                                    message: localization
+                                                        .getLocaleData.areYouSureYouHaveTakenThisMedicine
+                                                        .toString(),
+                                                    buttonName:  localization.getLocaleData.yes.toString(),
+                                                    onPressButton: () async {
+                                                rmdViewModal.insertMedication(context,
+                                                    data['pmId'].toString(),
+                                                    data['prescriptionRowID'],  DateFormat('HH:mm')
+                                                        .format(
+                                                        DateFormat('hh:mm a')
+                                                            .parse( data['time'].toString(),
+                                                        ))
+                                                        .toString());
+                                                }));
+                                              },
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(18.0),
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                                  children: [
+                                                    // Icon(
+                                                    //   Icons.check_box_outline_blank,
+                                                    //   color: VitalioColors.greyLight,
+                                                    // ),
+                                                    Icon(
+                                                      Icons.more_vert,
+                                                      color: VitalioColors.greyLight,
+                                                    )
+                                                  ],
                                                 ),
-                                                child: Text(toCamelCase(data['dosageForm'].toString()).toString(),
-                                                    style: MyTextTheme.mediumBCN.copyWith(
-                                                      color: dark ? Colors.white : null,
-                                                    ))),
-                                            Text(toCamelCase(data['drugName'].toString()).toString(), style: MyTextTheme.mediumBCB.copyWith(color: dark ? Colors.white : Colors.black, fontWeight: FontWeight.w600)),
-                                            Text(toCamelCase(data['remark'].toString()).toString(), style: MyTextTheme.mediumGCN.copyWith(color: dark ? Colors.white : VitalioColors.greyText))
+                                              ),
+                                            )
                                           ],
                                         ),
                                       ),
-                                      InkWell(
-                                        onTap: () async {
+                                    ) ;
+                                  }),
 
-                                          // Get.to(()=> Dose());
 
-                                          await CustomBottomSheet.open(context,
-                                            child: FunctionalSheet(
-                                              message: localization
-                                                  .getLocaleData.areYouSureYouHaveTakenThisMedicine
-                                                  .toString(),
-                                              buttonName:  localization.getLocaleData.yes.toString(),
-                                              onPressButton: () async {
-                                          rmdViewModal.insertMedication(context,
-                                              data['pmId'].toString(),
-                                              data['prescriptionRowID'],  DateFormat('HH:mm')
-                                                  .format(
-                                                  DateFormat('hh:mm a')
-                                                      .parse( data['time'].toString(),
-                                                  ))
-                                                  .toString());
-                                          }));
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.all(18.0),
-                                          child: Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                            crossAxisAlignment: CrossAxisAlignment.end,
-                                            children: [
-                                              // Icon(
-                                              //   Icons.check_box_outline_blank,
-                                              //   color: VitalioColors.greyLight,
-                                              // ),
-                                              Icon(
-                                                Icons.more_vert,
-                                                color: VitalioColors.greyLight,
-                                              )
-                                            ],
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ) ;
-                            }),
 
 
                             const SizedBox(height: 10),
@@ -442,56 +483,159 @@ class _RMDViewState extends State<RMDView> {
                             ),
 
                       const SizedBox(height: 10),
-                            Container(
-                              height: 73,
-                              width: double.infinity,
-                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(14), color: bgColor2),
-                              child: Row(
-                                children: [
-                                  rmdViewModal.vitalVitalImg.toString()==''?
-                                  SizedBox():Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Image.asset( rmdViewModal.vitalVitalImg.toString(), height: 30, width: 30),
-                                  ),
-                                  Expanded(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(rmdViewModal.vitalVitalName.toString(), style: MyTextTheme.largeBCB.copyWith(color: dark ? Colors.white : Colors.black, fontWeight: FontWeight.w600)),
-                                        Text(rmdViewModal.vitalVitalTime.toString() +' '+localization.getLocaleData.ago.toString(),  style: MyTextTheme.mediumGCN.copyWith(color: VitalioColors.greyLight))
-                                      ],
-                                    ),
-                                  ),
-                                  Column(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    crossAxisAlignment: CrossAxisAlignment.center,
-                                    children: [
-
-                                      Row(
-                                        children: [
-                                          Text(rmdViewModal.vitalValue!.toString(), style: MyTextTheme.largeBCB.copyWith(color: dark ? Colors.white : Colors.black, fontWeight: FontWeight.w600, fontSize: 26)),
-                                          Text(rmdViewModal.vitalUnit.toString(), style: MyTextTheme.mediumGCN.copyWith(color: dark ? Colors.white : Colors.black, )),
-                                        ],
-                                      ),
-                                      InkWell(
-                                        onTap: () async {
-                                          await rmdViewModal.hitVitalHistory(context);
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.fromLTRB(8.0,0,8,8),
-                                          child: Row(
-                                            children: [Text(localization.getLocaleData.update.toString()+' ', style: MyTextTheme.mediumGCN.copyWith(color: VitalioColors.greyLight)), Image.asset('assets/A Vitalio/arrow-repeat.png',color: VitalioColors.greyLight,)],
+                    rmdViewModal.GetPatientLastVitalList.isEmpty?
+                          SizedBox():
+                    CarouselSlider(
+                              options: CarouselOptions(
+                                onPageChanged: (i, reason) {
+                                  rmdViewModal.updateVIndex = i;
+                                  // try{
+                                  //         rmdViewModal.updateVitalValue =
+                                  //             rmdViewModal.getValue(
+                                  //           rmdViewModal.vitalId[i]['id']
+                                  //               .toString(),
+                                  //           'vitalValue',
+                                  //         );
+                                  //         rmdViewModal.updateVitalUnit =
+                                  //             rmdViewModal.getUnit(
+                                  //           rmdViewModal.vitalId[i]['id']
+                                  //               .toString(),
+                                  //           'unit',
+                                  //         );
+                                  //         rmdViewModal.vitalVitalTime =
+                                  //             rmdViewModal
+                                  //                 .getVitalTime(rmdViewModal
+                                  //                     .vitalId[i]['id']
+                                  //                     .toString())
+                                  //                 .toString();
+                                  //       }
+                                  //       catch(e){
+                                  //
+                                  //       }
+                                      },
+                                height: 74, // Adjust height as needed
+                                autoPlay: true,
+                                enlargeCenterPage: true,
+                              ),
+                              items: rmdViewModal.vitalId.map((vital) {
+                                var data=rmdViewModal.GetPatientLastVitalList.firstWhere((element) =>
+                                element['vitalID'].toString() == vital['id'].toString(),
+                                    orElse: ()=>{
+                                      "uhid": "",
+                                      "pmId": 0,
+                                      "vitalID": 0,
+                                      "vitalName": "",
+                                      "vitalValue": 0,
+                                      "unit": "",
+                                      "vitalDateTime": DateTime.now(),
+                                      "userId": 0,
+                                      "rowId": 0
+                                    });
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return InkWell(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => const AddVitalView(),
                                           ),
+                                        );
+                                      },
+                                      child: Container(
+                                        height: 73,
+                                        width: double.infinity,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(14),
+                                          color: bgColor2,
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(20.0),
+                                              child: Image.asset(
+                                                vital['img'], // Using image path from vitalId
+                                                height: 30,
+                                                width: 30,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    vital['name'], // Using name from vitalId
+                                                    style: MyTextTheme.largeBCB.copyWith(
+                                                      color: dark ? Colors.white : Colors.black,
+                                                      fontWeight: FontWeight.w600,
+                                                    ),
+                                                  ),
+                                              rmdViewModal.getVitalTime(vital['id'].toString()).toString()==''? SizedBox(): Text(
+                                                    '${rmdViewModal.getVitalTime(vital['id'].toString())} ago' ,
+                                                    style: MyTextTheme.mediumGCN.copyWith(
+                                                      color: AppColor.grey,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Column(
+                                              mainAxisAlignment: MainAxisAlignment.center,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    Text(
+                                                      data['vitalValue'].toString(),
+                                                      style: MyTextTheme.largeBCB.copyWith(
+                                                        color: dark ? Colors.white : Colors.black,
+                                                        fontWeight: FontWeight.w600,
+                                                        fontSize: 26,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      data['unit'].toString().replaceAll('null', ''),
+                                                      style: MyTextTheme.mediumGCN.copyWith(
+                                                        color: dark ? Colors.white : Colors.black,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                InkWell(
+                                                  onTap: () async {
+                                                    await rmdViewModal.hitVitalHistory(context);
+                                                  },
+                                                  child: Padding(
+                                                    padding: const EdgeInsets.fromLTRB(8.0, 0, 8, 8),
+                                                    child: Row(
+                                                      children: [
+                                                        Text(
+                                                          '${localization.getLocaleData.update} ',
+                                                          style: MyTextTheme.mediumGCN.copyWith(
+                                                            color: AppColor.grey,
+                                                          ),
+                                                        ),
+                                                        Image.asset(
+                                                          'assets/A Vitalio/arrow-repeat.png',
+                                                          color: AppColor.grey,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            const SizedBox(width: 20),
+                                          ],
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                  const SizedBox(width: 20),
-                                ],
-                              ),
+                                    );
+                                  },
+                                );
+                              }).toList(),
                             ),
-                            const SizedBox(height: 10),
+
+
 
                             Row(
                               children: [
@@ -505,6 +649,7 @@ class _RMDViewState extends State<RMDView> {
                             ),
                             const SizedBox(height: 10),
 
+
                             SizedBox(
                               height: 274,
                               child: Padding(
@@ -514,12 +659,12 @@ class _RMDViewState extends State<RMDView> {
                                   crossAxisSpacing: 10,
                                   mainAxisSpacing: 10,
                                   children: List.generate(
-                                      upperList.length,
+                                      upperList().length,
                                           (index) => InkWell(
                                           onTap: () async {
 
                                             Get.until(  (route) =>  route.settings.name=='/RMDView');
-                                            masterDashboardViewModal.updateSelectedPage =upperList[index]
+                                            masterDashboardViewModal.updateSelectedPage =upperList()[index]
                                             ['navigation']
                                                 .toString();
                                             await  masterDashboardViewModal.onSelectPage();
@@ -532,13 +677,13 @@ class _RMDViewState extends State<RMDView> {
                                               mainAxisAlignment: MainAxisAlignment.center,
                                               children: [
                                                 SvgPicture.asset(
-                                                  themeChange.darkTheme ? "assets/A Vitalio/${upperList[index]['img']}" : "assets/A Vitalio/${upperList[index]['img']}",
+                                                  dark ? "assets/A Vitalio/${upperList()[index]['img']}" : "assets/A Vitalio/${upperList()[index]['img']}",
                                                   height: 50,
-                                                  // color: themeChange.darkTheme?AppColor.white.withOpacity(.7):AppColor.grey,
+                                                  // color: dark?AppColor.white.withOpacity(.7):AppColor.grey,
                                                 ),
                                                 const SizedBox(height: 10),
                                                 Text(
-                                                  upperList[index]['title'].toString().replaceAll('\n', '').replaceAll(' ', '\n'),
+                                                  upperList()[index]['title'].toString().replaceAll('\n', '').replaceAll(' ', '\n'),
                                                   textAlign: TextAlign.center,
                                                   style: MyTextTheme.mediumWCN.copyWith(color: dark ? Colors.white : Colors.black, fontSize: 13, fontWeight: FontWeight.w500),
                                                 )
@@ -569,14 +714,14 @@ class _RMDViewState extends State<RMDView> {
                                     crossAxisSpacing: 10,
                                     mainAxisSpacing: 10,
                                     children:  List.generate(
-                                        other.length,
+                                        other().length,
                                             (index) => Padding(
                                               padding: const EdgeInsets.symmetric(horizontal: 15),
                                               child: InkWell(
                                               onTap: () async {
 
                                                 Get.until(  (route) =>  route.settings.name=='/RMDView');
-                                                masterDashboardViewModal.updateSelectedPage =other[index]
+                                                masterDashboardViewModal.updateSelectedPage = other()[index]
                                                 ['navigation']
                                                     .toString();
                                                 await  masterDashboardViewModal.onSelectPage();
@@ -593,12 +738,12 @@ class _RMDViewState extends State<RMDView> {
                                                         mainAxisAlignment: MainAxisAlignment.center,
                                                         children: [
                                                           SvgPicture.asset(
-                                                            "assets/A Vitalio/${other[index]['img']}",
+                                                            "assets/A Vitalio/${ other()[index]['img']}",
                                                             height: 40,
                                                             width: 40,
                                                           ),
                                                           const SizedBox(width: 15),
-                                                          Text(other[index]['title'].toString(), style: MyTextTheme.mediumGCN.copyWith(fontSize: 13, color:dark?Colors.white:Colors.black))
+                                                          Text( other()[index]['title'].toString(), style: MyTextTheme.mediumGCN.copyWith(fontSize: 13, color:dark?Colors.white:Colors.black))
                                                         ],
                                                       ),
                                                     ),
@@ -649,7 +794,7 @@ class _RMDViewState extends State<RMDView> {
   //   Provider.of<MasterDashboardViewModal>(context, listen: true);
   //   RMDViewModal rmdViewModal =
   //   Provider.of<RMDViewModal>(context, listen: true);
-  //   var dark= themeChange.darkTheme;
+  //   var dark= dark;
   //   return SafeArea(child: Scaffold(
   //     backgroundColor: dark?  Colors.black:AppColor.bgWhite,
   //     key: scaffoldKey,
@@ -701,7 +846,7 @@ class _RMDViewState extends State<RMDView> {
   //
   //                             scaffoldKey.currentState!.openDrawer();
   //                           },
-  //                           child: Image.asset(themeChange.darkTheme==true?ImagePaths.menuDark:ImagePaths.menulight,height: 40)),
+  //                           child: Image.asset(dark==true?ImagePaths.menuDark:ImagePaths.menulight,height: 40)),
   //                       Expanded(
   //                         child: Column(
   //                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -712,7 +857,7 @@ class _RMDViewState extends State<RMDView> {
   //                                   child: Text( rmdViewModal.getClintDetails.clientName.toString(),
   //                                     style: MyTextTheme.mediumGCN.copyWith(
   //                                         fontSize: 16,
-  //                                         color: themeChange.darkTheme
+  //                                         color: dark
   //                                             ? AppColor.white.withOpacity(.6)
   //                                             : AppColor.greyDark,
   //                                         fontWeight: FontWeight.w700
@@ -761,7 +906,7 @@ class _RMDViewState extends State<RMDView> {
   //                       //           ),
   //                       //
   //                       //           Text("${localization.getLocaleData.distance}  ${rmdViewModal.distance.toStringAsFixed(2)} ${localization.getLocaleData.km}",
-  //                       //             style: themeChange.darkTheme? MyTextTheme.mediumWCB: MyTextTheme.mediumWCB.copyWith( color:  dark?   Colors.white:AppColor.black),),
+  //                       //             style: dark? MyTextTheme.mediumWCB: MyTextTheme.mediumWCB.copyWith( color:  dark?   Colors.white:AppColor.black),),
   //                       //
   //                       //         ],
   //                       //       ),
@@ -1501,166 +1646,166 @@ class _RMDViewState extends State<RMDView> {
   }
 
 
-  customContainerButton() {
-    final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
-    return Consumer<ThemeProviderLd>(builder: (BuildContext context, value, _) {
-      return Container(
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-            color: style.themeData(value.darkTheme, context).primaryColor,
-            // border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(101),
-            gradient: LinearGradient(
-              colors: [
-                themeChange.darkTheme ? AppColor.neoBGGrey2 : AppColor.white,
-                themeChange.darkTheme
-                    ? AppColor.neoBGGrey2
-                    : AppColor.neoBGWhite2,
-                themeChange.darkTheme
-                    ? AppColor.neoBGGrey2
-                    : AppColor.neoBGWhite2,
-                themeChange.darkTheme
-                    ? AppColor.neoBGGrey2
-                    : Colors.grey.shade700,
-              ],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-            boxShadow: [
-              BoxShadow(
-                  color: themeChange.darkTheme
-                      ? Colors.black87
-                      : Colors.grey.shade400,
-                  blurRadius: 25,
-                  offset: const Offset(0, 10),
-                  spreadRadius: 7)
-            ]),
-        height: 101,
-        width: 101,
-        child: Container(
-          decoration: BoxDecoration(
-            // color:style.themeData(value.darkTheme, context).backgroundColor,
-            // border: Border.all(color: Colors.grey),
-              borderRadius: BorderRadius.circular(101),
-              gradient: LinearGradient(
-                colors: [
-                  themeChange.darkTheme
-                      ? AppColor.neoBGGrey1
-                      : AppColor.neoBGWhite1,
-                  themeChange.darkTheme
-                      ? AppColor.neoBGGrey2
-                      : AppColor.neoBGWhite2,
-                  themeChange.darkTheme
-                      ? AppColor.neoBGGrey2
-                      : Colors.grey.shade500,
-                  themeChange.darkTheme
-                      ? AppColor.neoBGGrey2
-                      : Colors.grey.shade700,
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-              boxShadow: [
-                BoxShadow(
-                    color: themeChange.darkTheme == false
-                        ? Colors.grey.shade600
-                        : style.themeData(value.darkTheme, context).focusColor,
-                    blurRadius: 10,
-                    offset: const Offset(0, 1),
-                    spreadRadius: 2)
-              ]),
-          height: 81,
-          width: 81,
-          alignment: Alignment.center,
-          child: Image.asset(
-            themeChange.darkTheme
-                ? "assets/darkm_patient/mic.png"
-                : 'assets/lightm_patient/mic.png',
-            width: 40,
-            height: 40,
-          ),
-        ),
-      );
-    });
-  }
+  // customContainerButton() {
+  //   final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
+  //   return Consumer<ThemeProviderLd>(builder: (BuildContext context, value, _) {
+  //     return Container(
+  //       alignment: Alignment.center,
+  //       decoration: BoxDecoration(
+  //           color: style.themeData(value.darkTheme, context).primaryColor,
+  //           // border: Border.all(color: Colors.grey),
+  //           borderRadius: BorderRadius.circular(101),
+  //           gradient: LinearGradient(
+  //             colors: [
+  //               themeChange.darkTheme ? AppColor.neoBGGrey2 : AppColor.white,
+  //               themeChange.darkTheme
+  //                   ? AppColor.neoBGGrey2
+  //                   : AppColor.neoBGWhite2,
+  //               themeChange.darkTheme
+  //                   ? AppColor.neoBGGrey2
+  //                   : AppColor.neoBGWhite2,
+  //               themeChange.darkTheme
+  //                   ? AppColor.neoBGGrey2
+  //                   : Colors.grey.shade700,
+  //             ],
+  //             begin: Alignment.topCenter,
+  //             end: Alignment.bottomCenter,
+  //           ),
+  //           boxShadow: [
+  //             BoxShadow(
+  //                 color: themeChange.darkTheme
+  //                     ? Colors.black87
+  //                     : Colors.grey.shade400,
+  //                 blurRadius: 25,
+  //                 offset: const Offset(0, 10),
+  //                 spreadRadius: 7)
+  //           ]),
+  //       height: 101,
+  //       width: 101,
+  //       child: Container(
+  //         decoration: BoxDecoration(
+  //           // color:style.themeData(value.darkTheme, context).backgroundColor,
+  //           // border: Border.all(color: Colors.grey),
+  //             borderRadius: BorderRadius.circular(101),
+  //             gradient: LinearGradient(
+  //               colors: [
+  //                 themeChange.darkTheme
+  //                     ? AppColor.neoBGGrey1
+  //                     : AppColor.neoBGWhite1,
+  //                 themeChange.darkTheme
+  //                     ? AppColor.neoBGGrey2
+  //                     : AppColor.neoBGWhite2,
+  //                 themeChange.darkTheme
+  //                     ? AppColor.neoBGGrey2
+  //                     : Colors.grey.shade500,
+  //                 themeChange.darkTheme
+  //                     ? AppColor.neoBGGrey2
+  //                     : Colors.grey.shade700,
+  //               ],
+  //               begin: Alignment.topCenter,
+  //               end: Alignment.bottomCenter,
+  //             ),
+  //             boxShadow: [
+  //               BoxShadow(
+  //                   color: themeChange.darkTheme == false
+  //                       ? Colors.grey.shade600
+  //                       : style.themeData(value.darkTheme, context).focusColor,
+  //                   blurRadius: 10,
+  //                   offset: const Offset(0, 1),
+  //                   spreadRadius: 2)
+  //             ]),
+  //         height: 81,
+  //         width: 81,
+  //         alignment: Alignment.center,
+  //         child: Image.asset(
+  //           themeChange.darkTheme
+  //               ? "assets/darkm_patient/mic.png"
+  //               : 'assets/lightm_patient/mic.png',
+  //           width: 40,
+  //           height: 40,
+  //         ),
+  //       ),
+  //     );
+  //   });
+  // }
 
-VitalWidget({img,title, value,unit, vitalDateTime}){
-   var differenceInMinutes=getTimediff(vitalDateTime);
-    final themeChange = Provider.of<ThemeProviderLd>(context, listen: false);
-    return  InkWell(
-      onTap: (){
+// VitalWidget({img,title, value,unit, vitalDateTime}){
+//    var differenceInMinutes=getTimediff(vitalDateTime);
+//     final themeChange = Provider.of<ThemeProviderLd>(context, listen: false);
+//     return  InkWell(
+//       onTap: (){
+//
+//         Get.to(()=>const AddVitalView());
+//       },
+//       child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Row(
+//             children: [
+//               SvgPicture.asset(img),
+//               const SizedBox(width: 10,),
+//               Text(title.toString(),style:MyTextTheme.smallWCN.copyWith(color:  themeChange.darkTheme?   Colors.white:AppColor.black),),
+//             ],
+//           ),
+//
+//           Row(crossAxisAlignment: CrossAxisAlignment.end,
+//             children: [
+//               Text(value.toString(), style: MyTextTheme.largeWCB.copyWith(
+//                   fontSize: 31,color:themeChange.darkTheme?
+//                   Colors.white:AppColor.black
+//               ),),
+//               Expanded(child: Text(unit.toString(),style:  MyTextTheme.mediumWCB.copyWith(color:  themeChange.darkTheme?   Colors.white:AppColor.black),)),
+//               Text(differenceInMinutes.toString()+' ago',style: MyTextTheme.mediumWCB.copyWith( color:themeChange.darkTheme?   Colors.white:AppColor.black),),
+//             ],
+//           ),
+//
+//         ],
+//       ),
+//     );
+// }
+// getTimediff(vitalDateTime){
+//   String differenceInMinutes='';
+//   if(vitalDateTime!=''){
+//     DateTime targetDateTime = DateTime.parse(vitalDateTime);
+//
+//     // Get the current date and time
+//     DateTime now = DateTime.now();
+//
+//     // Calculate the difference between the current time and the specific datetime
+//     Duration difference = now.difference(targetDateTime);
+// setState(() {
+//
+// });
+//     // Convert the difference to minutes
+//     int data = (difference.inMinutes) ;
+//     if(data<60){
+//       differenceInMinutes='$data Min';
+//     }
+//     else if(data>=60){
+//       int data2 = (difference.inHours) ;
+//       differenceInMinutes='$data2 Hr';
+//     }
+//   }
+//   return differenceInMinutes;
+// }
 
-        Get.to(()=>const AddVitalView());
-      },
-      child: Column(crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              SvgPicture.asset(img),
-              const SizedBox(width: 10,),
-              Text(title.toString(),style:MyTextTheme.smallWCN.copyWith(color:  themeChange.darkTheme?   Colors.white:AppColor.black),),
-            ],
-          ),
-
-          Row(crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(value.toString(), style: MyTextTheme.largeWCB.copyWith(
-                  fontSize: 31,color:themeChange.darkTheme?
-                  Colors.white:AppColor.black
-              ),),
-              Expanded(child: Text(unit.toString(),style:  MyTextTheme.mediumWCB.copyWith(color:  themeChange.darkTheme?   Colors.white:AppColor.black),)),
-              Text(differenceInMinutes.toString()+' ago',style: MyTextTheme.mediumWCB.copyWith( color:themeChange.darkTheme?   Colors.white:AppColor.black),),
-            ],
-          ),
-
-        ],
-      ),
-    );
-}
-getTimediff(vitalDateTime){
-  String differenceInMinutes='';
-  if(vitalDateTime!=''){
-    DateTime targetDateTime = DateTime.parse(vitalDateTime);
-
-    // Get the current date and time
-    DateTime now = DateTime.now();
-
-    // Calculate the difference between the current time and the specific datetime
-    Duration difference = now.difference(targetDateTime);
-setState(() {
-
-});
-    // Convert the difference to minutes
-    int data = (difference.inMinutes) ;
-    if(data<60){
-      differenceInMinutes='$data Min';
-    }
-    else if(data>=60){
-      int data2 = (difference.inHours) ;
-      differenceInMinutes='$data2 Hr';
-    }
-  }
-  return differenceInMinutes;
-}
-
-  myContainer({child, vitalDateTime }){
-    final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
-
-
-    return Container(
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: themeChange.darkTheme ? AppColor.black12:Colors.white,
-        borderRadius: BorderRadius.circular(15),
-          boxShadow: [
-            BoxShadow(
-                color: themeChange.darkTheme ?Colors.transparent :Colors.grey.shade300,
-                blurRadius: 10,
-                offset: const Offset(0, 0),
-                spreadRadius: 5)
-          ]
-      ),
-      child: child,
-    );
-  }
+  // myContainer({child, vitalDateTime }){
+  //   final themeChange = Provider.of<ThemeProviderLd>(context, listen: true);
+  //
+  //
+  //   return Container(
+  //     padding: const EdgeInsets.all(8.0),
+  //     decoration: BoxDecoration(
+  //       color: themeChange.darkTheme ? AppColor.black12:Colors.white,
+  //       borderRadius: BorderRadius.circular(15),
+  //         boxShadow: [
+  //           BoxShadow(
+  //               color: themeChange.darkTheme ?Colors.transparent :Colors.grey.shade300,
+  //               blurRadius: 10,
+  //               offset: const Offset(0, 0),
+  //               spreadRadius: 5)
+  //         ]
+  //     ),
+  //     child: child,
+  //   );
+  // }
 }

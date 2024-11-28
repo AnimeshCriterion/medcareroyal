@@ -12,6 +12,7 @@ import '../Modal/ChatDataModal.dart';
 import '../View/widget/common_method/show_progress_dialog.dart';
 import '../app_manager/api/api_util.dart';
 import '../authenticaton/user_repository.dart';
+import '../encyption.dart';
 import '../medcare_utill.dart';
 
 class ChatViewModal extends ChangeNotifier {
@@ -42,6 +43,8 @@ class ChatViewModal extends ChangeNotifier {
     ProgressDialogue().show(context, loadingText: "Sending message");
     UserRepository userRepository =
         Provider.of<UserRepository>(context, listen: false);
+
+    var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
     Map<String, String> body={
       'MessageType': getImgPath.isNotEmpty ? '2' : '1',
       'SendTo': userRepository.getUser.admitDoctorId.toString(),
@@ -56,7 +59,9 @@ class ChatViewModal extends ChangeNotifier {
     };
     dPrint(body);
     var request = http.MultipartRequest(
-        'POST', Uri.parse("https://apimedcareroyal.medvantage.tech:7100/SaveUserChat"));
+        'POST', Uri.parse(ApiUtil().baseUrlMedvanatge7100+'SaveUserChat'
+        // "https://apimedcareroyal.medvantage.tech:7100/SaveUserChat"
+    ));
 
     request.fields.addAll(body);
     if(getImgPath.toString()!=''){
@@ -66,6 +71,10 @@ class ChatViewModal extends ChangeNotifier {
       request.files.add(multipartFile);
     }
 
+    request.headers.addAll( {
+      "content-type": "application/json",
+      'Authorization': basicAuth
+    });
     http.StreamedResponse response = await request.send();
 
 
@@ -73,6 +82,9 @@ class ChatViewModal extends ChangeNotifier {
 
     var data=await response.stream.bytesToString();
     dPrint('nnnnn ${data}');
+    var decryptData= await EncryptDecrypt.decryptString(jsonDecode(data)['data'],EncryptDecrypt.key.toString() ) ;
+    dPrint("nnnnnnnnnnnn $decryptData");
+    data =decryptData;
 
     if (response.statusCode == 200) {
       ProgressDialogue().hide();
@@ -170,14 +182,23 @@ class ChatViewModal extends ChangeNotifier {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
     try{
+      dPrint('nnnnndsffdsfdfdnn ${ApiUtil().baseUrlMedvanatge7100+'ChatHubService'.toString()}');
+
+      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
       final hubConnection =await HubConnectionBuilder()
-          .withUrl(
-              'https://apimedcareroyal.medvantage.tech:7100/ChatHubService').withAutomaticReconnect()
+          .withUrl(ApiUtil().baseUrlMedvanatge7100+'ChatHubService',
+
+          options: HttpConnectionOptions(
+        accessTokenFactory: () async {
+          // Return the bearer token here
+          return basicAuth;
+        },)
+              // 'https://apimedcareroyal.medvantage.tech:7100/ChatHubService'
+      ).withAutomaticReconnect()
           .build();
 
       hubConnection.serverTimeoutInMilliseconds = 300000; // 2 minutes
       hubConnection.keepAliveIntervalInMilliseconds = 60000; // 30 seconds
-      dPrint('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
       await hubConnection.start();
 
       dPrint('nnnnndsffdsfdfdnn ${userRepository.getUser.clientId!.toString()}');
@@ -227,9 +248,16 @@ class ChatViewModal extends ChangeNotifier {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
 
+    var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
+    dPrint('nnnnndsffdsfdfdnn ${ApiUtil().baseUrlMedvanatge7100+'Notification'.toString()}');
       final hubConnection =await HubConnectionBuilder()
-          .withUrl(
-          'https://apimedcareroyal.medvantage.tech:7101/Notification',options: HttpConnectionOptions(
+          .withUrl(ApiUtil().baseUrlMedvanatge7101+'Notification'
+          // 'https://apimedcareroyal.medvantage.tech:7101/Notification'
+        ,options: HttpConnectionOptions(
+          accessTokenFactory: () async {
+          // Return the bearer token here
+          return basicAuth;
+        },
         transport: HttpTransportType.LongPolling, // Enable Long Polling
       ),).withAutomaticReconnect()
           .build();

@@ -272,3 +272,5 @@ Future<void> showHealthKitInfoDialog(BuildContext context) async {
 class NavigationService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 }
+
+

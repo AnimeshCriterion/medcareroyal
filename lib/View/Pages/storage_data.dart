@@ -262,34 +262,34 @@ class InternalStorage{
 
   storeData(context,{  Map? currentData,List? storedData, }) async {
 
-    UserRepository userRepository =
-    Provider.of<UserRepository>(context, listen: false);
-
-
-    final file =await _returnFilePath();
-
-    Map  initialData=  await _readData();
-
-    List temp=[];
-
-    if(initialData['userId'].toString()==userRepository.getUser.userId.toString()){
-      temp= storedData??  initialData['dataList'];
-    }
-    else{
-      initialData['userId']=userRepository.getUser.userId.toString();
-      temp=[];
-    }
-    if(currentData!=null){
-      temp.add(currentData);
-
-      Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'Your data automatically save when internet is on'.toString()));
-      // Alert.show('Your data automatically save when internet is on');
-    }
-    initialData['dataList']=temp;
-
-    dPrint('nnnvnvnnv '+initialData.toString());
-    await file.writeAsString(jsonEncode(initialData));
-    await getData();
+    // UserRepository userRepository =
+    // Provider.of<UserRepository>(context, listen: false);
+    //
+    //
+    // final file =await _returnFilePath();
+    //
+    // Map  initialData=  await _readData();
+    //
+    // List temp=[];
+    //
+    // if(initialData['userId'].toString()==userRepository.getUser.userId.toString()){
+    //   temp= storedData??  initialData['dataList'];
+    // }
+    // else{
+    //   initialData['userId']=userRepository.getUser.userId.toString();
+    //   temp=[];
+    // }
+    // if(currentData!=null){
+    //   temp.add(currentData);
+    //
+    //   Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'Your data automatically save when internet is on'.toString()));
+    //   // Alert.show('Your data automatically save when internet is on');
+    // }
+    // initialData['dataList']=temp;
+    //
+    // dPrint('nnnvnvnnv '+initialData.toString());
+    // await file.writeAsString(jsonEncode(initialData));
+    // await getData();
 
 
   }

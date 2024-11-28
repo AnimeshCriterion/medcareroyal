@@ -752,15 +752,15 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       }
     }
 
-    try {
+    // try {
       dPrint('save');
       var data = await _api.callMedvanatagePatient7082(context,
           url:
           // 'api/PatientIPDPrescription/InsertSymtoms?uhID=${userRepository.getUser.uhID.toString()}&doctorId=0&jsonSymtoms=${jsonEncode(dtDataTable).toString()}&userId=${userRepository.getUser.userId.toString()}&clientID=${userRepository.getUser.clientId.toString()}',
               "${AllApi.addSymptompsHm}uhID=${userRepository.getUser.uhID.toString()}&userID=${userRepository.getUser.userId.toString()}&isProvisionalDiagnosis=0&isFromPatient=1&doctorId=0&jsonSymtoms=${jsonEncode(dtDataTable).toString()}",
-          apiCallType: ApiCallType.post(body: {}),
+          apiCallType: ApiCallType.get( ),
       isSavedApi: true);
-      dPrint("Check$data");
+      dPrint("CheckCheck $data");
 
        Get.back();
       if (data["status"] == 0) {
@@ -780,9 +780,10 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       updateTempProblemList=[];
       addedSymptoms=[];
       notifyListeners();
-    } catch (e) {
-      Get.back();
-    }
+    // } catch (e) {
+    //   dPrint("Check $e");
+    //   Get.back();
+    // }
   }
 
   List symptomHistory = [];
@@ -813,7 +814,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       updateShowNoData=true;
        // Get.back();
       if (data["status"] == 0) {
-        Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data["responseValue"].toString()));
+        // Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data["responseValue"].toString()));
         // Alert.show(data["responseValue"].toString());
       } else {
 

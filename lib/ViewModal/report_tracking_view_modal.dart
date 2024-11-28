@@ -36,6 +36,9 @@ class ReportTrackingViewModal extends ChangeNotifier{
 
     ProgressDialogue().show(context, loadingText: 'Loading...');
 
+    UserRepository userRepository =
+    Provider.of<UserRepository>(context, listen: false);
+    var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
     Map<String, String> body={
         'uhId': uhId.toString(),
         'category': 'investigation',
@@ -50,13 +53,16 @@ class ReportTrackingViewModal extends ChangeNotifier{
         'uhId=${uhId}&category=investigation&dateTime=${DateTime.now().toString()}&userId=${admitDoctorId.toString()}', EncryptDecrypt.key);
 
       var request = http.MultipartRequest(
-          'POST', Uri.parse(ApiUtil().baseUrlMedvanatge7082+'/api/PatientMediaData/InsertPatientMediaData?'+encryptedData.toString()));
+          'POST', Uri.parse(ApiUtil().baseUrlMedvanatge7082+'api/PatientMediaData/InsertPatientMediaData?'+encryptedData.toString()));
 
     http.MultipartFile multipartFile = await http.MultipartFile.fromPath(
         'formFile', getImgPath.toString());
 
     request.files.add(multipartFile);
-    request.headers.addAll(  {'Content-Type': 'application/json'});
+    request.headers.addAll(  {'Content-Type': 'application/json',
+      'Authorization': basicAuth
+    });
+
       http.StreamedResponse response = await request.send();
 
 
@@ -75,7 +81,7 @@ class ReportTrackingViewModal extends ChangeNotifier{
         await  getPatientMediaData(context);
         // https://apimedcareroyal.medvantage.tech:7082/Upload\Image\1730805217123_image_cropper_1730805195025.jpg
         // await labReportExtraction(context,'https://apimedcareroyal.medvantage.tech:7082/'+url.toString());
-        await labReportExtraction(context,ApiUtil().baseUrlMedvanatge7082.toString()+url.toString());
+        // await labReportExtraction(context,ApiUtil().baseUrlMedvanatge7082.toString()+url.toString());
         alertToast(context, 'Report uploaded successfully');
 
 
@@ -172,36 +178,36 @@ class ReportTrackingViewModal extends ChangeNotifier{
   labReportExtraction(context,url) async {
 
 
-    ProgressDialogue().show(context, loadingText: 'Loading...');
+    // ProgressDialogue().show(context, loadingText: 'Loading...');
 
-    try {
-      var data = await _api.callMedvanatagePatient7082(context,
-          url:'LabReportExtraction/?ImageUrl=${url.toString()}',
-          newBaseUrl: 'http://172.16.19.195:8004/',
-          localStorage: true,
-          apiCallType: ApiCallType.get());
-
-      if(Map.from(data).keys.toList().contains('response')){
-        dPrint(Map.from(data).keys.toList().toString()+' kgvbnvcbnfxg');
-        updatePatientReportExtraction=data['response']['patient_details'];
-
-        dPrint(data.toString()+' nnnnnn');
-
-        for(int i=0;i<data['response']['report'].length;i++){
-          data['response']['report'][i].addAll(
-              {'val': TextEditingController(text:data['response']['report'][i]['result'].toString())});
-        }
-
-        updateReportExtraction=data['response']['report'];
-
-        Get.back();
-        Get.to(LabFeildView());
-      }
-
-    } catch (e) {
-      Get.back();
-      dPrint(e.toString()+' kgvbnvcbnfxg');
-    }
+    // try {
+    //   var data = await _api.callMedvanatagePatient7082(context,
+    //       url:'LabReportExtraction/?ImageUrl=${url.toString()}',
+    //       newBaseUrl: 'http://172.16.19.195:8004/',
+    //       localStorage: true,
+    //       apiCallType: ApiCallType.get());
+    //
+    //   if(Map.from(data).keys.toList().contains('response')){
+    //     dPrint(Map.from(data).keys.toList().toString()+' kgvbnvcbnfxg');
+    //     updatePatientReportExtraction=data['response']['patient_details'];
+    //
+    //     dPrint(data.toString()+' nnnnnn');
+    //
+    //     for(int i=0;i<data['response']['report'].length;i++){
+    //       data['response']['report'][i].addAll(
+    //           {'val': TextEditingController(text:data['response']['report'][i]['result'].toString())});
+    //     }
+    //
+    //     updateReportExtraction=data['response']['report'];
+    //
+    //     Get.back();
+    //     Get.to(LabFeildView());
+    //   }
+    //
+    // } catch (e) {
+    //   Get.back();
+    //   dPrint(e.toString()+' kgvbnvcbnfxg');
+    // }
   }
 
   // http://172.16.19.195:8004/docs

@@ -18,6 +18,7 @@ import '../../Localization/app_localization.dart';
 import '../../Modal/ChatDataModal.dart';
 import '../../ViewModal/chat_view_modal.dart';
 import '../../ViewModal/dashboard_view_modal.dart';
+import '../../app_manager/api/api_util.dart';
 import '../../app_manager/neomorphic/hex.dart';
 import '../../app_manager/widgets/buttons/custom_ink_well.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
@@ -48,8 +49,8 @@ class _ChatViewState extends State<ChatView> {
   get() async {
 
     ChatViewModal chatVM = Provider.of<ChatViewModal>(context, listen: false);
-    await chatVM.connectServer(context);
-    await chatVM.connectServerNotification(context);
+    // await chatVM.connectServer(context);
+    // await chatVM.connectServerNotification(context);
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       WidgetsFlutterBinding.ensureInitialized();
 
@@ -464,12 +465,14 @@ class _ChatViewState extends State<ChatView> {
         MyNavigator.push(
                       context,
                       MyImageView(
-                          url: 'https://apishfc.medvantage.tech:7100/' +
+                          url: ApiUtil().baseUrlMedvanatge7100
+                          // 'https://apishfc.medvantage.tech:7100/'
+                          +
                               filename
                                   .toString().split(':7100').last));
       },
       child: CachedNetworkImage(
-        imageUrl: 'https://apishfc.medvantage.tech:7100/' +filename
+        imageUrl:ApiUtil().baseUrlMedvanatge7100 +filename
             .toString().split(':7100').last,
         placeholder: (context, url) =>   Container(
           alignment: Alignment.center,
@@ -494,7 +497,7 @@ class _ChatViewState extends State<ChatView> {
         MyNavigator.push(
                       context,
                       VideoPlayer(
-                          url: 'https://apishfc.medvantage.tech:7100/' +
+                          url: ApiUtil().baseUrlMedvanatge7100 +
                               filename
                                   .toString().split(':7100').last));
       },

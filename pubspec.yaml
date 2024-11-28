@@ -166,6 +166,7 @@ dependencies:
   cryptography: ^2.0.0
   crypto: ^3.0.0
   flutter_js:
+  carousel_slider: ^5.0.0
   #    path: audio_input_type_plugin
 
   #  share_plus: ^7.0.2

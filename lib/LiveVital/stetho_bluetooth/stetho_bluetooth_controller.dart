@@ -34,8 +34,10 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../Localization/app_localization.dart';
 import '../../View/widget/common_method/show_progress_dialog.dart';
 import '../../app_manager/alert_toast.dart';
+import '../../app_manager/api/api_util.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
+import '../../encyption.dart';
 import 'app_api.dart';
 import 'data_modal/patient_details_data_modal.dart';
 class StethoBluetoothController extends GetxController{
@@ -483,10 +485,14 @@ class StethoBluetoothController extends GetxController{
     };
     dPrint("mdkgmg"+body.toString());
     try{
+    String encryptedData = await EncryptDecrypt.encryptString(
+         'uhId=${userRepository.getUser.uhID.toString()}&category=stethoscope&dateTime=${DateTime.now().toString()}&userId=${userRepository.getUser.admitDoctorId.toString()}'.toString(), EncryptDecrypt.key);
+
       var request = http.MultipartRequest(
           'POST',
-          Uri.parse(
-              'https://apimedcareroyal.medvantage.tech:7082/api/PatientMediaData/InsertPatientMediaData?uhId=${userRepository.getUser.uhID.toString()}&category=stethoscope&dateTime=${DateTime.now().toString()}&userId=${userRepository.getUser.admitDoctorId.toString()}'));
+          Uri.parse(ApiUtil().baseUrlMedvanatge7082+'api/PatientMediaData/InsertPatientMediaData?'+encryptedData.toString()
+              // 'https://apimedcareroyal.medvantage.tech:7082/api/PatientMediaData/InsertPatientMediaData?'
+          ));
 
       http.MultipartFile multipartFile =
           await http.MultipartFile.fromPath('formFile', filePath.toString());

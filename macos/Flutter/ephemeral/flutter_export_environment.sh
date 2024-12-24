@@ -1,7 +1,7 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/animesh/Documents/flutter"
-export "FLUTTER_APPLICATION_PATH=/Users/animesh/AndroidStudioProjects/medcareroyal"
+export "FLUTTER_ROOT=C:\flutter3139\flutter"
+export "FLUTTER_APPLICATION_PATH=C:\Gitea_Projects\medcareroyal"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
 export "FLUTTER_BUILD_NAME=1.2.15"

@@ -78,20 +78,24 @@ class Api {
       // String myUrl = (newBaseUrl ?? userRepository.getAppDetails.appBaseUrl.toString()) + url;
       String myUrl = (newBaseUrl ?? ApiUtil.baseUrl) + url;
 
-      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
-      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
-      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
+      if(myUrl.contains('?')){
       dPrint("myUrl: $myUrl");
+      String encryptedData = await EncryptDecrypt.encryptString(
+          myUrl.split('?')[1].toString(), EncryptDecrypt.key);
+      String encriptedUrl =
+          myUrl.contains('?') ? encryptedData : myUrl.split('?')[1].toString();
+      myUrl = myUrl.split('?')[0] + '?' + encriptedUrl;
+      dPrint("myUrl: $myUrl");
+    }
 
-
-
-      String accessToken = userRepository.getUser.patientName.toString();
+    String accessToken = userRepository.getUser.patientName.toString();
       String userId = userRepository.getUser.uhID.toString();
       Map body = apiCallType.body ?? {};
 
-      var basicAuth =
-          'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
+      // var basicAuth =
+      //     'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
 
+      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
       // Map<String, String>? header = token
       //     ? {
       //         'x-access-token': accessToken.toString(),
@@ -109,6 +113,7 @@ class Api {
         'Content-Type': 'application/json',
         'Authorization': basicAuth
       };
+
       if (onFoundStoredData != null) {
         var storedData = (await _localStorage.fetchData(key: url));
         if (storedData != null) {
@@ -184,7 +189,9 @@ class Api {
             localStorage: localStorage,
             encodeData: response.body,
           );
-          return data;
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          // dPrint("nnnnnnnnnnnn $decryptData");
+          return  jsonDecode(decryptData);
         } else if (streamResponse != null) {
           var res = await streamResponse.stream.bytesToString();
           var data = await _handleDecodeAndStorage(
@@ -192,7 +199,9 @@ class Api {
             localStorage: localStorage,
             encodeData: res,
           );
-          return data;
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          dPrint("nnnnnnnnnnnn $decryptData");
+          return  jsonDecode(decryptData);
         } else {
 
           Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: "Null response".toString()));
@@ -203,6 +212,7 @@ class Api {
         }
       } catch (e) {
 
+        dPrint("datadatadata: $e");
         if(isSavedApi){
           Map currentData={
             'fullUrl':myUrl,
@@ -277,10 +287,15 @@ class Api {
       // String myUrl = (newBaseUrl ?? userRepository.getAppDetails.appBaseUrl.toString()+'7080/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge) + url;
 
-      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
-      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
-      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
-      dPrint("myUrl: $myUrl");
+      if(myUrl.contains('?')){
+        dPrint("myUrl: $myUrl");
+        String encryptedData = await EncryptDecrypt.encryptString(
+            myUrl.split('?')[1].toString(), EncryptDecrypt.key);
+        String encriptedUrl =
+        myUrl.contains('?') ? encryptedData : myUrl.split('?')[1].toString();
+        myUrl = myUrl.split('?')[0] + '?' + encriptedUrl;
+        dPrint("myUrl: $myUrl");
+      }
 
 
 
@@ -288,10 +303,11 @@ class Api {
       String userId = userRepository.getUser.uhID.toString();
       Map body = apiCallType.body ?? {};
 
-      var basicAuth = 'Bearer ${base64Encode(
-          utf8.encode('$username:$password'))}';
+      // var basicAuth = 'Bearer ${base64Encode(
+      //     utf8.encode('$username:$password'))}';
 
 
+      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
       // Map<String, String>? header = token ? {
       //   'x-access-token': accessToken.toString(),
       //   'userID': userId.toString(),
@@ -394,9 +410,10 @@ class Api {
           );
 
 
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          dPrint("nnnnnnnnnnnn $decryptData");
 
-
-          return data;
+          return  jsonDecode(decryptData);
         }
         else if (streamResponse != null) {
           var res = await streamResponse.stream.bytesToString();
@@ -406,7 +423,9 @@ class Api {
             encodeData: res,
 
           );
-          return data;
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          dPrint("nnnnnnnnnnnn $decryptData");
+          return  jsonDecode(decryptData);
         }
         else {
           Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: "Null response".toString()));
@@ -490,20 +509,25 @@ class Api {
       // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7096/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7096) + url;
 
-      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
-      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
-      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
-      dPrint("myUrl: $myUrl");
-
+      if(myUrl.contains('?')){
+        dPrint("myUrl: $myUrl");
+        String encryptedData = await EncryptDecrypt.encryptString(
+            myUrl.split('?')[1].toString(), EncryptDecrypt.key);
+        String encriptedUrl =
+        myUrl.contains('?') ? encryptedData : myUrl.split('?')[1].toString();
+        myUrl = myUrl.split('?')[0] + '?' + encriptedUrl;
+        dPrint("myUrl: $myUrl");
+      }
 
 
       String accessToken = userRepository.getUser.patientName.toString();
       String userId = userRepository.getUser.uhID.toString();
       Map body = apiCallType.body ?? {};
 
-      var basicAuth = 'Bearer ${base64Encode(
-          utf8.encode('$username:$password'))}';
+      // var basicAuth = 'Bearer ${base64Encode(
+      //     utf8.encode('$username:$password'))}';
 
+      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
 
       // Map<String, String>? header = token ? {
       //   'x-access-token': accessToken.toString(),
@@ -606,7 +630,9 @@ class Api {
             encodeData: response.body,
 
           );
-          return data;
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          dPrint("nnnnnnnnnnnn $decryptData");
+          return  jsonDecode(decryptData);
         }
         else if (streamResponse != null) {
           var res = await streamResponse.stream.bytesToString();
@@ -616,7 +642,9 @@ class Api {
             encodeData: res,
 
           );
-          return data;
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          dPrint("nnnnnnnnnnnn $decryptData");
+          return  jsonDecode(decryptData);
         }
         else {
           Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: "Null response".toString()));
@@ -697,12 +725,15 @@ class Api {
 
     // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7100/') + url;
     String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7100) + url;
-
-    String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
-    String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
-    myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
-    dPrint("myUrl: $myUrl");
-
+    if(myUrl.contains('?')){
+      dPrint("myUrl: $myUrl");
+      String encryptedData = await EncryptDecrypt.encryptString(
+          myUrl.split('?')[1].toString(), EncryptDecrypt.key);
+      String encriptedUrl =
+      myUrl.contains('?') ? encryptedData : myUrl.split('?')[1].toString();
+      myUrl = myUrl.split('?')[0] + '?' + encriptedUrl;
+      dPrint("myUrl: $myUrl");
+    }
 
 
 
@@ -710,8 +741,9 @@ class Api {
     String userId =userRepository.getUser.uhID.toString();
     Map body = apiCallType.body??{};
 
-    var basicAuth =  'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
+    // var basicAuth =  'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
 
+    var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
 
     // Map<String,String>? header = token? {
     //   // 'x-access-token': accessToken.toString(),
@@ -821,7 +853,9 @@ class Api {
           encodeData: response.body,
 
         );
-        return data;
+        var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+        dPrint("nnnnnnnnnnnn $decryptData");
+        return  jsonDecode(decryptData);
       }
       else if (streamResponse != null) {
         var res = await streamResponse.stream.bytesToString();
@@ -831,7 +865,9 @@ class Api {
           encodeData: res,
 
         );
-        return data;
+        var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+        dPrint("nnnnnnnnnnnn $decryptData");
+        return  jsonDecode(decryptData);
 
       }
       else {
@@ -915,10 +951,15 @@ class Api {
       // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7082/') + url;
       String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7082) + url;
 
-      String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
-      String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
-      myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
-      dPrint("myUrl: $myUrl");
+      if(myUrl.contains('?')){
+        dPrint("myUrl: $myUrl");
+        String encryptedData = await EncryptDecrypt.encryptString(
+            myUrl.split('?')[1].toString(), EncryptDecrypt.key);
+        String encriptedUrl =
+        myUrl.contains('?') ? encryptedData : myUrl.split('?')[1].toString();
+        myUrl = myUrl.split('?')[0] + '?' + encriptedUrl;
+        dPrint("myUrl: $myUrl");
+      }
 
 
 
@@ -929,8 +970,9 @@ class Api {
       // var basicAuth = 'Bearer ${base64Encode(
       //     utf8.encode('$username:$password'))}';
 
-      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
+      // var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
 
+      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
 
       // Map<String, String>? header = token ? {
       //   'x-access-token': accessToken.toString(),
@@ -1048,8 +1090,8 @@ class Api {
 
           );
           var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
-          log("nnnnnnnnnnnn $decryptData");
-          return jsonDecode(decryptData);
+          dPrint("nnnnnnnnnnnn $decryptData");
+          return  jsonDecode(decryptData);
         }
         else if (streamResponse != null) {
           var res = await streamResponse.stream.bytesToString();
@@ -1059,7 +1101,9 @@ class Api {
             encodeData: res,
 
           );
-          return data;
+          var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+          dPrint("nnnnnnnnnnnn $decryptData");
+          return  jsonDecode(decryptData);
         }
         else {
           Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: "Null response".toString()));
@@ -1142,12 +1186,15 @@ class Api {
     // String myUrl = (newBaseUrl ?? '${userRepository.getAppDetails.appBaseUrl}7084/') + url;
     String myUrl = (newBaseUrl ?? ApiUtil().baseUrlMedvanatge7084) + url;
 
-
-    String encryptedData=await EncryptDecrypt.encryptString(myUrl.split('?')[1].toString(),EncryptDecrypt.key);
-    String encriptedUrl= myUrl.contains('?')? encryptedData: myUrl.split('?')[1].toString();
-    myUrl=myUrl.split('?')[0]+'?'+encriptedUrl;
-    dPrint("myUrl: $myUrl");
-
+    if(myUrl.contains('?')){
+      dPrint("myUrl: $myUrl");
+      String encryptedData = await EncryptDecrypt.encryptString(
+          myUrl.split('?')[1].toString(), EncryptDecrypt.key);
+      String encriptedUrl =
+      myUrl.contains('?') ? encryptedData : myUrl.split('?')[1].toString();
+      myUrl = myUrl.split('?')[0] + '?' + encriptedUrl;
+      dPrint("myUrl: $myUrl");
+    }
 
 
 
@@ -1157,8 +1204,9 @@ class Api {
     String userId =userRepository.getUser.uhID.toString();
     Map body = apiCallType.body??{};
 
-    var basicAuth =  'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
+    // var basicAuth =  'Bearer ${base64Encode(utf8.encode('$username:$password'))}';
 
+    var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
 
     // Map<String,String>? header = token? {
     //   'x-access-token': accessToken.toString(),
@@ -1275,7 +1323,9 @@ class Api {
           encodeData: res,
 
         );
-        return data;
+        var decryptData= await EncryptDecrypt.decryptString(data['data'],EncryptDecrypt.key.toString() ) ;
+        dPrint("nnnnnnnnnnnn $decryptData");
+        return  jsonDecode(decryptData);
 
       }
       else {

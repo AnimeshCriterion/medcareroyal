@@ -4,7 +4,6 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:medvantage_patient/app_manager/api/api_util.dart';
 import 'package:medvantage_patient/app_manager/widgets/coloured_safe_area.dart';
-import 'package:medvantage_patient/encyption.dart';
 
 import '../../Localization/app_localization.dart';
 import '../../Modal/investigation_model.dart';
@@ -13,6 +12,7 @@ import '../../app_manager/theme/text_theme.dart';
 import '../../assets.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
+import '../../encyption.dart';
 import '../../theme/theme.dart';
 
 class InvestigationPage extends StatefulWidget {
@@ -38,12 +38,14 @@ class _InvestigationPageState extends State<InvestigationPage> {
   Future<List<Investigation>> fetchInvestigations() async {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
-    final url = '${ApiUtil().baseUrlMedvanatge7082}api/PatientIPDPrescription/GetPrescribedInvestigations?${await EncryptDecrypt.encryptString('uhID=${userRepository.currentUser!.uhID}', EncryptDecrypt.key)}&clientID=${await EncryptDecrypt.encryptString('${userRepository.currentUser!.clientId}', EncryptDecrypt.key)}';
-print("checkk"+url.toString());
-    final response = await http.get(Uri.parse(url));
+    String encryptedData = await EncryptDecrypt.encryptString(
+        'uhID=${userRepository.currentUser!.uhID}&clientID=${userRepository.currentUser!.clientId}', EncryptDecrypt.key);
+    final url = '${ApiUtil().baseUrlMedvanatge7082}api/PatientIPDPrescription/GetPrescribedInvestigations?'+encryptedData.toString();
 
+    final response = await http.get(Uri.parse(url));
+    var decryptData= await EncryptDecrypt.decryptString(jsonDecode(response.body)['data'],EncryptDecrypt.key.toString() ) ;
+     var jsonData=jsonDecode(decryptData);
     if (response.statusCode == 200) {
-      final jsonData = jsonDecode(response.body);
       if (jsonData['status'] == 1) {
         List<dynamic> investigationsJson = jsonData['responseValue'];
         return investigationsJson.map((item) => Investigation.fromJson(item)).toList();

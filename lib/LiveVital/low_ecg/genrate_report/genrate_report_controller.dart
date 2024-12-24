@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:http/http.dart' as http;
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
+import '../../../app_manager/api/api_util.dart';
 import '../../../authenticaton/user_repository.dart';
+import '../../../encyption.dart';
 import '../../../medcare_utill.dart';
 import '../../live_vital_controller.dart';
 import '../ecg_controller.dart';
@@ -33,6 +36,7 @@ class GenerateReportController extends GetxController{
 
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
+    var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
     Map  body={
       "time":DateTime.now().toString(),
       "PID": userRepository.getUser.pid.toString(),
@@ -58,22 +62,23 @@ class GenerateReportController extends GetxController{
             .toList().join(',')
       }
     };
-    dPrint('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv'+jsonEncode(body).toString());
     (json.encode(body).toString());
     dPrint(json.encode(body).toString());
     try{
-      var response = await http.post(Uri.parse('http://182.156.200.179:1880/ecg'),
+      var response = await http.post(Uri.parse(ApiUtil().baseUrlMedvanatge7082+'api/DigiDoctorApis/Ecg'
+          // 'http://182.156.200.179:1880/ecg'
+      ),
           body: json.encode(body),
           headers: {
             "authKey": "4S5NF5N0F4UUN6G",
             "content-type": "application/json",
+            'Authorization': basicAuth
           }
       );
+      var decryptData= await EncryptDecrypt.decryptString(jsonDecode(response.body)['data'],EncryptDecrypt.key.toString() ) ;
+      dPrint("nnnnnnnnnnnn $decryptData");
+      var data = await json.decode(decryptData);
 
-      dPrint(response.toString());
-      var data = await json.decode(response.body);
-
-      dPrint('nnnnnnnnnnnnvnvnvnvnvnvnvnnvnvnvnvnv1112222' + data.toString());
       updatePerLead=data['perlead'][0];
     }
     catch(e){

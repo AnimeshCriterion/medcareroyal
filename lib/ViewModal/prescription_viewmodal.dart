@@ -102,7 +102,6 @@ class PrescriptionViewModal extends ChangeNotifier {
 
 
 
-      log('nnnnnnnnnnnn'+data.toString());
 
       if (data['responseCode'] == 1) {
         prescriptionResponse.data = (List<PrescriptionHistoryDataModal>.from(

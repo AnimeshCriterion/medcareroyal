@@ -42,7 +42,6 @@ class GetApiService{
       // CommonWidgets.showBottomAlert(message: "invalid data format");
     }
     catch (e) {
-      //log("eeeeeeeeeeeeeeeeeeeeeeeee"+e.toString());
       Alert.show(e.toString());
       // CommonWidgets.showBottomAlert(message: e.toString());
     }

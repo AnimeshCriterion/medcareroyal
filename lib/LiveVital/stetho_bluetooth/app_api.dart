@@ -58,8 +58,6 @@ class App {
 
       dPrint('fffffffffffdfgdfgdfg');
 
-      log(response.body.toString());
-      //log("dfffffffffffffffffffffff"+response.body.toString()+' dsddsfsdf');
       dPrint(
           "dfffffffffffffffffffffff" + response.body.toString() + ' dsddsfsdf');
       var data = await json.decode(response.body);

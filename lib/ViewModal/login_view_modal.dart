@@ -154,8 +154,8 @@ class LoginViewModal extends ChangeNotifier {
             "api/LogInForSHFCApp/SentLogInOTPForSHFCApp?UHID=${uhid.toString()}&ifLoggedOutFromAllDevices=${ifLoggedOutFromAllDevices}" ,
         // "api/Users/SendOtp?userName=${userMobile.toString()}&isPatient=true",
        loginHeader:  {
-         'Content-Type': 'application/json',
-         'Authorization': 'Bearer '+ logindetail[0]['token'].toString()
+         // 'Content-Type': 'application/json',
+         // 'Authorization': 'Bearer '+ logindetail[0]['token'].toString()
        },
           apiCallType: ApiCallType.get( ));
      Get.back();
@@ -308,7 +308,6 @@ class LoginViewModal extends ChangeNotifier {
           // "userName":incr.toString()
         },  ),
         loginHeader: {});
-    log("nnnnnnnnnnnn ${data }");
      Get.back();
 
     if (data['status'] == 1) {

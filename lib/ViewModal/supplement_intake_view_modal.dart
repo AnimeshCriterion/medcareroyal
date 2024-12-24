@@ -68,45 +68,6 @@ class SupplementIntakeViewModal extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> supplementCheckList(context) async {
-    UserRepository userRepository =
-        Provider.of<UserRepository>(context, listen: false);
-
-    _updateIntakeResponse = ApiResponse.loading("Fetching Menu");
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      var langId=await prefs.getString("lang").toString();
-      var data = await _api.callMedvanatagePatient(context,
-          url:
-              "api/FoodIntake/GetFoodIntake?Uhid=${userRepository.getUser.uhID.toString()}&entryType=D&languageId=${langId.toString()}&fromDate=${DateFormat('yyyy-MM-dd').format(DateTime.now())}",
-          localStorage: true,
-          newBaseUrl: ApiUtil.supplementUrl,
-          apiCallType: ApiCallType.rawPost(body: {}));
-
-      dPrint(data.toString());
-
-      if (data['responseCode'] == 1) {
-        intakeResponse.data = List<FoodListDataModel>.from(
-            ((data['foodIntakeList'] ?? []) as List)
-                .map((e) => FoodListDataModel.fromJson(e)));
-
-        dPrint('nnnnnnnnnn' + getIntakeList.length.toString());
-        _updateIntakeResponse = ApiResponse<List<FoodListDataModel>>.completed(
-            getIntakeResponse.data ?? []);
-
-        if (data['responseValue'].isEmpty) {
-          _updateIntakeResponse = ApiResponse.empty("Address not available");
-        } else {}
-      } else {
-        _updateIntakeResponse = ApiResponse.empty("Address not available");
-
-        Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['message'].toString()));
-        // Alert.show(data['message']);
-      }
-    } catch (e) {
-      _updateIntakeResponse = ApiResponse.error(e.toString());
-    }
-  }
 
   TextEditingController intakeTimeC=TextEditingController();
   Widget iconAccordingToGivenStatus(

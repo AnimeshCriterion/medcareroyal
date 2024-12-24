@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:medvantage_patient/View/Pages/addvital_view.dart';
@@ -155,7 +156,6 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
         url: "api/PatientMedication/GetAllPatientMedication?UhID=${userRepository.getUser.uhID.toString()}&languageId=${langId.toString()}",
         localStorage: true,
         apiCallType: ApiCallType.get());
-    dPrint('nnnn'+data.toString());
 
     updateShowNoData=true;
     //  Get.back();
@@ -199,13 +199,11 @@ class MedicineViewCheckListDataMOdel extends ChangeNotifier{
         "duration": duration.toString(),
         "compareTime": time.toString()
       };
-      dPrint("BODY $body");
 
       var data = await _api.callMedvanatagePatient7082(context,
           url: "api/PatientMedication/InsertPatientMedication",
           apiCallType: ApiCallType.rawPost(body: body),
       isSavedApi: true);
-      dPrint("DATA @@@ $data");
 
        Get.back();
       if (data['status'] == 1) {

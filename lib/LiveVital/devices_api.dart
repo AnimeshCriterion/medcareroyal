@@ -60,7 +60,6 @@ class RawData{
       );
       var data = await jsonDecode(response.toString());
       if (kDebugMode) {
-        // log('**data***$data');
       }
       if(data is List){
         return data[0];

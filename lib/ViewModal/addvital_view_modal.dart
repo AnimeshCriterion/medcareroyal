@@ -943,7 +943,6 @@ ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading
         //     .toList();
         // updateVitalHistoryList = result;
         // dPring("######################");
-        // log(getVitalHistoryList.toString());
 
       } else {
         Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));

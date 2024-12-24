@@ -11,6 +11,7 @@ import 'package:medvantage_patient/app_manager/extentions/hex_color_extention.da
 import 'package:medvantage_patient/remote_dashboard/remoteMonitorDataModel.dart';
 import 'package:signalr_netcore/hub_connection_builder.dart';
 
+import '../app_manager/api/api_util.dart';
 import '../authenticaton/user_repository.dart';
 import '../common_libs.dart';
 import 'data_model/drug_intraction_data_modal.dart';
@@ -222,7 +223,7 @@ class RemoteDashboardController extends GetxController {
   // https://api.medvantage.tech
   // http://172.16.61.31:7085
 
-  final serverUrl = "https://apimedcareroyal.medvantage.tech:7085/PatientDashboard";
+  final serverUrl = ApiUtil().baseUrlMedvanatge7100+"https://apimedcareroyal.medvantage.tech:7085/PatientDashboard";
 
   // final hubConnection = new HubConnectionBuilder().withUrl(serverUrl).build();
 

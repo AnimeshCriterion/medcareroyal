@@ -299,45 +299,6 @@ class FullBodyCheckupDataModal extends ChangeNotifier {
     organResponse = val;
     notifyListeners();
   }
-  getSymptomByProblem(context) async {
-    ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
-    ProgressDialogue().show(context, loadingText:localization.getLocaleData.Loading.toString());
-    updateOrganResponse=ApiResponse.loading("Loading Organ....");
-    try{
-      var data= await _api.call(context,
-          newBaseUrl: ApiUtil.kiosUrl,
-          url: AllApi.getSymptomByProblem,
-          localStorage: true,
-          apiCallType:ApiCallType.rawPost(body: {
-            "id":getSelectedBodyPart['id'].toString() ,
-            "language": "1",
-            "symptomName":"",
-          }));
-      ProgressDialogue().hide();
-      if(data['responseCode'] == 1) {
-        //....Add isSELECTED IN API.........
-        // data['responseValue'];
-        for(int i=0; i<data['responseValue'].length;i++){
-          data['responseValue'][i].addAll({"isSelected":false});
-        }
-        dPrint('nnnnnnnnnn'+data.toString());
-        organResponse.data=(List<OrganSymptomDataModal>.from(((data['responseValue'] ?? []) as List).map((e) =>
-            OrganSymptomDataModal.fromJson(e))));
-        updateOrganResponse=ApiResponse<List<OrganSymptomDataModal>>.completed(getOrganResponse.data??[]);
-        ShowSymptomDataShow(context,);
-        if(data['responseValue'].isEmpty){
-          updateOrganResponse=ApiResponse.empty("Address not available");
-        }
-        else{}
-
-      }
-      else{
-        updateOrganResponse=ApiResponse.empty("Addresss not available");
-        Alert.show(data["message"]);
-      }
-
-    }catch(e){}
-  }
   deleteSymptoms(index){
 
     selectedSymptomsList.removeAt(index);
@@ -358,7 +319,7 @@ class FullBodyCheckupDataModal extends ChangeNotifier {
     dPrint('vvvvvvvvvvvvvvvv'+selectedData.toString());
     updateSelectedBodyPart=selectedData;
 
-    await getSymptomByProblem(context);
+    // await getSymptomByProblem(context);
 
 
   }

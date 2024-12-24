@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:developer' as b;
+import 'dart:math';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:get/get.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io' show Platform;
-import 'dart:math';
+// import 'dart:math';
 import 'package:medvantage_patient/View/Pages/exercise_tracking_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +50,7 @@ import 'authenticaton/user_repository.dart';
 import 'package:http/http.dart' as http;
 
 import 'common_libs.dart';
+import 'encyption.dart';
 
 class VoiceAssistant extends StatefulWidget {
   String? isFrom;
@@ -976,7 +979,7 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
 
   bool weAreListening = true;
 
-  Future<void> postData(text) async {
+  Future<void> postData(context,text) async {
     dPrint('debouncedhits');
 
     ApplicationLocalizations localization =
@@ -1008,20 +1011,30 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
       /// local
       //   "text": jsonEncode(text),/// live
     };
+    UserRepository userRepository = Provider.of<UserRepository>(
+        context, listen: false);
+
     dPrint(url.toString());
-    dPrint("AnimeshRequest" + requestBody.toString());
     String requestBodyJson = jsonEncode(requestBody);
     try {
+      var basicAuth = 'Bearer ${ userRepository.getUser.token.toString()}';
       final response = await http.post(
         Uri.parse(url),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
+          'Authorization': basicAuth
         },
         body: requestBodyJson,
       );
+
+      dPrint("nnnnnnnnnnnn $requestBodyJson");
+      var decryptData= await EncryptDecrypt.decryptString(jsonDecode(response.body)['data'],EncryptDecrypt.key.toString() ) ;
+      dPrint("nnnnnnnnnnnn $decryptData");
+
       var data = response.body;
       dPrint('data is $data');
-      addvitalVM.allData = jsonDecode(data)['echo']['myvital'];
+      addvitalVM.allData = jsonDecode(decryptData)['echo']['myvital'];
+
       dPrint('Response: is ${addvitalVM.allData}');
       if (response.statusCode == 200) {
         // Navigator.pop(context);
@@ -1429,12 +1442,12 @@ class _VoiceAssistantState extends State<VoiceAssistant> {
             }
           ]
         };
-        Get.log(data.toString());
-        Get.log(controller.medNameandDate.toString());
+
+       dPrint("AnimeshRequest" + jsonEncode(data).toString());
         if (widget.isFrom != 'add vitals') {
           dPrint('hits');
           EasyDebounce.debounce(
-              'apihit', Duration(milliseconds: 500), () => postData(data));
+              'apihit', Duration(milliseconds: 500), () => postData(context,data));
         }
 
         dPrint('${text}08978967954');

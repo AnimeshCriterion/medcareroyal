@@ -86,10 +86,12 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
           localStorage: true,
           apiCallType: ApiCallType.rawPost(body: {
             "problemName": '',
-              "languageId": await prefs.getString("lang").toString()
+              // "languageId": await prefs.getString("lang").toString()
           }));
+
+      dPrint("nnnnnnnnnnnnnnvnn ${data }");
       updateShowNoData=true;
-      if (data["responseCode"] == 1) {
+      if (data["status"] == 1) {
         problemsResponse.data = (List<SymptomsProblemModal>.from(
             ((data['responseValue'] ?? []) as List)
                 .map((e) => SymptomsProblemModal.fromJson(e))));
@@ -107,6 +109,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
         // Alert.show(data['message']);
       }
     } catch (e) {
+      dPrint("datadatadata: $e");
       updateShowNoData=true;
       updateProblemsResponse = ApiResponse.error(e.toString());
     }
@@ -332,8 +335,9 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
 
 
     var data = await _api.call(context,
-        url: "Services/patientProblem.asmx/getAllSymptoms",
-        newBaseUrl: "http://182.156.200.178:192/",
+        // url: "Services/patientProblem.asmx/getAllSymptoms",
+        url: "api/DigiDoctorApis/GetAllSymptoms",
+        // newBaseUrl: "http://182.156.200.178:192/",
         apiCallType: ApiCallType.rawPost(body: {
           "language": prefs.getString("lang").toString(),
         }));
@@ -748,15 +752,15 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       }
     }
 
-    try {
+    // try {
       dPrint('save');
       var data = await _api.callMedvanatagePatient7082(context,
           url:
           // 'api/PatientIPDPrescription/InsertSymtoms?uhID=${userRepository.getUser.uhID.toString()}&doctorId=0&jsonSymtoms=${jsonEncode(dtDataTable).toString()}&userId=${userRepository.getUser.userId.toString()}&clientID=${userRepository.getUser.clientId.toString()}',
               "${AllApi.addSymptompsHm}uhID=${userRepository.getUser.uhID.toString()}&userID=${userRepository.getUser.userId.toString()}&isProvisionalDiagnosis=0&isFromPatient=1&doctorId=0&jsonSymtoms=${jsonEncode(dtDataTable).toString()}",
-          apiCallType: ApiCallType.post(body: {}),
+          apiCallType: ApiCallType.get( ),
       isSavedApi: true);
-      dPrint("Check$data");
+      dPrint("CheckCheck $data");
 
        Get.back();
       if (data["status"] == 0) {
@@ -776,9 +780,10 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       updateTempProblemList=[];
       addedSymptoms=[];
       notifyListeners();
-    } catch (e) {
-      Get.back();
-    }
+    // } catch (e) {
+    //   dPrint("Check $e");
+    //   Get.back();
+    // }
   }
 
   List symptomHistory = [];
@@ -809,7 +814,7 @@ class SymptomsTrackerViewModal extends ChangeNotifier {
       updateShowNoData=true;
        // Get.back();
       if (data["status"] == 0) {
-        Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data["responseValue"].toString()));
+        // Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data["responseValue"].toString()));
         // Alert.show(data["responseValue"].toString());
       } else {
 

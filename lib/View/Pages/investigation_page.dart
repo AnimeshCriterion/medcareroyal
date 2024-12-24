@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:medvantage_patient/app_manager/api/api_util.dart';
 import 'package:medvantage_patient/app_manager/widgets/coloured_safe_area.dart';
+import 'package:medvantage_patient/encyption.dart';
 
 import '../../Localization/app_localization.dart';
 import '../../Modal/investigation_model.dart';
@@ -37,8 +38,8 @@ class _InvestigationPageState extends State<InvestigationPage> {
   Future<List<Investigation>> fetchInvestigations() async {
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
-    final url = '${ApiUtil().baseUrlMedvanatge7082}api/PatientIPDPrescription/GetPrescribedInvestigations?uhID=${userRepository.currentUser!.uhID}&clientID=${userRepository.currentUser!.clientId}';
-
+    final url = '${ApiUtil().baseUrlMedvanatge7082}api/PatientIPDPrescription/GetPrescribedInvestigations?${await EncryptDecrypt.encryptString('uhID=${userRepository.currentUser!.uhID}', EncryptDecrypt.key)}&clientID=${await EncryptDecrypt.encryptString('${userRepository.currentUser!.clientId}', EncryptDecrypt.key)}';
+print("checkk"+url.toString());
     final response = await http.get(Uri.parse(url));
 
     if (response.statusCode == 200) {

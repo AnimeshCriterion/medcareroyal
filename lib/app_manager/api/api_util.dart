@@ -49,12 +49,12 @@ class ApiUtil {
 
 
    //without http
-   late String baseUrlMedvanatge = "https://apidemo.medvantage.tech/1080/";
-   late String baseUrlMedvanatge7084 = "https://apidemo.medvantage.tech/UserService/";
-   late String baseUrlMedvanatge7082 = "https://apidemo.medvantage.tech/MedvantageService/";
-   late String baseUrlMedvanatge7096 = "https://apidemo.medvantage.tech/DietService/";
-   late String baseUrlMedvanatge7100 = "https://apidemo.medvantage.tech/ChatService/";
-   late String baseUrlMedvanatge7083 = "https://apidemo.medvantage.tech/AdminService/";
+   late String baseUrlMedvanatge = "http://apidemo.medvantage.tech:1080/";
+   late String baseUrlMedvanatge7084 = "http://apidemo.medvantage.tech/UserService/";
+   late String baseUrlMedvanatge7082 = "http://apidemo.medvantage.tech/MedvantageService/";
+   late String baseUrlMedvanatge7096 = "http://apidemo.medvantage.tech/DietService/";
+   late String baseUrlMedvanatge7100 = "http://apidemo.medvantage.tech/ChatService/";
+   late String baseUrlMedvanatge7083 = "http://apidemo.medvantage.tech/AdminService/";
    // //without http
    //  late String baseUrlMedvanatge = "http://demo.medvantage.tech:1080/";
    //  late String baseUrlMedvanatge7084 = "http://demo.medvantage.tech:1084/";

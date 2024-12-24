@@ -1,5 +1,3 @@
-import 'package:medvantage_patient/View/Pages/siginup_verify_view.dart';
-import 'package:medvantage_patient/View/Pages/startup_view.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
@@ -12,8 +10,6 @@ import 'package:flutter/material.dart';
 
 import '../../Localization/app_localization.dart';
 import '../../ViewModal/signup_view_modal.dart';
-import '../../app_manager/bottomSheet/bottom_sheet.dart';
-import '../../app_manager/bottomSheet/functional_sheet.dart';
 import '../../app_manager/web_view.dart';
 import '../../app_manager/widgets/buttons/custom_ink_well.dart';
 import '../../common_libs.dart';

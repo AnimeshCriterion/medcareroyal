@@ -2,7 +2,6 @@ import 'package:medvantage_patient/View/widget/common_method/show_progress_dialo
 import 'package:medvantage_patient/ViewModal/login_view_modal.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import '../../Localization/app_localization.dart';
 import '../../app_manager/alert_toast.dart';

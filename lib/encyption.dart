@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 import 'dart:math';
+import 'package:crypto/crypto.dart';
 import 'package:encrypt/encrypt.dart' as encrypt;
 import 'package:cryptography/cryptography.dart' as crypto_graphy;
 
@@ -13,17 +14,13 @@ class EncryptDecrypt {
     // Generate random salt and IV
     final salt = _generateRandomBytes(16); // 16 bytes salt
     final iv = _generateRandomBytes(16);   // 16 bytes IV
-
     // Derive a 256-bit key using PBKDF2 with SHA256
     final key = await _generateKey(password, salt: salt);
-
     // Perform AES encryption with CBC mode and PKCS7 padding
     final encrypter = encrypt.Encrypter(
       encrypt.AES(key, mode: encrypt.AESMode.cbc, padding: 'PKCS7'),
     );
-
     final encrypted = encrypter.encrypt(plainText, iv: encrypt.IV(iv));
-
     // Combine salt, IV, and encrypted data
     final combined = Uint8List.fromList([...salt, ...iv, ...encrypted.bytes]);
 
@@ -81,5 +78,17 @@ class EncryptDecrypt {
   // Generate a salt (16 bytes)
   static Uint8List _generateSalt() {
     return _generateRandomBytes(16);
+  }
+
+
+  static String hashStringToSha512(String input) {
+    // Convert the input string to bytes
+    var bytes = utf8.encode(input);
+
+    // Perform the SHA-512 hash
+    var hash = sha512.convert(bytes);
+
+    // Return the hash as a hexadecimal string
+    return hash.toString();
   }
 }

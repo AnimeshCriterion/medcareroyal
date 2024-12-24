@@ -159,7 +159,7 @@ class RMDViewModal extends ChangeNotifier{
         updateVitalImg=vitalId[4]['img'].toString();
         updateVitalValue=getValue(vitalId[4]['id'].toString(),'vitalValue');
         updateVitalUnit=getUnit(vitalId[4]['id'].toString(),'unit' );
-        vitalVitalTime= getVitalTime(vitalId[4]['id'].toString(),).toString();
+       // vitalVitalTime= getVitalTime(vitalId[4]['id'].toString(),).toString();
 
     }
     Timer.periodic(Duration(seconds: vitalId.length*5 ), (timer) async {
@@ -169,7 +169,7 @@ class RMDViewModal extends ChangeNotifier{
           updateVitalImg=vitalId[i]['img'].toString();
           updateVitalValue=getValue(vitalId[i]['id'].toString(),'vitalValue');
           updateVitalUnit=getUnit(vitalId[i]['id'].toString(),'unit' );
-          vitalVitalTime= getVitalTime(vitalId[i]['id'].toString(),).toString();
+         // vitalVitalTime= getVitalTime(vitalId[i]['id'].toString(),).toString();
         });
       }
     });
@@ -181,7 +181,7 @@ class RMDViewModal extends ChangeNotifier{
     String unit='';
    var dateTime=GetPatientLastVitalList.firstWhere((element) => element['vitalID'].toString()==vitalID.toString(),
         orElse: ()=>{"uhID":" ","homecareId":0,"vitalID":0,"vitalName":"Weight","vitalValue":0,"unit":" ","vitalDateTime":"","userId":0} )['vitalDateTime'].toString();
-
+print("checkvitaldatetime"+dateTime.toString());
       difference = DateTime.now()
         .difference(DateTime.parse(dateTime.toString()))
         .inMinutes;

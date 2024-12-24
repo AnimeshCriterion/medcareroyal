@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';  // For jsonEncode
 import 'package:http/http.dart' as http;
-import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 
 import '../authenticaton/user_repository.dart';
@@ -35,7 +34,7 @@ TextEditingController remarkC=TextEditingController();
 
     // Construct the full URL with parameters
     Uri url = Uri.parse('$apiUrl?Uhid=$uhid&deviceToken=$deviceToken&clientId=$clientId&remark=${remarkC.value.text.toString()}&emergencyNumber=$emergencyNumber');
-dPrint("CheckUrl"+url.toString());
+    dPrint("CheckUrl"+url.toString());
     try {
       // Make the GET request
       final response = await http.post(url);

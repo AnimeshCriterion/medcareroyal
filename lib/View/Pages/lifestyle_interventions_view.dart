@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:medvantage_patient/View/Pages/drawer_view.dart';
-import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:medvantage_patient/assets.dart';

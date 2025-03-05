@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import '../../ViewModal/addvital_view_modal.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/comman_widget.dart';
-import '../../app_manager/widgets/buttons/primary_button.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../common_libs.dart';
 import '../../theme/theme.dart';

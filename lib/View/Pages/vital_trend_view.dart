@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';

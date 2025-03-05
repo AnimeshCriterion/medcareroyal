@@ -6,7 +6,6 @@ import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:medvantage_patient/common_libs.dart';
 import 'package:medvantage_patient/theme/theme.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import '../../LiveVital/pmd/app_color.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
 import '../../theme/style.dart';

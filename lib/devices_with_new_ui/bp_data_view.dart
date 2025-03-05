@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_blue_plus/flutter_blue_plus.dart';
 import 'package:get/get.dart';
 import 'package:medvantage_patient/View/widget/common_method/show_progress_dialog.dart';
 import 'package:medvantage_patient/app_manager/appBar/custom_app_bar.dart';
@@ -81,6 +82,25 @@ class _BpDeviceDataViewState extends State<BpDeviceDataView> {
 
     await controller.connectionState();
 
+  }
+
+
+
+  Future<String?> getSelfBluetoothId() async {
+
+    try {
+      // Check Bluetooth adapter state
+      BluetoothAdapterState state = await FlutterBluePlus .adapterStateNow;
+      // state.adapterId
+      // if adapterId(state.isEnabled) {
+      //   // Get the adapter's unique ID (UUID if supported)
+      //   return state.i; // Returns a UUID-like string
+      // } else {
+      //   return 'Bluetooth is disabled';
+      // }
+    } catch (e) {
+      return 'Failed to get Bluetooth ID: $e';
+    }
   }
   @override
   Widget build(BuildContext context) {

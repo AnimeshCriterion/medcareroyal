@@ -159,7 +159,7 @@ class LoginViewModal extends ChangeNotifier {
        },
           apiCallType: ApiCallType.get( ));
      Get.back();
-    dPrint('nnnnvv ${data['status']}');
+    dPrint('nnnnvvSentLogInOTPForSHFCApp ${data}');
     if (data['status'] == 1) {
       Alert.show(data['message']);
       WidgetsBinding.instance
@@ -175,7 +175,8 @@ class LoginViewModal extends ChangeNotifier {
       //   MyNavigator.push(context, const LoginWithOtp());
       // });
       dPrint("Aniemsh${userRepository.getUser.mobileNo}");
-    } else if (data['responseValue'] == 'Already LoggedIn On 2 Devices') {
+    }
+    else if (data['responseValue']['errorMessage'] == 'Already LoggedIn On 2 Devices') {
       vitalDialog(context);
     } else {
       Alert.show(data['message']);

@@ -159,7 +159,7 @@ dependencies:
   flutter_audio_waveforms: ^1.2.1+8
   numberpicker:
   pedometer:
-  audio_input_type_plugin: ^0.0.2
+  audio_input_type_plugin:
   just_audio:
   in_app_purchase:
   encrypt: ^5.0.0

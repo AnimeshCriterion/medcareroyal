@@ -49,6 +49,7 @@ class User {
   String? alternateCountryCode;
   String? addressLine2;
   String? token;
+  String? profileUrl;
 
   User(
       {this.pmid,
@@ -101,6 +102,7 @@ class User {
         this.alternateCountryCode,
         this.addressLine2,
         this.token,
+        this.profileUrl,
 
       });
 
@@ -155,6 +157,7 @@ class User {
     alternateCountryCode = json['alternateCountryCode'];
     token = json['token'];
     addressLine2 = json['addressLine2'];
+    profileUrl = json['profileUrl'];
   }
 
   Map<String, dynamic> toJson() {
@@ -208,6 +211,7 @@ class User {
     data['alternateCountryCode'] = alternateCountryCode;
     data['addressLine2'] = addressLine2;
     data['token'] = token;
+    data['profileUrl'] = profileUrl;
     return data;
   }
 }

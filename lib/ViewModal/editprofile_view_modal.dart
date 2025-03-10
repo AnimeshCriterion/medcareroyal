@@ -15,11 +15,13 @@ import '../Modal/member_data_modal.dart';
 import '../View/Pages/dashboard_view.dart';
 import '../app_manager/alert_toast.dart';
 import '../app_manager/api/api_response.dart';
+import '../app_manager/api/api_util.dart';
 import '../app_manager/bottomSheet/bottom_sheet.dart';
 import '../app_manager/bottomSheet/functional_sheet.dart';
 import '../app_manager/dialog.dart';
 import '../authenticaton/user.dart';
 import '../medcare_utill.dart';
+import 'package:http/http.dart' as http;
 
 class EditProfileViewModal extends ChangeNotifier {
   final Api _api = Api();
@@ -328,75 +330,182 @@ class EditProfileViewModal extends ChangeNotifier {
   }
 
 
-  Future<void> updateUserData(context) async {
+  // Future<void> updateUserData(context) async {
+  //   UserRepository userRepository =
+  //   Provider.of<UserRepository>(context, listen: false);
+  //   ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
+  //   ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString());
+  //   try {
+  //
+  //     var body={
+  //       "patientName":nameC.value.text,
+  //       "dob":DateFormat('yyyy-MM-dd').format(DateFormat("dd/MM/yyyy")
+  //           .parse(userRepository.getUser.dob.toString())),
+  //       "genderId": getSelectedGender,
+  //       "countryCallingCode": "91",
+  //       "mobileNo": phoneC.value.text,
+  //       "countryId": userRepository.getUser.countryId,
+  //       "stateId": userRepository.getUser.stateId,
+  //       "cityId": userRepository.getUser.cityId,
+  //       "address": addressC.value.text,
+  //       "userId": userRepository.getUser.userId,
+  //       "idNumber": "",
+  //       "idTypeId": 0,
+  //       'guardianAddress':'null',
+  //       "age": userRepository.getUser.age,
+  //       "departmentId": userRepository.getUser.deptId,
+  //       "doctorId": userRepository.getUser.admitDoctorId,
+  //       "emailID":emailC.value.text,
+  //       "uhID": userRepository.getUser.uhID.toString(),
+  //       "pid": userRepository.getUser.pid,
+  //       "ageUnitId": userRepository.getUser.ageUnitId,
+  //       "bloodGroupId": selectedBloodGroup,
+  //       "height": heightC.value.text,
+  //       "weight": weightC.value.text,
+  //       "zip": userRepository.getUser.zip.toString(),
+  //       "alternateMobileNo": aleternamephoneC.value.text,
+  //       "alternateCountryCode": "91",
+  //       "addressLine2": addressline2.value.text,
+  //       'guardianMobileNo':''
+  //     };
+  //
+  //
+  //
+  //
+  //   var data = await _api.callMedvanatagePatient7082(context,
+  //         url:'api/PatientRegistration/UpdatePatient',
+  //         localStorage: true,
+  //         token: false,
+  //         apiCallType: ApiCallType.rawPut(
+  //             body: body));
+  //     ProgressDialogue().hide();
+  //     dPrint("objecsdsdst"+data.toString());
+  //     dPrint("objecsdsdst"+jsonEncode(body));
+  //     if (data['status'] == 1) {
+  //
+  //      // Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'Profile updated Successfully !'));
+  //
+  //       // Alert.show("Profile updated Successfully !");
+  //       loginWithUHID(context);
+  //        Get.back();
+  //       myNewDialog(title:"Profile updated Successfully !");
+  //     } else {
+  //
+  //       Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
+  //       // Alert.show(data['responseValue']);
+  //     }
+  //   } catch (e) {
+  //     ApiResponse.error(e.toString());
+  //   }
+  // }
+
+  Future<void> updateUserData(context,   {filePath}) async {
+
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
-    ApplicationLocalizations localization = Provider.of<ApplicationLocalizations>(context, listen: false);
-    ProgressDialogue().show(context, loadingText: localization.getLocaleData.Loading.toString());
-    try {
+    //
+    // ProgressDialogue().show(context, loadingText: 'Loading...');
+    var age= userRepository.getUser.age.toString()=='null'? '':userRepository.getUser.age.toString();
+    var dob= userRepository.getUser.dob.toString()=='null'? '':userRepository.getUser.dob.toString();
+    print( 'nnnnvnnnvnnvnn '+ dob.toString());
+    var request = http.MultipartRequest('PUT', Uri.parse('${ApiUtil().baseUrlMedvanatge7082}api/PatientRegistration/UpdatePatient'));
 
-      var body={
-        "patientName":nameC.value.text,
-        "dob":DateFormat('yyyy-MM-dd').format(DateFormat("dd/MM/yyyy")
-            .parse(userRepository.getUser.dob.toString())),
-        "genderId": getSelectedGender,
-        "countryCallingCode": "91",
-        "mobileNo": phoneC.value.text,
-        "countryId": userRepository.getUser.countryId,
-        "stateId": userRepository.getUser.stateId,
-        "cityId": userRepository.getUser.cityId,
-        "address": addressC.value.text,
-        "userId": userRepository.getUser.userId,
-        "idNumber": "",
-        "idTypeId": 0,
-        'guardianAddress':'null',
-        "age": userRepository.getUser.age,
-        "departmentId": userRepository.getUser.deptId,
-        "doctorId": userRepository.getUser.admitDoctorId,
-        "emailID":emailC.value.text,
-        "uhID": userRepository.getUser.uhID.toString(),
-        "pid": userRepository.getUser.pid,
-        "ageUnitId": userRepository.getUser.ageUnitId,
-        "bloodGroupId": selectedBloodGroup,
-        "height": heightC.value.text,
-        "weight": weightC.value.text,
-        "zip": userRepository.getUser.zip.toString(),
-        "alternateMobileNo": aleternamephoneC.value.text,
-        "alternateCountryCode": "91",
-        "addressLine2": addressline2.value.text,
-        'guardianMobileNo':''
-      };
-
-
-
-
-    var data = await _api.callMedvanatagePatient7082(context,
-          url:'api/PatientRegistration/UpdatePatient',
-          localStorage: true,
-          token: false,
-          apiCallType: ApiCallType.rawPut(
-              body: body));
-      ProgressDialogue().hide();
-      dPrint("objecsdsdst"+data.toString());
-      dPrint("objecsdsdst"+jsonEncode(body));
-      if (data['status'] == 1) {
-
-       // Get.showSnackbar( MySnackbar.SuccessSnackBar(  message: 'Profile updated Successfully !'));
-
-        // Alert.show("Profile updated Successfully !");
-        loginWithUHID(context);
-         Get.back();
-        myNewDialog(title:"Profile updated Successfully !");
-      } else {
-
-        Get.showSnackbar( MySnackbar.ErrorSnackBar(  message: data['responseValue'].toString()));
-        // Alert.show(data['responseValue']);
-      }
-    } catch (e) {
-      ApiResponse.error(e.toString());
+    request.fields.addAll( filePath.toString().isNotEmpty?{
+      'patientName': nameC.value.text.toString().isNotEmpty?nameC.value.text.toString():userRepository.getUser.patientName.toString(),
+      'dob': dob.toString(),
+      'genderId': getSelectedGender.toString(),
+      'mobileNo':phoneC.value.text.toString().isNotEmpty? phoneC.value.text.toString():userRepository.getUser.mobileNo.toString(),
+      'countryId': userRepository.getUser.countryId.toString(),
+      'stateId': userRepository.getUser.stateId.toString(),
+      'cityId': userRepository.getUser.cityId.toString(),
+      'address':  addressC.value.text,
+      'userId': userRepository.getUser.userId.toString(),
+      'IdNumber': '0',
+      'IdTypeId': '0',
+      'age':  age.toString(),
+      'emailID': emailC.value.text.toString(),
+      'pid': userRepository.getUser.pid.toString(),
+      'languageId': '0',
+      'ageUnitId': userRepository.getUser.ageUnitId.toString(),
+      'bloodGroupId': userRepository.getUser.bloodGroupId.toString(),
+      'height':heightC.value.text.toString()==''?  userRepository.getUser.height.toString():double.parse(heightC.value.text.toString()).toStringAsFixed(2),
+      'weight': weightC.value.text.toString()==''?  userRepository.getUser.weight.toString():double.parse( weightC.value.text.toString()).toStringAsFixed(2),
+      'IsCashLess': 'false',
+      'InsuranceCompanyId': '0',
+      'IsNotificationRequired': 'false',
+      'PermanentCountryId': '0',
+      'PermanentCityId': '0',
+      'PermanentStateId': '0',
+      'IsRegister': '0',
+      'guardianAddress': ' ',
+      'guardianMobileNo': ' ',
+    }:
+    {
+      'patientName': nameC.value.text.toString().isNotEmpty?nameC.value.text.toString():userRepository.getUser.patientName.toString(),
+      'dob': dob.toString(),
+      'genderId': getSelectedGender.toString(),
+      'mobileNo':phoneC.value.text.toString().isNotEmpty? phoneC.value.text.toString():userRepository.getUser.mobileNo.toString(),
+      'countryId': userRepository.getUser.countryId.toString(),
+      'stateId': userRepository.getUser.stateId.toString(),
+      'cityId': userRepository.getUser.cityId.toString(),
+      'address':  addressC.value.text,
+      'userId': userRepository.getUser.userId.toString(),
+      'IdNumber': '0',
+      'IdTypeId': '0',
+      'age':  age.toString(),
+      'emailID': emailC.value.text.toString(),
+      'pid': userRepository.getUser.pid.toString(),
+      'languageId': '0',
+      'ageUnitId': userRepository.getUser.ageUnitId.toString(),
+      'bloodGroupId':  userRepository.getUser.bloodGroupId.toString(),
+      'height': double.parse(heightC.value.text.toString()).toStringAsFixed(2),
+      'weight': double.parse( weightC.value.text.toString()).toStringAsFixed(2),
+      'IsCashLess': 'false',
+      'InsuranceCompanyId': '0',
+      'IsNotificationRequired': 'false',
+      'PermanentCountryId': '0',
+      'PermanentCityId': '0',
+      'PermanentStateId': '0',
+      'IsRegister': '0',
+      'guardianAddress': ' ',
+      'guardianMobileNo': ' ',
+      "ProfileURL": userRepository.getUser.profileUrl.toString().replaceAll('https://api.medvantage.tech:7082/', ''),
     }
-  }
+    ) ;
 
+    print( 'nnvnnvnnnnnvnnn '+ request.fields.toString());
+    if(filePath.toString().isNotEmpty){
+      request.files.add(await http.MultipartFile.fromPath('FormFile', filePath.toString()));
+    }
+
+    http.StreamedResponse response = await request.send();
+
+    var myData=await response.stream.bytesToString();
+
+    print( 'nnvnnvnnnnnvnnn '+ myData.toString());
+    if (response.statusCode == 200) {
+      Alert.show("Profile updated Successfully !");
+      //
+      await userRepository
+          .updateUserData(User.fromJson(jsonDecode(myData)['responseValue'][0]))
+          .then((value) async {
+        //       DashboardViewModal dashboardVM =
+        // Provider.of<DashboardViewModal>(context, listen: false);
+        // await dashboardVM.appDetails(context) ;
+        dPrint("Aniemsh $value");
+        // Get.offAll(RMDView());
+        // MyNavigator.pushAndRemoveUntil(context, const RMDView());
+      });
+
+      // await loginWithUHID(context,userRepository.getUser.uhID.toString());
+      // await loginWithUHID(context,userRepository.getUser.uhID.toString());
+      Get.back();
+    }
+    else {
+      print(response.reasonPhrase);
+    }
+
+  }
 
   loginWithUHID(context) async {
 

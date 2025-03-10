@@ -785,7 +785,7 @@ class _EditProfileState extends State<EditProfile> {
                           left: 10.0, bottom: 15, right: 10),
                       child: NeoButton(
                         func: () async {
-                          await editProfileVM.updateUserData(context);
+                          await editProfileVM.updateUserData(context,filePath: '');
                         },
                         title: localization.getLocaleData.updateProfile.toString(),
                         height: 50

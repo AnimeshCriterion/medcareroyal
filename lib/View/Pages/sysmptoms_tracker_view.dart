@@ -3,29 +3,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:medvantage_patient/Localization/app_localization.dart';
-import 'package:medvantage_patient/ViewModal/MasterDashoboardViewModal.dart';
 import 'package:medvantage_patient/ViewModal/symptoms_tracker_view_modal.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/neomorphic/neomorphic.dart';
-import 'package:medvantage_patient/app_manager/neomorphic/theme_provider.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:medvantage_patient/theme/theme.dart';
-
 import 'package:get/get.dart';
 import '../../app_manager/bottomSheet/bottom_sheet.dart';
 import '../../app_manager/bottomSheet/functional_sheet.dart';
 import '../../app_manager/comman_widget.dart';
-import '../../app_manager/my_button.dart';
-import '../../app_manager/navigator.dart';
-import '../../app_manager/widgets/buttons/primary_button.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
-import '../../app_manager/widgets/tab_responsive.dart';
-import '../../assets.dart';
 import '../../common_libs.dart';
-import 'addvital_view.dart';
-import 'drawer_view.dart';
 
 class SymptomTrackerView extends StatefulWidget {
   const SymptomTrackerView({super.key});

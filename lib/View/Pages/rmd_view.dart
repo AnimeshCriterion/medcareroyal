@@ -5,36 +5,20 @@ import 'dart:io';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:medvantage_patient/View/Pages/dose.dart';
-import 'package:medvantage_patient/View/Pages/pills_reminder_view.dart';
-import 'package:medvantage_patient/View/Pages/water_intake_view.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
-import 'package:medvantage_patient/app_manager/theme/theme_provider.dart';
-import 'package:medvantage_patient/app_manager/widgets/text_field/custom_sd.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:provider/provider.dart';
-
 import '../../Localization/app_localization.dart';
-import '../../Modal/medicine_intake_data_model.dart';
 import '../../ViewModal/MasterDashoboardViewModal.dart';
 import '../../ViewModal/addvital_view_modal.dart';
-import '../../ViewModal/dashboard_view_modal.dart';
 import '../../ViewModal/prescription_checklist_viewmodel.dart';
 import '../../ViewModal/rmd_view_modal.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/bottomSheet/bottom_sheet.dart';
 import '../../app_manager/bottomSheet/functional_sheet.dart';
-import '../../app_manager/services/check_for_update.dart';
-import '../../app_manager/widgets/buttons/custom_ink_well.dart';
-import '../../assets.dart';
 import '../../authenticaton/user_repository.dart';
 import '../../common_libs.dart';
 import '../../main.dart';
-import '../../medcare_utill.dart';
 import '../../theme/theme.dart';
 import '../../voice_assistant.dart';
 import '../request_Calback_View.dart';
@@ -43,7 +27,6 @@ import 'drawer_view.dart';
 import '../../theme/style.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
-import 'nnn.dart';
 
 class RMDView extends StatefulWidget {
   const RMDView({super.key});

@@ -18,6 +18,7 @@ class RequestCallbackFormStyled extends StatefulWidget {
 
 class _RequestCallbackFormStyledState extends State<RequestCallbackFormStyled> {
   final _formKey = GlobalKey<FormState>();
+  final String apiUrl = "https://apimedcareroyal.medvantage.tech:7082/api/LogInForSHFCApp/EmergencyAlertAPI";
 TextEditingController remarkC=TextEditingController();
 
   String _reason = '';
@@ -26,7 +27,6 @@ TextEditingController remarkC=TextEditingController();
   // This function will be used to make the API call
   Future<void> callEmergencyAlertAPI() async {
 
-    final String apiUrl = ApiUtil().baseUrlMedvanatge7082+"/api/LogInForSHFCApp/EmergencyAlertAPI";
     UserRepository userRepository =
     Provider.of<UserRepository>(context, listen: false);
     // Set up query parameters

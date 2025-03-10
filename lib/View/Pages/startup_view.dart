@@ -1,14 +1,10 @@
 import 'package:medvantage_patient/Localization/app_localization.dart';
 import 'package:medvantage_patient/Localization/language_change_widget.dart';
 import 'package:medvantage_patient/View/Pages/login_view.dart';
-import 'package:medvantage_patient/View/Pages/siginup_verify_view.dart';
-import 'package:medvantage_patient/View/Pages/signup_view.dart';
 import 'package:medvantage_patient/app_manager/navigator.dart';
 import 'package:medvantage_patient/common_libs.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:introduction_screen/introduction_screen.dart';
-import 'package:lottie/lottie.dart';
 import '../../app_manager/app_color.dart';
 import '../../app_manager/theme/text_theme.dart';
 import '../../app_manager/web_view.dart';

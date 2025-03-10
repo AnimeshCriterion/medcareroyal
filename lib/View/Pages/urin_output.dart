@@ -6,12 +6,10 @@ import 'package:medvantage_patient/ViewModal/addvital_view_modal.dart';
 import 'package:medvantage_patient/app_manager/app_color.dart';
 import 'package:medvantage_patient/app_manager/bottomSheet/bottom_sheet.dart';
 import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
-import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../app_manager/bottomSheet/functional_sheet.dart';
 import '../../app_manager/widgets/coloured_safe_area.dart';
-import '../../app_manager/widgets/text_field/primary_text_field.dart';
 import '../../assets.dart';
 import '../../theme/theme.dart';
 

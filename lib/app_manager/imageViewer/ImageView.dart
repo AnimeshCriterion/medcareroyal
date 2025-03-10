@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_file_downloader/flutter_file_downloader.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:get/get.dart';
@@ -85,7 +86,12 @@ class _MyImageViewState extends State<MyImageView> {
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () async {
-
+            try{
+              await FileDownloader.downloadFile(url: widget.url.toString(),
+                onDownloadCompleted: (value) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(backgroundColor: Colors.green,
+                    content: Text('File Downloaded Successfully\n $value'),                        duration: const Duration(seconds: 2),                      ),                    );                    dPrint('path  $value ');                    },                    onDownloadError: (String error) {                      dPrint('DOWNLOAD ERROR: $error');                    },                  );                }catch (e){                  dPrint(e);                }
           },
           child: const Icon(Icons.download_rounded, size: 30),
         ),

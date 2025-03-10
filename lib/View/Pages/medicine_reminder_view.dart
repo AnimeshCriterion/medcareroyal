@@ -8,7 +8,6 @@ import 'package:medvantage_patient/app_manager/theme/text_theme.dart';
 import 'package:medvantage_patient/app_manager/widgets/buttons/primary_button.dart';
 import 'package:medvantage_patient/app_manager/widgets/coloured_safe_area.dart';
 import 'package:medvantage_patient/common_libs.dart';
-import 'package:medvantage_patient/services/local_notification_services.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
